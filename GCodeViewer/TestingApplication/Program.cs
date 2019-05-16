@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
+using GCodeViewer.RenderWindow.Utils;
 
 namespace TestingApplication
 {
@@ -11,13 +8,22 @@ namespace TestingApplication
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\florager\source\repos\GCodeViewer\GCodeViewer\GCodeExamples\SinkingBenchy.gcode";
+            string path = @"C:\Users\flori\source\repos\GCodeViewer\GCodeViewer\GCodeExamples\SinkingBenchy.gcode";
 
-            string[] lines = File.ReadAllLines(path);
-            for (int i = 1; i < 100; i++)
-                Console.WriteLine(lines[i]);
+            PointExtractor extractor = new PointExtractor(path);
+            Point3DCollection points = extractor.ExtractPoints();
+
+            //foreach (Point3D point in points)
+            //    DisplayPoint(point);
+
+            Console.WriteLine($"The gcode file contains {points.Count} points");
 
             Console.ReadKey();
+        }
+
+        private static void DisplayPoint(Point3D point)
+        {
+            Console.WriteLine($"{point.X}, {point.Y}, {point.Z}");
         }
     }
 }
