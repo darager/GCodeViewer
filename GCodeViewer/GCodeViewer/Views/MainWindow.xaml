@@ -10,32 +10,82 @@
     Height="450"
     ResizeMode="CanResize"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DockPanel>
+        <ToolBarTray
+            Background="CornflowerBlue"
+            DockPanel.Dock="Top"
+            IsLocked="True">
+            <ToolBar IsOverflowOpen="False">
+                <Menu>
+                    <MenuItem Header="File">
+                        <MenuItem Header="Open" />
+                        <MenuItem Header="Save" />
+                        <MenuItem Header="Save as" />
+                        <MenuItem Header="Close" />
+                    </MenuItem>
+                </Menu>
+            </ToolBar>
+        </ToolBarTray>
 
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding Commands/ExtractPath}"/>
-        </StackPanel>
-        <Grid
-            Grid.Row="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="Olive">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <DockPanel>
+            <Viewport3D MinWidth="400" DockPanel.Dock="Left">
+                <!--  Add a camera.  -->
+                <Viewport3D.Camera>
+                    <PerspectiveCamera
+                        FarPlaneDistance="20"
+                        FieldOfView="40"
+                        LookDirection="0,0,1"
+                        NearPlaneDistance="1"
+                        Position="0,0,-3"
+                        UpDirection="0,1,0" />
+                </Viewport3D.Camera>
 
-            <InkCanvas Grid.Column="0" Background="LightGray" />
-            <Border Grid.Column="1" Background="DarkGray" />
-            <TextBox Grid.Column="2" Background="WhiteSmoke" />
-        </Grid>
+                <!--  Add models.  -->
+                <Viewport3D.Children>
+
+                    <ModelVisual3D>
+                        <ModelVisual3D.Content>
+                            <Model3DGroup>
+                                <Model3DGroup.Children>
+
+                                    <!--  Lights, MeshGeometry3D and DiffuseMaterial objects are added to the ModelVisual3D.  -->
+                                    <SpotLight
+                                        Direction="0,0,1"
+                                        Position="0,0,-10"
+                                        Color="WhiteSmoke" />
+
+                                    <!--  Define a red cone.  -->
+                                    <GeometryModel3D>
+
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D
+                                                Normals="0.7236065,0.4472139,0.5257313  0.2763934,0.4472138,0.8506507  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  -0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.5308242,0.4294462,0.7306172  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.7236065,0.4472139,0.5257313  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.858892,0.429446,0.279071  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.8944269,0.4472139,0  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.858892,0.429446,-0.279071  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.7236065,0.4472139,-0.5257313  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.5308242,0.4294462,-0.7306172  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.2763934,0.4472138,-0.8506507  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.5308249,0.4294459,-0.7306169  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.7236068,0.4472141,-0.5257306  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8588922,0.4294461,-0.27907  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8944269,0.4472139,0  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.858892,0.429446,0.279071  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.7236065,0.4472139,0.5257313  0.858892,0.429446,0.279071  0.7236065,0.4472139,0.5257313  0.5308242,0.4294462,0.7306172  0.858892,0.429446,0.279071  "
+                                                Positions="0.293893 -0.5 0.404509  0.475528 -0.5 0.154509  0 0.5 0  0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 0.154509  0.475528 -0.5 -0.154509  0 0.5 0  0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 -0.154509  0.293893 -0.5 -0.404509  0 0.5 0  0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  0.293893 -0.5 -0.404509  0 -0.5 -0.5  0 0.5 0  0 -0.5 -0.5  0 0.5 0  0 0.5 0  0 -0.5 -0.5  -0.293893 -0.5 -0.404509  0 0.5 0  -0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  -0.293893 -0.5 -0.404509  -0.475528 -0.5 -0.154509  0 0.5 0  -0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 -0.154509  -0.475528 -0.5 0.154509  0 0.5 0  -0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 0.154509  -0.293892 -0.5 0.404509  0 0.5 0  -0.293892 -0.5 0.404509  0 0.5 0  0 0.5 0  -0.293892 -0.5 0.404509  0 -0.5 0.5  0 0.5 0  0 -0.5 0.5  0 0.5 0  0 0.5 0  0 -0.5 0.5  0.293893 -0.5 0.404509  0 0.5 0  0.293893 -0.5 0.404509  0 0.5 0  0 0.5 0  "
+                                                TriangleIndices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 " />
+                                        </GeometryModel3D.Geometry>
 
 
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <SolidColorBrush Opacity="1.0" Color="CornflowerBlue" />
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
 
-    </Grid>
+                                    </GeometryModel3D>
+
+                                </Model3DGroup.Children>
+                            </Model3DGroup>
+
+                        </ModelVisual3D.Content>
+
+                    </ModelVisual3D>
+
+                </Viewport3D.Children>
+
+            </Viewport3D>
+            <TextBox Background="DarkGray" DockPanel.Dock="Right" />
+        </DockPanel>
+    </DockPanel>
 </Window>

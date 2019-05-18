@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Media.Media3D;
 using GCodeViewer.RenderWindow.Utils;
 
@@ -8,22 +10,21 @@ namespace TestingApplication
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\flori\source\repos\GCodeViewer\GCodeViewer\GCodeExamples\SinkingBenchy.gcode";
+            string fileName = "WitcherWolf.gcode";
+            //string fileName = "SinkingBenchy.gcode";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            var watch = new Stopwatch();
+            watch.Start();
 
             PointExtractor extractor = new PointExtractor(path);
             Point3DCollection points = extractor.ExtractPoints();
 
-            //foreach (Point3D point in points)
-            //    DisplayPoint(point);
+            watch.Stop();
 
             Console.WriteLine($"The gcode file contains {points.Count} points");
+            Console.WriteLine($"And retrieving them took {watch.ElapsedMilliseconds} ms");
 
             Console.ReadKey();
-        }
-
-        private static void DisplayPoint(Point3D point)
-        {
-            Console.WriteLine($"{point.X}, {point.Y}, {point.Z}");
         }
     }
 }

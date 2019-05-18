@@ -11,6 +11,10 @@ namespace GCodeViewer.RenderWindow.Utils
         private Regex xRegex;
         private Regex yRegex;
         private Regex zRegex;
+        private char X = 'X';
+        private char Y = 'Y';
+        private char Z = 'Z';
+        private char CommentChar = ';';
 
         public PointExtractor(string gcodeFilePath)
         {
@@ -19,9 +23,9 @@ namespace GCodeViewer.RenderWindow.Utils
 
             stream = new FileStream(gcodeFilePath, FileMode.Open);
 
-            xRegex = GetRegex('X');
-            yRegex = GetRegex('Y');
-            zRegex = GetRegex('Z');
+            xRegex = GetRegex(X);
+            yRegex = GetRegex(Y);
+            zRegex = GetRegex(Z);
         }
 
         public Point3DCollection ExtractPoints()
@@ -47,17 +51,21 @@ namespace GCodeViewer.RenderWindow.Utils
         {
             Point3D point = lastPoint;
 
-            if (line.Length == 0)
+            if (string.IsNullOrEmpty(line))
                 return point;
-            if (line[0] == ';')
+            if (line[0] == CommentChar)
                 return point;
 
-            if (xRegex.Match(line).Success)
-                point.X = GetValue(xRegex, line);
-            if (yRegex.Match(line).Success)
-                point.Y = GetValue(yRegex, line);
-            if (zRegex.Match(line).Success)
-                point.Z = GetValue(zRegex, line);
+            Match xMatch = xRegex.Match(line);
+            Match yMatch = yRegex.Match(line);
+            Match zMatch = zRegex.Match(line);
+
+            if (xMatch.Success)
+                point.X = GetValue(xMatch);
+            if (yMatch.Success)
+                point.Y = GetValue(yMatch);
+            if (zMatch.Success)
+                point.Z = GetValue(zMatch);
 
             return point;
         }
@@ -66,9 +74,8 @@ namespace GCodeViewer.RenderWindow.Utils
             var regex = new Regex(character + "(\\d+\\.\\d+|\\d+)");
             return regex;
         }
-        private double GetValue(Regex regex, string line)
+        private double GetValue(Match match)
         {
-            Match match = regex.Match(line);
             string valueString = match.ToString().Substring(1);
             double value = Convert.ToDouble(valueString);
 
