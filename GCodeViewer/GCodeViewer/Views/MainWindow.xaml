@@ -11,21 +11,21 @@
     ResizeMode="CanResize"
     mc:Ignorable="d">
     <DockPanel>
-        <ToolBarTray
+        <StackPanel
             Background="CornflowerBlue"
             DockPanel.Dock="Top"
-            IsLocked="True">
-            <ToolBar IsOverflowOpen="False">
-                <Menu>
-                    <MenuItem Header="File">
-                        <MenuItem Header="Open" />
-                        <MenuItem Header="Save" />
-                        <MenuItem Header="Save as" />
-                        <MenuItem Header="Close" />
-                    </MenuItem>
-                </Menu>
-            </ToolBar>
-        </ToolBarTray>
+            Orientation="Horizontal"
+            Height="25">
+            <Menu VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem Header="File">
+                    <MenuItem Click="OpenFile_Click" Header="Open" />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save as" />
+                    <MenuItem Header="Close" />
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <Border DockPanel.Dock="Top" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="LightGray" />
 
         <DockPanel>
             <Viewport3D MinWidth="400" DockPanel.Dock="Left">
@@ -85,7 +85,20 @@
                 </Viewport3D.Children>
 
             </Viewport3D>
-            <TextBox Background="DarkGray" DockPanel.Dock="Right" />
+            <Border
+                Width="1"
+                VerticalAlignment="Stretch"
+                Background="CornflowerBlue" />
+            <TextBox
+                x:Name="textblock"
+                AcceptsReturn="True"
+                AcceptsTab="True"
+                Background="WhiteSmoke"
+                DockPanel.Dock="Right"
+                FontSize="14"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Visible"
+                TextChanged="Textblock_TextChanged"/>
         </DockPanel>
     </DockPanel>
 </Window>
