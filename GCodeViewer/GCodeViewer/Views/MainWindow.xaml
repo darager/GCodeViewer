@@ -52,7 +52,7 @@
                                     <SpotLight
                                         Direction="0,0,1"
                                         Position="0,0,-10"
-                                        Color="WhiteSmoke" />
+                                        Color="DarkOrange" />
 
                                     <!--  Define a red cone.  -->
                                     <GeometryModel3D>
@@ -68,7 +68,7 @@
                                         <GeometryModel3D.Material>
                                             <DiffuseMaterial>
                                                 <DiffuseMaterial.Brush>
-                                                    <SolidColorBrush Opacity="1.0" Color="CornflowerBlue" />
+                                                    <SolidColorBrush Opacity="1.0" Color="DarkOliveGreen" />
                                                 </DiffuseMaterial.Brush>
                                             </DiffuseMaterial>
                                         </GeometryModel3D.Material>
