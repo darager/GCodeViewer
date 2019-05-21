@@ -47,9 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extractor\PointExtractor.cs" />
-    <Compile Include="FileSelector\FileChangedEventArgs.cs" />
-    <Compile Include="FileSelector\FileChangedEventHandler.cs" />
-    <Compile Include="FileSelector\IFileSelector.cs" />
+    <Compile Include="Interfaces\IFile.cs" />
+    <Compile Include="Interfaces\IFileBuffer.cs" />
+    <Compile Include="Interfaces\IFileLoader.cs" />
+    <Compile Include="Interfaces\IFileSaver.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Interfaces\ITextViewModel.cs" />
+    <Compile Include="Interfaces\IToolbarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
