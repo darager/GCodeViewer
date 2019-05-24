@@ -1,11 +1,7 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
+﻿using System.IO;
+using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.ViewModels;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GCodeViewer.Interfaces.FileAccess.FileChooser;
 
 namespace GCodeViewer.Objects
 {

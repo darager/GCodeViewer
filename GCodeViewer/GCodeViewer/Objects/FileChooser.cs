@@ -11,9 +11,9 @@ namespace GCodeViewer.Objects
             get { return _File; }
         }
 
-        public FileChooser(IFile startingFile)
+        public FileChooser(IFile cacheFile)
         {
-            SwapFile(startingFile);
+            SwapFile(cacheFile);
         }
 
         public IFile GetFile()

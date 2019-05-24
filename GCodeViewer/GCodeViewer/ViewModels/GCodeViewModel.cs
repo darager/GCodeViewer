@@ -6,9 +6,9 @@ namespace GCodeViewer.ViewModels
 {
     public class GCodeViewModel : ITextViewModel
     {
-        public IFileBuffer FileBuffer { get; set; }
+        public ITextBuffer FileBuffer { get; set; }
 
-        public GCodeViewModel(IFileBuffer fileBuffer)
+        public GCodeViewModel(ITextBuffer fileBuffer)
         {
             this.FileBuffer = fileBuffer;
         }

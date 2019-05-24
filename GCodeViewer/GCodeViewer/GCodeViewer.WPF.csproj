@@ -66,11 +66,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\CloseFileCommand.cs" />
-    <Compile Include="Commands\OpenFileCommand.cs" />
-    <Compile Include="Commands\ResetTextCommand.cs" />
-    <Compile Include="Commands\SaveAsCommand.cs" />
-    <Compile Include="Commands\SaveFileCommand.cs" />
+    <Compile Include="ViewModels\Commands\CloseFileCommand.cs" />
+    <Compile Include="ViewModels\Commands\OpenFileCommand.cs" />
+    <Compile Include="ViewModels\Commands\ResetTextCommand.cs" />
+    <Compile Include="ViewModels\Commands\SaveAsCommand.cs" />
+    <Compile Include="ViewModels\Commands\SaveFileCommand.cs" />
+    <Compile Include="Objects\CacheFile.cs" />
+    <Compile Include="Objects\TextFile.cs" />
     <Compile Include="REWORK\PointExtractor.cs" />
     <Compile Include="Interfaces\FileAccess\FileChooser\IFileChooser.cs" />
     <Compile Include="Interfaces\IPointExtractor.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="Models\GCode.cs" />
     <Compile Include="Ninject\Bindings.cs" />
     <Compile Include="Interfaces\FileAccess\IFile.cs" />
-    <Compile Include="Interfaces\FileAccess\IFileBuffer.cs" />
+    <Compile Include="Interfaces\FileAccess\ITextBuffer.cs" />
     <Compile Include="Interfaces\FileAccess\IFileSaver.cs" />
     <Compile Include="Interfaces\ViewModels\ITextViewModel.cs" />
     <Compile Include="Interfaces\ViewModels\IToolbarViewModel.cs" />

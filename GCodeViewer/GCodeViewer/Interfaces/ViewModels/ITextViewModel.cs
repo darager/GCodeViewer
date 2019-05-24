@@ -9,7 +9,7 @@ namespace GCodeViewer.Interfaces.ViewModels
 {
     public interface ITextViewModel
     {
-        IFileBuffer FileBuffer { get; set; }
+        ITextBuffer FileBuffer { get; set; }
 
         void RestoreOriginalContent();
         void ChangeLine(int lineIndex, string content);
