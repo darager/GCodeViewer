@@ -72,7 +72,7 @@
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveFileCommand.cs" />
     <Compile Include="REWORK\PointExtractor.cs" />
-    <Compile Include="Interfaces\FileAccess\IFileChooser.cs" />
+    <Compile Include="Interfaces\FileAccess\FileChooser\IFileChooser.cs" />
     <Compile Include="Interfaces\IPointExtractor.cs" />
     <Compile Include="Interfaces\ViewModels\IRenderWindowViewModel.cs" />
     <Compile Include="Models\GCode.cs" />
