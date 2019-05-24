@@ -54,11 +54,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GCodeViewer.RenderWindow.Utils\GCodeViewer.RenderWindow.Utils.csproj">
-      <Project>{bb88192c-0b1c-4231-8cbc-7e490ca8615c}</Project>
-      <Name>GCodeViewer.RenderWindow.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

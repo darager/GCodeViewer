@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Media3D;
-using GCodeViewer.RenderWindow.Utils;
 
 namespace TestingApplication
 {
@@ -16,13 +15,9 @@ namespace TestingApplication
             var watch = new Stopwatch();
             watch.Start();
 
-            PointExtractor extractor = new PointExtractor(path);
-            Point3DCollection points = extractor.ExtractPoints();
 
             watch.Stop();
 
-            Console.WriteLine($"The gcode file contains {points.Count} points");
-            Console.WriteLine($"And retrieving them took {watch.ElapsedMilliseconds} ms");
 
             Console.ReadKey();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCodeViewer.RenderWindow.Utils.Interfaces
+namespace GCodeViewer.Interfaces.FileAccess
 {
     public interface IFile
     {

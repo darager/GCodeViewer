@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCodeViewer.RenderWindow.Utils.Interfaces
+namespace GCodeViewer.Models
 {
-    public interface IRenderer
+    public class GCode
     {
-        void Render(int lineStart, int lineStop);
+        public string[] Content { get; set; }
     }
 }

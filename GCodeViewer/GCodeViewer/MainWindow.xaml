@@ -12,6 +12,7 @@
     mc:Ignorable="d">
     <DockPanel>
         <StackPanel
+        x:Name="toolBar"
             Height="25"
             Background="CornflowerBlue"
             DockPanel.Dock="Top"
@@ -34,7 +35,7 @@
 
         <DockPanel>
             <Viewport3D
-                x:Name="mainViewPort"
+                x:Name="liveRenderWindow"
                 MinWidth="400"
                 DockPanel.Dock="Left">
                 <Viewport3D.Camera>
@@ -61,14 +62,13 @@
                 VerticalAlignment="Stretch"
                 Background="CornflowerBlue" />
             <TextBox
-                x:Name="textblock"
+                x:Name="gCodeTextBox"
                 AcceptsReturn="True"
                 AcceptsTab="True"
                 Background="WhiteSmoke"
                 DockPanel.Dock="Right"
                 FontSize="14"
                 HorizontalScrollBarVisibility="Auto"
-                TextChanged="Textblock_TextChanged"
                 VerticalScrollBarVisibility="Visible" />
         </DockPanel>
     </DockPanel>

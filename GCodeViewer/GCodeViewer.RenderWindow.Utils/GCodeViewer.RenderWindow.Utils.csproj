@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,13 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extractor\PointExtractor.cs" />
-    <Compile Include="Interfaces\IFile.cs" />
-    <Compile Include="Interfaces\IFileBuffer.cs" />
-    <Compile Include="Interfaces\IFileLoader.cs" />
-    <Compile Include="Interfaces\IFileSaver.cs" />
-    <Compile Include="Interfaces\IRenderer.cs" />
-    <Compile Include="Interfaces\ITextViewModel.cs" />
-    <Compile Include="Interfaces\IToolbarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
