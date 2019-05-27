@@ -23,20 +23,22 @@
                 VerticalContentAlignment="Center"
                 Background="{StaticResource ToolbarBackgroundColor}">
                 <MenuItem
+                    Width="24"
+                    Height="28"
                     FontFamily="Roboto"
                     FontSize="15"
-                    Foreground="{StaticResource FontColor}" Width="24" Height="28">
+                    Foreground="{StaticResource FontColor}">
                     <MenuItem.Icon>
                         <Image
+                            Height="25"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Height="25"
                             Opacity="0.9"
                             Source="Icons/document-icon.png" />
                     </MenuItem.Icon>
                     <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Open" />
                     <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save" />
-                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save as" />
+                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save As" />
                 </MenuItem>
             </Menu>
         </StackPanel>
