@@ -26,5 +26,9 @@ namespace GCodeViewer.Objects
 
             return content;
         }
+        public FileStream GetFileStream()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
+using GCodeViewer.Interfaces.FileAccess.FileChooser;
 using GCodeViewer.Interfaces.ViewModels;
 
 namespace GCodeViewer.ViewModels

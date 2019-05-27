@@ -12,64 +12,37 @@
     mc:Ignorable="d">
     <DockPanel>
         <StackPanel
-        x:Name="toolBar"
-            Height="25"
-            Background="CornflowerBlue"
+            x:Name="toolBar"
+            Height="30"
+            Background="{StaticResource ToolbarBackgroundColor}"
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Menu VerticalAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem Header="File">
-                    <MenuItem Header="Open" />
-                    <MenuItem Header="Save" />
-                    <MenuItem Header="Save as" />
-                    <MenuItem Header="Close" />
+            <Menu
+                Margin="4,1,4,1"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="{StaticResource ToolbarBackgroundColor}">
+                <MenuItem
+                    FontFamily="Roboto"
+                    FontSize="15"
+                    Foreground="{StaticResource FontColor}" Width="24" Height="28">
+                    <MenuItem.Icon>
+                        <Image
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Height="25"
+                            Opacity="0.9"
+                            Source="Icons/document-icon.png" />
+                    </MenuItem.Icon>
+                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Open" />
+                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save" />
+                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save as" />
                 </MenuItem>
             </Menu>
         </StackPanel>
-        <Border
-            Height="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Center"
-            Background="LightGray"
-            DockPanel.Dock="Top" />
-
-        <DockPanel>
-            <Viewport3D
-                x:Name="liveRenderWindow"
-                MinWidth="400"
-                DockPanel.Dock="Left">
-                <Viewport3D.Camera>
-                    <PerspectiveCamera
-                        FarPlaneDistance="100"
-                        FieldOfView="60"
-                        LookDirection="0,0,-1"
-                        NearPlaneDistance="0.1"
-                        Position="0,0,10"
-                        UpDirection="0,1,0" />
-                </Viewport3D.Camera>
-                <ModelVisual3D>
-                    <ModelVisual3D.Content>
-                        <Model3DGroup>
-                            <AmbientLight Color="#40FFFFFF" />
-                            <DirectionalLight Direction="1,-1,-1" Color="#FFFFFF" />
-                        </Model3DGroup>
-                    </ModelVisual3D.Content>
-                </ModelVisual3D>
-
-            </Viewport3D>
-            <Border
-                Width="1"
-                VerticalAlignment="Stretch"
-                Background="CornflowerBlue" />
-            <TextBox
-                x:Name="gCodeTextBox"
-                AcceptsReturn="True"
-                AcceptsTab="True"
-                Background="WhiteSmoke"
-                DockPanel.Dock="Right"
-                FontSize="14"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Visible" />
-        </DockPanel>
+        <Frame
+            x:Name="Main"
+            Background="{StaticResource BackgroundColor}"
+            DockPanel.Dock="Bottom" />
     </DockPanel>
 </Window>

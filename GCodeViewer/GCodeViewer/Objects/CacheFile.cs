@@ -1,5 +1,6 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
+﻿using System;
 using System.IO;
+using GCodeViewer.Interfaces.FileAccess;
 
 namespace GCodeViewer.Objects
 {
@@ -20,6 +21,10 @@ namespace GCodeViewer.Objects
                 content = File.ReadAllLines(FilePath);
 
             return content;
+        }
+        public FileStream GetFileStream()
+        {
+            throw new NotImplementedException();
         }
     }
 }

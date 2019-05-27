@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Reflection;
 using GCodeViewer.Interfaces;
 using GCodeViewer.Interfaces.ViewModels;
+using GCodeViewer.Views;
 
 namespace GCodeViewer
 {
@@ -26,6 +27,7 @@ namespace GCodeViewer
             //toolBar.DataContext = kernel.Get<IToolbarViewModel>();
 
             InitializeComponent();
+            Main.Content = new OpenFilePage();
         }
 
         //private void Textblock_TextChanged(object sender, TextChangedEventArgs e)
