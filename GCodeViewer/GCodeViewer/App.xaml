@@ -6,12 +6,12 @@
     StartupUri="MainWindow.xaml">
 
     <Application.Resources>
-        <SolidColorBrush x:Key="ToolbarBackgroundColor" Color="#202020" />
         <SolidColorBrush x:Key="BackgroundColor" Color="#121212" />
+        <SolidColorBrush x:Key="ToolbarBackgroundColor" Color="#202020" />
+        <SolidColorBrush x:Key="PrimaryColor" Color="#02dac5" />
         <SolidColorBrush x:Key="FontColor" Color="#E1E1E1" />
 
         <!--  Material Design Controls  -->
-        <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#02dac5" />
         <Style x:Key="DarkThemeButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
@@ -22,11 +22,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            Padding="6,2,6,2"
-                            Background="{StaticResource ButtonBackgroundColor}"
+                            Padding="8,2,8,2"
+                            Background="{StaticResource PrimaryColor}"
                             BorderBrush="{StaticResource BackgroundColor}"
                             BorderThickness="2"
-                            CornerRadius="9">
+                            CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>

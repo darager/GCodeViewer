@@ -1,11 +1,7 @@
-﻿using GCodeViewer.Interfaces;
-using GCodeViewer.Interfaces.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Media.Media3D;
+using GCodeViewer.Interfaces;
+using GCodeViewer.Interfaces.ViewModels;
 
 namespace GCodeViewer.ViewModels
 {
@@ -17,7 +13,6 @@ namespace GCodeViewer.ViewModels
         {
             this.PointExtractor = pointExtractor;
         }
-
         public void Render(Point3DCollection points)
         {
             throw new NotImplementedException();
