@@ -8,6 +8,7 @@ namespace GCodeViewer.Interfaces.FileAccess
         ITextViewModel TextViewModel { get; set; }
         IFileChooser FileChooser { get; set; }
 
-        void WriteToFile();
+        void SaveCurrentFile();
+        void SaveToFile(IFile file);
     }
 }

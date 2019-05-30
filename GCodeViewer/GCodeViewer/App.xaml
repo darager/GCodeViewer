@@ -8,7 +8,9 @@
     <Application.Resources>
         <SolidColorBrush x:Key="BackgroundColor" Color="#121212" />
         <SolidColorBrush x:Key="ToolbarBackgroundColor" Color="#202020" />
-        <SolidColorBrush x:Key="PrimaryColor" Color="#02dac5" />
+        <SolidColorBrush x:Key="PrimaryColor" Color="#bb86fc" />
+        <SolidColorBrush x:Key="SecondaryColor" Color="#03dac5" />
+        <!--<SolidColorBrush x:Key="PrimaryColor" Color="CornflowerBlue" />-->
         <SolidColorBrush x:Key="FontColor" Color="#E1E1E1" />
 
         <!--  Material Design Controls  -->

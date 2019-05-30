@@ -1,18 +1,16 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace GCodeViewer.Interfaces.ViewModels
 {
     public interface ITextViewModel
     {
         ITextBuffer FileBuffer { get; set; }
+        ObservableCollection<string> FileContent { get; set; }
 
-        void RestoreOriginalContent();
+        void LoadBufferContent();
         void ChangeLine(int lineIndex, string content);
         string[] GetCurrentContent();
+        bool IsCurrentFileSaved();
     }
 }

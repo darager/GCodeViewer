@@ -20,12 +20,12 @@
                 Opacity="0.6"
                 Source="/GCodeViewer;component/Icons/document-icon.png" />
             <Label
-            Margin="5"
+                Margin="5"
                 Padding="3"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontFamily="Roboto"
-                FontSize="20"
+                FontSize="17"
                 FontWeight="DemiBold"
                 Foreground="{StaticResource FontColor}">
                 Open a File to start!
@@ -34,7 +34,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Content="Open File"
-                FontSize="20"
+                FontSize="17"
                 Style="{StaticResource DarkThemeButton}" />
         </StackPanel>
     </Grid>

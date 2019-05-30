@@ -6,6 +6,7 @@ namespace GCodeViewer.Interfaces.FileAccess
     {
         IFileChooser FileChooser { get; set; }
 
-        string[] OriginalText { get; set; }
+        void LoadFileContent();
+        string[] GetContent();
     }
 }

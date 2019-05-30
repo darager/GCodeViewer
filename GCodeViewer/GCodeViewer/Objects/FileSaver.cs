@@ -16,15 +16,28 @@ namespace GCodeViewer.Objects
             this.FileChooser = fileChooser;
         }
 
-        public void WriteToFile()
+        public void SaveCurrentFile()
         {
             string[] content = TextViewModel.GetCurrentContent();
             IFile file = FileChooser.GetFile();
 
-            using (var stream = new FileStream(file.FilePath, FileMode.OpenOrCreate))
+            SaveFile(file, content);
+        }
+        public void SaveToFile(IFile file)
+        {
+            string[] content = TextViewModel.GetCurrentContent();
+
+            SaveFile(file, content);
+        }
+
+        void SaveFile(IFile file, string[] content)
+        {
+            using (var stream = file.GetFileStream())
+            {
                 using (var writer = new StreamWriter(stream))
                     foreach (string line in content)
                         writer.WriteLineAsync(line);
+            }
         }
     }
 }

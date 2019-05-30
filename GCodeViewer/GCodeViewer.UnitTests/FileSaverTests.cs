@@ -39,7 +39,7 @@ namespace GCodeViewer.UnitTests
             string[] actual = new string[10];
             var fileSaver = new FileSaver(mockTextViewModel.Object, mockFileChooser.Object);
 
-            fileSaver.WriteToFile();
+            fileSaver.SaveCurrentFile();
 
 
             Assert.AreEqual(expected, actual);

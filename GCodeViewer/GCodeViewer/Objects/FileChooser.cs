@@ -5,37 +5,19 @@ namespace GCodeViewer.Objects
 {
     public class FileChooser : IFileChooser
     {
-        private IFile _File;
-        public IFile File
-        {
-            get { return _File; }
-        }
+        private IFile File;
 
-        public FileChooser(IFile cacheFile)
+        public FileChooser()
         {
-            SwapFile(cacheFile);
         }
 
         public IFile GetFile()
         {
-            return _File;
+            return File;
         }
         public void SwapFile(IFile file)
         {
-            if (file != _File)
-            {
-                _File = file;
-                CallEvent(_File);
-            }
+            File = file;
         }
-
-        void CallEvent(IFile file)
-        {
-            var handler = FileSwapped;
-
-            if (handler != null)
-                FileSwapped(this, new FileSwappedEventArgs(file));
-        }
-        public event FileSwappedEventHandler FileSwapped;
     }
 }
