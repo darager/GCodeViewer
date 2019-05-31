@@ -20,13 +20,13 @@ namespace GCodeViewer.Dependency_Injection
             // TODO: Add Bindings for all for all of the objects
 
             // WPF Viewmodels
-            //Bind<ITextViewModel>().To<GCodeViewModel>().InSingletonScope();
-            //Bind<IRenderWindowViewModel>().To<RenderWindowViewModel>().InSingletonScope();
-            //Bind<IToolbarViewModel>().To<ToolbarViewModel>().InSingletonScope();
+            Bind<IToolbarViewModel>().To<ToolbarBase>().InSingletonScope();
+            Bind<ITextViewModel>().To<TextEditorBase>().InSingletonScope();
 
             // File Access objects
             Bind<IFileChooser>().To<FileChooser>().InSingletonScope();
             Bind<IFileSaver>().To<FileSaver>().InSingletonScope();
+            Bind<ITextBuffer>().To<TextBuffer>().InSingletonScope();
         }
     }
 }

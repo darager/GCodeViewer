@@ -36,9 +36,18 @@
                             Opacity="0.9"
                             Source="Icons/document-icon.png" />
                     </MenuItem.Icon>
-                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Open" />
-                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save" />
-                    <MenuItem Foreground="{StaticResource BackgroundColor}" Header="Save As" />
+                    <MenuItem
+                        Command="{Binding OpenFileCommand}"
+                        Foreground="{StaticResource BackgroundColor}"
+                        Header="Open" />
+                    <MenuItem
+                        Command="{Binding SaveFileCommand}"
+                        Foreground="{StaticResource BackgroundColor}"
+                        Header="Save" />
+                    <MenuItem
+                        Command="{Binding SaveAsCommand}"
+                        Foreground="{StaticResource BackgroundColor}"
+                        Header="Save As" />
                 </MenuItem>
             </Menu>
         </StackPanel>

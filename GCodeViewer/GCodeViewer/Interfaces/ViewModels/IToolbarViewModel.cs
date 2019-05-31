@@ -13,10 +13,10 @@ namespace GCodeViewer.Interfaces.ViewModels
         ITextViewModel TextViewModel { get; set; }
         IFileSaver FileSaver { get; set; }
         IFileChooser FileChooser { get; set; }
+        ITextBuffer TextBuffer { get; set; }
 
         void Save();
         void SaveAs();
         void Open();
-        void Close();
     }
 }

@@ -62,6 +62,8 @@
     <Compile Include="ViewModels\Commands\GCodeFileFilter.cs" />
     <Compile Include="ViewModels\Commands\SaveAsCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
+    <Compile Include="ViewModels\TextEditorBase.cs" />
+    <Compile Include="ViewModels\ToolbarBase.cs" />
     <Compile Include="Views\LiveEditorPage.xaml.cs">
       <DependentUpon>LiveEditorPage.xaml</DependentUpon>
     </Compile>

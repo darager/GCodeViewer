@@ -33,6 +33,7 @@
             <Button
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Command="{Binding OpenFileCommand}"
                 Content="Open File"
                 FontSize="17"
                 Style="{StaticResource DarkThemeButton}" />

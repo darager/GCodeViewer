@@ -6,7 +6,7 @@ namespace GCodeViewer.Interfaces.ViewModels
     public interface ITextViewModel
     {
         ITextBuffer FileBuffer { get; set; }
-        ObservableCollection<string> FileContent { get; set; }
+        string[] FileContent { get; set; }
 
         void LoadBufferContent();
         void ChangeLine(int lineIndex, string content);

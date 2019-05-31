@@ -33,7 +33,7 @@ namespace GCodeViewer.Objects
                     while ((line = reader.ReadLine()) != null)
                         content.Add(line);
 
-                    fileContent = (string[])content.ToArray();
+                    fileContent = (string[])content.ToArray(typeof(string));
                 }
             }
         }

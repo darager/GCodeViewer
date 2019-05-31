@@ -19,15 +19,14 @@ namespace GCodeViewer
     {
         public MainWindow()
         {
-            //var kernel = new StandardKernel();
-            //kernel.Load(Assembly.GetExecutingAssembly());
-
-            //gCodeTextBox.DataContext = kernel.Get<ITextViewModel>();
-            //liveRenderWindow.DataContext = kernel.Get<IRenderWindowViewModel>();
-            //toolBar.DataContext = kernel.Get<IToolbarViewModel>();
-
             InitializeComponent();
-            Main.Content = new OpenFilePage();
+
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+
+            toolBar.DataContext = kernel.Get<IToolbarViewModel>();
+
+            Main.Content = new OpenFilePage(kernel.Get<IToolbarViewModel>());
         }
 
         //private void Textblock_TextChanged(object sender, TextChangedEventArgs e)

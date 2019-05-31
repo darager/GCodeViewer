@@ -36,7 +36,7 @@ namespace GCodeViewer.Objects
             {
                 using (var writer = new StreamWriter(stream))
                     foreach (string line in content)
-                        writer.WriteLineAsync(line);
+                        writer.WriteLine(line);
             }
         }
     }
