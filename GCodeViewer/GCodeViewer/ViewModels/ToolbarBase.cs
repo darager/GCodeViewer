@@ -45,19 +45,6 @@ namespace GCodeViewer.ViewModels
             _openFileCommand = new OpenFileCommand(textViewModel, fileChooser, textBuffer);
             _saveAsCommand = new SaveAsCommand(textViewModel, fileChooser, textBuffer, fileSaver);
         }
-
-        public void Open()
-        {
-            throw new NotImplementedException();
-        }
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-        public void SaveAs()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

@@ -8,6 +8,7 @@
     Title="GCodeViewer"
     Width="800"
     Height="450"
+    Icon="Icons/document-icon.png"
     ResizeMode="CanResize"
     mc:Ignorable="d">
     <DockPanel>

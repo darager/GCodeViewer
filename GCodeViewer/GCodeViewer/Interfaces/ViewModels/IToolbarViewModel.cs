@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GCodeViewer.Interfaces.ViewModels
 {
@@ -15,8 +16,8 @@ namespace GCodeViewer.Interfaces.ViewModels
         IFileChooser FileChooser { get; set; }
         ITextBuffer TextBuffer { get; set; }
 
-        void Save();
-        void SaveAs();
-        void Open();
+        ICommand OpenFileCommand { get; set; }
+        ICommand SaveFileCommand { get; set; }
+        ICommand SaveAsCommand { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
-using System.Collections.ObjectModel;
 
 namespace GCodeViewer.Interfaces.ViewModels
 {
@@ -11,6 +10,7 @@ namespace GCodeViewer.Interfaces.ViewModels
         void LoadBufferContent();
         void ChangeLine(int lineIndex, string content);
         string[] GetCurrentContent();
-        bool IsCurrentFileSaved();
+        bool IsCurrentStateSaved();
+        bool IsFileLoaded();
     }
 }

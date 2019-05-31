@@ -31,8 +31,7 @@ namespace GCodeViewer.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            // TODO check whether a file has already been opened
-            return true;
+            return textViewModel.IsFileLoaded();
         }
         public void Execute(object parameter)
         {

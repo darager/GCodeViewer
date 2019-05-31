@@ -20,7 +20,7 @@ namespace GCodeViewer.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            return !textViewModel.IsCurrentFileSaved();
+            return !textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded();
         }
         public void Execute(object parameter)
         {

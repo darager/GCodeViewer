@@ -27,7 +27,7 @@ namespace GCodeViewer.Commands
 
         public bool CanExecute(object parameter)
         {
-            return textViewModel.IsCurrentFileSaved();
+            return true;
         }
         public void Execute(object parameter)
         {

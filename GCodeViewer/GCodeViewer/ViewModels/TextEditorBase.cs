@@ -1,11 +1,6 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GCodeViewer.ViewModels
 {
@@ -27,14 +22,18 @@ namespace GCodeViewer.ViewModels
         {
             return FileContent;
         }
-        public bool IsCurrentFileSaved()
-        {
-            // TODO: implement this
-            return true;
-        }
         public void LoadBufferContent()
         {
             FileContent = FileBuffer.GetContent();
+        }
+        public bool IsCurrentStateSaved()
+        {
+            // TODO implement a flag that is set to true once the file is saved and set to false when some text changes.
+            return true;
+        }
+        public bool IsFileLoaded()
+        {
+            return (FileContent != null);
         }
     }
 }
