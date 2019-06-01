@@ -3,7 +3,8 @@ using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.FileAccess.FileChooser;
 using GCodeViewer.Interfaces.ViewModels;
 using GCodeViewer.ViewModels.Commands;
-using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GCodeViewer.ViewModels

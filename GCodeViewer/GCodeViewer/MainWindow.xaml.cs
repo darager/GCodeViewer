@@ -9,6 +9,7 @@ using System.Reflection;
 using GCodeViewer.Interfaces;
 using GCodeViewer.Interfaces.ViewModels;
 using GCodeViewer.Views;
+using System.Windows.Navigation;
 
 namespace GCodeViewer
 {
@@ -17,18 +18,25 @@ namespace GCodeViewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        NavigationService navigationService;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            navigationService = NavigationService.GetNavigationService(this);
+
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            toolBar.DataContext = kernel.Get<IToolbarViewModel>();
 
-            Main.Content = new OpenFilePage(kernel.Get<IToolbarViewModel>());
+            //liveEditorPage = new LiveEditorPage();
+            mainFrame.Content = new OpenFilePage(kernel.Get<IToolbarViewModel>());
+
+            toolBar.DataContext = kernel.Get<IToolbarViewModel>();
         }
 
+        #region ZombieCode
         //private void Textblock_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //    Debug.WriteLine(e.Changes.ToString());
@@ -85,5 +93,6 @@ namespace GCodeViewer
 
         //    return mod;
         //}
+        #endregion
     }
 }

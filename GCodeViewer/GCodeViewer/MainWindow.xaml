@@ -53,7 +53,7 @@
             </Menu>
         </StackPanel>
         <Frame
-            x:Name="Main"
+            x:Name="mainFrame"
             Background="{StaticResource BackgroundColor}"
             DockPanel.Dock="Bottom" />
     </DockPanel>

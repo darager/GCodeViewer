@@ -1,10 +1,5 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.FileAccess.FileChooser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GCodeViewer.Interfaces.ViewModels
