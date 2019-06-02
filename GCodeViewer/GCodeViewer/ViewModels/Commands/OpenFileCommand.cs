@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using Ninject;
 using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GCodeViewer.Commands
@@ -33,6 +34,18 @@ namespace GCodeViewer.Commands
         }
         public void Execute(object parameter)
         {
+            if(!textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded())
+            {
+                var result =
+                    MessageBox.Show(
+                      "The current changes have not been saved! \nDo you wish to proceed without saving"
+                    , "Unsaved Changes!"
+                    , MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.No)
+                    return;
+            }
+
             var ofd = new OpenFileDialog();
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
             ofd.DefaultExt = GCodeFileFilter.StandardFileExtension;
