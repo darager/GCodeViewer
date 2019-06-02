@@ -5,6 +5,7 @@ using GCodeViewer.Objects;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,6 @@ namespace GCodeViewer.ViewModels.Commands
         private IFileChooser fileChooser;
         private ITextBuffer textBuffer;
         private IFileSaver fileSaver;
-
-        public event EventHandler CanExecuteChanged;
 
         public SaveAsCommand(ITextViewModel textViewModel, IFileChooser fileChooser, ITextBuffer textBuffer, IFileSaver fileSaver)
         {
@@ -47,6 +46,12 @@ namespace GCodeViewer.ViewModels.Commands
             fileChooser.SwapFile(newFile);
             textBuffer.LoadFileContent();
             textViewModel.GetCurrentContent();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 }

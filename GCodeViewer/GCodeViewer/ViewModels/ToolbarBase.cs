@@ -6,12 +6,16 @@ namespace GCodeViewer.ViewModels
 {
     public class ToolbarBase : IToolbarViewModel
     {
-        [Inject, Named("SaveAsFileCommand")]
         public ICommand SaveAsCommand { get; set; }
-        [Inject, Named("OpenFileCommand")]
         public ICommand OpenFileCommand { get; set; }
-        [Inject, Named("SaveFileCommand")]
         public ICommand SaveFileCommand { get; set; }
+
+        public ToolbarBase([Named("SaveAsFileCommand")]ICommand saveAsCommand, [Named("OpenFileCommand")]ICommand openFileCommand, [Named("SaveFileCommand")]ICommand saveFileCommand)
+        {
+            this.SaveAsCommand = saveAsCommand;
+            this.OpenFileCommand = openFileCommand;
+            this.SaveFileCommand = saveFileCommand;
+        }
     }
 }
 

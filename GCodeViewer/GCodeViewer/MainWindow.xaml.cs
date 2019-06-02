@@ -22,6 +22,7 @@ namespace GCodeViewer
             //liveEditorPage = new LiveEditorPage();
             mainFrame.Content = kernel.Get<Page>("OpenFilePage");
 
+            // set the dataContext of the toolbar
             toolBar.DataContext = kernel.Get<IToolbarViewModel>();
         }
 

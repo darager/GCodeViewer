@@ -8,7 +8,7 @@
     Title="GCodeViewer"
     Width="800"
     Height="450"
-    Icon="Icons/document-icon.png"
+    Icon="Resources/document-icon.png"
     ResizeMode="CanResize"
     mc:Ignorable="d">
     <DockPanel>
@@ -35,7 +35,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Opacity="0.9"
-                            Source="Icons/document-icon.png" />
+                            Source="Resources/document-icon.png" />
                     </MenuItem.Icon>
                     <MenuItem
                         Command="{Binding OpenFileCommand}"

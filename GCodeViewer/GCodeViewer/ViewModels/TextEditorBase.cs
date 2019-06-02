@@ -1,15 +1,18 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.ViewModels;
-using Ninject;
 using System;
 
 namespace GCodeViewer.ViewModels
 {
     public class TextEditorBase : ITextViewModel
     {
-        [Inject]
         public ITextBuffer FileBuffer { get; set; }
         public string[] FileContent { get; set; }
+
+        public TextEditorBase(ITextBuffer fileBuffer)
+        {
+            FileBuffer = fileBuffer;
+        }
 
         public void ChangeLine(int lineIndex, string content)
         {
@@ -26,7 +29,7 @@ namespace GCodeViewer.ViewModels
         public bool IsCurrentStateSaved()
         {
             // TODO implement a flag that is set to true once the file is saved and set to false when some text changes.
-            return true;
+            return false;
         }
         public bool IsFileLoaded()
         {

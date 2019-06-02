@@ -10,8 +10,6 @@ namespace GCodeViewer.ViewModels.Commands
         private ITextViewModel textViewModel;
         private IFileSaver fileSaver;
 
-        public event EventHandler CanExecuteChanged;
-
         public SaveCommand(ITextViewModel textViewModel, IFileSaver fileSaver)
         {
             this.textViewModel = textViewModel;
@@ -25,6 +23,12 @@ namespace GCodeViewer.ViewModels.Commands
         public void Execute(object parameter)
         {
             fileSaver.SaveCurrentFile();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 }

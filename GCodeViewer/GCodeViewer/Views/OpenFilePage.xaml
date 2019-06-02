@@ -18,7 +18,7 @@
             <Image
                 Height="20"
                 Opacity="0.6"
-                Source="/GCodeViewer;component/Icons/document-icon.png" />
+                Source="/GCodeViewer;component/Resources/document-icon.png" />
             <Label
                 Margin="5"
                 Padding="3"
@@ -36,6 +36,7 @@
                 Command="{Binding OpenFileCommand}"
                 Content="Open File"
                 FontSize="17"
+                IsEnabled="{Binding CanExecute}"
                 Style="{StaticResource DarkThemeButton}" />
         </StackPanel>
     </Grid>

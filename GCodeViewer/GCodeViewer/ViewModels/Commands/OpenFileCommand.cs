@@ -5,6 +5,7 @@ using GCodeViewer.Objects;
 using GCodeViewer.ViewModels.Commands;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 
@@ -12,11 +13,9 @@ namespace GCodeViewer.Commands
 {
     public class OpenFileCommand : ICommand
     {
-        private ITextViewModel textViewModel;
-        private IFileChooser fileChooser;
-        private ITextBuffer textBuffer;
-
-        public event EventHandler CanExecuteChanged;
+        private ITextViewModel textViewModel { get; set; }
+        private IFileChooser fileChooser { get; set; }
+        private ITextBuffer textBuffer { get; set; }
 
         public OpenFileCommand(ITextViewModel textViewModel, IFileChooser fileChooser, ITextBuffer textBuffer)
         {
@@ -43,6 +42,12 @@ namespace GCodeViewer.Commands
             fileChooser.SwapFile(new TextFile(ofd.FileName));
             textBuffer.LoadFileContent();
             textViewModel.LoadBufferContent();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 }
