@@ -1,11 +1,12 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
+﻿using GCodeViewer.Interfaces;
+using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.FileAccess.FileChooser;
 using GCodeViewer.Interfaces.ViewModels;
 using GCodeViewer.Objects;
 using GCodeViewer.ViewModels.Commands;
 using Microsoft.Win32;
+using Ninject;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 
@@ -13,9 +14,11 @@ namespace GCodeViewer.Commands
 {
     public class OpenFileCommand : ICommand
     {
-        private ITextViewModel textViewModel { get; set; }
-        private IFileChooser fileChooser { get; set; }
-        private ITextBuffer textBuffer { get; set; }
+        public ITextViewModel textViewModel { get; set; }
+        public IFileChooser fileChooser { get; set; }
+        public ITextBuffer textBuffer { get; set; }
+        [Inject]
+        public IPageLocator pageLocator { get; set; }
 
         public OpenFileCommand(ITextViewModel textViewModel, IFileChooser fileChooser, ITextBuffer textBuffer)
         {
@@ -42,6 +45,7 @@ namespace GCodeViewer.Commands
             fileChooser.SwapFile(new TextFile(ofd.FileName));
             textBuffer.LoadFileContent();
             textViewModel.LoadBufferContent();
+            pageLocator.SwapToLiveEditorPage();
         }
 
         public event EventHandler CanExecuteChanged

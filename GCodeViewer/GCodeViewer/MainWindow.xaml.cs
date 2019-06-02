@@ -2,8 +2,7 @@
 using System.Windows;
 using System.Reflection;
 using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Views;
-using System.Windows.Controls;
+using GCodeViewer.Interfaces;
 
 namespace GCodeViewer
 {
@@ -19,11 +18,16 @@ namespace GCodeViewer
 
             InitializeComponent();
 
-            //liveEditorPage = new LiveEditorPage();
-            mainFrame.Content = kernel.Get<Page>("OpenFilePage");
+            SetDataContexts(kernel);
+        }
 
-            // set the dataContext of the toolbar
+        void SetDataContexts(IKernel kernel)
+        {
             toolBar.DataContext = kernel.Get<IToolbarViewModel>();
+
+            var pageSwapper = kernel.Get<IPageLocator>();
+            pageSwapper.SetStartupPage();
+            mainFrame.DataContext = pageSwapper;
         }
 
         #region ZombieCode

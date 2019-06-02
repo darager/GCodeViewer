@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using GCodeViewer.Commands;
 using GCodeViewer.Interfaces;
@@ -28,7 +23,8 @@ namespace GCodeViewer.Dependency_Injection
             Bind<IToolbarViewModel>().To<ToolbarBase>().InSingletonScope();
             Bind<ITextViewModel>().To<TextEditorBase>().InSingletonScope();
 
-            // Page Factory for navigation
+            // Pages and Pagelocator
+            Bind<IPageLocator>().To<PageSwapper>().InSingletonScope();
             Bind<Page>().To<OpenFilePage>().InSingletonScope().Named("OpenFilePage");
             Bind<Page>().To<LiveEditorPage>().InSingletonScope().Named("LiveEditorPage");
 

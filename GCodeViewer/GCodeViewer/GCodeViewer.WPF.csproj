@@ -58,11 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\Interfaces\ViewModels\IPageLocator.cs" />
+    <Compile Include="Components\Interfaces\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
     <Compile Include="ViewModels\Commands\GCodeFileFilter.cs" />
     <Compile Include="ViewModels\Commands\SaveAsCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
+    <Compile Include="ViewModels\PageSwapper.cs" />
     <Compile Include="ViewModels\TextEditorBase.cs" />
     <Compile Include="ViewModels\ToolbarBase.cs" />
     <Compile Include="Views\LiveEditorPage.xaml.cs">

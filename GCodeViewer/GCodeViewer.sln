@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingProjects", "TestingP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectDIExample", "NinjectDIExample\NinjectDIExample.csproj", "{BB4CD212-64E5-409D-A1C6-2E5D52CC0834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.UnitTests", "GCodeViewer.UnitTests\GCodeViewer.UnitTests.csproj", "{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,26 +90,6 @@ Global
 		{BB4CD212-64E5-409D-A1C6-2E5D52CC0834}.Release|x64.Build.0 = Release|Any CPU
 		{BB4CD212-64E5-409D-A1C6-2E5D52CC0834}.Release|x86.ActiveCfg = Release|Any CPU
 		{BB4CD212-64E5-409D-A1C6-2E5D52CC0834}.Release|x86.Build.0 = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|ARM.Build.0 = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|x64.Build.0 = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Debug|x86.Build.0 = Debug|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|ARM.ActiveCfg = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|ARM.Build.0 = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|ARM64.Build.0 = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|x64.ActiveCfg = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|x64.Build.0 = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|x86.ActiveCfg = Release|Any CPU
-		{27D6D579-C19A-40BD-AD75-13CD2D28AF3A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

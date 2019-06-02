@@ -29,7 +29,7 @@ namespace GCodeViewer.ViewModels
         public bool IsCurrentStateSaved()
         {
             // TODO implement a flag that is set to true once the file is saved and set to false when some text changes.
-            return false;
+            return true;
         }
         public bool IsFileLoaded()
         {

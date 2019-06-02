@@ -55,6 +55,7 @@
         <Frame
             x:Name="mainFrame"
             Background="{StaticResource BackgroundColor}"
+            Content="{Binding CurrentPage}"
             DockPanel.Dock="Bottom" />
     </DockPanel>
 </Window>
