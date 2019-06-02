@@ -1,18 +1,15 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.ViewModels;
+using Ninject;
 using System;
 
 namespace GCodeViewer.ViewModels
 {
     public class TextEditorBase : ITextViewModel
     {
+        [Inject]
         public ITextBuffer FileBuffer { get; set; }
         public string[] FileContent { get; set; }
-
-        public TextEditorBase(ITextBuffer fileBuffer)
-        {
-            FileBuffer = fileBuffer;
-        }
 
         public void ChangeLine(int lineIndex, string content)
         {

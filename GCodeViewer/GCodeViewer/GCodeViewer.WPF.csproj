@@ -59,7 +59,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\ViewModels\IPageLocator.cs" />
-    <Compile Include="Objects\FrameChanger.cs" />
     <Compile Include="Objects\TextBuffer.cs" />
     <Compile Include="ViewModels\Commands\GCodeFileFilter.cs" />
     <Compile Include="ViewModels\Commands\SaveAsCommand.cs" />

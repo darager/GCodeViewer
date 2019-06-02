@@ -1,15 +1,9 @@
 ﻿using Ninject;
-using System;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Controls;
-using System.Windows.Media.Media3D;
-using System.Diagnostics;
 using System.Reflection;
-using GCodeViewer.Interfaces;
 using GCodeViewer.Interfaces.ViewModels;
 using GCodeViewer.Views;
-using System.Windows.Navigation;
+using System.Windows.Controls;
 
 namespace GCodeViewer
 {
@@ -18,20 +12,15 @@ namespace GCodeViewer
     /// </summary>
     public partial class MainWindow : Window
     {
-        NavigationService navigationService;
-
         public MainWindow()
         {
-            InitializeComponent();
-
-            navigationService = NavigationService.GetNavigationService(this);
-
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
+            InitializeComponent();
 
             //liveEditorPage = new LiveEditorPage();
-            mainFrame.Content = new OpenFilePage(kernel.Get<IToolbarViewModel>());
+            mainFrame.Content = kernel.Get<Page>("OpenFilePage");
 
             toolBar.DataContext = kernel.Get<IToolbarViewModel>();
         }

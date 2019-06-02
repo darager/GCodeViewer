@@ -1,51 +1,17 @@
-﻿using GCodeViewer.Commands;
-using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
-using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.ViewModels.Commands;
-using System.ComponentModel;
-using System.Windows.Controls;
+﻿using GCodeViewer.Interfaces.ViewModels;
+using Ninject;
 using System.Windows.Input;
 
 namespace GCodeViewer.ViewModels
 {
     public class ToolbarBase : IToolbarViewModel
     {
-        public ITextViewModel TextViewModel { get; set; }
-        public IFileSaver FileSaver { get; set; }
-        public IFileChooser FileChooser { get; set; }
-        public ITextBuffer TextBuffer { get; set; }
-        public ICommand SaveFileCommand
-        {
-            get { return _saveFileCommand; }
-            set { _saveFileCommand = value; }
-        }
-        public ICommand OpenFileCommand
-        {
-            get { return _openFileCommand; }
-            set { _openFileCommand = value; }
-        }
-        public ICommand SaveAsCommand
-        {
-            get { return _saveAsCommand; }
-            set { _saveAsCommand = value; }
-        }
-
-        private ICommand _saveFileCommand;
-        private ICommand _openFileCommand;
-        private ICommand _saveAsCommand;
-
-        public ToolbarBase(ITextViewModel textViewModel, IFileSaver fileSaver, IFileChooser fileChooser, ITextBuffer textBuffer)
-        {
-            TextViewModel = textViewModel;
-            FileSaver = fileSaver;
-            FileChooser = fileChooser;
-            TextBuffer = textBuffer;
-
-            _saveFileCommand = new SaveCommand(textViewModel, fileSaver);
-            _openFileCommand = new OpenFileCommand(textViewModel, fileChooser, textBuffer);
-            _saveAsCommand = new SaveAsCommand(textViewModel, fileChooser, textBuffer, fileSaver);
-        }
+        [Inject, Named("SaveAsFileCommand")]
+        public ICommand SaveAsCommand { get; set; }
+        [Inject, Named("OpenFileCommand")]
+        public ICommand OpenFileCommand { get; set; }
+        [Inject, Named("SaveFileCommand")]
+        public ICommand SaveFileCommand { get; set; }
     }
 }
 
