@@ -17,8 +17,6 @@ namespace GCodeViewer.Dependency_Injection
     {
         public override void Load()
         {
-            // TODO: Add Bindings for all for all of the objects
-
             // WPF Viewmodels
             Bind<IToolbarViewModel>().To<ToolbarBase>().InSingletonScope();
             Bind<ITextViewModel>().To<TextEditorBase>().InSingletonScope();

@@ -34,10 +34,6 @@
             </ModelVisual3D>
 
         </Viewport3D>
-        <Border
-            Width="1"
-            VerticalAlignment="Stretch"
-            Background="CornflowerBlue" />
         <TextBox
             x:Name="gCodeTextBox"
             AcceptsReturn="True"
