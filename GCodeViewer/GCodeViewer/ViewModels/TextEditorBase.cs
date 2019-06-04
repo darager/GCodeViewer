@@ -1,17 +1,35 @@
 ﻿using GCodeViewer.Interfaces.FileAccess;
 using GCodeViewer.Interfaces.ViewModels;
 using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace GCodeViewer.ViewModels
 {
-    public class TextEditorBase : ITextViewModel
+    public class TextEditorBase : ITextViewModel, INotifyCollectionChanged
     {
         public ITextBuffer FileBuffer { get; set; }
-        public string[] FileContent { get; set; }
+
+        public ObservableCollection<string> FileContent
+        {
+            get { return _FileContent; }
+            set
+            {
+                if(value != _FileContent)
+                {
+                    _FileContent = value;
+                    OnCollectionChanged();
+                }
+            }
+
+        }
+        private ObservableCollection<string> _FileContent;
 
         public TextEditorBase(ITextBuffer fileBuffer)
         {
             FileBuffer = fileBuffer;
+            _FileContent = new ObservableCollection<string>();
         }
 
         public void ChangeLine(int lineIndex, string content)
@@ -20,11 +38,14 @@ namespace GCodeViewer.ViewModels
         }
         public string[] GetCurrentContent()
         {
-            return FileContent;
+            var currentContent = new string[FileContent.Count];
+            FileContent.CopyTo(currentContent, 0);
+
+            return currentContent;
         }
         public void LoadBufferContent()
         {
-            FileContent = FileBuffer.GetContent();
+            FileContent = new ObservableCollection<string>(FileBuffer.GetContent());
         }
         public bool IsCurrentStateSaved()
         {
@@ -35,5 +56,13 @@ namespace GCodeViewer.ViewModels
         {
             return (FileContent != null);
         }
+
+        private void OnCollectionChanged()
+        {
+            // TODO: find out what exactly this is doing
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+        }
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

@@ -34,14 +34,27 @@
             </ModelVisual3D>
 
         </Viewport3D>
-        <TextBox
+        <!--<TextBox
             x:Name="gCodeTextBox"
+            Text="{Binding FileContent}"
             AcceptsReturn="True"
             AcceptsTab="True"
             Background="WhiteSmoke"
             DockPanel.Dock="Right"
             FontSize="14"
             HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Visible" />
+            VerticalScrollBarVisibility="Visible" />-->
+
+        <TextBlock
+            Background="White"
+            DockPanel.Dock="Right"
+            Text="{Binding FileContent}" />
+        <!--<ItemsControl ItemsSource="{Binding FileContent}" Background="White" DockPanel.Dock="Right">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding Path=., UpdateSourceTrigger=PropertyChanged}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
     </DockPanel>
 </Page>

@@ -1,5 +1,4 @@
-﻿using GCodeViewer.Interfaces.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GCodeViewer.Views
+namespace GCodeViewer.Views.Controls
 {
     /// <summary>
-    /// Interaction logic for LiveEditorPage.xaml
+    /// Interaction logic for DarkThemeTextEditor.xaml
     /// </summary>
-    public partial class LiveEditorPage : Page
+    public partial class DarkThemeTextEditor : UserControl
     {
-        public LiveEditorPage(ITextViewModel textViewModel)
+        public DarkThemeTextEditor()
         {
             InitializeComponent();
-            this.DataContext = textViewModel;
         }
     }
 }

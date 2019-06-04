@@ -1,8 +1,9 @@
-﻿using GCodeViewer.Interfaces.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,17 +15,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GCodeViewer.Views
+namespace MultithreadingBindingTest
 {
     /// <summary>
-    /// Interaction logic for LiveEditorPage.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LiveEditorPage : Page
+    public partial class MainWindow : Window
     {
-        public LiveEditorPage(ITextViewModel textViewModel)
+        public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = textViewModel;
+
+            var vm = new TextViewModel();
+            this.DataContext = vm;
         }
     }
 }

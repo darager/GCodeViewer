@@ -11,11 +11,6 @@ namespace ConsoleApp1
             parser.SendData(10);
             parser.SendData(20);
 
-
-            string message = "lkasjdföklajsdlkfjljk";
-            Console.WriteLine(message);
-
-
             Console.ReadKey();
         }
     }
