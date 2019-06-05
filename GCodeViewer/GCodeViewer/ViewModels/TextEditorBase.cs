@@ -71,9 +71,9 @@ namespace GCodeViewer.ViewModels
         private void FakeData()
         {
             ActualFileContent = new ObservableCollection<GCodeLine>();
-            for(int i = 0; i < 1000; i++)
+            for(int i = 0; i < 3000000; i++)
             {
-                ActualFileContent.Add(new GCodeLine(i + 1, "this is a test " + i));
+                ActualFileContent.Add(new GCodeLine(i + 1, "this is a test " + i, ActualFileContent));
             }
         }
         public ObservableCollection<GCodeLine> ActualFileContent
@@ -94,13 +94,15 @@ namespace GCodeViewer.ViewModels
 
     public class GCodeLine
     {
-        public int LineNumber { get; set; }
+        public int LineNumber => ActualFileContent.IndexOf(this);
         public string LineContent { get; set; }
 
-    public GCodeLine(int lineNumber, string lineContent)
-    {
-        LineNumber = lineNumber;
-        LineContent = lineContent;
+        private static ObservableCollection<GCodeLine> ActualFileContent;
+
+        public GCodeLine(int lineNumber, string lineContent, ObservableCollection<GCodeLine> lines)
+        {
+            ActualFileContent = lines;
+            LineContent = lineContent;
+        }
     }
-}
 }
