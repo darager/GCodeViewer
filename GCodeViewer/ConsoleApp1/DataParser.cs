@@ -9,40 +9,40 @@ namespace ConsoleApp1
 {
     public class DataParser
     {
-        System.Timers.Timer timer;
-        List<int> items;
+        //System.Timers.Timer timer;
+        //List<int> items;
 
-        public DataParser()
-        {
-            items = new List<int>();
-            timer = new System.Timers.Timer();
-            timer.Interval = 100;
-            timer.AutoReset = false;
-            timer.Elapsed += ParseData;
-        }
+        //public DataParser()
+        //{
+        //    items = new List<int>();
+        //    timer = new System.Timers.Timer();
+        //    timer.Interval = 100;
+        //    timer.AutoReset = false;
+        //    timer.Elapsed += ParseData;
+        //}
 
-        public void SendData(int data)
-        {
-            if (!timer.Enabled) StartNewTimer();
+        //public void SendData(int data)
+        //{
+        //    if (!timer.Enabled) StartNewTimer();
 
-            if (items.Count >= 2) return;
+        //    if (items.Count >= 2) return;
 
-            items.Add(data);
-        }
-        private void StartNewTimer()
-        {
-            timer.Start();
-            items = new List<int>();
-        }
+        //    items.Add(data);
+        //}
+        //private void StartNewTimer()
+        //{
+        //    timer.Start();
+        //    items = new List<int>();
+        //}
 
-        private void ParseData(object sender, ElapsedEventArgs e)
-        {
-            var builder = new StringBuilder();
-            foreach (var item in items)
-                builder.Append(item);
+        //private void ParseData(object sender, ElapsedEventArgs e)
+        //{
+        //    var builder = new StringBuilder();
+        //    foreach (var item in items)
+        //        builder.Append(item);
 
-            int number = Convert.ToInt16(builder.ToString());
-            Console.WriteLine("The number is: " + number);
-        }
+        //    int number = Convert.ToInt16(builder.ToString());
+        //    Console.WriteLine("The number is: " + number);
+        //}
     }
 }

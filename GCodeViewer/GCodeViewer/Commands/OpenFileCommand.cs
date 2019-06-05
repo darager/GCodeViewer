@@ -57,7 +57,7 @@ namespace GCodeViewer.Commands
 
             fileChooser.SwapFile(new TextFile(ofd.FileName));
             textBuffer.LoadFileContent();
-            textViewModel.LoadBufferContent();
+            textViewModel.LoadFileContent();
             pageLocator.SwapToLiveEditorPage();
         }
 

@@ -66,9 +66,7 @@
     <Compile Include="ViewModels\PageSwapper.cs" />
     <Compile Include="ViewModels\TextEditorBase.cs" />
     <Compile Include="ViewModels\ToolbarBase.cs" />
-    <Compile Include="Views\Controls\DarkThemeTextEditor.xaml.cs">
-      <DependentUpon>DarkThemeTextEditor.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Views\Controls\NoNavigationFrame.cs" />
     <Compile Include="Views\LiveEditorPage.xaml.cs">
       <DependentUpon>LiveEditorPage.xaml</DependentUpon>
     </Compile>
@@ -101,10 +99,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Controls\DarkThemeTextEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\LiveEditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -30,6 +30,9 @@ namespace GCodeViewer.ViewModels
         {
             FileBuffer = fileBuffer;
             _FileContent = new ObservableCollection<string>();
+
+            // TODO: Remove this line and add a way of parsing the actual text to this format
+            FakeData();
         }
 
         public void ChangeLine(int lineIndex, string content)
@@ -43,7 +46,7 @@ namespace GCodeViewer.ViewModels
 
             return currentContent;
         }
-        public void LoadBufferContent()
+        public void LoadFileContent()
         {
             FileContent = new ObservableCollection<string>(FileBuffer.GetContent());
         }
@@ -54,7 +57,7 @@ namespace GCodeViewer.ViewModels
         }
         public bool IsFileLoaded()
         {
-            return (FileContent != null);
+            return (FileContent?.Count >= 0);
         }
 
         private void OnCollectionChanged()
@@ -64,5 +67,40 @@ namespace GCodeViewer.ViewModels
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
         }
         public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        private void FakeData()
+        {
+            ActualFileContent = new ObservableCollection<GCodeLine>();
+            for(int i = 0; i < 10; i++)
+            {
+                ActualFileContent.Add(new GCodeLine(i + 1, "this is a test " + i));
+            }
+        }
+        public ObservableCollection<GCodeLine> ActualFileContent
+        {
+            get { return _ActualFileContent; }
+            set
+            {
+                if(value != _ActualFileContent)
+                {
+                    _ActualFileContent = value;
+                    OnCollectionChanged();
+                }
+            }
+
+        }
+        private ObservableCollection<GCodeLine> _ActualFileContent;
     }
+
+    public class GCodeLine
+    {
+        public int LineNumber { get; set; }
+        public string LineContent { get; set; }
+
+    public GCodeLine(int lineNumber, string lineContent)
+    {
+        LineNumber = lineNumber;
+        LineContent = lineContent;
+    }
+}
 }

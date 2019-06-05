@@ -45,10 +45,26 @@
             HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Visible" />-->
 
-        <TextBlock
+        <ListView ItemsSource="{Binding ActualFileContent}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Width="Auto"
+                            VerticalAlignment="Stretch"
+                            Text="{Binding LineNumber}" />
+                        <TextBlock
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Text="{Binding LineContent}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<TextBlock
             Background="White"
             DockPanel.Dock="Right"
-            Text="{Binding FileContent}" />
+            Text="{Binding FileContent}" />-->
         <!--<ItemsControl ItemsSource="{Binding FileContent}" Background="White" DockPanel.Dock="Right">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

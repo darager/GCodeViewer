@@ -6,12 +6,12 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var parser = new DataParser();
+            //var parser = new DataParser();
 
-            parser.SendData(10);
-            parser.SendData(20);
+            //parser.SendData(10);
+            //parser.SendData(20);
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace GCodeViewer.Interfaces.ViewModels
         ITextBuffer FileBuffer { get; set; }
         ObservableCollection<string> FileContent { get; set; }
 
-        void LoadBufferContent();
+        void LoadFileContent();
         void ChangeLine(int lineIndex, string content);
         string[] GetCurrentContent();
         bool IsCurrentStateSaved();
