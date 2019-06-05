@@ -23,7 +23,6 @@
                 Margin="5"
                 Padding="3"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 FontFamily="Roboto"
                 FontSize="17"
                 FontWeight="DemiBold"
@@ -32,7 +31,6 @@
             </Label>
             <Button
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 Command="{Binding OpenFileCommand}"
                 Content="Open File"
                 FontSize="17"

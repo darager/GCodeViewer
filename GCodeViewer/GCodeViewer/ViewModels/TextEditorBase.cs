@@ -71,7 +71,7 @@ namespace GCodeViewer.ViewModels
         private void FakeData()
         {
             ActualFileContent = new ObservableCollection<GCodeLine>();
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 1000; i++)
             {
                 ActualFileContent.Add(new GCodeLine(i + 1, "this is a test " + i));
             }

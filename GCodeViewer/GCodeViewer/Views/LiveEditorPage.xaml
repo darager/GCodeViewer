@@ -34,18 +34,13 @@
             </ModelVisual3D>
 
         </Viewport3D>
-        <!--<TextBox
-            x:Name="gCodeTextBox"
-            Text="{Binding FileContent}"
-            AcceptsReturn="True"
-            AcceptsTab="True"
-            Background="WhiteSmoke"
-            DockPanel.Dock="Right"
-            FontSize="14"
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Visible" />-->
 
-        <ListView ItemsSource="{Binding ActualFileContent}">
+        <ListView
+            ItemsSource="{Binding ActualFileContent}"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            FontSize="12"
+            ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -53,24 +48,14 @@
                             Width="Auto"
                             VerticalAlignment="Stretch"
                             Text="{Binding LineNumber}" />
+                        <TextBlock Text=" | " />
                         <TextBlock
-                            HorizontalAlignment="Stretch"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Stretch"
                             Text="{Binding LineContent}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--<TextBlock
-            Background="White"
-            DockPanel.Dock="Right"
-            Text="{Binding FileContent}" />-->
-        <!--<ItemsControl ItemsSource="{Binding FileContent}" Background="White" DockPanel.Dock="Right">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBox Text="{Binding Path=., UpdateSourceTrigger=PropertyChanged}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
     </DockPanel>
 </Page>
