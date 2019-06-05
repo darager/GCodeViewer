@@ -83,14 +83,14 @@
     </Compile>
     <Compile Include="Commands\OpenFileCommand.cs" />
     <Compile Include="Components\FileAccess\TextFile.cs" />
-    <Compile Include="aaREWORK these objects\PointExtractor.cs" />
-    <Compile Include="Components\Interfaces\FileAccess\IFileChooser.cs" />
+    <Compile Include="aa needs to be reworked\PointExtractor.cs" />
+    <Compile Include="Components\Interfaces\IFileChooser.cs" />
     <Compile Include="Components\Interfaces\IPointExtractor.cs" />
     <Compile Include="Components\Interfaces\ViewModels\IRenderWindowViewModel.cs" />
     <Compile Include="Ninject\Bindings.cs" />
-    <Compile Include="Components\Interfaces\FileAccess\IFile.cs" />
-    <Compile Include="Components\Interfaces\FileAccess\ITextBuffer.cs" />
-    <Compile Include="Components\Interfaces\FileAccess\IFileSaver.cs" />
+    <Compile Include="Components\Interfaces\IFile.cs" />
+    <Compile Include="Components\Interfaces\ITextBuffer.cs" />
+    <Compile Include="Components\Interfaces\IFileSaver.cs" />
     <Compile Include="Components\Interfaces\ViewModels\ITextViewModel.cs" />
     <Compile Include="Components\Interfaces\ViewModels\IToolbarViewModel.cs" />
     <Compile Include="Components\FileAccess\FileChooser.cs" />

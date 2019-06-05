@@ -12,15 +12,15 @@
 
     <Grid Background="{StaticResource BackgroundColor}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Viewport3D
             x:Name="liveRenderWindow"
-            MinWidth="400"
-            Grid.Column="0">
+            Grid.Column="0"
+            MinWidth="400">
             <Viewport3D.Camera>
                 <PerspectiveCamera
                     FarPlaneDistance="100"
@@ -38,21 +38,23 @@
                     </Model3DGroup>
                 </ModelVisual3D.Content>
             </ModelVisual3D>
-
         </Viewport3D>
 
-        <Border Grid.Column="1" Background="{StaticResource PrimaryColor}" Width="3" />
+        <Border
+            Grid.Column="1"
+            Width="3"
+            Background="{StaticResource PrimaryColor}" />
 
 
         <ListView
-            ItemsSource="{Binding ActualFileContent}"
+            Grid.Column="2"
             Background="{StaticResource BackgroundColor}"
+            FontSize="12"
             Foreground="{StaticResource FontColor}"
+            ItemsSource="{Binding ActualFileContent}"
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            FontSize="12"
-            Grid.Column="3">
-            ScrollViewer.VerticalScrollBarVisibility="Visible">
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

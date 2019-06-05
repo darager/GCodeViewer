@@ -12,6 +12,7 @@
     Icon="Resources/document-icon.png"
     ResizeMode="CanResize"
     mc:Ignorable="d">
+
     <DockPanel>
         <StackPanel
             x:Name="toolBar"
