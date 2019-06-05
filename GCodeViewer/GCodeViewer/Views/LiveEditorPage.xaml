@@ -10,11 +10,17 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <DockPanel Background="{StaticResource BackgroundColor}">
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <Viewport3D
             x:Name="liveRenderWindow"
             MinWidth="400"
-            DockPanel.Dock="Left">
+            Grid.Column="0">
             <Viewport3D.Camera>
                 <PerspectiveCamera
                     FarPlaneDistance="100"
@@ -35,17 +41,23 @@
 
         </Viewport3D>
 
+        <Border Grid.Column="1" Background="{StaticResource PrimaryColor}" Width="3" />
+
+
         <ListView
             ItemsSource="{Binding ActualFileContent}"
+            Background="{StaticResource BackgroundColor}"
+            Foreground="{StaticResource FontColor}"
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
             FontSize="12"
+            Grid.Column="3">
             ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock
-                            Width="Auto"
+                            Width="50"
                             VerticalAlignment="Stretch"
                             Text="{Binding LineNumber}" />
                         <TextBlock Text=" | " />
@@ -57,5 +69,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </DockPanel>
+    </Grid>
 </Page>
