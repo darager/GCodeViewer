@@ -3,7 +3,6 @@ using GCodeViewer.Interfaces.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
 
 namespace GCodeViewer.ViewModels
 {
@@ -16,7 +15,7 @@ namespace GCodeViewer.ViewModels
             get { return _FileContent; }
             set
             {
-                if(value != _FileContent)
+                if (value != _FileContent)
                 {
                     _FileContent = value;
                     OnCollectionChanged();
@@ -61,7 +60,9 @@ namespace GCodeViewer.ViewModels
         {
             // TODO: find out what exactly this is doing
             if (CollectionChanged != null)
+            {
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+            }
         }
         public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
