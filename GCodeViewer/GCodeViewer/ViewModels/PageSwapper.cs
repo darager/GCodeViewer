@@ -1,14 +1,7 @@
-﻿using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Views;
-using System;
+﻿using GCodeViewer.Interfaces;
 using Ninject;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.ComponentModel;
-using GCodeViewer.Interfaces;
+using System.Windows.Controls;
 
 namespace GCodeViewer.ViewModels
 {
@@ -16,7 +9,7 @@ namespace GCodeViewer.ViewModels
     {
         [Inject, Named("OpenFilePage")]
         public Page OpenFilePage { get; set; }
-        [Inject,  Named("LiveEditorPage")]
+        [Inject, Named("LiveEditorPage")]
         public Page LiveEditorPage { get; set; }
 
         public Page CurrentPage
@@ -24,34 +17,25 @@ namespace GCodeViewer.ViewModels
             get { return _currentPage; }
             set
             {
-                if(_currentPage != value)
+                if (_currentPage == value)
                 {
-                    _currentPage = value;
-                    OnPropertyChanged("CurrentPage");
+                    return;
                 }
+
+                _currentPage = value;
+                OnPropertyChanged("CurrentPage");
             }
         }
-
         private Page _currentPage;
 
-        public void SetStartupPage()
-        {
-            SwapToOpenFilePage();
-        }
-        public void SwapToOpenFilePage()
-        {
-            CurrentPage = OpenFilePage;
-        }
-        public void SwapToLiveEditorPage()
-        {
-            CurrentPage = LiveEditorPage;
-        }
+        public void SetStartupPage() => SwapToOpenFilePage();
+        public void SwapToOpenFilePage() => CurrentPage = OpenFilePage;
+        public void SwapToLiveEditorPage() => CurrentPage = LiveEditorPage;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
