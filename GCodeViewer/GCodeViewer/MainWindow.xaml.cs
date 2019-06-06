@@ -3,6 +3,7 @@ using System.Windows;
 using System.Reflection;
 using GCodeViewer.Interfaces.ViewModels;
 using GCodeViewer.Interfaces;
+using System.Windows.Input;
 
 namespace GCodeViewer
 {

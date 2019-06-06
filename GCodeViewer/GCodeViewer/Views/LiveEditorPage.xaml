@@ -10,11 +10,17 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <DockPanel Background="{StaticResource BackgroundColor}">
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
         <Viewport3D
             x:Name="liveRenderWindow"
-            MinWidth="400"
-            DockPanel.Dock="Left">
+            Grid.Column="0"
+            MinWidth="400">
             <Viewport3D.Camera>
                 <PerspectiveCamera
                     FarPlaneDistance="100"
@@ -32,29 +38,38 @@
                     </Model3DGroup>
                 </ModelVisual3D.Content>
             </ModelVisual3D>
-
         </Viewport3D>
-        <!--<TextBox
-            x:Name="gCodeTextBox"
-            Text="{Binding FileContent}"
-            AcceptsReturn="True"
-            AcceptsTab="True"
-            Background="WhiteSmoke"
-            DockPanel.Dock="Right"
-            FontSize="14"
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Visible" />-->
 
-        <TextBlock
-            Background="White"
-            DockPanel.Dock="Right"
-            Text="{Binding FileContent}" />
-        <!--<ItemsControl ItemsSource="{Binding FileContent}" Background="White" DockPanel.Dock="Right">
-            <ItemsControl.ItemTemplate>
+        <Border
+            Grid.Column="1"
+            Width="3"
+            Background="{StaticResource PrimaryColor}" />
+
+
+        <ListView
+            Grid.Column="2"
+            Background="{StaticResource BackgroundColor}"
+            FontSize="12"
+            Foreground="{StaticResource FontColor}"
+            ItemsSource="{Binding ActualFileContent}"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=., UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Width="50"
+                            VerticalAlignment="Stretch"
+                            Text="{Binding LineNumber}" />
+                        <TextBlock Text=" | " />
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Stretch"
+                            Text="{Binding LineContent}" />
+                    </StackPanel>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-    </DockPanel>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Page>
