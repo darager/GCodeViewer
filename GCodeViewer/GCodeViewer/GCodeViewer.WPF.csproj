@@ -58,19 +58,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\Interfaces\IPageLocator.cs" />
+    <Compile Include="Abstractions\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
-    <Compile Include="Commands\GCodeFileFilter.cs" />
+    <Compile Include="Resources\GCodeFileFilter.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="ViewModels\PageSwapper.cs" />
+    <Compile Include="ViewModels\FramePageSwapperPage.cs" />
     <Compile Include="ViewModels\TextEditorBase.cs" />
     <Compile Include="ViewModels\ToolbarBase.cs" />
     <Compile Include="Views\Controls\NoNavigationFrame.cs" />
-    <Compile Include="Views\LiveEditorPage.xaml.cs">
+    <Compile Include="Views\Pages\LiveEditorPage.xaml.cs">
       <DependentUpon>LiveEditorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OpenFilePage.xaml.cs">
+    <Compile Include="Views\Pages\OpenFilePage.xaml.cs">
       <DependentUpon>OpenFilePage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -84,26 +84,26 @@
     <Compile Include="Commands\OpenFileCommand.cs" />
     <Compile Include="Components\FileAccess\TextFile.cs" />
     <Compile Include="aa needs to be reworked\PointExtractor.cs" />
-    <Compile Include="Components\Interfaces\IFileChooser.cs" />
-    <Compile Include="Components\Interfaces\IPointExtractor.cs" />
-    <Compile Include="Components\Interfaces\ViewModels\IRenderWindowViewModel.cs" />
-    <Compile Include="Ninject\Bindings.cs" />
-    <Compile Include="Components\Interfaces\IFile.cs" />
-    <Compile Include="Components\Interfaces\ITextBuffer.cs" />
-    <Compile Include="Components\Interfaces\IFileSaver.cs" />
-    <Compile Include="Components\Interfaces\ViewModels\ITextViewModel.cs" />
-    <Compile Include="Components\Interfaces\ViewModels\IToolbarViewModel.cs" />
+    <Compile Include="Abstractions\FileAccess\IFileChooser.cs" />
+    <Compile Include="Abstractions\IPointExtractor.cs" />
+    <Compile Include="Abstractions\ViewModels\IRenderWindowViewModel.cs" />
+    <Compile Include="Injection\Bindings.cs" />
+    <Compile Include="Abstractions\FileAccess\IFile.cs" />
+    <Compile Include="Abstractions\FileAccess\ITextBuffer.cs" />
+    <Compile Include="Abstractions\FileAccess\IFileSaver.cs" />
+    <Compile Include="Abstractions\ViewModels\ITextViewModel.cs" />
+    <Compile Include="Abstractions\ViewModels\IToolbarViewModel.cs" />
     <Compile Include="Components\FileAccess\FileChooser.cs" />
     <Compile Include="Components\FileAccess\FileSaver.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\LiveEditorPage.xaml">
+    <Page Include="Views\Pages\LiveEditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OpenFilePage.xaml">
+    <Page Include="Views\Pages\OpenFilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

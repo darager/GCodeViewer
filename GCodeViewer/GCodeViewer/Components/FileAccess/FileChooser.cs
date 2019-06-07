@@ -1,7 +1,6 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
+﻿using GCodeViewer.Abstractions.FileAccess;
 
-namespace GCodeViewer.Objects
+namespace GCodeViewer.Components.FileAccess
 {
     public class FileChooser : IFileChooser
     {

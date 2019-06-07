@@ -1,17 +1,12 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
-using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Objects;
+﻿using GCodeViewer.Abstractions.FileAccess;
+using GCodeViewer.Abstractions.ViewModels;
+using GCodeViewer.Components.FileAccess;
+using GCodeViewer.Resources;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GCodeViewer.ViewModels.Commands
+namespace GCodeViewer.Commands
 {
     public class SaveAsCommand : ICommand
     {
@@ -39,7 +34,10 @@ namespace GCodeViewer.ViewModels.Commands
             sad.DefaultExt = GCodeFileFilter.StandardFileExtension;
             Nullable<bool> dialogResult = sad.ShowDialog();
 
-            if (dialogResult == false) return;
+            if (dialogResult == false)
+            {
+                return;
+            }
 
             IFile newFile = new TextFile(sad.FileName);
             fileSaver.SaveToFile(newFile);

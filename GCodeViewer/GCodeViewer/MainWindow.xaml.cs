@@ -1,9 +1,8 @@
-﻿using Ninject;
-using System.Windows;
+﻿using GCodeViewer.Abstractions;
+using GCodeViewer.Abstractions.ViewModels;
+using Ninject;
 using System.Reflection;
-using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Interfaces;
-using System.Windows.Input;
+using System.Windows;
 
 namespace GCodeViewer
 {

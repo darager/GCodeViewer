@@ -19,7 +19,9 @@ namespace GCodeViewer.RenderWindow.Utils
         public PointExtractor(string gcodeFilePath)
         {
             if (!File.Exists(gcodeFilePath))
+            {
                 throw new FileNotFoundException();
+            }
 
             stream = new FileStream(gcodeFilePath, FileMode.Open);
 
@@ -52,20 +54,33 @@ namespace GCodeViewer.RenderWindow.Utils
             Point3D point = lastPoint;
 
             if (string.IsNullOrEmpty(line))
+            {
                 return point;
+            }
+
             if (line[0] == CommentChar)
+            {
                 return point;
+            }
 
             Match xMatch = xRegex.Match(line);
             Match yMatch = yRegex.Match(line);
             Match zMatch = zRegex.Match(line);
 
             if (xMatch.Success)
+            {
                 point.X = GetValue(xMatch);
+            }
+
             if (yMatch.Success)
+            {
                 point.Y = GetValue(yMatch);
+            }
+
             if (zMatch.Success)
+            {
                 point.Z = GetValue(zMatch);
+            }
 
             return point;
         }

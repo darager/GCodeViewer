@@ -1,9 +1,8 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
+﻿using GCodeViewer.Abstractions.FileAccess;
 using System.Collections;
 using System.IO;
 
-namespace GCodeViewer.Objects
+namespace GCodeViewer.Components.FileAccess
 {
     public class TextBuffer : ITextBuffer
     {
@@ -31,7 +30,9 @@ namespace GCodeViewer.Objects
 
                     string line;
                     while ((line = reader.ReadLine()) != null)
+                    {
                         content.Add(line);
+                    }
 
                     fileContent = (string[])content.ToArray(typeof(string));
                 }

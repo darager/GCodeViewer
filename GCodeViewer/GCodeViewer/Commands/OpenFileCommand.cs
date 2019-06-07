@@ -1,9 +1,8 @@
-﻿using GCodeViewer.Interfaces;
-using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
-using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Objects;
-using GCodeViewer.ViewModels.Commands;
+﻿using GCodeViewer.Abstractions;
+using GCodeViewer.Abstractions.FileAccess;
+using GCodeViewer.Abstractions.ViewModels;
+using GCodeViewer.Components.FileAccess;
+using GCodeViewer.Resources;
 using Microsoft.Win32;
 using Ninject;
 using System;
@@ -34,7 +33,7 @@ namespace GCodeViewer.Commands
         }
         public void Execute(object parameter)
         {
-            if(!textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded())
+            if (!textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded())
             {
                 var result =
                     MessageBox.Show(
@@ -43,7 +42,9 @@ namespace GCodeViewer.Commands
                     , MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.No)
+                {
                     return;
+                }
             }
 
             var ofd = new OpenFileDialog();
@@ -53,7 +54,9 @@ namespace GCodeViewer.Commands
             Nullable<bool> dialogOk = ofd.ShowDialog();
 
             if (dialogOk == false)
+            {
                 return;
+            }
 
             fileChooser.SwapFile(new TextFile(ofd.FileName));
             textBuffer.LoadFileContent();

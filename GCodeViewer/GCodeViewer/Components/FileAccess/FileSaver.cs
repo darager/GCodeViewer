@@ -1,9 +1,8 @@
-﻿using System.IO;
-using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.ViewModels;
-using GCodeViewer.Interfaces.FileAccess.FileChooser;
+﻿using GCodeViewer.Abstractions.FileAccess;
+using GCodeViewer.Abstractions.ViewModels;
+using System.IO;
 
-namespace GCodeViewer.Objects
+namespace GCodeViewer.Components.FileAccess
 {
     public class FileSaver : IFileSaver
     {
@@ -35,8 +34,12 @@ namespace GCodeViewer.Objects
             using (var stream = file.GetFileStream())
             {
                 using (var writer = new StreamWriter(stream))
+                {
                     foreach (string line in content)
+                    {
                         writer.WriteLine(line);
+                    }
+                }
             }
         }
     }

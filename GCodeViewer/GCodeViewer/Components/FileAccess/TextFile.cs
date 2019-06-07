@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
+﻿using GCodeViewer.Abstractions.FileAccess;
 using System.IO;
 
-namespace GCodeViewer.Objects
+namespace GCodeViewer.Components.FileAccess
 {
     public class TextFile : IFile
     {

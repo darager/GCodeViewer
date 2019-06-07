@@ -1,5 +1,5 @@
-﻿using GCodeViewer.Interfaces.FileAccess;
-using GCodeViewer.Interfaces.ViewModels;
+﻿using GCodeViewer.Abstractions.FileAccess;
+using GCodeViewer.Abstractions.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
