@@ -30,6 +30,7 @@
                     Position="0,0,10"
                     UpDirection="0,1,0" />
             </Viewport3D.Camera>
+            <GridSplitter
             <ModelVisual3D>
                 <ModelVisual3D.Content>
                     <Model3DGroup>
@@ -42,34 +43,51 @@
 
         <Border
             Grid.Column="1"
-            Width="3"
-            Background="{StaticResource PrimaryColor}" />
-
+            Width="1"
+            Background="{StaticResource SecondaryColor}"
+            SnapsToDevicePixels="True" />
 
         <ListView
             Grid.Column="2"
+            AlternationCount="{Binding ActualFileContent.Count}"
             Background="{StaticResource BackgroundColor}"
+            BorderThickness="0"
+            Focusable="False"
             FontSize="12"
             Foreground="{StaticResource FontColor}"
             ItemsSource="{Binding ActualFileContent}"
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ListView.ItemTemplate>
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock
-                            Width="50"
+                            Width="Auto"
                             VerticalAlignment="Stretch"
+                            Foreground="{StaticResource SecondaryColor}"
                             Text="{Binding LineNumber}" />
-                        <TextBlock Text=" | " />
+                        <Border
+                            Width="1"
+                            Height="Auto"
+                            Margin="10" />
                         <TextBlock
-                            HorizontalAlignment="Left"
+                            Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}"
                             Text="{Binding LineContent}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.ItemTemplate>-->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding LineNumber}" Header="Num." />
+                    <GridViewColumn DisplayMemberBinding="{Binding LineContent}" Header="Line" />
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Page>
