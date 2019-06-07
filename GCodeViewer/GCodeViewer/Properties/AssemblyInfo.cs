@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyTitle("GCodeViewer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Florian Rager")]
 [assembly: AssemblyProduct("GCodeViewer")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]

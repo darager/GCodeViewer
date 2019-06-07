@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace GCodeViewer.Abstractions
+namespace GCodeViewer.Abstractions.ViewModels
 {
     public interface IPageLocator
     {

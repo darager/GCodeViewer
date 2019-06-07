@@ -58,7 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Abstractions\IPageLocator.cs" />
+    <Compile Include="Abstractions\ViewModels\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
     <Compile Include="Resources\GCodeFileFilter.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
@@ -83,7 +83,7 @@
     </Compile>
     <Compile Include="Commands\OpenFileCommand.cs" />
     <Compile Include="Components\FileAccess\TextFile.cs" />
-    <Compile Include="aa needs to be reworked\PointExtractor.cs" />
+    <Compile Include="aa Zombie code\PointExtractor.cs" />
     <Compile Include="Abstractions\FileAccess\IFileChooser.cs" />
     <Compile Include="Abstractions\IPointExtractor.cs" />
     <Compile Include="Abstractions\ViewModels\IRenderWindowViewModel.cs" />
@@ -138,7 +138,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="aa Zombie code\3DObject.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\document-icon.png" />
   </ItemGroup>
