@@ -1,5 +1,4 @@
-﻿using GCodeViewer.Abstractions;
-using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.Abstractions.FileAccess;
 using GCodeViewer.Abstractions.ViewModels;
 using GCodeViewer.Components.FileAccess;
 using GCodeViewer.Resources;

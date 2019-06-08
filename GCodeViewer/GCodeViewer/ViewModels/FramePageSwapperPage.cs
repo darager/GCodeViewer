@@ -1,4 +1,4 @@
-﻿using GCodeViewer.Abstractions;
+﻿using GCodeViewer.Abstractions.ViewModels;
 using Ninject;
 using System.ComponentModel;
 using System.Windows.Controls;

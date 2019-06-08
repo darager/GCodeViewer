@@ -44,7 +44,7 @@
         <!--  // TODO:  -->
         <GridSplitter
             Grid.Column="1"
-            Width="1"
+            Width="3"
             Background="{StaticResource SecondaryColor}"
             SnapsToDevicePixels="True" />
 
