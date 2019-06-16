@@ -33,8 +33,16 @@
             <ModelVisual3D>
                 <ModelVisual3D.Content>
                     <Model3DGroup>
-                        <AmbientLight Color="#40FFFFFF" />
-                        <DirectionalLight Direction="1,-1,-1" Color="#FFFFFF" />
+                        <AmbientLight Color="Bisque" />
+                        <DirectionalLight Direction="-3,-5,-2" Color="Red" />
+                        <GeometryModel3D>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D Positions="0,-3,0 5,-3,0 5,-3,5 0,-3,5" TriangleIndices="0 2 1 0 3 2 " />
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <DiffuseMaterial Brush="Brown" />
+                            </GeometryModel3D.Material>
+                        </GeometryModel3D>
                     </Model3DGroup>
                 </ModelVisual3D.Content>
             </ModelVisual3D>
