@@ -1,5 +1,4 @@
-﻿using GCodeViewer.Abstractions;
-using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.Abstractions.ViewModels;
 using Ninject;
 using System.Reflection;
 using System.Windows;
@@ -14,18 +13,17 @@ namespace GCodeViewer
         public MainWindow()
         {
             InitializeComponent();
-            InitIocContainer();
-        }
 
-        void InitIocContainer()
-        {
+            // Init ioc container
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            toolBar.DataContext = kernel.Get<IToolbarViewModel>();
-
+            // get pageswapper from kernel
             var pageSwapper = kernel.Get<IPageLocator>();
             pageSwapper.SetStartupPage();
+
+            // set datacontexts
+            toolBar.DataContext = kernel.Get<IToolbarViewModel>();
             mainFrame.DataContext = pageSwapper;
         }
     }
