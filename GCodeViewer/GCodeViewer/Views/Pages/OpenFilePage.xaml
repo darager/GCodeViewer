@@ -23,12 +23,11 @@
                 Margin="5"
                 Padding="3"
                 HorizontalAlignment="Center"
+                Content="Open a File to start!"
                 FontFamily="Roboto"
                 FontSize="17"
                 FontWeight="DemiBold"
-                Foreground="{StaticResource FontColor}">
-                Open a File to start!
-            </Label>
+                Foreground="{StaticResource FontColor}" />
             <Button
                 HorizontalAlignment="Center"
                 Command="{Binding OpenFileCommand}"
