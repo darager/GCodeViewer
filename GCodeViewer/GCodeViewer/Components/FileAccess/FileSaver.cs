@@ -17,19 +17,18 @@ namespace GCodeViewer.Components.FileAccess
 
         public void SaveCurrentFile()
         {
-            string[] content = TextViewModel.GetCurrentContent();
+            string[] content = GetCurrentContent();
             IFile file = FileChooser.GetFile();
 
             SaveFile(file, content);
         }
         public void SaveToFile(IFile file)
         {
-            string[] content = TextViewModel.GetCurrentContent();
-
+            string[] content = GetCurrentContent();
             SaveFile(file, content);
         }
 
-        void SaveFile(IFile file, string[] content)
+        private void SaveFile(IFile file, string[] content)
         {
             using (var stream = file.GetFileStream())
             {
@@ -41,6 +40,10 @@ namespace GCodeViewer.Components.FileAccess
                     }
                 }
             }
+        }
+        private string[] GetCurrentContent()
+        {
+            return TextViewModel.GetCurrentContent();
         }
     }
 }

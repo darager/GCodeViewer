@@ -22,21 +22,24 @@ namespace GCodeViewer.Components.FileAccess
         public void LoadFileContent()
         {
             IFile file = FileChooser.GetFile();
-            using (FileStream stream = file.GetFileStream())
-            {
-                using (var reader = new StreamReader(stream))
-                {
-                    var content = new ArrayList();
+            FileStream stream = file.GetFileStream();
+            var reader = new StreamReader(stream);
 
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        content.Add(line);
-                    }
+            fileContent = LoadFileContent(reader);
 
-                    fileContent = (string[])content.ToArray(typeof(string));
-                }
-            }
+            reader.Close();
+            stream.Close();
+        }
+
+        private string[] LoadFileContent(StreamReader reader)
+        {
+            var content = new ArrayList();
+            string line;
+
+            while ((line = reader.ReadLine()) != null)
+                content.Add(line);
+
+            return (string[])content.ToArray(typeof(string));
         }
     }
 }

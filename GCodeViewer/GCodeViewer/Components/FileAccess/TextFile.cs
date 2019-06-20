@@ -14,7 +14,9 @@ namespace GCodeViewer.Components.FileAccess
 
         public FileStream GetFileStream()
         {
-            return new FileStream(FilePath, FileMode.OpenOrCreate);
+            var stream = new FileStream(FilePath, FileMode.OpenOrCreate);
+
+            return stream;
         }
     }
 }

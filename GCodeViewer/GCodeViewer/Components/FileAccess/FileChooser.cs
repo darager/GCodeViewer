@@ -6,10 +6,6 @@ namespace GCodeViewer.Components.FileAccess
     {
         private IFile File;
 
-        public FileChooser()
-        {
-        }
-
         public IFile GetFile()
         {
             return File;
