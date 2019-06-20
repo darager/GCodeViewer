@@ -28,45 +28,64 @@ namespace GCodeViewer.Commands
 
         public bool CanExecute(object parameter)
         {
+            // you can always open a file
             return true;
         }
         public void Execute(object parameter)
         {
-            if (!textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded())
+            if (ThereAreUnsavedChanges())
             {
-                var result =
-                    MessageBox.Show(
-                      "The current changes have not been saved! \nDo you wish to proceed without saving"
-                    , "Unsaved Changes!"
-                    , MessageBoxButton.YesNo);
+                bool UserWantsToDiscardChanges = AskUserWhetherToDiscardChanges();
 
-                if (result == MessageBoxResult.No)
-                {
+                if (UserWantsToDiscardChanges)
                     return;
-                }
             }
 
             var ofd = new OpenFileDialog();
-            ofd.InitialDirectory = Directory.GetCurrentDirectory();
-            ofd.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
-            ofd.Filter = GCodeFileExtensionFilter.Filter;
-            Nullable<bool> dialogOk = ofd.ShowDialog();
+            Nullable<bool> dialogResult = GetDialogResult(ofd);
 
-            if (dialogOk == false)
-            {
-                return;
-            }
+            if (dialogResult == false) return;
 
-            fileChooser.SwapFile(new TextFile(ofd.FileName));
-            textBuffer.LoadFileContent();
-            textViewModel.LoadFileContent();
-            pageLocator.SwapToLiveEditorPage();
+            OpenTextFile(ofd);
         }
 
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        private bool ThereAreUnsavedChanges()
+        {
+            bool result = (!textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded());
+
+           return result;
+        }
+        private bool AskUserWhetherToDiscardChanges()
+        {
+            var result =
+                MessageBox.Show(
+                  "The current changes have not been saved! \nDo you wish to proceed without saving"
+                , "Unsaved Changes!"
+                , MessageBoxButton.YesNo);
+
+            return (result == MessageBoxResult.No);
+        }
+        private Nullable<bool> GetDialogResult(OpenFileDialog ofd)
+        {
+            ofd.InitialDirectory = Directory.GetCurrentDirectory();
+            ofd.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
+            ofd.Filter = GCodeFileExtensionFilter.Filter;
+            Nullable<bool> dialogResult = ofd.ShowDialog();
+
+            return dialogResult;
+        }
+        private void OpenTextFile(OpenFileDialog ofd)
+        {
+            fileChooser.SwapFile(new TextFile(ofd.FileName));
+            textBuffer.LoadFileContent();
+            textViewModel.LoadFileContent();
+            pageLocator.SwapToLiveEditorPage();
         }
     }
 }
