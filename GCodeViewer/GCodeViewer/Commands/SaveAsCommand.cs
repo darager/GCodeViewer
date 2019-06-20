@@ -30,8 +30,8 @@ namespace GCodeViewer.Commands
         public void Execute(object parameter)
         {
             var sad = new SaveFileDialog();
-            sad.Filter = GCodeFileFilter.Filter;
-            sad.DefaultExt = GCodeFileFilter.StandardFileExtension;
+            sad.Filter = GCodeFileExtensionFilter.Filter;
+            sad.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
             Nullable<bool> dialogResult = sad.ShowDialog();
 
             if (dialogResult == false)

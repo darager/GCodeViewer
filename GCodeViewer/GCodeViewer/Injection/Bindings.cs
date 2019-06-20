@@ -1,5 +1,4 @@
-﻿using GCodeViewer.Abstractions;
-using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.Abstractions.FileAccess;
 using GCodeViewer.Abstractions.ViewModels;
 using GCodeViewer.Commands;
 using GCodeViewer.Components.FileAccess;
@@ -18,7 +17,7 @@ namespace GCodeViewer.Injection
             // WPF Viewmodels
             Bind<IToolbarViewModel>().To<ToolbarBase>().InSingletonScope();
             Bind<ITextViewModel>().To<TextEditorBase>().InSingletonScope();
-            Bind<IPageLocator>().To<FramePageSwapperBase>().InSingletonScope();
+            Bind<IPageLocator>().To<PageSwapperBase>().InSingletonScope();
 
             // Pages and Pagelocator
             Bind<Page>().To<OpenFilePage>().InSingletonScope().Named("OpenFilePage");

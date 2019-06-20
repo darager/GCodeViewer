@@ -60,10 +60,10 @@
     </ApplicationDefinition>
     <Compile Include="Abstractions\ViewModels\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
-    <Compile Include="Resources\GCodeFileFilter.cs" />
+    <Compile Include="Resources\GCodeFileExtension.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="ViewModels\FramePageSwapperPage.cs" />
+    <Compile Include="ViewModels\PageSwapperBase.cs" />
     <Compile Include="ViewModels\TextEditorBase.cs" />
     <Compile Include="ViewModels\ToolbarBase.cs" />
     <Compile Include="Views\Controls\NoNavigationFrame.cs" />

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace GCodeViewer.ViewModels
 {
-    public class FramePageSwapperBase : IPageLocator, INotifyPropertyChanged
+    public class PageSwapperBase : IPageLocator, INotifyPropertyChanged
     {
         [Inject, Named("OpenFilePage")]
         public Page OpenFilePage { get; set; }

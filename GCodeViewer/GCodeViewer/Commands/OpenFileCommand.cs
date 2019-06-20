@@ -48,8 +48,8 @@ namespace GCodeViewer.Commands
 
             var ofd = new OpenFileDialog();
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
-            ofd.DefaultExt = GCodeFileFilter.StandardFileExtension;
-            ofd.Filter = GCodeFileFilter.Filter;
+            ofd.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
+            ofd.Filter = GCodeFileExtensionFilter.Filter;
             Nullable<bool> dialogOk = ofd.ShowDialog();
 
             if (dialogOk == false)
