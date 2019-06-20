@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GCodeViewer.ViewModels;
+using System.Windows.Controls;
 
 namespace GCodeViewer.Abstractions.ViewModels
 {
@@ -8,7 +9,6 @@ namespace GCodeViewer.Abstractions.ViewModels
         Page LiveEditorPage { get; set; }
 
         void SetStartupPage();
-        void SwapToOpenFilePage();
-        void SwapToLiveEditorPage();
+        void SwapPage(FramePage page);
     }
 }

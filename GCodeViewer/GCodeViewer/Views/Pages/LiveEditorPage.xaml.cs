@@ -15,6 +15,7 @@ namespace GCodeViewer.Views
             InitializeComponent();
             this.DataContext = textViewModel;
 
+            //TODO: remove this
             PopulateRenderWindow();
         }
 

@@ -5,6 +5,10 @@ using System.Windows.Controls;
 
 namespace GCodeViewer.ViewModels
 {
+    public enum FramePage
+    {
+        OpenFile, LiveEditor
+    }
     public class PageSwapperBase : IPageLocator, INotifyPropertyChanged
     {
         [Inject, Named("OpenFilePage")]
@@ -28,9 +32,19 @@ namespace GCodeViewer.ViewModels
         }
         private Page _currentPage;
 
-        public void SetStartupPage() => SwapToOpenFilePage();
-        public void SwapToOpenFilePage() => CurrentPage = OpenFilePage;
-        public void SwapToLiveEditorPage() => CurrentPage = LiveEditorPage;
+        public void SetStartupPage() => SwapPage(FramePage.OpenFile);
+        public void SwapPage(FramePage newPage)
+        {
+            switch (newPage)
+            {
+                case FramePage.OpenFile:
+                    CurrentPage = OpenFilePage;
+                    break;
+                case FramePage.LiveEditor:
+                    CurrentPage = LiveEditorPage;
+                    break;
+            }
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

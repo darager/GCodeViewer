@@ -2,6 +2,7 @@
 using GCodeViewer.Abstractions.ViewModels;
 using GCodeViewer.Components.FileAccess;
 using GCodeViewer.Resources;
+using GCodeViewer.ViewModels;
 using Microsoft.Win32;
 using Ninject;
 using System;
@@ -85,7 +86,7 @@ namespace GCodeViewer.Commands
             fileChooser.SwapFile(new TextFile(ofd.FileName));
             textBuffer.LoadFileContent();
             textViewModel.LoadFileContent();
-            pageLocator.SwapToLiveEditorPage();
+            pageLocator.SwapPage(FramePage.LiveEditor);
         }
     }
 }
