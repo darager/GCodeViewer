@@ -1,6 +1,7 @@
 ﻿using GCodeViewer.Abstractions.FileAccess;
 using GCodeViewer.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -29,9 +30,6 @@ namespace GCodeViewer.ViewModels
         {
             FileBuffer = fileBuffer;
             _FileContent = new ObservableCollection<string>();
-
-            // TODO: Remove this line and add a way of parsing the actual text to this format
-            FakeData();
         }
 
         public void ChangeLine(int lineIndex, string content)
@@ -47,7 +45,25 @@ namespace GCodeViewer.ViewModels
         }
         public void LoadFileContent()
         {
-            FileContent = new ObservableCollection<string>(FileBuffer.GetContent());
+            var content = FileBuffer.GetContent();
+            var list = new List<string>();
+            foreach (var line in content)
+                list.Add(line);
+
+            var collection = new ObservableCollection<string>(list);
+
+            FileContent = collection;
+        }
+        private ObservableCollection<string> GetContent()
+        {
+            var content = new ObservableCollection<string>();
+
+            var bufferContent = FileBuffer.GetContent();
+
+            foreach (var line in bufferContent)
+                content.Add(line);
+
+            return content;
         }
         public bool IsCurrentStateSaved()
         {
@@ -68,42 +84,5 @@ namespace GCodeViewer.ViewModels
             }
         }
         public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        private void FakeData()
-        {
-            ActualFileContent = new ObservableCollection<GCodeLine>();
-            for (int i = 0; i < 3000000; i++)
-            {
-                ActualFileContent.Add(new GCodeLine("this is a test " + i, ActualFileContent));
-            }
-        }
-        public ObservableCollection<GCodeLine> ActualFileContent
-        {
-            get { return _ActualFileContent; }
-            set
-            {
-                if (value != _ActualFileContent)
-                {
-                    _ActualFileContent = value;
-                    OnCollectionChanged();
-                }
-            }
-
-        }
-        private ObservableCollection<GCodeLine> _ActualFileContent;
-    }
-
-    public class GCodeLine
-    {
-        public int LineNumber => ActualFileContent.IndexOf(this);
-        public string LineContent { get; set; }
-
-        private static ObservableCollection<GCodeLine> ActualFileContent;
-
-        public GCodeLine(string lineContent, ObservableCollection<GCodeLine> lines)
-        {
-            ActualFileContent = lines;
-            LineContent = lineContent;
-        }
     }
 }
