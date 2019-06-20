@@ -18,7 +18,9 @@ namespace GCodeViewer.Commands
 
         public bool CanExecute(object parameter)
         {
-            return !textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded();
+            var CanChangesBeSaved = !textViewModel.IsCurrentStateSaved() && textViewModel.IsFileLoaded();
+
+            return CanChangesBeSaved;
         }
         public void Execute(object parameter)
         {

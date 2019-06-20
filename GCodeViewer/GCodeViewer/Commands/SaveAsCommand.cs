@@ -29,27 +29,29 @@ namespace GCodeViewer.Commands
         }
         public void Execute(object parameter)
         {
-            var sad = new SaveFileDialog();
-            sad.Filter = GCodeFileExtensionFilter.Filter;
-            sad.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
-            Nullable<bool> dialogResult = sad.ShowDialog();
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = GCodeFileExtensionFilter.Filter;
+            saveFileDialog.DefaultExt = GCodeFileExtensionFilter.StandardFileExtension;
+            Nullable<bool> dialogResult = saveFileDialog.ShowDialog();
 
-            if (dialogResult == false)
-            {
-                return;
-            }
+            if (dialogResult == false) return;
 
-            IFile newFile = new TextFile(sad.FileName);
-            fileSaver.SaveToFile(newFile);
-            fileChooser.SwapFile(newFile);
-            textBuffer.LoadFileContent();
-            textViewModel.GetCurrentContent();
+            IFile newFile = new TextFile(saveFileDialog.FileName);
+            SaveFile(newFile);
         }
 
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        private void SaveFile(IFile file)
+        {
+            fileSaver.SaveToFile(file);
+            fileChooser.SwapFile(file);
+            textBuffer.LoadFileContent();
+            textViewModel.GetCurrentContent();
         }
     }
 }
