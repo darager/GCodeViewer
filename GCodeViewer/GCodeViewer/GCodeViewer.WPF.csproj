@@ -61,11 +61,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abstractions\RenderWindow\IPathBuilder.cs" />
+    <Compile Include="Abstractions\RenderWindow\IPointExtractor.cs" />
+    <Compile Include="Abstractions\RenderWindow\IHelixViewportViewModel.cs" />
     <Compile Include="Abstractions\ViewModels\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
     <Compile Include="Resources\GCodeFileExtension.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Views\Controls\HelixPlot.cs" />
     <Compile Include="Views\ViewModels\PageSwapperBase.cs" />
     <Compile Include="Views\ViewModels\TextEditorBase.cs" />
     <Compile Include="Views\ViewModels\ToolbarBase.cs" />
@@ -146,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\document-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\LiveVisualizer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,6 +2,7 @@
     x:Class="GCodeViewer.Views.LiveEditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:GCodeViewer.Views.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:h="http://helix-toolkit.org/wpf"
     xmlns:local="clr-namespace:GCodeViewer.Views"
@@ -13,11 +14,10 @@
 
     <DockPanel Background="{StaticResource BackgroundColor}">
 
-        <h:HelixViewport3D MinWidth="350" DockPanel.Dock="Left">
-            <h:DefaultLights />
-            <h:CubeVisual3D />
-            <h:GridLinesVisual3D />
-        </h:HelixViewport3D>
+        <c:HelixPlot
+            x:Name="port"
+            MinWidth="900"
+            DockPanel.Dock="Left" />
 
         <!--  //TODO:  -->
         <GridSplitter
