@@ -3,7 +3,7 @@ using Ninject;
 using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace GCodeViewer.ViewModels
+namespace GCodeViewer.Views.ViewModels
 {
     public enum FramePage
     {

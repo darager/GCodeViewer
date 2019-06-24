@@ -2,7 +2,7 @@
 using GCodeViewer.Abstractions.ViewModels;
 using GCodeViewer.Components.FileAccess;
 using GCodeViewer.Resources;
-using GCodeViewer.ViewModels;
+using GCodeViewer.Views.ViewModels;
 using Microsoft.Win32;
 using Ninject;
 using System;

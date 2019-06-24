@@ -1,4 +1,4 @@
-﻿using GCodeViewer.ViewModels;
+﻿using GCodeViewer.Views.ViewModels;
 using System.Windows.Controls;
 
 namespace GCodeViewer.Abstractions.ViewModels

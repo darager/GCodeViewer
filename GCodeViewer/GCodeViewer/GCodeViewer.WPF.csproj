@@ -66,9 +66,9 @@
     <Compile Include="Resources\GCodeFileExtension.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="ViewModels\PageSwapperBase.cs" />
-    <Compile Include="ViewModels\TextEditorBase.cs" />
-    <Compile Include="ViewModels\ToolbarBase.cs" />
+    <Compile Include="Views\ViewModels\PageSwapperBase.cs" />
+    <Compile Include="Views\ViewModels\TextEditorBase.cs" />
+    <Compile Include="Views\ViewModels\ToolbarBase.cs" />
     <Compile Include="Views\Controls\NoNavigationFrame.cs" />
     <Compile Include="Views\Pages\LiveEditorPage.xaml.cs">
       <DependentUpon>LiveEditorPage.xaml</DependentUpon>
