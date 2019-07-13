@@ -1,4 +1,4 @@
-﻿using GCodeViewer.WPF.Resources;
+﻿using GCodeViewer.WPF.Components;
 using NUnit.Framework;
 using System;
 using System.Text.RegularExpressions;

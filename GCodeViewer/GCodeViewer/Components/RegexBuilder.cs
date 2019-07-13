@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace GCodeViewer.WPF.Resources
+namespace GCodeViewer.WPF.Components
 {
     public class RegexBuilder
     {

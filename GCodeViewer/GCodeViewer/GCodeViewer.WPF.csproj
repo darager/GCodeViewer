@@ -66,10 +66,11 @@
     <Compile Include="Abstractions\RenderWindow\IHelixViewportViewModel.cs" />
     <Compile Include="Abstractions\ViewModels\IPageLocator.cs" />
     <Compile Include="Components\FileAccess\TextBuffer.cs" />
+    <Compile Include="Components\PointExtraction\ValueExtractor.cs" />
     <Compile Include="Resources\GCodeFileExtension.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="Resources\RegexBuilder.cs" />
+    <Compile Include="Components\RegexBuilder.cs" />
     <Compile Include="Views\Controls\HelixPlot.cs" />
     <Compile Include="Views\ViewModels\PageSwapperBase.cs" />
     <Compile Include="Views\ViewModels\TextEditorBase.cs" />
@@ -154,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\LiveVisualizer\" />
-    <Folder Include="Components\PointExtraction\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
