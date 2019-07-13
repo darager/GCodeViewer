@@ -2,7 +2,7 @@
 using GCodeViewer.WPF.Abstractions.ViewModels;
 using GCodeViewer.WPF.Commands;
 using GCodeViewer.WPF.Components.FileAccess;
-using GCodeViewer.WPF.Views;
+using GCodeViewer.WPF.Views.Pages;
 using GCodeViewer.WPF.Views.ViewModels;
 using Ninject.Modules;
 using System.Windows.Controls;
