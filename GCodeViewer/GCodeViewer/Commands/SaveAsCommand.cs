@@ -1,12 +1,12 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
-using GCodeViewer.Abstractions.ViewModels;
-using GCodeViewer.Components.FileAccess;
-using GCodeViewer.Resources;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
+using GCodeViewer.WPF.Abstractions.ViewModels;
+using GCodeViewer.WPF.Components.FileAccess;
+using GCodeViewer.WPF.Resources;
 using Microsoft.Win32;
 using System;
 using System.Windows.Input;
 
-namespace GCodeViewer.Commands
+namespace GCodeViewer.WPF.Commands
 {
     public class SaveAsCommand : ICommand
     {

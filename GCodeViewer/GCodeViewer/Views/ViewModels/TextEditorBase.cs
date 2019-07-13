@@ -1,11 +1,11 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
-using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
+using GCodeViewer.WPF.Abstractions.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace GCodeViewer.Views.ViewModels
+namespace GCodeViewer.WPF.Views.ViewModels
 {
     public class TextEditorBase : ITextViewModel, INotifyCollectionChanged
     {

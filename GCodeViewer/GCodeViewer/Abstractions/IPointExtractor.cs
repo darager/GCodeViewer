@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.ViewModels;
 using System.Windows.Media.Media3D;
 
-namespace GCodeViewer.Abstractions
+namespace GCodeViewer.WPF.Abstractions
 {
     public interface IPointExtractor
     {

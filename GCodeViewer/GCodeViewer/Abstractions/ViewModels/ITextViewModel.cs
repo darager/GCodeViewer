@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
 using System.Collections.ObjectModel;
 
-namespace GCodeViewer.Abstractions.ViewModels
+namespace GCodeViewer.WPF.Abstractions.ViewModels
 {
     public interface ITextViewModel
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCodeViewer.Abstractions.RenderWindow
+namespace GCodeViewer.WPF.Abstractions.RenderWindow
 {
     public interface IPathBuilder
     {

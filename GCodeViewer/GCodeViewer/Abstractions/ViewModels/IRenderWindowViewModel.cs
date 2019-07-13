@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media.Media3D;
 
-namespace GCodeViewer.Abstractions.ViewModels
+namespace GCodeViewer.WPF.Abstractions.ViewModels
 {
     public interface IRenderWindowViewModel
     {

@@ -1,7 +1,8 @@
 ﻿
-using GCodeViewer.Abstractions.ViewModels;
 
-namespace GCodeViewer.Abstractions.FileAccess
+using GCodeViewer.WPF.Abstractions.ViewModels;
+
+namespace GCodeViewer.WPF.Abstractions.FileAccess
 {
     public interface IFileSaver
     {

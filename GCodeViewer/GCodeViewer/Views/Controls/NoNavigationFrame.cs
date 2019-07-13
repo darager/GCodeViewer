@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace GCodeViewer.Views.Controls
+namespace GCodeViewer.WPF.Views.Controls
 {
     public class NoNavigationFrame : Frame
     {

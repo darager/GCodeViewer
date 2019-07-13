@@ -1,11 +1,10 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
-using GCodeViewer.RenderWindow.Utils;
-using System;
+﻿using GCodeViewer.WPF.aa_Zombie_code;
+using GCodeViewer.WPF.Abstractions.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace GCodeViewer.Views
+namespace GCodeViewer.WPF.Views.Pages
 {
     /// <summary>
     /// Interaction logic for LiveEditorPage.xaml

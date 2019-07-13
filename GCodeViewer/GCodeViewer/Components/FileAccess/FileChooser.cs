@@ -1,6 +1,6 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
 
-namespace GCodeViewer.Components.FileAccess
+namespace GCodeViewer.WPF.Components.FileAccess
 {
     public class FileChooser : IFileChooser
     {

@@ -1,8 +1,8 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
 using System.Collections;
 using System.IO;
 
-namespace GCodeViewer.Components.FileAccess
+namespace GCodeViewer.WPF.Components.FileAccess
 {
     public class TextBuffer : ITextBuffer
     {

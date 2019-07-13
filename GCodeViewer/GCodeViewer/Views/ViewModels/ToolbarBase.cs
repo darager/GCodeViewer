@@ -1,8 +1,8 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.ViewModels;
 using Ninject;
 using System.Windows.Input;
 
-namespace GCodeViewer.Views.ViewModels
+namespace GCodeViewer.WPF.Views.ViewModels
 {
     public class ToolbarBase : IToolbarViewModel
     {

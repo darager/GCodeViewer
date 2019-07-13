@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Media3D;
 
-namespace GCodeViewer.RenderWindow.Utils
+namespace GCodeViewer.WPF.aa_Zombie_code
 {
     public class PointExtractor
     {

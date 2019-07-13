@@ -1,9 +1,9 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.ViewModels;
 using Ninject;
 using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace GCodeViewer.Views.ViewModels
+namespace GCodeViewer.WPF.Views.ViewModels
 {
     public enum FramePage
     {

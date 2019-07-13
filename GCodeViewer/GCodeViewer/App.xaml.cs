@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace GCodeViewer
+namespace GCodeViewer.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

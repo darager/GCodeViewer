@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.ViewModels;
 using System.Windows.Controls;
 
-namespace GCodeViewer.Views
+namespace GCodeViewer.WPF.Views.Pages
 {
     /// <summary>
     /// Interaction logic for OpenFilePage.xaml

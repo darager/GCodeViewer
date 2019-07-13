@@ -1,8 +1,8 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
-using GCodeViewer.Abstractions.ViewModels;
-using GCodeViewer.Components.FileAccess;
-using GCodeViewer.Resources;
-using GCodeViewer.Views.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
+using GCodeViewer.WPF.Abstractions.ViewModels;
+using GCodeViewer.WPF.Components.FileAccess;
+using GCodeViewer.WPF.Resources;
+using GCodeViewer.WPF.Views.ViewModels;
 using Microsoft.Win32;
 using Ninject;
 using System;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
-namespace GCodeViewer.Commands
+namespace GCodeViewer.WPF.Commands
 {
     public class OpenFileCommand : ICommand
     {

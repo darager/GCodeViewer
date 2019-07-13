@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BC9DB81E-8402-47E9-B619-C97577E1961C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>GCodeViewer</RootNamespace>
+    <RootNamespace>GCodeViewer.WPF</RootNamespace>
     <AssemblyName>GCodeViewer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\LiveVisualizer\" />
+    <Folder Include="Components\PointExtraction\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

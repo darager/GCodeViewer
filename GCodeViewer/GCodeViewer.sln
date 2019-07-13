@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF", "GCodeViewer\GCodeViewer.WPF.csproj", "{BC9DB81E-8402-47E9-B619-C97577E1961C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.Tests", "GCodeViewer.Tests\GCodeViewer.Tests.csproj", "{43E855E7-2B24-45CC-9D28-86111D5DE006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,26 @@ Global
 		{BC9DB81E-8402-47E9-B619-C97577E1961C}.Release|x64.Build.0 = Release|Any CPU
 		{BC9DB81E-8402-47E9-B619-C97577E1961C}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC9DB81E-8402-47E9-B619-C97577E1961C}.Release|x86.Build.0 = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|ARM.Build.0 = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|x64.Build.0 = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Debug|x86.Build.0 = Debug|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|ARM.ActiveCfg = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|ARM.Build.0 = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|ARM64.Build.0 = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x64.ActiveCfg = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x64.Build.0 = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x86.ActiveCfg = Release|Any CPU
+		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

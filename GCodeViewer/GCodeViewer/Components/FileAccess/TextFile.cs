@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Abstractions.FileAccess;
+﻿using GCodeViewer.WPF.Abstractions.FileAccess;
 using System.IO;
 
-namespace GCodeViewer.Components.FileAccess
+namespace GCodeViewer.WPF.Components.FileAccess
 {
     public class TextFile : IFile
     {

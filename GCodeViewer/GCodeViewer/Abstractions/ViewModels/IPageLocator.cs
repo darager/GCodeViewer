@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Views.ViewModels;
+﻿using GCodeViewer.WPF.Views.ViewModels;
 using System.Windows.Controls;
 
-namespace GCodeViewer.Abstractions.ViewModels
+namespace GCodeViewer.WPF.Abstractions.ViewModels
 {
     public interface IPageLocator
     {

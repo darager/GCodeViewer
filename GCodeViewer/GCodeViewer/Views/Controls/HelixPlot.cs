@@ -25,7 +25,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace GCodeViewer.Views.Controls
+namespace GCodeViewer.WPF.Views.Controls
 {
     /// <summary>
     /// Plot a trace in 3D space with marker, axes and bounding box.

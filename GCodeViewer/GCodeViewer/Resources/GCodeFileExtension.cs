@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.Resources
+﻿namespace GCodeViewer.WPF.Resources
 {
     public static class GCodeFileExtensionFilter
     {

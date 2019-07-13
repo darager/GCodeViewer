@@ -1,9 +1,9 @@
-﻿using GCodeViewer.Abstractions.ViewModels;
+﻿using GCodeViewer.WPF.Abstractions.ViewModels;
 using Ninject;
 using System.Reflection;
 using System.Windows;
 
-namespace GCodeViewer
+namespace GCodeViewer.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

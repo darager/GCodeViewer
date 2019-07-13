@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.Abstractions.FileAccess
+﻿namespace GCodeViewer.WPF.Abstractions.FileAccess
 {
     public interface IFileChooser
     {

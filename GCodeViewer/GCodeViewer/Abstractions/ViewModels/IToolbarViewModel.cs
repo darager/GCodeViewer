@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace GCodeViewer.Abstractions.ViewModels
+namespace GCodeViewer.WPF.Abstractions.ViewModels
 {
     public interface IToolbarViewModel
     {
