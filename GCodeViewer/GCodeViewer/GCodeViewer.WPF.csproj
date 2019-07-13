@@ -69,6 +69,7 @@
     <Compile Include="Resources\GCodeFileExtension.cs" />
     <Compile Include="Commands\SaveAsCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Resources\RegexBuilder.cs" />
     <Compile Include="Views\Controls\HelixPlot.cs" />
     <Compile Include="Views\ViewModels\PageSwapperBase.cs" />
     <Compile Include="Views\ViewModels\TextEditorBase.cs" />
