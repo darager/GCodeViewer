@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC9DB81E-8402-47E9-B619-C97577E1961C}</ProjectGuid>
+    <ProjectGuid>{B75E16F7-F9E1-477E-860C-3AC14948651E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>GCodeViewer.WPF</RootNamespace>
-    <AssemblyName>GCodeViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>FirstTest</RootNamespace>
+    <AssemblyName>FirstTest</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -35,14 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HelixToolkit.Wpf, Version=2.8.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
-      <HintPath>..\packages\HelixToolkit.Wpf.2.8.0\lib\net45\HelixToolkit.Wpf.dll</HintPath>
+    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    <Reference Include="OpenTK.GLControl, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,33 +56,13 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Abstractions\RenderWindow\IPathBuilder.cs" />
-    <Compile Include="Abstractions\RenderWindow\IPointExtractor.cs" />
-    <Compile Include="Abstractions\RenderWindow\IHelixViewportViewModel.cs" />
-    <Compile Include="Abstractions\ViewModels\IPageLocator.cs" />
-    <Compile Include="Components\FileAccess\TextBuffer.cs" />
-    <Compile Include="Components\PointExtraction\ValueExtractor.cs" />
-    <Compile Include="Resources\GCodeFileExtension.cs" />
-    <Compile Include="Commands\SaveAsCommand.cs" />
-    <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="Components\RegexBuilder.cs" />
-    <Compile Include="Views\Controls\HelixPlot.cs" />
-    <Compile Include="Views\ViewModels\PageSwapperBase.cs" />
-    <Compile Include="Views\ViewModels\TextEditorBase.cs" />
-    <Compile Include="Views\ViewModels\ToolbarBase.cs" />
-    <Compile Include="Views\Controls\NoNavigationFrame.cs" />
-    <Compile Include="Views\Pages\LiveEditorPage.xaml.cs">
-      <DependentUpon>LiveEditorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Pages\OpenFilePage.xaml.cs">
-      <DependentUpon>OpenFilePage.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -90,31 +71,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\OpenFileCommand.cs" />
-    <Compile Include="Components\FileAccess\TextFile.cs" />
-    <Compile Include="Abstractions\FileAccess\IFileChooser.cs" />
-    <Compile Include="Abstractions\IPointExtractor.cs" />
-    <Compile Include="Abstractions\ViewModels\IRenderWindowViewModel.cs" />
-    <Compile Include="Injection\Bindings.cs" />
-    <Compile Include="Abstractions\FileAccess\IFile.cs" />
-    <Compile Include="Abstractions\FileAccess\ITextBuffer.cs" />
-    <Compile Include="Abstractions\FileAccess\IFileSaver.cs" />
-    <Compile Include="Abstractions\ViewModels\ITextViewModel.cs" />
-    <Compile Include="Abstractions\ViewModels\IToolbarViewModel.cs" />
-    <Compile Include="Components\FileAccess\FileChooser.cs" />
-    <Compile Include="Components\FileAccess\FileSaver.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Pages\LiveEditorPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Pages\OpenFilePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -134,6 +94,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -142,15 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\document-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\LiveVisualizer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

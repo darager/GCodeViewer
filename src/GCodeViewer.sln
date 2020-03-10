@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF", "GCodeViewer\GCodeViewer.WPF.csproj", "{BC9DB81E-8402-47E9-B619-C97577E1961C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.Tests", "GCodeViewer.Tests\GCodeViewer.Tests.csproj", "{43E855E7-2B24-45CC-9D28-86111D5DE006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Tests", "GCodeViewer.Tests\GCodeViewer.Tests.csproj", "{43E855E7-2B24-45CC-9D28-86111D5DE006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenGL-Playground", "OpenGL-Playground", "{BDD28A23-614E-47D1-8B55-E940DC59DBEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstTest", "FirstTest\FirstTest.csproj", "{B75E16F7-F9E1-477E-860C-3AC14948651E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,9 +65,32 @@ Global
 		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x64.Build.0 = Release|Any CPU
 		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x86.ActiveCfg = Release|Any CPU
 		{43E855E7-2B24-45CC-9D28-86111D5DE006}.Release|x86.Build.0 = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|x64.Build.0 = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Debug|x86.Build.0 = Debug|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|ARM.Build.0 = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|ARM64.Build.0 = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|x64.ActiveCfg = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|x64.Build.0 = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|x86.ActiveCfg = Release|Any CPU
+		{B75E16F7-F9E1-477E-860C-3AC14948651E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B75E16F7-F9E1-477E-860C-3AC14948651E} = {BDD28A23-614E-47D1-8B55-E940DC59DBEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D1A69A3-5F6E-4EAE-91B3-DE068366B479}
