@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -10,60 +12,61 @@ namespace FirstTest
 {
     public partial class MainWindow : Window
     {
-        public MainWindow() => InitializeComponent();
+        private GLControl _control;
 
-        private void WindowsFormsHost_Initialized(object sender, EventArgs args)
+        public MainWindow()
         {
+            InitializeComponent();
+
             var flags = GraphicsContextFlags.Default;
-            var control = new GLControl(new GraphicsMode(32, 24), 2, 0, flags);
 
-            control.MakeCurrent(); // makes control current (GL.something now uses this control)
-            control.Dock = DockStyle.Fill;
-            (sender as WindowsFormsHost).Child = control;
+            _control = new GLControl(new GraphicsMode(32, 24), 2, 0, flags);
+            _control.MakeCurrent(); // makes control current (GL.something now uses this control)
+            _control.Dock = DockStyle.Fill;
+            _control.Paint += Paint;
 
-            control.Paint += (s, e) =>
-            {
-                GL.ClearColor(0, 0, 255, 1);
-
-                GL.Clear(ClearBufferMask.ColorBufferBit |
-                         ClearBufferMask.DepthBufferBit |
-                         ClearBufferMask.StencilBufferBit);
-
-                DrawTriangle();
-
-
-                control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
-            };
-
-            control.Invalidate(); // makes control invalid and causes it to be redrawn
-        }
-        int vertexBufferObject;
-        private void DrawTriangle()
-        {
-            float[] vertices = {
-                    -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-                     0.5f, -0.5f, 0.0f, //Bottom-right vertex
-                     0.0f,  0.5f, 0.0f  //Top vertex
-                };
-
-            vertexBufferObject = GL.GenBuffer();
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
-
-            // the usage changes according to how the data changes over time (StaticDraw, DynamicDraw, StreamDraw (changes every frame))
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+            winFormsHost.Child = _control;
         }
 
-        private void WindowsFormsHost_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Paint(object sender, EventArgs e)
         {
-            GL.Viewport(0, 0, 100, 100);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.ClearColor(Color.CornflowerBlue);
+
+            SetupViewPort();
+
+
+            _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
+            _control.Invalidate(); // make control invalid and redraw it
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SetupViewPort()
         {
-            // the buffers have to be cleaned up manually
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // binding a buffer to 0 sets it to null
-            GL.DeleteBuffer(vertexBufferObject);
+            int w = _control.Width;
+            int h = _control.Height;
+            GL.Viewport(0, 0, w, h); // Use all of the glControl painting area
+        }
+
+        private int CompileShaders()
+        {
+            var vertexShader = GL.CreateShader(ShaderType.VertexShader);
+            GL.ShaderSource(vertexShader, File.ReadAllText("shader.vert"));
+            GL.CompileShader(vertexShader);
+
+            var fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
+            GL.ShaderSource(fragmentShader, File.ReadAllText("shader.frag"));
+            GL.CompileShader(fragmentShader);
+
+            var program = GL.CreateProgram();
+            GL.AttachShader(program, vertexShader);
+            GL.AttachShader(program, fragmentShader);
+            GL.LinkProgram(program);
+
+            GL.DetachShader(program, vertexShader);
+            GL.DetachShader(program, fragmentShader);
+            GL.DeleteShader(vertexShader);
+            GL.DeleteShader(fragmentShader);
+            return program;
         }
     }
 }
