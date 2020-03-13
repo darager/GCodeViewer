@@ -54,6 +54,7 @@ namespace OpenTkTest
             GL.EnableVertexAttribArray(0);
 
             _shader.Use();
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
 
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
         }
@@ -70,6 +71,14 @@ namespace OpenTkTest
             GL.DeleteBuffer(_vertexBufferObject);
 
             _shader.Dispose();
+        }
+
+        private void WinFormsHost_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            int height = (int)WinFormsHost.ActualHeight;
+            int width = (int)WinFormsHost.ActualWidth;
+
+            GL.Viewport(0, 0, width, height);
         }
     }
 }

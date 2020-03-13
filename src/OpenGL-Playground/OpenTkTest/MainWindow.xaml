@@ -13,5 +13,6 @@
     <WindowsFormsHost
         x:Name="WinFormsHost"
         Loaded="WinFormsHost_Loaded"
+        SizeChanged="WinFormsHost_SizeChanged"
         Unloaded="WinFormsHost_Unloaded" />
 </Window>
