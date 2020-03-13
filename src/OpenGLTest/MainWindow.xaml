@@ -12,7 +12,10 @@
     mc:Ignorable="d">
     <Grid>
         <WindowsFormsHost x:Name="HostControl" Margin="0,20,0,0">
-            <opengl:GlControl ContextCreated="GlControl_ContextCreated" Render="GlControl_Render" />
+            <opengl:GlControl
+                x:Name="control"
+                ContextCreated="GlControl_ContextCreated"
+                Render="GlControl_Render" />
         </WindowsFormsHost>
     </Grid>
 </Window>

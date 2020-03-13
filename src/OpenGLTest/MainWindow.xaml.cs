@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Drawing;
+using System.Windows;
 using OpenGL;
 
 namespace OpenGLTest
@@ -13,11 +14,11 @@ namespace OpenGLTest
         private void GlControl_ContextCreated(object sender, OpenGL.GlControlEventArgs e)
         {
             Gl.MatrixMode(MatrixMode.Projection);
-            Gl.LoadIdentity();
+            //Gl.LoadIdentity();
             Gl.Ortho(0.0, 1.0f, 0.0, 1.0, 0.0, 1.0);
 
             Gl.MatrixMode(MatrixMode.Modelview);
-            Gl.LoadIdentity();
+            //Gl.LoadIdentity();
         }
 
         private void GlControl_Render(object sender, OpenGL.GlControlEventArgs e)
@@ -32,25 +33,35 @@ namespace OpenGLTest
             Gl.Viewport(vpx, vpy, vpw, vph);
             Gl.Clear(ClearBufferMask.ColorBufferBit);
 
-            Gl.Begin(PrimitiveType.Triangles);
-            Gl.Color3(1.0f, 0.0f, 0.0f); Gl.Vertex2(0.0f, 0.0f);
-            Gl.Color3(0.0f, 1.0f, 0.0f); Gl.Vertex2(0.5f, 0.8f);
-            Gl.Color3(0.0f, 0.0f, 1.0f); Gl.Vertex2(1.0f, 0.0f);
-            Gl.End();
+            // uses NDC (normalized device coordinates)
+            float[] triangleVertices =
+            {
+                -0.5f, -0.5f, 0.0f,
+                 0.5f, -0.5f, 0.0f,
+                 0.0f,  0.5f, 0.0f
+            };
+
+            uint VBO = Gl.GenBuffer();
+
+            Gl.BindBuffer(BufferTarget.ArrayBuffer, VBO);
+            Gl.BufferData(BufferTarget.ArrayBuffer, sizeof(float) * 9, VBO, BufferUsage.StaticDraw);
+
+            Gl.ClearColor(240, 14, 15, 1);
+            senderControl.Invalidate();
         }
 
-        // Vertex position array.
-        private static readonly float[] _ArrayPosition = new float[] {
-                      0.0f, 0.0f,
-                      0.5f, 1.0f,
-                      1.0f, 0.0f
-                    };
+        private static void DrawTriangleSimple()
+        {
+            Gl.Begin(PrimitiveType.Triangles);
 
-        // Vertex color array.
-        private static readonly float[] _ArrayColor = new float[] {
-                      1.0f, 0.0f, 0.0f,
-                      0.0f, 1.0f, 0.0f,
-                      0.0f, 0.0f, 1.0f
-                    };
+            Gl.Color3(1.0f, 0.0f, 0.0f);
+            Gl.Vertex2(0.0f, 0.0f);
+            Gl.Color3(0.0f, 1.0f, 0.0f);
+            Gl.Vertex2(0.5f, 0.8f);
+            Gl.Color3(0.0f, 0.0f, 1.0f);
+            Gl.Vertex2(1.0f, 0.0f);
+
+            Gl.End();
+        }
     }
 }
