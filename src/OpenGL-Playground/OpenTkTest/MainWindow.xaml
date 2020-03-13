@@ -8,6 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    Unloaded="Window_Unloaded"
     mc:Ignorable="d">
     <WindowsFormsHost
         x:Name="WinFormsHost"

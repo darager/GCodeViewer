@@ -10,7 +10,7 @@ namespace OpenTkTest
     public partial class MainWindow : Window
     {
         private GLControl _control;
-        private int _vertexBuffer;
+        private int _vertexBufferObject;
 
         private Shader _shader;
 
@@ -45,9 +45,15 @@ namespace OpenTkTest
                 0.0f,  0.5f, 0.0f
             };
 
-            _vertexBuffer = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBuffer);
+            _vertexBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+
+            // before caling the VertexAttribPointer method the VBO has to be bound
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), 0);
+            GL.EnableVertexAttribArray(0);
+
+            _shader.Use();
 
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
         }
@@ -55,7 +61,15 @@ namespace OpenTkTest
         private void WinFormsHost_Unloaded(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.DeleteBuffer(_vertexBuffer);
+            GL.DeleteBuffer(_vertexBufferObject);
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.DeleteBuffer(_vertexBufferObject);
+
+            _shader.Dispose();
         }
     }
 }
