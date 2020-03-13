@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Tests", "GCodeV
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenGL-Playground", "OpenGL-Playground", "{BDD28A23-614E-47D1-8B55-E940DC59DBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenGLTest", "OpenGLTest\OpenGLTest.csproj", "{6C199123-6A13-49C8-B211-D9893ABE2D01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenGLTest", "OpenGL-Playground\OpenGLTest\OpenGLTest.csproj", "{6C199123-6A13-49C8-B211-D9893ABE2D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkTest", "OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkTest", "OpenGL-Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

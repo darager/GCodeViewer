@@ -1,9 +1,0 @@
-﻿<Application
-    x:Class="OpenTK.FirstTests.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:OpenTK.FirstTests"
-    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-    StartupUri="MainWindow.xaml">
-    <Application.Resources />
-</Application>
