@@ -7,16 +7,15 @@ namespace OpenTkTest
 {
     public class Shader : IDisposable
     {
-        private int _handle;
+        private readonly int _handle;
 
-        private int _vertexShader;
-        private int _fragmentShader;
+        private readonly int _vertexShader;
+        private readonly int _fragmentShader;
 
         public Shader(string vertexShaderPath, string fragShaderPath)
         {
             string vertexShaderSource = File.ReadAllText(vertexShaderPath);
             string fragmentShaderSource = File.ReadAllText(fragShaderPath);
-
 
             // create the shaders
             _vertexShader = GL.CreateShader(ShaderType.VertexShader);
@@ -39,7 +38,6 @@ namespace OpenTkTest
 
             if (infoLogFrag != String.Empty)
                 Debug.WriteLine(infoLogFrag);
-
 
             // link shaders together into a program for later usage
             _handle = GL.CreateProgram();
@@ -71,11 +69,10 @@ namespace OpenTkTest
             }
         }
 
-        ~Shader()
-        {
-            GL.DeleteProgram(_handle);
-        }
-
+        //~Shader()
+        //{
+        //    GL.DeleteProgram(_handle);
+        //}
 
         public void Dispose()
         {
