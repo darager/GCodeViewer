@@ -19,25 +19,22 @@ namespace OpenTkTest
 
             // create the shaders
             _vertexShader = GL.CreateShader(ShaderType.VertexShader);
-
-            _fragmentShader = GL.CreateShader(ShaderType.VertexShader);
-
             GL.ShaderSource(_vertexShader, vertexShaderSource);
-            GL.ShaderSource(_fragmentShader, fragmentShaderSource);
-
-            // Compile the shaders
             GL.CompileShader(_vertexShader);
 
             string infoLogVert = GL.GetShaderInfoLog(_vertexShader);
             if (infoLogVert != String.Empty)
                 Debug.WriteLine(infoLogVert);
 
+
+            _fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
+            GL.ShaderSource(_fragmentShader, fragmentShaderSource);
             GL.CompileShader(_fragmentShader);
 
             string infoLogFrag = GL.GetShaderInfoLog(_fragmentShader);
-
             if (infoLogFrag != String.Empty)
                 Debug.WriteLine(infoLogFrag);
+
 
             // link shaders together into a program for later usage
             _handle = GL.CreateProgram();
@@ -68,11 +65,6 @@ namespace OpenTkTest
                 _isDisposed = true;
             }
         }
-
-        //~Shader()
-        //{
-        //    GL.DeleteProgram(_handle);
-        //}
 
         public void Dispose()
         {

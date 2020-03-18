@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
@@ -27,7 +26,7 @@ namespace OpenTkTest
             _control.Dock = DockStyle.Fill;
             _control.Paint += Paint;
 
-            _shader = new Shader("shader.vert", "shader.frag");
+            _shader = new Shader("shader/shader.vert", "shader/shader.frag");
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
             WinFormsHost.Child = _control;
@@ -35,8 +34,6 @@ namespace OpenTkTest
 
         private void Paint(object sender, PaintEventArgs e)
         {
-            GL.ClearColor(Color.CornflowerBlue);
-
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             float[] vertices = {
@@ -54,15 +51,10 @@ namespace OpenTkTest
             GL.EnableVertexAttribArray(0);
 
             _shader.Use();
+
             GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
 
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
-        }
-
-        private void WinFormsHost_Unloaded(object sender, RoutedEventArgs e)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.DeleteBuffer(_vertexBufferObject);
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
@@ -77,7 +69,6 @@ namespace OpenTkTest
         {
             int height = (int)WinFormsHost.ActualHeight;
             int width = (int)WinFormsHost.ActualWidth;
-
             GL.Viewport(0, 0, width, height);
         }
     }
