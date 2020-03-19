@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using OpenTK;
@@ -15,8 +14,6 @@ namespace OpenTkTest
         private int _vertexBufferObject;
 
         private Shader _shader;
-
-        private Random _random = new Random();
 
         public MainWindow()
         {
@@ -39,15 +36,20 @@ namespace OpenTkTest
 
         private void Paint(object sender, PaintEventArgs e)
         {
-            #region draw triangle
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
+            List<float> verts = new List<float>();
+            var rnd = new Random();
             int count = 500;
-            float[] vertices = Enumerable.Range(0, count * 3)
-                                         .Select(_ => (float)_random.NextDouble() - 0.5f)
-                                         .ToArray();
+            for (int i = 0; i < count * 3; i++)
+            {
+                float rn = (float)rnd.NextDouble();
+
+                verts.Add(rn - 0.5f);
+            }
+            float[] vertices = verts.ToArray();
 
             _vertexBufferObject = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
@@ -62,8 +64,7 @@ namespace OpenTkTest
 
             _shader.Use();
 
-            GL.DrawArrays(PrimitiveType.Points, 0, count);
-            #endregion
+            GL.DrawArrays(PrimitiveType.Points, first: 0, count);
 
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
         }
