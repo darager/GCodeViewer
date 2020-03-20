@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using OpenTK;
 using OpenTK.Graphics.ES20;
 
 namespace OpenTkTest
@@ -11,6 +13,8 @@ namespace OpenTkTest
 
         private readonly int _vertexShader;
         private readonly int _fragmentShader;
+
+        private Dictionary<string, int> _uniformLocations;
 
         public Shader(string vertexShaderPath, string fragShaderPath)
         {
@@ -47,6 +51,29 @@ namespace OpenTkTest
             GL.DetachShader(_handle, _fragmentShader);
             GL.DeleteShader(_vertexShader);
             GL.DeleteShader(_fragmentShader);
+
+
+            // get the number of uniforms of the shader
+            GL.GetProgram(_handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
+
+            _uniformLocations = new Dictionary<string, int>();
+
+            for (var i = 0; i < numberOfUniforms; i++)
+            {
+                // get the name of this uniform,
+                var key = GL.GetActiveUniform(_handle, i, out _, out _);
+
+                // get the location,
+                var location = GL.GetUniformLocation(_handle, key);
+
+                // and then add it to the dictionary.
+                _uniformLocations.Add(key, location);
+            }
+        }
+        public void SetMatrix4(string name, Matrix4 data)
+        {
+            GL.UseProgram(_handle);
+            GL.UniformMatrix4(_uniformLocations[name], true, ref data);
         }
 
         public void Use()

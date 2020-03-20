@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.ES20;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenTkTest
 {
@@ -15,7 +13,7 @@ namespace OpenTkTest
         private int _vertexBufferObject;
 
         private Shader _shader;
-
+        private Camera _camera;
         private Random _random = new Random();
 
         public MainWindow()
@@ -30,24 +28,30 @@ namespace OpenTkTest
 
             _control.Dock = DockStyle.Fill;
             _control.Paint += Paint;
+            WinFormsHost.Child = _control;
 
             _shader = new Shader("shader/shader.vert", "shader/shader.frag");
+            _camera = new Camera(_shader, new Vector3(0, 0, 3), new Vector3(0, 0, 0));
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
-            WinFormsHost.Child = _control;
         }
 
         private void Paint(object sender, PaintEventArgs e)
         {
-            #region draw triangle
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            int count = 500;
-            float[] vertices = Enumerable.Range(0, count * 3)
-                                         .Select(_ => (float)_random.NextDouble() - 0.5f)
-                                         .ToArray();
+            #region draw points
+
+            int count = 3;
+
+            float[] vertices =
+            {
+                 0,     0, 0,
+                 0.5f,  0, 0,
+                -0.5f,  0, 0
+            };
 
             _vertexBufferObject = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
@@ -62,10 +66,18 @@ namespace OpenTkTest
 
             _shader.Use();
 
+            GL.Enable(EnableCap.PointSmooth);
+            GL.Enable(EnableCap.ProgramPointSize);
+
             GL.DrawArrays(PrimitiveType.Points, 0, count);
             #endregion
 
+
+            _camera.Reset(); // has to be reset since camera keeps state (resizing not done properly?)
+            _camera.RotateZ(45);
+
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
+            _control.Invalidate();
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
