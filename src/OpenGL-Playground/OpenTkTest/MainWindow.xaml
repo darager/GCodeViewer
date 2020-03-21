@@ -10,9 +10,16 @@
     Unloaded="Window_Unloaded"
     mc:Ignorable="d">
 
-    <WindowsFormsHost
-        x:Name="WinFormsHost"
-        Loaded="WinFormsHost_Loaded"
-        SizeChanged="WinFormsHost_SizeChanged" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <WindowsFormsHost
+            x:Name="WinFormsHost"
+            Grid.Row="1"
+            Loaded="WinFormsHost_Loaded"
+            SizeChanged="WinFormsHost_SizeChanged" />
+    </Grid>
 
 </Window>

@@ -26,20 +26,28 @@ namespace OpenTkTest
             _currentMatrix *= Matrix4.CreateTranslation(vector);
             this.Update();
         }
-        public void RotateX(float angle)
+
+        public void RotateX(float angleInDeg)
         {
-            _currentMatrix *= Matrix4.CreateRotationX(angle);
+            var rotation = Matrix4.CreateRotationX(DegToRad(angleInDeg));
+            _currentMatrix *= rotation;
             this.Update();
         }
-        public void RotateY(float angle)
+        public void RotateY(float angleInDeg)
         {
-            _currentMatrix *= Matrix4.CreateRotationY(angle);
+            var rotation = Matrix4.CreateRotationY(DegToRad(angleInDeg));
+            _currentMatrix *= rotation;
             this.Update();
         }
-        public void RotateZ(float angle)
+        public void RotateZ(float angleInDeg)
         {
-            _currentMatrix *= Matrix4.CreateRotationZ(angle);
+            var rotation = Matrix4.CreateRotationZ(DegToRad(angleInDeg));
+            _currentMatrix *= rotation;
             this.Update();
+        }
+        private float DegToRad(float angleInDeg)
+        {
+            return (float)(Math.PI / 180) * angleInDeg;
         }
 
         public void Reset()
