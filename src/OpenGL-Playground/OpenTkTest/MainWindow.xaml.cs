@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System.Windows.Input;
-using System.Timers;
 
 namespace OpenTkTest
 {
@@ -34,7 +32,7 @@ namespace OpenTkTest
             _control.MouseMove += Control_MouseMove;
 
             _shader = new Shader("shader/shader.vert", "shader/shader.frag");
-            _camera = new Camera(_shader, new Vector3(0, 0, 6), Vector3.Zero);
+            _camera = new Camera(_shader, new Vector3(0, 0, 10), Vector3.Zero);
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
         }
@@ -46,18 +44,17 @@ namespace OpenTkTest
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            #region draw points
 
             float[] vertices =
             {
-                0, 0, 0,
-                0.1f, 0, 0,
+                0.0f, 0.0f, 0.0f,
+                0.1f, 0.0f, 0.0f,
 
-                0, 0, 0,
-                0, 0.1f, 0,
+                0.0f, 0.0f, 0.0f,
+                0.0f, 0.1f, 0.0f,
 
-                0, 0, 0,
-                0, 0, 0.1f,
+                0.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 0.1f
             };
 
             int count = vertices.Length / 3;
@@ -78,12 +75,9 @@ namespace OpenTkTest
             GL.Enable(EnableCap.PointSmooth);
             GL.Enable(EnableCap.ProgramPointSize);
 
+            GL.MatrixMode(MatrixMode.Projection);
+
             GL.DrawArrays(PrimitiveType.Lines, 0, count);
-            #endregion
-
-
-            //_camera.Reset(); // has to be reset since camera keeps state (resizing not done properly?)
-            //_camera.RotateZ(45);
 
             _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
             _control.Invalidate();
@@ -107,18 +101,23 @@ namespace OpenTkTest
         Point previousPosition = new Point(0, 0);
         private void Control_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            double dx = e.X - previousPosition.X;
-            double dy = e.Y - previousPosition.Y;
+            float dx = (float)(e.X - previousPosition.X);
+            float dy = (float)(e.Y - previousPosition.Y);
 
             if ((Control.MouseButtons & MouseButtons.Left) != 0)
             {
-                _camera.RotateY(-(float)dx / 5);
-                _camera.RotateX(-(float)dy / 5);
+                int sensitivity = 5;
+
+                var curr = _camera.CurrentPosition;
+
+                _camera.Reset();
+                _camera.RotateY(-dx / sensitivity);
+                _camera.RotateX(-dy / sensitivity);
+
+                _camera.CurrentPosition *= curr;
             }
 
-            double distance = Math.Sqrt(dx * dx + dy * dy);
-            if (distance > 2)
-                previousPosition = new Point(e.X, e.Y);
+            previousPosition = new Point(e.X, e.Y);
         }
     }
 }
