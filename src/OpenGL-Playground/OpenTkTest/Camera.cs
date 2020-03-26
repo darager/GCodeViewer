@@ -5,27 +5,25 @@ namespace OpenTkTest
 {
     public class Camera
     {
-        public Vector3 Translation;
         public float RotationX = 0.0f;
         public float RotationY = 0.0f;
-        public float Zoom;
+        public float Scale;
 
         private Shader _shader;
 
-        public Camera(Shader shader, Vector3 translation, float zoom)
+        public Camera(Shader shader, float scale)
         {
             this._shader = shader;
-            this.Translation = translation;
-            this.Zoom = zoom;
+            this.Scale = scale;
         }
 
         public void ApplyTransformation()
         {
             var transform = Matrix4.Identity;
 
-            transform *= Matrix4.CreateTranslation(Translation);
             transform *= Matrix4.CreateRotationX(DegToRad(RotationX));
             transform *= Matrix4.CreateRotationY(DegToRad(RotationY));
+            transform *= Matrix4.CreateScale(Scale);
 
             _shader.SetMatrix4("view", transform);
         }
