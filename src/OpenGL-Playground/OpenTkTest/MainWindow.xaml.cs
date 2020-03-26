@@ -30,9 +30,10 @@ namespace OpenTkTest
             _control.Paint += Paint;
             WinFormsHost.Child = _control;
             _control.MouseMove += Control_MouseMove;
+            _control.MouseWheel += Control_MouseWheel;
 
             _shader = new Shader("shader/shader.vert", "shader/shader.frag");
-            _camera = new Camera(_shader, new Vector3(0, 0, 9), Vector3.Zero);
+            _camera = new Camera(_shader, new Vector3(0, 0, 0), 0.2f);
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
         }
@@ -45,13 +46,31 @@ namespace OpenTkTest
 
             GL.Enable(EnableCap.PointSmooth);
             GL.Enable(EnableCap.ProgramPointSize);
-            GL.MatrixMode(MatrixMode.Projection);
+            //GL.MatrixMode(MatrixMode.Projection);
 
             float[] vertices =
             {
                 0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
                 0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
                 0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f, // Z
+
+                // bottom
+                0.25f, 0.25f, 0.25f,  0.5f, 0.25f, 0.25f,
+                0.25f, 0.25f, 0.25f,  0.25f, 0.25f, 0.5f,
+                0.5f, 0.25f, 0.5f,  0.5f, 0.25f, 0.25f,
+                0.5f, 0.25f, 0.5f,  0.25f, 0.25f, 0.5f,
+
+                // top
+                0.25f, 0.5f, 0.25f,  0.5f, 0.5f, 0.25f,
+                0.25f, 0.5f, 0.25f,  0.25f, 0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,  0.5f, 0.5f, 0.25f,
+                0.5f, 0.5f, 0.5f,  0.25f, 0.5f, 0.5f,
+
+                // connections
+                0.25f, 0.25f, 0.25f,  0.25f, 0.5f, 0.25f,
+                0.25f, 0.25f, 0.5f,  0.25f, 0.5f, 0.5f,
+                0.5f, 0.25f, 0.25f,  0.5f, 0.5f, 0.25f,
+                0.5f, 0.25f, 0.5f,  0.5f, 0.5f, 0.5f,
             };
 
             int count = vertices.Length / 3;
@@ -68,6 +87,8 @@ namespace OpenTkTest
             GL.EnableVertexAttribArray(0);
 
             _shader.Use();
+            //GL.LoadIdentity(); // required??
+            _camera.ApplyTransformation();
 
             GL.DrawArrays(PrimitiveType.Lines, 0, count);
 
@@ -102,18 +123,24 @@ namespace OpenTkTest
 
             if ((Control.MouseButtons & MouseButtons.Left) != 0)
             {
-
-                var curr = _camera.CurrentPosition;
-
-                _camera.Reset();
-                _camera.RotateY(-dx * mouseSensitivity);
-                _camera.RotateX(-dy * mouseSensitivity);
-
-                _camera.CurrentPosition *= curr;
-                _camera.Update();
+                _camera.RotationX += (-dy * mouseSensitivity);
+                _camera.RotationY += (-dx * mouseSensitivity);
+            }
+            if ((Control.MouseButtons & MouseButtons.Right) != 0)
+            {
+                _camera.Translation = new Vector3(dx, dy, 0); // translation resets for some reason :(
             }
 
             previousPosition = new Point(e.X, e.Y);
+        }
+
+        private void Control_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //int change = e.Delta;
+            //float sensitivity = 0.1f;
+            //_camera.Zoom += change * sensitivity;
+
+            _camera.Zoom += 0.1f;
         }
     }
 }

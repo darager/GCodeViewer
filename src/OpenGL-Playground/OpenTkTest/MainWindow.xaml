@@ -21,5 +21,4 @@
             Loaded="WinFormsHost_Loaded"
             SizeChanged="WinFormsHost_SizeChanged" />
     </Grid>
-
 </Window>
