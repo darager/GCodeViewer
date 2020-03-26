@@ -11,10 +11,10 @@ namespace OpenTkTest
 
         private Shader _shader;
 
-        public Camera(Shader shader, float scale)
+        public Camera(Shader shader, float startScale)
         {
             this._shader = shader;
-            this.Scale = scale;
+            this.Scale = startScale;
         }
 
         public void ApplyTransformation()

@@ -57,7 +57,7 @@ namespace OpenTkTest
             _control.MouseWheel += Control_MouseWheel;
 
             _shader = new Shader("shader/shader.vert", "shader/shader.frag");
-            _camera = new Camera(_shader, scale: 0.5f);
+            _camera = new Camera(_shader, startScale: 0.5f);
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
