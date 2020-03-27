@@ -54,9 +54,9 @@ namespace GCodeViewer.WPF.Controls
             _control.Dock = DockStyle.Fill;
             this.Child = _control;
 
-            _control.Paint += Paint;
-            _control.MouseMove += Control_MouseMove;
-            _control.MouseWheel += Control_MouseWheel;
+            _control.Paint += OnPaint;
+            _control.MouseMove += OnMouseMove;
+            _control.MouseWheel += OnMouseWheel;
 
             _shader = new Shader("shader/shader.vert", "shader/shader.frag");
             _camera = new Camera(_shader, startScale: 0.5f);
@@ -80,7 +80,7 @@ namespace GCodeViewer.WPF.Controls
             GL.EnableVertexAttribArray(0);
         }
 
-        private void Paint(object sender, PaintEventArgs e)
+        private void OnPaint(object sender, PaintEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -108,7 +108,7 @@ namespace GCodeViewer.WPF.Controls
         #region Rotation and Zooming
         private Point previousPosition = new Point(0, 0);
         private float mouseSensitivity = 0.25f;
-        private void Control_MouseMove(object sender, MouseEventArgs e)
+        private void OnMouseMove(object sender, MouseEventArgs e)
         {
             float dx = (float)(e.X - previousPosition.X);
             float dy = (float)(e.Y - previousPosition.Y);
@@ -123,7 +123,7 @@ namespace GCodeViewer.WPF.Controls
         }
 
         private float wheelSensitivity = 0.1f;
-        private void Control_MouseWheel(object sender, MouseEventArgs e)
+        private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;
 

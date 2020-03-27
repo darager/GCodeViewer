@@ -4,15 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pcv="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
     Title="MainWindow"
     Width="700"
     Height="700"
     ResizeMode="NoResize"
-    Unloaded="Window_Unloaded"
     mc:Ignorable="d">
 
-    <WindowsFormsHost
-        x:Name="WinFormsHost"
-        Loaded="WinFormsHost_Loaded"
-        SizeChanged="WinFormsHost_SizeChanged" />
+    <pcv:PointCloudViewer/>
 </Window>

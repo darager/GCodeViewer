@@ -112,6 +112,10 @@
       <Project>{6B77C13F-535D-4F9B-A1C9-93091D21511F}</Project>
       <Name>GCodeViewer.OpenTK.Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\GCodeViewer.OpenTK.Resources\GCodeViewer.OpenTK.Resources.csproj">
+      <Project>{ce33c4b2-a832-4a55-8fa6-f6cf5f134bee}</Project>
+      <Name>GCodeViewer.OpenTK.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
       <Project>{0b166abc-a1f9-4160-ba5a-0a332bfd8ed0}</Project>
       <Name>GCodeViewer.WPF.Controls</Name>
