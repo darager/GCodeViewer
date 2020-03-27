@@ -11,5 +11,5 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
 
-    <pcv:PointCloudViewer/>
+    <pcv:PointCloudViewer />
 </Window>

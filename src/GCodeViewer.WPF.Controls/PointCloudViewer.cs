@@ -1,10 +1,11 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using GCodeViewer.OpenTK.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using GCodeViewer.OpenTK.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -43,23 +44,24 @@ namespace GCodeViewer.WPF.Controls
 
         public PointCloudViewer()
         {
-            this.Loaded += OnLoaded;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs args)
-        {
             _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default);
+            _control.Dock = DockStyle.Fill;
             _control.MakeCurrent(); // makes control current (GL.something now uses this control)
 
-            _control.Dock = DockStyle.Fill;
             this.Child = _control;
+
+            string vertShaderSource = File.ReadAllText("shader/shader.vert");
+            string fragmentShaderSource = File.ReadAllText("shader/shader.frag");
+
+            _shader = new Shader(vertShaderSource, fragmentShaderSource);
+            _camera = new Camera(_shader, startScale: 0.5f);
 
             _control.Paint += OnPaint;
             _control.MouseMove += OnMouseMove;
             _control.MouseWheel += OnMouseWheel;
 
-            _shader = new Shader("shader/shader.vert", "shader/shader.frag");
-            _camera = new Camera(_shader, startScale: 0.5f);
+            this.Unloaded += OnUnloaded;
+            this.SizeChanged += OnSizeChanged;
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
@@ -98,7 +100,7 @@ namespace GCodeViewer.WPF.Controls
             _control.Invalidate();
         }
 
-        private void WinFormsHost_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             int height = (int)this.ActualHeight;
             int width = (int)this.ActualWidth;
@@ -134,7 +136,7 @@ namespace GCodeViewer.WPF.Controls
         }
         #endregion
 
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.DeleteBuffer(_vertexBufferObject);
