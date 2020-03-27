@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using OpenTK.Graphics.ES20;
+using OpenTK.Graphics.OpenGL;
 using OpenTK;
 
 namespace GCodeViewer.OpenTK.Helpers.Shaders
 {
-    public class Shader : IDisposable
+    public class Shader
     {
         private readonly int _handle;
 

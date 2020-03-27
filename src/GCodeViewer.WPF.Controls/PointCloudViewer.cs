@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using GCodeViewer.OpenTK.Helpers;
+using GCodeViewer.OpenTK.Helpers.Shaders;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+
+using Point = System.Windows.Point;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -14,8 +18,7 @@ namespace GCodeViewer.WPF.Controls
     {
         private GLControl _control;
 
-        private Shader _redShader;
-        private Shader _blueShader;
+        private Shader _shader;
         private OrbitCamera _camera;
 
         private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
@@ -55,22 +58,9 @@ namespace GCodeViewer.WPF.Controls
 
             this.Child = _control;
 
-            string vertShaderSource = File.ReadAllText("Shaders/shader.vert");
-            string fragmentShaderSource = File.ReadAllText("Shaders/shader.frag");
-            fragmentShaderSource = fragmentShaderSource.Replace("%RED%", "1.0f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%GREEN%", "0.4f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%BLUE%", "0.0f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%ALPHA%", "0.8f");
+            _shader = ShaderFactory.FromColor(Color.CornflowerBlue);
 
-            _redShader = new Shader(vertShaderSource, fragmentShaderSource);
-
-            fragmentShaderSource = fragmentShaderSource.Replace("%RED%", "0.0f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%GREEN%", "0.2f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%BLUE%", "1.0f");
-            fragmentShaderSource = fragmentShaderSource.Replace("%ALPHA%", "1.0f");
-            _blueShader = new Shader(vertShaderSource, fragmentShaderSource);
-
-            _camera = new OrbitCamera(_redShader, startScale: 0.5f);
+            _camera = new OrbitCamera(_shader, startScale: 0.5f);
 
             _control.Paint += OnPaint;
             _control.MouseMove += OnMouseMove;
@@ -81,8 +71,8 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _blueShader));
-            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _redShader));
+            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader));
+            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader));
 
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
             GL.EnableVertexAttribArray(0);
@@ -146,7 +136,7 @@ namespace GCodeViewer.WPF.Controls
 
             _vbos.ForEach(v => v.Dispose());
 
-            _redShader.Dispose();
+            _shader.Dispose();
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using GCodeViewer.OpenTK.Helpers.Shaders;
 using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.OpenTK.Helpers

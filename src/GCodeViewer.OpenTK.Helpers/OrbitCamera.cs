@@ -1,4 +1,5 @@
 ﻿using System;
+using GCodeViewer.OpenTK.Helpers.Shaders;
 using OpenTK;
 
 namespace GCodeViewer.OpenTK.Helpers
@@ -27,7 +28,7 @@ namespace GCodeViewer.OpenTK.Helpers
             transform *= Matrix4.CreateRotationZ(DegToRad(RotationZ));
             transform *= Matrix4.CreateScale(Scale);
 
-            _shader.SetMatrix4("view", transform);
+            ShaderFactory.SetRotationMatrix(transform);
         }
 
         private float DegToRad(float angleInDeg)
