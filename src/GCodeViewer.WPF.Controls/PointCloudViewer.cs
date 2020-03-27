@@ -16,8 +16,7 @@ namespace GCodeViewer.WPF.Controls
         private Shader _shader;
         private Camera _camera;
 
-        private int _vertexBufferObject;
-        private readonly float[] vertices =
+        private readonly float[] _vertices =
         {
             0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
             0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
@@ -41,6 +40,7 @@ namespace GCodeViewer.WPF.Controls
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
             0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
         };
+        private VertexBufferObject _coordsAndCubeVBO;
 
         public PointCloudViewer()
         {
@@ -52,8 +52,8 @@ namespace GCodeViewer.WPF.Controls
 
             string vertShaderSource = File.ReadAllText("Shaders/shader.vert");
             string fragmentShaderSource = File.ReadAllText("Shaders/shader.frag");
-
             _shader = new Shader(vertShaderSource, fragmentShaderSource);
+
             _camera = new Camera(_shader, startScale: 0.5f);
 
             _control.Paint += OnPaint;
@@ -65,21 +65,7 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            CreateAndBindVBO();
-        }
-
-        private void CreateAndBindVBO()
-        {
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer,
-                          vertices.Length * sizeof(float),
-                          vertices,
-                          BufferUsageHint.StaticDraw);
-
-            // before caling the VertexAttribPointer method the VBO has to be bound
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
-            GL.EnableVertexAttribArray(0);
+            _coordsAndCubeVBO = new VertexBufferObject(_vertices, PrimitiveType.Lines, _shader);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -91,10 +77,8 @@ namespace GCodeViewer.WPF.Controls
             GL.Enable(EnableCap.ProgramPointSize);
 
             _camera.ApplyTransformation();
-            _shader.Use();
 
-            int count = vertices.Length / 3;
-            GL.DrawArrays(PrimitiveType.Lines, 0, count);
+            _coordsAndCubeVBO.Draw();
 
             _control.SwapBuffers(); // swaps front and back buffers
             _control.Invalidate();
@@ -139,7 +123,8 @@ namespace GCodeViewer.WPF.Controls
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.DeleteBuffer(_vertexBufferObject);
+
+            _coordsAndCubeVBO.Dispose();
             _shader.Dispose();
         }
 
