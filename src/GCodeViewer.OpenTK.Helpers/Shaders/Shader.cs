@@ -14,7 +14,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
         private Dictionary<string, int> _uniformLocations;
 
-        public Shader(string vertexShaderSource, string fragmentShaderSource)
+        internal Shader(string vertexShaderSource, string fragmentShaderSource)
         {
             _vertexShader = GL.CreateShader(ShaderType.VertexShader);
             _fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
