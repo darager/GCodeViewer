@@ -1,13 +1,14 @@
-﻿using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using GCodeViewer.OpenTK.Helpers;
 
-namespace OpenTkTest
+namespace GCodeViewer.WPF.Controls
 {
-    public partial class MainWindow : Window
+    public class PointCloudViewer : WindowsFormsHost
     {
         private GLControl _control;
 
@@ -40,26 +41,24 @@ namespace OpenTkTest
             0.5f, 0.25f, 0.5f,  0.5f, 0.5f, 0.5f,
         };
 
-        public MainWindow()
+        public PointCloudViewer()
         {
-            InitializeComponent();
+            this.Loaded += OnLoaded;
         }
 
-        private void WinFormsHost_Loaded(object sender, RoutedEventArgs args)
+        private void OnLoaded(object sender, RoutedEventArgs args)
         {
             _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default);
             _control.MakeCurrent(); // makes control current (GL.something now uses this control)
 
             _control.Dock = DockStyle.Fill;
-            WinFormsHost.Child = _control;
+            this.Child = _control;
 
             _control.Paint += Paint;
             _control.MouseMove += Control_MouseMove;
             _control.MouseWheel += Control_MouseWheel;
 
-            string vertexShaderSource = File.ReadAllText("shader/shader.vert");
-            string fragmentShaderSource = File.ReadAllText("shader/shader.frag");
-            _shader = new Shader(vertexShaderSource, fragmentShaderSource);
+            _shader = new Shader("shader/shader.vert", "shader/shader.frag");
             _camera = new Camera(_shader, startScale: 0.5f);
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
@@ -101,8 +100,8 @@ namespace OpenTkTest
 
         private void WinFormsHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            int height = (int)WinFormsHost.ActualHeight;
-            int width = (int)WinFormsHost.ActualWidth;
+            int height = (int)this.ActualHeight;
+            int width = (int)this.ActualWidth;
             GL.Viewport(0, 0, width, height);
         }
 
@@ -141,5 +140,6 @@ namespace OpenTkTest
             GL.DeleteBuffer(_vertexBufferObject);
             _shader.Dispose();
         }
+
     }
 }

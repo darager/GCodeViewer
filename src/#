@@ -1,87 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Forms;
-using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.ES20;
+using System.Windows.Forms.Integration;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenTkTest
+namespace GCodeViewer.WPF.Controls
 {
-    public partial class MainWindow : Window
+    public class PointCloudViewer : WindowsFormsHost
     {
-        private GLControl _control;
-        private int _vertexBufferObject;
-
-        private Shader _shader;
-
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void WinFormsHost_Loaded(object sender, RoutedEventArgs args)
-        {
-            _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default);
-            _control.MakeCurrent(); // makes control current (GL.something now uses this control)
-
-            _control.Dock = DockStyle.Fill;
-            _control.Paint += Paint;
-
-            _shader = new Shader("shader/shader.vert", "shader/shader.frag");
-
-            _control.Invalidate(); // makes control invalid and causes it to be redrawn
-            WinFormsHost.Child = _control;
-        }
-
-        private void Paint(object sender, PaintEventArgs e)
-        {
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            List<float> verts = new List<float>();
-            var rnd = new Random();
-            int count = 500;
-            for (int i = 0; i < count * 3; i++)
-            {
-                float rn = (float)rnd.NextDouble();
-
-                verts.Add(rn - 0.5f);
-            }
-            float[] vertices = verts.ToArray();
-
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer,
-                          vertices.Length * sizeof(float),
-                          vertices,
-                          BufferUsageHint.StaticDraw);
-
-            // before caling the VertexAttribPointer method the VBO has to be bound
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-
-            _shader.Use();
-
-            GL.DrawArrays(PrimitiveType.Points, first: 0, count);
-
-            _control.SwapBuffers(); // swaps front and back buffers (impo when scene changes?)
-        }
-
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.DeleteBuffer(_vertexBufferObject);
-
-            _shader.Dispose();
-        }
-
-        private void WinFormsHost_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            int height = (int)WinFormsHost.ActualHeight;
-            int width = (int)WinFormsHost.ActualWidth;
-            GL.Viewport(0, 0, width, height);
-        }
     }
 }

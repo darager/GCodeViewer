@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using OpenTK.Graphics.ES20;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
-namespace OpenTkTest
+namespace GCodeViewer.OpenTK.Helpers
 {
     public class Shader : IDisposable
     {
