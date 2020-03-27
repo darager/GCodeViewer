@@ -67,8 +67,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
             static float Scale(int value, int min, int max, int minScale, int maxScale)
             {
-                float result = minScale + (float)(value - min) / (max - min) * (maxScale - minScale);
-                return result;
+                return minScale + (float)(value - min) / (max - min) * (maxScale - minScale);
             }
         }
     }

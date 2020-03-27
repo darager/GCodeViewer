@@ -13,7 +13,10 @@ namespace GCodeViewer.OpenTK.Helpers
         PrimitiveType _type;
         BufferUsageHint _usageHint;
 
-        public VertexBufferObject(float[] vertices, PrimitiveType type, Shader shader, BufferUsageHint usageHint = BufferUsageHint.StaticDraw)
+        public VertexBufferObject(float[] vertices,
+                                  PrimitiveType type,
+                                  Shader shader,
+                                  BufferUsageHint usageHint = BufferUsageHint.StaticDraw)
         {
             _vertices = vertices;
             _type = type;
@@ -24,7 +27,12 @@ namespace GCodeViewer.OpenTK.Helpers
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
 
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
+            GL.VertexAttribPointer(0,
+                                   size: 3,
+                                   VertexAttribPointerType.Float,
+                                   normalized: false,
+                                   3 * sizeof(float),
+                                   offset: 0);
         }
 
         public void Draw()

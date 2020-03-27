@@ -74,16 +74,27 @@ namespace GCodeViewer.WPF.Controls
 
             GL.EnableVertexAttribArray(0);
 
-            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, ShaderFactory.FromColor(Color.Red)));
-            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, ShaderFactory.FromColor(Color.MistyRose)));
+            ; ;
+            _vbos.Add(new VertexBufferObject(
+                            _coordinateSytemVertices,
+                            PrimitiveType.Lines,
+                            ShaderFactory.FromColor(Color.Red)));
+
+            _vbos.Add(new VertexBufferObject(
+                            _cubeVertices,
+                            PrimitiveType.Lines,
+                            ShaderFactory.FromColor(Color.MistyRose)));
 
             var rnd = new Random();
             int count = 1000;
-            var verts = Enumerable.Range(0, count * 3)
+            var pointVertices = Enumerable.Range(0, count * 3)
                 .Select(_ => rnd.NextDouble())
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
-            _vbos.Add(new VertexBufferObject(verts, PrimitiveType.Points, ShaderFactory.FromColor(Color.CornflowerBlue)));
+            _vbos.Add(new VertexBufferObject(
+                            pointVertices,
+                            PrimitiveType.Points,
+                            ShaderFactory.FromColor(Color.CornflowerBlue)));
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
