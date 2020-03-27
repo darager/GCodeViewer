@@ -24,22 +24,22 @@ namespace GCodeViewer.WPF.Controls
             0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f, // Z
 
             // bottom
-            0.25f, 0.25f, 0.25f,  0.5f, 0.25f, 0.25f,
-            0.25f, 0.25f, 0.25f,  0.25f, 0.25f, 0.5f,
-            0.5f, 0.25f, 0.5f,  0.5f, 0.25f, 0.25f,
-            0.5f, 0.25f, 0.5f,  0.25f, 0.25f, 0.5f,
+            0.25f, 0.25f, 0.25f,  0.7f, 0.25f, 0.25f,
+            0.25f, 0.25f, 0.25f,  0.25f, 0.25f, 0.7f,
+            0.7f, 0.25f, 0.7f,  0.7f, 0.25f, 0.25f,
+            0.7f, 0.25f, 0.7f,  0.25f, 0.25f, 0.7f,
 
             // top
-            0.25f, 0.5f, 0.25f,  0.5f, 0.5f, 0.25f,
-            0.25f, 0.5f, 0.25f,  0.25f, 0.5f, 0.5f,
-            0.5f, 0.5f, 0.5f,  0.5f, 0.5f, 0.25f,
-            0.5f, 0.5f, 0.5f,  0.25f, 0.5f, 0.5f,
+            0.25f, 0.7f, 0.25f,  0.7f, 0.7f, 0.25f,
+            0.25f, 0.7f, 0.25f,  0.25f, 0.7f, 0.7f,
+            0.7f, 0.7f, 0.7f,  0.7f, 0.7f, 0.25f,
+            0.7f, 0.7f, 0.7f,  0.25f, 0.7f, 0.7f,
 
-            // connections
-            0.25f, 0.25f, 0.25f,  0.25f, 0.5f, 0.25f,
-            0.25f, 0.25f, 0.5f,  0.25f, 0.5f, 0.5f,
-            0.5f, 0.25f, 0.25f,  0.5f, 0.5f, 0.25f,
-            0.5f, 0.25f, 0.5f,  0.5f, 0.5f, 0.5f,
+            // middle
+            0.25f, 0.25f, 0.25f,  0.25f, 0.7f, 0.25f,
+            0.25f, 0.25f, 0.7f,  0.25f, 0.7f, 0.7f,
+            0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
+            0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
         };
 
         public PointCloudViewer()
@@ -50,8 +50,8 @@ namespace GCodeViewer.WPF.Controls
 
             this.Child = _control;
 
-            string vertShaderSource = File.ReadAllText("shader/shader.vert");
-            string fragmentShaderSource = File.ReadAllText("shader/shader.frag");
+            string vertShaderSource = File.ReadAllText("Shaders/shader.vert");
+            string fragmentShaderSource = File.ReadAllText("Shaders/shader.frag");
 
             _shader = new Shader(vertShaderSource, fragmentShaderSource);
             _camera = new Camera(_shader, startScale: 0.5f);
