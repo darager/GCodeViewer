@@ -22,18 +22,16 @@ namespace GCodeViewer.OpenTK.Helpers
             _handle = GL.GenBuffer();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
-            GL.BufferData(BufferTarget.ArrayBuffer,
-                          _vertices.Length * sizeof(float),
-                          _vertices,
-                          _usageHint);
-
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
-            GL.EnableVertexAttribArray(0);
         }
 
         public void Draw()
         {
             int count = _vertices.Length / 3;
+
+            GL.BufferData(BufferTarget.ArrayBuffer,
+                          _vertices.Length * sizeof(float),
+                          _vertices,
+                          _usageHint);
 
             _shader.Use();
             GL.DrawArrays(_type, first: 0, count);
