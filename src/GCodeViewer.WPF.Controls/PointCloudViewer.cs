@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -23,6 +24,12 @@ namespace GCodeViewer.WPF.Controls
 
         private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
+        float[] _coordinateSytemVertices =
+        {
+            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
+            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
+            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
+        };
         private readonly float[] _cubeVertices =
         {
             // bottom
@@ -42,12 +49,6 @@ namespace GCodeViewer.WPF.Controls
             0.25f, 0.25f, 0.7f,  0.25f, 0.7f, 0.7f,
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
             0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
-        };
-        float[] _coordinateSytemVertices =
-        {
-            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
         };
 
         public PointCloudViewer()
@@ -74,7 +75,15 @@ namespace GCodeViewer.WPF.Controls
             GL.EnableVertexAttribArray(0);
 
             _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, ShaderFactory.FromColor(Color.Red)));
-            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Points, ShaderFactory.FromColor(Color.CornflowerBlue)));
+            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, ShaderFactory.FromColor(Color.MistyRose)));
+
+            var rnd = new Random();
+            int count = 1000;
+            var verts = Enumerable.Range(0, count * 3)
+                .Select(_ => rnd.NextDouble())
+                .Select(r => (float)r * 2 - 1)
+                .ToArray();
+            _vbos.Add(new VertexBufferObject(verts, PrimitiveType.Points, ShaderFactory.FromColor(Color.CornflowerBlue)));
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
