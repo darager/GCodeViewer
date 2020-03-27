@@ -16,12 +16,8 @@ namespace GCodeViewer.WPF.Controls
         private Shader _shader;
         private Camera _camera;
 
-        private readonly float[] _vertices =
+        private readonly float[] _cubeVertices =
         {
-            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f, // Z
-
             // bottom
             0.25f, 0.25f, 0.25f,  0.7f, 0.25f, 0.25f,
             0.25f, 0.25f, 0.25f,  0.25f, 0.25f, 0.7f,
@@ -40,7 +36,15 @@ namespace GCodeViewer.WPF.Controls
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
             0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
         };
-        private VertexBufferObject _coordsAndCubeVBO;
+        private VertexBufferObject _cubeVBO;
+
+        float[] _coordinateSytemVertices =
+        {
+            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
+            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
+            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
+        };
+        private VertexBufferObject _coordinateSystemVBO;
 
         public PointCloudViewer()
         {
@@ -65,7 +69,8 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            _coordsAndCubeVBO = new VertexBufferObject(_vertices, PrimitiveType.Lines, _shader);
+            _cubeVBO = new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader);
+            _coordinateSystemVBO = new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -78,7 +83,8 @@ namespace GCodeViewer.WPF.Controls
 
             _camera.ApplyTransformation();
 
-            _coordsAndCubeVBO.Draw();
+            _coordinateSystemVBO.Draw();
+            _cubeVBO.Draw();
 
             _control.SwapBuffers(); // swaps front and back buffers
             _control.Invalidate();
@@ -124,7 +130,9 @@ namespace GCodeViewer.WPF.Controls
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
-            _coordsAndCubeVBO.Dispose();
+            _cubeVBO.Dispose();
+            _coordinateSystemVBO.Dispose();
+
             _shader.Dispose();
         }
 
