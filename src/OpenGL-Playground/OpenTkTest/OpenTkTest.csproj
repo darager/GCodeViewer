@@ -66,8 +66,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Camera.cs" />
-    <Compile Include="Shader.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,17 +103,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="shader\shader.frag">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="shader\shader.vert">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GCodeViewer.OpenTK.Helpers\GCodeViewer.OpenTK.Helpers.csproj">
+      <Project>{6B77C13F-535D-4F9B-A1C9-93091D21511F}</Project>
+      <Name>GCodeViewer.OpenTK.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
       <Project>{0b166abc-a1f9-4160-ba5a-0a332bfd8ed0}</Project>
       <Name>GCodeViewer.WPF.Controls</Name>
