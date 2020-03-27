@@ -6,16 +6,17 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 {
     public static class ShaderFactory
     {
-        private static string originalVertexShaderSource =
+        private static string _uniformName = "view";
+        private static string _originalVertexShaderSource =
             "#version 330 core\n" +
              "layout (location = 0) in vec3 aPosition;\n" +
-             "uniform mat4 view;\n" +
+             "uniform mat4 %UNIFORMNAME%;\n" +
              "void main()\n" +
              "{\n" +
-                "gl_Position = view * vec4(aPosition, 1.0);\n" +
+                "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
                 "gl_PointSize = 5.0;\n" +
              "}";
-        private static string originalFragmentShaderSource =
+        private static string _originalFragmentShaderSource =
             "#version 330 core\n" +
             "out vec4 FragColor;\n" +
             "void main()\n" +
@@ -32,13 +33,16 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
             string blue = ScaleFromRGBValueToFloat(color.B).ToString();
             string alpha = ScaleFromRGBValueToFloat(color.A).ToString();
 
-            string fragmentShaderSource = originalFragmentShaderSource
+            string fragmentShaderSource = _originalFragmentShaderSource
                                             .Replace("%RED%", red)
                                             .Replace("%GREEN%", green)
                                             .Replace("%BLUE%", blue)
                                             .Replace("%ALPHA%", alpha);
 
-            var shader = new Shader(originalVertexShaderSource, fragmentShaderSource);
+            string vertexShaderSource = _originalVertexShaderSource
+                                            .Replace("%UNIFORMNAME%", _uniformName);
+
+            var shader = new Shader(vertexShaderSource, fragmentShaderSource);
 
             _shaders.Add(shader);
 
@@ -48,8 +52,13 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
         {
             foreach (Shader shader in _shaders)
             {
-                shader.SetMatrix4("view", matrix);
+                shader.SetMatrix4(_uniformName, matrix);
             }
+        }
+        public static void DisposeAll()
+        {
+            foreach (Shader shader in _shaders)
+                shader.Dispose();
         }
 
         private static float ScaleFromRGBValueToFloat(int value)
@@ -62,6 +71,5 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
                 return result;
             }
         }
-
     }
 }

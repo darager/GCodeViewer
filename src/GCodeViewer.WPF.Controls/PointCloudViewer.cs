@@ -136,8 +136,7 @@ namespace GCodeViewer.WPF.Controls
 
             _vbos.ForEach(v => v.Dispose());
 
-            _shader.Dispose();
+            ShaderFactory.DisposeAll();
         }
-
     }
 }
