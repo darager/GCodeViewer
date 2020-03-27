@@ -23,6 +23,8 @@ namespace GCodeViewer.OpenTK.Helpers
             _handle = GL.GenBuffer();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
+
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
         }
 
         public void Draw()

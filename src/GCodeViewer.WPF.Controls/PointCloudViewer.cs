@@ -71,11 +71,10 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader));
-            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader));
-
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
             GL.EnableVertexAttribArray(0);
+
+            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, ShaderFactory.FromColor(Color.Red)));
+            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Points, ShaderFactory.FromColor(Color.CornflowerBlue)));
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
