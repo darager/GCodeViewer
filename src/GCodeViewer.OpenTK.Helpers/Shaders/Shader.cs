@@ -4,7 +4,7 @@ using System.Diagnostics;
 using OpenTK.Graphics.ES20;
 using OpenTK;
 
-namespace GCodeViewer.OpenTK.Helpers
+namespace GCodeViewer.OpenTK.Helpers.Shaders
 {
     public class Shader : IDisposable
     {

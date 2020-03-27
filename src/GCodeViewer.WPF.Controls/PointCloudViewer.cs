@@ -14,8 +14,9 @@ namespace GCodeViewer.WPF.Controls
     {
         private GLControl _control;
 
-        private Shader _shader;
-        private Camera _camera;
+        private Shader _redShader;
+        private Shader _blueShader;
+        private OrbitCamera _camera;
 
         private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
@@ -56,9 +57,20 @@ namespace GCodeViewer.WPF.Controls
 
             string vertShaderSource = File.ReadAllText("Shaders/shader.vert");
             string fragmentShaderSource = File.ReadAllText("Shaders/shader.frag");
-            _shader = new Shader(vertShaderSource, fragmentShaderSource);
+            fragmentShaderSource = fragmentShaderSource.Replace("%RED%", "1.0f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%GREEN%", "0.4f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%BLUE%", "0.0f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%ALPHA%", "0.8f");
 
-            _camera = new Camera(_shader, startScale: 0.5f);
+            _redShader = new Shader(vertShaderSource, fragmentShaderSource);
+
+            fragmentShaderSource = fragmentShaderSource.Replace("%RED%", "0.0f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%GREEN%", "0.2f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%BLUE%", "1.0f");
+            fragmentShaderSource = fragmentShaderSource.Replace("%ALPHA%", "1.0f");
+            _blueShader = new Shader(vertShaderSource, fragmentShaderSource);
+
+            _camera = new OrbitCamera(_redShader, startScale: 0.5f);
 
             _control.Paint += OnPaint;
             _control.MouseMove += OnMouseMove;
@@ -69,8 +81,8 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader));
-            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader));
+            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _blueShader));
+            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _redShader));
 
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
             GL.EnableVertexAttribArray(0);
@@ -134,7 +146,7 @@ namespace GCodeViewer.WPF.Controls
 
             _vbos.ForEach(v => v.Dispose());
 
-            _shader.Dispose();
+            _redShader.Dispose();
         }
 
     }

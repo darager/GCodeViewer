@@ -3,15 +3,16 @@ using OpenTK;
 
 namespace GCodeViewer.OpenTK.Helpers
 {
-    public class Camera
+    public class OrbitCamera
     {
         public float RotationX = 0.0f;
         public float RotationY = 0.0f;
+        public float RotationZ = 0.0f;
         public float Scale;
 
         private Shader _shader;
 
-        public Camera(Shader shader, float startScale)
+        public OrbitCamera(Shader shader, float startScale)
         {
             this._shader = shader;
             this.Scale = startScale;
@@ -23,6 +24,7 @@ namespace GCodeViewer.OpenTK.Helpers
 
             transform *= Matrix4.CreateRotationX(DegToRad(RotationX));
             transform *= Matrix4.CreateRotationY(DegToRad(RotationY));
+            transform *= Matrix4.CreateRotationZ(DegToRad(RotationZ));
             transform *= Matrix4.CreateScale(Scale);
 
             _shader.SetMatrix4("view", transform);
