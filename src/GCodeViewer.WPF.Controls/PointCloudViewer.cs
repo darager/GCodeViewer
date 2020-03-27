@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -15,6 +16,8 @@ namespace GCodeViewer.WPF.Controls
 
         private Shader _shader;
         private Camera _camera;
+
+        private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
         private readonly float[] _cubeVertices =
         {
@@ -36,15 +39,12 @@ namespace GCodeViewer.WPF.Controls
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
             0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
         };
-        private VertexBufferObject _cubeVBO;
-
         float[] _coordinateSytemVertices =
         {
             0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
             0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
             0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
         };
-        private VertexBufferObject _coordinateSystemVBO;
 
         public PointCloudViewer()
         {
@@ -69,8 +69,8 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
-            _coordinateSystemVBO = new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader);
-            _cubeVBO = new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader);
+            _vbos.Add(new VertexBufferObject(_coordinateSytemVertices, PrimitiveType.Lines, _shader));
+            _vbos.Add(new VertexBufferObject(_cubeVertices, PrimitiveType.Lines, _shader));
 
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, normalized: false, 3 * sizeof(float), offset: 0);
             GL.EnableVertexAttribArray(0);
@@ -86,8 +86,7 @@ namespace GCodeViewer.WPF.Controls
 
             _camera.ApplyTransformation();
 
-            _coordinateSystemVBO.Draw();
-            _cubeVBO.Draw();
+            _vbos.ForEach(v => v.Draw());
 
             _control.SwapBuffers(); // swaps front and back buffers
             _control.Invalidate();
@@ -133,8 +132,7 @@ namespace GCodeViewer.WPF.Controls
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
-            _cubeVBO.Dispose();
-            _coordinateSystemVBO.Dispose();
+            _vbos.ForEach(v => v.Dispose());
 
             _shader.Dispose();
         }
