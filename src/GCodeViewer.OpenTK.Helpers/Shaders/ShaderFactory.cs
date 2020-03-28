@@ -6,7 +6,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 {
     public static class ShaderFactory
     {
-        private static string _uniformName = "view";
+        private static string _uniformName = "transform";
         private static string _originalVertexShaderSource =
             "#version 330 core\n" +
             "layout (location = 0) in vec3 aPosition;\n" +
@@ -48,7 +48,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
             return shader;
         }
-        public static void SetRotationMatrix(Matrix4 matrix)
+        public static void SetTransformationMatrix(Matrix4 matrix)
         {
             foreach (Shader shader in _shaders)
                 shader.SetMatrix4(_uniformName, matrix);

@@ -159,7 +159,7 @@ namespace GCodeViewer.WPF.Controls
             previousPosition = new Point(e.X, e.Y);
         }
 
-        private float wheelSensitivity = 0.1f;
+        private float wheelSensitivity = 0.05f;
         private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;

@@ -8,7 +8,6 @@ namespace GCodeViewer.OpenTK.Helpers
     {
         public float RotationX = 0.0f;
         public float RotationY = 0.0f;
-        public float RotationZ = 0.0f;
         public float Scale;
 
         private Shader _shader;
@@ -23,12 +22,13 @@ namespace GCodeViewer.OpenTK.Helpers
         {
             var transform = Matrix4.Identity;
 
-            transform *= Matrix4.CreateRotationX(DegToRad(RotationX));
-            transform *= Matrix4.CreateRotationY(DegToRad(RotationY));
-            transform *= Matrix4.CreateRotationZ(DegToRad(RotationZ));
+            transform *= Matrix4.LookAt(new Vector3(0, 0, 10), new Vector3(0, 0, 0), Vector3.UnitY);
+            transform *= Matrix4.CreatePerspectiveFieldOfView(0.5f, 1, 1.0f, 100.0f);
+            transform *= Matrix4.CreateRotationX(DegToRad(-RotationX));
+            transform *= Matrix4.CreateRotationY(DegToRad(-RotationY));
             transform *= Matrix4.CreateScale(Scale);
 
-            ShaderFactory.SetRotationMatrix(transform);
+            ShaderFactory.SetTransformationMatrix(transform);
         }
 
         private float DegToRad(float angleInDeg)
