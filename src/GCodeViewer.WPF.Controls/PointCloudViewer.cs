@@ -140,11 +140,12 @@ namespace GCodeViewer.WPF.Controls
         private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;
+            float newScale = _camera.Scale + (direction * wheelSensitivity);
 
-            _camera.Scale += direction * wheelSensitivity;
+            if (newScale >= 3.0f) newScale = 3.0f;
+            if (newScale <= 0.05f) newScale = 0.05f;
 
-            if (_camera.Scale >= 1.0f) _camera.Scale = 1.0f;
-            if (_camera.Scale <= 0.01f) _camera.Scale = 0.01f;
+            _camera.Scale = newScale;
         }
         #endregion
 
