@@ -30,7 +30,7 @@ namespace GCodeViewer.WPF.Controls
             0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
             0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
         };
-        private readonly float[] _cubeVertices =
+        private readonly float[] _smallCubeVertices =
         {
             // bottom
             0.25f, 0.25f, 0.25f,  0.7f, 0.25f, 0.25f,
@@ -49,6 +49,23 @@ namespace GCodeViewer.WPF.Controls
             0.25f, 0.25f, 0.7f,  0.25f, 0.7f, 0.7f,
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
             0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f
+        };
+        private readonly float[] _bigCubeVertices =
+        {
+            -1.0f, -1.0f, -1.0f,  1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,  -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,
+
+            -1.0f, 1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,  -1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,  1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
+
+            -1.0f, -1.0f, -1.0f,  -1.0f, 1.0f, -1.0f,
+            -1.0f, -1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
+            1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,  1.0f, 1.0f, 1.0f
         };
 
         public PointCloudViewer()
@@ -72,6 +89,7 @@ namespace GCodeViewer.WPF.Controls
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
 
+            GL.Enable(EnableCap.DepthTest);
             GL.EnableVertexAttribArray(0);
 
             _vbos.Add(new VertexBufferObject(
@@ -80,9 +98,14 @@ namespace GCodeViewer.WPF.Controls
                             ShaderFactory.FromColor(Color.Red)));
 
             _vbos.Add(new VertexBufferObject(
-                            _cubeVertices,
+                            _smallCubeVertices,
                             PrimitiveType.Lines,
-                            ShaderFactory.FromColor(Color.MistyRose)));
+                            ShaderFactory.FromColor(Color.GreenYellow)));
+
+            _vbos.Add(new VertexBufferObject(
+                            _bigCubeVertices,
+                            PrimitiveType.Lines,
+                            ShaderFactory.FromColor(Color.GreenYellow)));
 
             var rnd = new Random();
             int count = 1000;
@@ -98,7 +121,7 @@ namespace GCodeViewer.WPF.Controls
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
             GL.Enable(EnableCap.PointSmooth);

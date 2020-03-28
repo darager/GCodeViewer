@@ -8,7 +8,6 @@
     Title="MainWindow"
     Width="700"
     Height="700"
-    ResizeMode="NoResize"
     mc:Ignorable="d">
 
     <pcv:PointCloudViewer />
