@@ -48,7 +48,7 @@ namespace GCodeViewer.WPF.Controls
             0.25f, 0.25f, 0.25f,  0.25f, 0.7f, 0.25f,
             0.25f, 0.25f, 0.7f,  0.25f, 0.7f, 0.7f,
             0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
-            0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f,
+            0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f
         };
 
         public PointCloudViewer()
@@ -74,7 +74,6 @@ namespace GCodeViewer.WPF.Controls
 
             GL.EnableVertexAttribArray(0);
 
-            ; ;
             _vbos.Add(new VertexBufferObject(
                             _coordinateSytemVertices,
                             PrimitiveType.Lines,

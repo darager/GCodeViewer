@@ -9,13 +9,13 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
         private static string _uniformName = "view";
         private static string _originalVertexShaderSource =
             "#version 330 core\n" +
-             "layout (location = 0) in vec3 aPosition;\n" +
-             "uniform mat4 %UNIFORMNAME%;\n" +
-             "void main()\n" +
-             "{\n" +
+            "layout (location = 0) in vec3 aPosition;\n" +
+            "uniform mat4 %UNIFORMNAME%;\n" +
+            "void main()\n" +
+            "{\n" +
                 "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
                 "gl_PointSize = 5.0;\n" +
-             "}";
+            "}";
         private static string _originalFragmentShaderSource =
             "#version 330 core\n" +
             "out vec4 FragColor;\n" +
@@ -51,9 +51,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
         public static void SetRotationMatrix(Matrix4 matrix)
         {
             foreach (Shader shader in _shaders)
-            {
                 shader.SetMatrix4(_uniformName, matrix);
-            }
         }
         public static void DisposeAll()
         {
