@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -18,8 +19,9 @@ namespace GCodeViewer.WPF.Controls
         private OrbitCamera _camera;
         private ShaderFactory _shaderFactory;
 
-        private List<Renderable> _renderables = new List<Renderable>();
         private Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
+
+        public ObservableCollection<Renderable> Renderables = new ObservableCollection<Renderable>();
 
         public PointCloudViewer()
         {
@@ -43,19 +45,30 @@ namespace GCodeViewer.WPF.Controls
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate(); // causes control to be redrawn
+
+            Renderables.CollectionChanged += Renderables_CollectionChanged;
+        }
+
+        private void Renderables_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var renderables = e.NewItems;
+
+            foreach (Renderable renderable in renderables)
+            {
+                var shader = _shaderFactory.FromColor(renderable.Color);
+                var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+
+                _vbos.Add(renderable, vbo);
+            }
         }
 
         public void AddRenderable(Renderable renderable)
         {
-            var shader = _shaderFactory.FromColor(renderable.Color);
-            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-            _renderables.Add(renderable);
-            _vbos.Add(renderable, vbo);
+            Renderables.Add(renderable);
         }
         public void RemoveRenderable(Renderable renderable)
         {
-            _renderables.Remove(renderable);
+            Renderables.Remove(renderable);
             _vbos.Remove(renderable);
         }
 
