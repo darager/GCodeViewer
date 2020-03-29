@@ -7,6 +7,8 @@ namespace OpenTkTest
         public MainWindow()
         {
             InitializeComponent();
+
+            pclViewer.DataContext = new PointCloudViewModel();
         }
     }
 }

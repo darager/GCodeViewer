@@ -23,6 +23,7 @@ namespace GCodeViewer.WPF.Controls
 
         private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
+        #region Vertices
         float[] _coordinateSytemVertices =
         {
             0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
@@ -59,6 +60,7 @@ namespace GCodeViewer.WPF.Controls
             1.0f, -1.0f, -1.0f,    1.0f,  1.0f, -1.0f,
             1.0f, -1.0f,  1.0f,    1.0f,  1.0f,  1.0f
         };
+        #endregion
 
         public PointCloudViewer()
         {
