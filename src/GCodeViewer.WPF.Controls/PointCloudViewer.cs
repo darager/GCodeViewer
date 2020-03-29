@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -49,23 +51,25 @@ namespace GCodeViewer.WPF.Controls
             Renderables.CollectionChanged += Renderables_CollectionChanged;
         }
 
-        private void Renderables_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Renderables_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var renderables = e.NewItems;
-
-            foreach (Renderable renderable in renderables)
+            if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                var shader = _shaderFactory.FromColor(renderable.Color);
-                var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+                foreach (Renderable renderable in e.NewItems)
+                {
+                    var shader = _shaderFactory.FromColor(renderable.Color);
+                    var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
 
-                _vbos.Add(renderable, vbo);
+                    _vbos.Add(renderable, vbo);
+                }
             }
-        }
-
-        public void RemoveRenderable(Renderable renderable)
-        {
-            Renderables.Remove(renderable);
-            _vbos.Remove(renderable);
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Renderable renderable in e.OldItems)
+                    _vbos.Remove(renderable);
+            }
+            else
+                throw new NotImplementedException();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
