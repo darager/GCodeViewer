@@ -19,7 +19,7 @@ namespace GCodeViewer.WPF.Controls
         private OrbitCamera _camera;
         internal ShaderFactory _shaderFactory;
 
-        public List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
+        public Dictionary<Object3D, VertexBufferObject> _vbos = new Dictionary<Object3D, VertexBufferObject>();
 
         public PointCloudViewer()
         {
@@ -50,7 +50,7 @@ namespace GCodeViewer.WPF.Controls
             var shader = _shaderFactory.FromColor(object3D.Color);
             var vbo = new VertexBufferObject(object3D.Vertices, object3D.Type, shader);
 
-            _vbos.Add(vbo);
+            _vbos.Add(object3D, vbo);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -63,7 +63,8 @@ namespace GCodeViewer.WPF.Controls
 
             _camera.ApplyTransformation();
 
-            _vbos.ForEach(v => v.Draw());
+            foreach (var vbo in _vbos.Values)
+                vbo.Draw();
 
             _control.SwapBuffers(); // swaps front and back buffers
             _control.Invalidate();
@@ -76,7 +77,8 @@ namespace GCodeViewer.WPF.Controls
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
-            _vbos.ForEach(v => v.Dispose());
+            foreach (var vbo in _vbos.Values)
+                vbo.Dispose();
 
             _shaderFactory.DisposeAll();
         }
