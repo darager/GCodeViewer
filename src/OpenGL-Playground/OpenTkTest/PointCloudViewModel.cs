@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using GCodeViewer.WPF.Controls;
 using GCodeViewer.OpenTK.Helpers.Renderables;
 
 namespace OpenTkTest
 {
-    public class PointCloudViewModel
+    public class PointCloudViewModel : INotifyPropertyChanged
     {
         #region Vertices
         float[] _coordinateSytemVertices =
@@ -48,12 +48,10 @@ namespace OpenTkTest
         };
         #endregion
 
-        public ObservableCollection<Renderable> PointCloudObjects;
+        public ObservableCollection<Renderable> PointCloudObjects = new ObservableCollection<Renderable>();
 
-        public PointCloudViewModel(PointCloudViewer pclViewer)
+        public PointCloudViewModel()
         {
-            this.PointCloudObjects = pclViewer.Renderables;
-
             var coordSystem = new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines);
             PointCloudObjects.Add(coordSystem);
             PointCloudObjects.Remove(coordSystem);
@@ -68,6 +66,10 @@ namespace OpenTkTest
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
             PointCloudObjects.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PointCloudObjects"));
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

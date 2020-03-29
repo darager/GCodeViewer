@@ -10,5 +10,5 @@
     Height="700"
     mc:Ignorable="d">
 
-    <pcv:PointCloudViewer x:Name="pclViewer" />
+    <pcv:PointCloudViewer x:Name="pclViewer" Renderables="{Binding PointCloudObjects}" />
 </Window>
