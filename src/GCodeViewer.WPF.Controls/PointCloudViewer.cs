@@ -18,7 +18,8 @@ namespace GCodeViewer.WPF.Controls
         private OrbitCamera _camera;
         private ShaderFactory _shaderFactory;
 
-        public Dictionary<Renderable, VertexBufferObject> _renderables = new Dictionary<Renderable, VertexBufferObject>();
+        private List<Renderable> _renderables = new List<Renderable>();
+        private Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
         public PointCloudViewer()
         {
@@ -44,17 +45,18 @@ namespace GCodeViewer.WPF.Controls
             _control.Invalidate(); // causes control to be redrawn
         }
 
-        public void Add3DObject(Renderable object3D)
+        public void AddRenderable(Renderable renderable)
         {
-            var shader = _shaderFactory.FromColor(object3D.Color);
-            var vbo = new VertexBufferObject(object3D.Vertices, object3D.Type, shader);
+            var shader = _shaderFactory.FromColor(renderable.Color);
+            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
 
-            _renderables.Add(object3D, vbo);
+            _renderables.Add(renderable);
+            _vbos.Add(renderable, vbo);
         }
-        public void Remove3DObject(Renderable object3D)
+        public void RemoveRenderable(Renderable renderable)
         {
-            if (_renderables.ContainsKey(object3D))
-                _renderables.Remove(object3D);
+            _renderables.Remove(renderable);
+            _vbos.Remove(renderable);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -67,7 +69,7 @@ namespace GCodeViewer.WPF.Controls
 
             _camera.ApplyTransformation();
 
-            foreach (var vbo in _renderables.Values)
+            foreach (var vbo in _vbos.Values)
                 vbo.Draw();
 
             _control.SwapBuffers(); // swaps front and back buffers
@@ -81,7 +83,7 @@ namespace GCodeViewer.WPF.Controls
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
-            foreach (var vbo in _renderables.Values)
+            foreach (var vbo in _vbos.Values)
                 vbo.Dispose();
 
             _shaderFactory.DisposeAll();
