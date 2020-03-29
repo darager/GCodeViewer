@@ -23,7 +23,17 @@ namespace GCodeViewer.WPF.Controls
 
         private Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
-        public ObservableCollection<Renderable> Renderables = new ObservableCollection<Renderable>();
+        public ObservableCollection<Renderable> Renderables
+        {
+            get => (ObservableCollection<Renderable>)this.GetValue(RenderablesProperty);
+            set => this.SetValue(RenderablesProperty, value);
+        }
+        public static readonly DependencyProperty RenderablesProperty =
+            DependencyProperty.Register(
+                "Renderables",
+                typeof(ObservableCollection<Renderable>),
+                typeof(PointCloudViewer),
+                new PropertyMetadata(new ObservableCollection<Renderable>()));
 
         public PointCloudViewer()
         {
