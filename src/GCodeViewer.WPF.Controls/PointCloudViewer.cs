@@ -49,6 +49,8 @@ namespace GCodeViewer.WPF.Controls
             if (args.NewValue != null)
             {
                 pclViewer.Renderables = (ObservableCollection<Renderable>)args.NewValue;
+                foreach (var renderable in pclViewer.Renderables)
+                    AddRenderable(pclViewer, renderable);
                 pclViewer.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, pclViewer);
             }
         }
@@ -59,10 +61,7 @@ namespace GCodeViewer.WPF.Controls
             {
                 foreach (Renderable renderable in args.NewItems)
                 {
-                    var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
-                    var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-                    pclViewer._vbos.Add(renderable, vbo);
+                    AddRenderable(pclViewer, renderable);
                 }
             }
             else if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -72,6 +71,14 @@ namespace GCodeViewer.WPF.Controls
             }
             else
                 throw new NotImplementedException();
+        }
+
+        private static void AddRenderable(PointCloudViewer pclViewer, Renderable renderable)
+        {
+            var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
+            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+
+            pclViewer._vbos.Add(renderable, vbo);
         }
 
         public PointCloudViewer()

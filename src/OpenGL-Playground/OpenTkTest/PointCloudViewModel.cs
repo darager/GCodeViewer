@@ -48,10 +48,21 @@ namespace OpenTkTest
         };
         #endregion
 
-        public ObservableCollection<Renderable> PointCloudObjects = new ObservableCollection<Renderable>();
+        public ObservableCollection<Renderable> PointCloudObjects
+        {
+            get => _pointCloudObjects;
+            set
+            {
+                _pointCloudObjects = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PointCloudObjects"));
+            }
+        }
+        private ObservableCollection<Renderable> _pointCloudObjects;
 
         public PointCloudViewModel()
         {
+            PointCloudObjects = new ObservableCollection<Renderable>();
+
             var coordSystem = new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines);
             PointCloudObjects.Add(coordSystem);
             PointCloudObjects.Remove(coordSystem);
@@ -66,8 +77,6 @@ namespace OpenTkTest
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
             PointCloudObjects.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PointCloudObjects"));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
