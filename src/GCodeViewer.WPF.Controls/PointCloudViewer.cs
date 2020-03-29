@@ -62,10 +62,6 @@ namespace GCodeViewer.WPF.Controls
             }
         }
 
-        public void AddRenderable(Renderable renderable)
-        {
-            Renderables.Add(renderable);
-        }
         public void RemoveRenderable(Renderable renderable)
         {
             Renderables.Remove(renderable);

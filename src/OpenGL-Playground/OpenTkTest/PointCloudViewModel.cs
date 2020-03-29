@@ -52,9 +52,9 @@ namespace OpenTkTest
 
         public PointCloudViewModel(PointCloudViewer pclViewer)
         {
-            pclViewer.AddRenderable(new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines));
-            pclViewer.AddRenderable(new Renderable(Color.GreenYellow, _smallCubeVertices, RenderableType.Lines));
-            pclViewer.AddRenderable(new Renderable(Color.GreenYellow, _bigCubeVertices, RenderableType.Lines));
+            pclViewer.Renderables.Add(new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines));
+            pclViewer.Renderables.Add(new Renderable(Color.GreenYellow, _smallCubeVertices, RenderableType.Lines));
+            pclViewer.Renderables.Add(new Renderable(Color.GreenYellow, _bigCubeVertices, RenderableType.Lines));
 
             var rnd = new Random();
             int count = 1000;
@@ -62,7 +62,7 @@ namespace OpenTkTest
                 .Select(_ => rnd.NextDouble())
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
-            pclViewer.AddRenderable(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
+            pclViewer.Renderables.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
         }
     }
 }
