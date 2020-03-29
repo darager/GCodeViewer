@@ -4,10 +4,10 @@ using OpenTK;
 
 namespace GCodeViewer.OpenTK.Helpers.Shaders
 {
-    public static class ShaderFactory
+    public class ShaderFactory
     {
-        private static string _uniformName = "transform";
-        private static string _originalVertexShaderSource =
+        private readonly static string _uniformName = "transform";
+        private readonly static string _originalVertexShaderSource =
             "#version 330 core\n" +
             "layout (location = 0) in vec3 aPosition;\n" +
             "uniform mat4 %UNIFORMNAME%;\n" +
@@ -16,7 +16,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
                 "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
                 "gl_PointSize = 5.0;\n" +
             "}";
-        private static string _originalFragmentShaderSource =
+        private readonly static string _originalFragmentShaderSource =
             "#version 330 core\n" +
             "out vec4 FragColor;\n" +
             "void main()\n" +
@@ -24,9 +24,9 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
                 "FragColor = vec4(%RED%, %GREEN%, %BLUE%, %ALPHA%);\n" +
             "}";
 
-        private static List<Shader> _shaders = new List<Shader>();
+        private List<Shader> _shaders = new List<Shader>();
 
-        public static Shader FromColor(Color color)
+        public Shader FromColor(Color color)
         {
             string red = ScaleFromRGBValueToFloat(color.R).ToString();
             string green = ScaleFromRGBValueToFloat(color.G).ToString();
@@ -48,18 +48,20 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
             return shader;
         }
-        public static void SetTransformationMatrix(Matrix4 matrix)
+        public void SetTransformationMatrix(Matrix4 matrix)
         {
             foreach (Shader shader in _shaders)
                 shader.SetMatrix4(_uniformName, matrix);
         }
-        public static void DisposeAll()
+        public void DisposeAll()
         {
             foreach (Shader shader in _shaders)
                 shader.Dispose();
+
+            _shaders.RemoveAll(_ => true);
         }
 
-        private static float ScaleFromRGBValueToFloat(int value)
+        private float ScaleFromRGBValueToFloat(int value)
         {
             return Scale(value, 0, 255, 0, 1);
 

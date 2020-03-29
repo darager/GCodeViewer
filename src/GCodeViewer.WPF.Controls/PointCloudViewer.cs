@@ -19,8 +19,8 @@ namespace GCodeViewer.WPF.Controls
     {
         private GLControl _control;
 
-        private Shader _shader;
         private OrbitCamera _camera;
+        private ShaderFactory _shaderFactory;
 
         private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
@@ -56,12 +56,10 @@ namespace GCodeViewer.WPF.Controls
             -1.0f, -1.0f, -1.0f,  -1.0f, -1.0f, 1.0f,
             1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,
             1.0f, -1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,
-
             -1.0f, 1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
             -1.0f, 1.0f, -1.0f,  -1.0f, 1.0f, 1.0f,
             1.0f, 1.0f, 1.0f,  1.0f, 1.0f, -1.0f,
             1.0f, 1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
-
             -1.0f, -1.0f, -1.0f,  -1.0f, 1.0f, -1.0f,
             -1.0f, -1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
             1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
@@ -76,9 +74,8 @@ namespace GCodeViewer.WPF.Controls
 
             this.Child = _control;
 
-            _shader = ShaderFactory.FromColor(Color.CornflowerBlue);
-
-            _camera = new OrbitCamera(_shader, startScale: 0.5f);
+            _shaderFactory = new ShaderFactory();
+            _camera = new OrbitCamera(startScale: 0.5f, _shaderFactory);
 
             _control.Paint += OnPaint;
             _control.MouseMove += OnMouseMove;
@@ -95,17 +92,17 @@ namespace GCodeViewer.WPF.Controls
             _vbos.Add(new VertexBufferObject(
                             _coordinateSytemVertices,
                             PrimitiveType.Lines,
-                            ShaderFactory.FromColor(Color.Red)));
+                            _shaderFactory.FromColor(Color.Red)));
 
             _vbos.Add(new VertexBufferObject(
                             _smallCubeVertices,
                             PrimitiveType.Lines,
-                            ShaderFactory.FromColor(Color.GreenYellow)));
+                            _shaderFactory.FromColor(Color.GreenYellow)));
 
             _vbos.Add(new VertexBufferObject(
                             _bigCubeVertices,
                             PrimitiveType.Lines,
-                            ShaderFactory.FromColor(Color.GreenYellow)));
+                            _shaderFactory.FromColor(Color.GreenYellow)));
 
             var rnd = new Random();
             int count = 1000;
@@ -116,7 +113,7 @@ namespace GCodeViewer.WPF.Controls
             _vbos.Add(new VertexBufferObject(
                             pointVertices,
                             PrimitiveType.Points,
-                            ShaderFactory.FromColor(Color.CornflowerBlue)));
+                            _shaderFactory.FromColor(Color.CornflowerBlue)));
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -178,7 +175,7 @@ namespace GCodeViewer.WPF.Controls
 
             _vbos.ForEach(v => v.Dispose());
 
-            ShaderFactory.DisposeAll();
+            _shaderFactory.DisposeAll();
         }
     }
 }

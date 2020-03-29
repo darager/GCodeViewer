@@ -10,11 +10,11 @@ namespace GCodeViewer.OpenTK.Helpers
         public float RotationY = 0.0f;
         public float Scale;
 
-        private Shader _shader;
+        private ShaderFactory _shaderFactory;
 
-        public OrbitCamera(Shader shader, float startScale)
+        public OrbitCamera(float startScale, ShaderFactory shaderFactory)
         {
-            this._shader = shader;
+            this._shaderFactory = shaderFactory;
             this.Scale = startScale;
         }
 
@@ -28,7 +28,7 @@ namespace GCodeViewer.OpenTK.Helpers
             transform *= Matrix4.CreateRotationY(DegToRad(-RotationY));
             transform *= Matrix4.CreateScale(Scale);
 
-            ShaderFactory.SetTransformationMatrix(transform);
+            _shaderFactory.SetTransformationMatrix(transform);
         }
 
         private float DegToRad(float angleInDeg)
