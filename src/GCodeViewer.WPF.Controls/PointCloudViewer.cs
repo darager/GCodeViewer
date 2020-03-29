@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using GCodeViewer.OpenTK.Helpers;
+using GCodeViewer.OpenTK.Helpers.Objects3D;
 using GCodeViewer.OpenTK.Helpers.Shaders;
 using OpenTK;
 using OpenTK.Graphics;
@@ -17,50 +16,33 @@ namespace GCodeViewer.WPF.Controls
     public class PointCloudViewer : WindowsFormsHost
     {
         private GLControl _control;
-
         private OrbitCamera _camera;
-        private ShaderFactory _shaderFactory;
+        internal ShaderFactory _shaderFactory;
 
-        private List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
+        public List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
-        #region Vertices
-        float[] _coordinateSytemVertices =
+        public ObservableCollection<Object3D> ObjectsSource
         {
-            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
-        };
-        private readonly float[] _smallCubeVertices =
+            get => (ObservableCollection<Object3D>)GetValue(Objects3DProperty);
+            set => SetValue(Objects3DProperty, value);
+        }
+        public readonly DependencyProperty Objects3DProperty =
+            DependencyProperty.Register(
+                nameof(ObjectsSource),
+                typeof(ObservableCollection<Object3D>), typeof(PointCloudViewer),
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(Objects3D_CollectionChanged)));
+        private static void Objects3D_CollectionChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            0.25f, 0.25f, 0.25f,   0.7f,  0.25f, 0.25f,
-            0.25f, 0.25f, 0.25f,   0.25f, 0.25f, 0.7f,
-            0.7f,  0.25f, 0.7f,    0.7f,  0.25f, 0.25f,
-            0.7f,  0.25f, 0.7f,    0.25f, 0.25f, 0.7f,
-            0.25f, 0.7f,  0.25f,   0.7f,  0.7f,  0.25f,
-            0.25f, 0.7f,  0.25f,   0.25f, 0.7f,  0.7f,
-            0.7f,  0.7f,  0.7f,    0.7f,  0.7f,  0.25f,
-            0.7f,  0.7f,  0.7f,    0.25f, 0.7f,  0.7f,
-            0.25f, 0.25f, 0.25f,   0.25f, 0.7f,  0.25f,
-            0.25f, 0.25f, 0.7f,    0.25f, 0.7f,  0.7f,
-            0.7f,  0.25f, 0.25f,   0.7f,  0.7f,  0.25f,
-            0.7f,  0.25f, 0.7f,    0.7f,  0.7f,  0.7f
-        };
-        private readonly float[] _bigCubeVertices =
-        {
-           -1.0f, -1.0f, -1.0f,    1.0f, -1.0f, -1.0f,
-           -1.0f, -1.0f, -1.0f,   -1.0f, -1.0f,  1.0f,
-            1.0f, -1.0f,  1.0f,    1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f,  1.0f,   -1.0f, -1.0f,  1.0f,
-           -1.0f,  1.0f, -1.0f,    1.0f,  1.0f, -1.0f,
-           -1.0f,  1.0f, -1.0f,   -1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,    1.0f,  1.0f, -1.0f,
-            1.0f,  1.0f,  1.0f,   -1.0f,  1.0f,  1.0f,
-           -1.0f, -1.0f, -1.0f,   -1.0f,  1.0f, -1.0f,
-           -1.0f, -1.0f,  1.0f,   -1.0f,  1.0f,  1.0f,
-            1.0f, -1.0f, -1.0f,    1.0f,  1.0f, -1.0f,
-            1.0f, -1.0f,  1.0f,    1.0f,  1.0f,  1.0f
-        };
-        #endregion
+            var control = (PointCloudViewer)source;
+            var items = e.NewValue;
+
+            var item = (Object3D)e.NewValue;
+
+            Shader shader = control._shaderFactory.FromColor(item.Color);
+            var vbo = new VertexBufferObject(item.Vertices, item.Type, shader);
+
+            control._vbos.Add(vbo);
+        }
 
         public PointCloudViewer()
         {
@@ -84,38 +66,8 @@ namespace GCodeViewer.WPF.Controls
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate(); // makes control invalid and causes it to be redrawn
-
-            AddVBOs();
         }
 
-        private void AddVBOs()
-        {
-            _vbos.Add(new VertexBufferObject(
-                            _coordinateSytemVertices,
-                            PrimitiveType.Lines,
-                            _shaderFactory.FromColor(Color.Red)));
-
-            _vbos.Add(new VertexBufferObject(
-                            _smallCubeVertices,
-                            PrimitiveType.Lines,
-                            _shaderFactory.FromColor(Color.GreenYellow)));
-
-            _vbos.Add(new VertexBufferObject(
-                            _bigCubeVertices,
-                            PrimitiveType.Lines,
-                            _shaderFactory.FromColor(Color.GreenYellow)));
-
-            var rnd = new Random();
-            int count = 1000;
-            var pointVertices = Enumerable.Range(0, count * 3)
-                .Select(_ => rnd.NextDouble())
-                .Select(r => (float)r * 2 - 1)
-                .ToArray();
-            _vbos.Add(new VertexBufferObject(
-                            pointVertices,
-                            PrimitiveType.Points,
-                            _shaderFactory.FromColor(Color.CornflowerBlue)));
-        }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {

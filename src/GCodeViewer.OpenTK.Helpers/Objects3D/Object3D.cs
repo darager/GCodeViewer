@@ -6,18 +6,18 @@ namespace GCodeViewer.OpenTK.Helpers.Objects3D
 {
     public class Object3D
     {
-        private readonly Color _color;
-        private readonly float[] _vertices;
-        private readonly PrimitiveType _type;
+        public readonly Color Color;
+        public readonly float[] Vertices;
+        public readonly PrimitiveType Type;
 
         public Object3D(Color color, float[] vertices, ObjectType type)
         {
             if (vertices.Length % 3 != 0)
                 throw new Exception("The vertices contain at least one incomplete Vector!");
 
-            _color = color;
-            _vertices = vertices;
-            _type = type switch
+            this.Color = color;
+            Vertices = vertices;
+            Type = type switch
             {
                 ObjectType.Lines => PrimitiveType.Lines,
                 ObjectType.Points => PrimitiveType.Points,
