@@ -8,7 +8,7 @@ namespace OpenTkTest
         {
             InitializeComponent();
 
-            pclViewer.DataContext = new PointCloudViewModel();
+            var pclViewerViewModel = new PointCloudViewModel(pclViewer);
         }
     }
 }

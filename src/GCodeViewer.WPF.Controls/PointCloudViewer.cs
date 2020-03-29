@@ -21,34 +21,11 @@ namespace GCodeViewer.WPF.Controls
 
         public List<VertexBufferObject> _vbos = new List<VertexBufferObject>();
 
-        public ObservableCollection<Object3D> ObjectsSource
-        {
-            get => (ObservableCollection<Object3D>)GetValue(Objects3DProperty);
-            set => SetValue(Objects3DProperty, value);
-        }
-        public readonly DependencyProperty Objects3DProperty =
-            DependencyProperty.Register(
-                nameof(ObjectsSource),
-                typeof(ObservableCollection<Object3D>), typeof(PointCloudViewer),
-                new FrameworkPropertyMetadata(new PropertyChangedCallback(Objects3D_CollectionChanged)));
-        private static void Objects3D_CollectionChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (PointCloudViewer)source;
-            var items = e.NewValue;
-
-            var item = (Object3D)e.NewValue;
-
-            Shader shader = control._shaderFactory.FromColor(item.Color);
-            var vbo = new VertexBufferObject(item.Vertices, item.Type, shader);
-
-            control._vbos.Add(vbo);
-        }
-
         public PointCloudViewer()
         {
             _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default);
             _control.Dock = DockStyle.Fill;
-            _control.MakeCurrent(); // makes control current (GL.something now uses this control)
+            _control.MakeCurrent(); // makes GL.something refer to this control
 
             this.Child = _control;
 
@@ -65,9 +42,16 @@ namespace GCodeViewer.WPF.Controls
             GL.Enable(EnableCap.DepthTest);
             GL.EnableVertexAttribArray(0);
 
-            _control.Invalidate(); // makes control invalid and causes it to be redrawn
+            _control.Invalidate(); // causes control to be redrawn
         }
 
+        public void Add3DObject(Object3D object3D)
+        {
+            var shader = _shaderFactory.FromColor(object3D.Color);
+            var vbo = new VertexBufferObject(object3D.Vertices, object3D.Type, shader);
+
+            _vbos.Add(vbo);
+        }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {

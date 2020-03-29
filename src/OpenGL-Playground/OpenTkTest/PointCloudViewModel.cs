@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using GCodeViewer.OpenTK.Helpers.Objects3D;
+using GCodeViewer.WPF.Controls;
 
 namespace OpenTkTest
 {
@@ -47,13 +48,13 @@ namespace OpenTkTest
         };
         #endregion
 
-        public ObservableCollection<Object3D> Objects = new ObservableCollection<Object3D>();
+        public ObservableCollection<Object3D> PointCloudObjects = new ObservableCollection<Object3D>();
 
-        public PointCloudViewModel()
+        public PointCloudViewModel(PointCloudViewer pclViewer)
         {
-            Objects.Add(new Object3D(Color.Red, _coordinateSytemVertices, ObjectType.Lines));
-            Objects.Add(new Object3D(Color.GreenYellow, _smallCubeVertices, ObjectType.Lines));
-            Objects.Add(new Object3D(Color.GreenYellow, _bigCubeVertices, ObjectType.Lines));
+            pclViewer.Add3DObject(new Object3D(Color.Red, _coordinateSytemVertices, ObjectType.Lines));
+            pclViewer.Add3DObject(new Object3D(Color.GreenYellow, _smallCubeVertices, ObjectType.Lines));
+            pclViewer.Add3DObject(new Object3D(Color.GreenYellow, _bigCubeVertices, ObjectType.Lines));
 
             var rnd = new Random();
             int count = 1000;
@@ -61,7 +62,7 @@ namespace OpenTkTest
                 .Select(_ => rnd.NextDouble())
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
-            Objects.Add(new Object3D(Color.CornflowerBlue, randomPointVertices, ObjectType.Points));
+            pclViewer.Add3DObject(new Object3D(Color.CornflowerBlue, randomPointVertices, ObjectType.Points));
         }
     }
 }
