@@ -17,9 +17,9 @@ namespace GCodeViewer.WPF.Controls
 {
     public class PointCloudViewer : WindowsFormsHost
     {
-        private GLControl _control;
-        private OrbitCamera _camera;
-        private ShaderFactory _shaderFactory;
+        private readonly GLControl _control;
+        private readonly OrbitCamera _camera;
+        private readonly ShaderFactory _shaderFactory;
 
         private Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
@@ -27,8 +27,10 @@ namespace GCodeViewer.WPF.Controls
 
         public PointCloudViewer()
         {
-            _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default);
-            _control.Dock = DockStyle.Fill;
+            _control = new GLControl(new GraphicsMode(32, 24), 2, 0, GraphicsContextFlags.Default)
+            {
+                Dock = DockStyle.Fill
+            };
             _control.MakeCurrent(); // makes GL.something refer to this control
 
             this.Child = _control;
@@ -103,8 +105,8 @@ namespace GCodeViewer.WPF.Controls
         }
 
         private Point _previousMousePosition = new Point(0, 0);
-        private float _mouseSensitivity = 0.25f;
-        private float _mouseWheelSensitivity = 0.05f;
+        private readonly float _mouseSensitivity = 0.25f;
+        private readonly float _mouseWheelSensitivity = 0.05f;
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             float dx = (float)(e.X - _previousMousePosition.X);
