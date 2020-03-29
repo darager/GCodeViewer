@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -17,7 +16,7 @@ namespace GCodeViewer.WPF.Controls
     {
         private GLControl _control;
         private OrbitCamera _camera;
-        internal ShaderFactory _shaderFactory;
+        private ShaderFactory _shaderFactory;
 
         public Dictionary<Object3D, VertexBufferObject> _vbos = new Dictionary<Object3D, VertexBufferObject>();
 
@@ -51,6 +50,11 @@ namespace GCodeViewer.WPF.Controls
             var vbo = new VertexBufferObject(object3D.Vertices, object3D.Type, shader);
 
             _vbos.Add(object3D, vbo);
+        }
+        public void Remove3DObject(Object3D object3D)
+        {
+            if (_vbos.ContainsKey(object3D))
+                _vbos.Remove(object3D);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
