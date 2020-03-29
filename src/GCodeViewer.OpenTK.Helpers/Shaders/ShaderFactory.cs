@@ -31,19 +31,8 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
             if (_shaders.ContainsKey(color))
                 return _shaders[color];
 
-            string red = ToFloat(color.R).ToString();
-            string green = ToFloat(color.G).ToString();
-            string blue = ToFloat(color.B).ToString();
-            string alpha = ToFloat(color.A).ToString();
-
-            string fragmentShaderSource = _originalFragmentShaderSource
-                                            .Replace("%RED%", red)
-                                            .Replace("%GREEN%", green)
-                                            .Replace("%BLUE%", blue)
-                                            .Replace("%ALPHA%", alpha);
-
-            string vertexShaderSource = _originalVertexShaderSource
-                                            .Replace("%UNIFORMNAME%", _uniformName);
+            string fragmentShaderSource = GetFragmentShaderSource(color);
+            string vertexShaderSource = GetVertexShaderSource();
 
             var shader = new Shader(vertexShaderSource, fragmentShaderSource);
 
@@ -51,6 +40,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
             return shader;
         }
+
         public void SetTransformationMatrix(Matrix4 matrix)
         {
             foreach (Shader shader in _shaders.Values)
@@ -64,6 +54,24 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
             _shaders.Clear();
         }
 
+        private string GetFragmentShaderSource(Color color)
+        {
+            string red = ToFloat(color.R).ToString();
+            string green = ToFloat(color.G).ToString();
+            string blue = ToFloat(color.B).ToString();
+            string alpha = ToFloat(color.A).ToString();
+
+            return _originalFragmentShaderSource
+                       .Replace("%RED%", red)
+                       .Replace("%GREEN%", green)
+                       .Replace("%BLUE%", blue)
+                       .Replace("%ALPHA%", alpha);
+        }
+        private string GetVertexShaderSource()
+        {
+            return _originalVertexShaderSource
+                       .Replace("%UNIFORMNAME%", _uniformName);
+        }
         private float ToFloat(int value)
         {
             return Scale(value, 0, 255, 0, 1);
