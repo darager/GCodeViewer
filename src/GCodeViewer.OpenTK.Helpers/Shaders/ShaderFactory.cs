@@ -14,7 +14,7 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
             "void main()\n" +
             "{\n" +
                 "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
-                "gl_PointSize = 5.0;\n" +
+                "gl_PointSize = 3.0;\n" +
             "}";
         private readonly static string _originalFragmentShaderSource =
             "#version 330 core\n" +
