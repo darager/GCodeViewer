@@ -42,34 +42,36 @@ namespace GCodeViewer.WPF.Controls
             if (args.OldValue != null)
             {
                 var oldRenderables = (ObservableCollection<Renderable>)args.OldValue;
-                foreach (var renderable in oldRenderables)
+                foreach (Renderable renderable in oldRenderables)
                     pclViewer._vbos.Remove(renderable);
             }
-            else if (args.NewValue != null)
+
+            if (args.NewValue != null)
             {
                 pclViewer.Renderables = (ObservableCollection<Renderable>)args.NewValue;
-                pclViewer.Renderables.CollectionChanged += (s, e) =>
-                {
-                    if (e.Action == NotifyCollectionChangedAction.Add)
-                    {
-                        foreach (Renderable renderable in e.NewItems)
-                        {
-                            var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
-                            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-                            pclViewer._vbos.Add(renderable, vbo);
-                        }
-                    }
-                    else if (e.Action == NotifyCollectionChangedAction.Remove)
-                    {
-                        foreach (Renderable renderable in e.OldItems)
-                            pclViewer._vbos.Remove(renderable);
-                    }
-                    else
-                        throw new NotImplementedException();
-
-                };
+                pclViewer.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, pclViewer);
             }
+        }
+
+        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, PointCloudViewer pclViewer)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Renderable renderable in args.NewItems)
+                {
+                    var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
+                    var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+
+                    pclViewer._vbos.Add(renderable, vbo);
+                }
+            }
+            else if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+            else
+                throw new NotImplementedException();
         }
 
         public PointCloudViewer()
@@ -96,29 +98,6 @@ namespace GCodeViewer.WPF.Controls
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate(); // causes control to be redrawn
-        }
-
-        private void Renderables_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            //var pclViewer = (PointCloudViewer)sender;
-
-            //if (e.Action == NotifyCollectionChangedAction.Add)
-            //{
-            //    foreach (Renderable renderable in e.NewItems)
-            //    {
-            //        //var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
-            //        //var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-            //        //pclViewer._vbos.Add(renderable, vbo);
-            //    }
-            //}
-            //else if (e.Action == NotifyCollectionChangedAction.Remove)
-            //{
-            //    //foreach (Renderable renderable in e.OldItems)
-            //    //    pclViewer._vbos.Remove(renderable);
-            //}
-            //else
-            //    throw new NotImplementedException();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
