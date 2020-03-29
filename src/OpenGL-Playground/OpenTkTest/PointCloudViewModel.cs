@@ -48,14 +48,18 @@ namespace OpenTkTest
         };
         #endregion
 
-        public ObservableCollection<Renderable> PointCloudObjects = new ObservableCollection<Renderable>();
+        public ObservableCollection<Renderable> PointCloudObjects;
 
         public PointCloudViewModel(PointCloudViewer pclViewer)
         {
+            this.PointCloudObjects = pclViewer.Renderables;
+
             var coordSystem = new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines);
-            pclViewer.Renderables.Add(coordSystem);
-            pclViewer.Renderables.Add(new Renderable(Color.GreenYellow, _smallCubeVertices, RenderableType.Lines));
-            pclViewer.Renderables.Add(new Renderable(Color.GreenYellow, _bigCubeVertices, RenderableType.Lines));
+            PointCloudObjects.Add(coordSystem);
+            PointCloudObjects.Remove(coordSystem);
+
+            PointCloudObjects.Add(new Renderable(Color.GreenYellow, _smallCubeVertices, RenderableType.Lines));
+            PointCloudObjects.Add(new Renderable(Color.GreenYellow, _bigCubeVertices, RenderableType.Lines));
 
             var rnd = new Random();
             int count = 1000;
@@ -63,9 +67,7 @@ namespace OpenTkTest
                 .Select(_ => rnd.NextDouble())
                 .Select(r => (float)r * 2 - 1)
                 .ToArray();
-            pclViewer.Renderables.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
-
-            pclViewer.Renderables.Remove(coordSystem);
+            PointCloudObjects.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
         }
     }
 }
