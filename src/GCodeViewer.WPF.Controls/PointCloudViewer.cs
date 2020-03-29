@@ -10,7 +10,6 @@ using GCodeViewer.OpenTK.Helpers.Shaders;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-
 using Point = System.Windows.Point;
 
 namespace GCodeViewer.WPF.Controls
@@ -32,38 +31,33 @@ namespace GCodeViewer.WPF.Controls
         };
         private readonly float[] _smallCubeVertices =
         {
-            // bottom
-            0.25f, 0.25f, 0.25f,  0.7f, 0.25f, 0.25f,
-            0.25f, 0.25f, 0.25f,  0.25f, 0.25f, 0.7f,
-            0.7f, 0.25f, 0.7f,  0.7f, 0.25f, 0.25f,
-            0.7f, 0.25f, 0.7f,  0.25f, 0.25f, 0.7f,
-
-            // top
-            0.25f, 0.7f, 0.25f,  0.7f, 0.7f, 0.25f,
-            0.25f, 0.7f, 0.25f,  0.25f, 0.7f, 0.7f,
-            0.7f, 0.7f, 0.7f,  0.7f, 0.7f, 0.25f,
-            0.7f, 0.7f, 0.7f,  0.25f, 0.7f, 0.7f,
-
-            // middle
-            0.25f, 0.25f, 0.25f,  0.25f, 0.7f, 0.25f,
-            0.25f, 0.25f, 0.7f,  0.25f, 0.7f, 0.7f,
-            0.7f, 0.25f, 0.25f,  0.7f, 0.7f, 0.25f,
-            0.7f, 0.25f, 0.7f,  0.7f, 0.7f, 0.7f
+            0.25f, 0.25f, 0.25f,   0.7f,  0.25f, 0.25f,
+            0.25f, 0.25f, 0.25f,   0.25f, 0.25f, 0.7f,
+            0.7f,  0.25f, 0.7f,    0.7f,  0.25f, 0.25f,
+            0.7f,  0.25f, 0.7f,    0.25f, 0.25f, 0.7f,
+            0.25f, 0.7f,  0.25f,   0.7f,  0.7f,  0.25f,
+            0.25f, 0.7f,  0.25f,   0.25f, 0.7f,  0.7f,
+            0.7f,  0.7f,  0.7f,    0.7f,  0.7f,  0.25f,
+            0.7f,  0.7f,  0.7f,    0.25f, 0.7f,  0.7f,
+            0.25f, 0.25f, 0.25f,   0.25f, 0.7f,  0.25f,
+            0.25f, 0.25f, 0.7f,    0.25f, 0.7f,  0.7f,
+            0.7f,  0.25f, 0.25f,   0.7f,  0.7f,  0.25f,
+            0.7f,  0.25f, 0.7f,    0.7f,  0.7f,  0.7f
         };
         private readonly float[] _bigCubeVertices =
         {
-            -1.0f, -1.0f, -1.0f,  1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,  -1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,
-            -1.0f, 1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,  -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,  1.0f, 1.0f, -1.0f,
-            1.0f, 1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
-            -1.0f, -1.0f, -1.0f,  -1.0f, 1.0f, -1.0f,
-            -1.0f, -1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,
-            1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, 1.0f,  1.0f, 1.0f, 1.0f
+           -1.0f, -1.0f, -1.0f,    1.0f, -1.0f, -1.0f,
+           -1.0f, -1.0f, -1.0f,   -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f,    1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f,  1.0f,   -1.0f, -1.0f,  1.0f,
+           -1.0f,  1.0f, -1.0f,    1.0f,  1.0f, -1.0f,
+           -1.0f,  1.0f, -1.0f,   -1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,    1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f,  1.0f,   -1.0f,  1.0f,  1.0f,
+           -1.0f, -1.0f, -1.0f,   -1.0f,  1.0f, -1.0f,
+           -1.0f, -1.0f,  1.0f,   -1.0f,  1.0f,  1.0f,
+            1.0f, -1.0f, -1.0f,    1.0f,  1.0f, -1.0f,
+            1.0f, -1.0f,  1.0f,    1.0f,  1.0f,  1.0f
         };
 
         public PointCloudViewer()
@@ -84,11 +78,16 @@ namespace GCodeViewer.WPF.Controls
             this.Unloaded += OnUnloaded;
             this.SizeChanged += OnSizeChanged;
 
-            _control.Invalidate(); // makes control invalid and causes it to be redrawn
-
             GL.Enable(EnableCap.DepthTest);
             GL.EnableVertexAttribArray(0);
 
+            _control.Invalidate(); // makes control invalid and causes it to be redrawn
+
+            AddVBOs();
+        }
+
+        private void AddVBOs()
+        {
             _vbos.Add(new VertexBufferObject(
                             _coordinateSytemVertices,
                             PrimitiveType.Lines,
@@ -131,44 +130,10 @@ namespace GCodeViewer.WPF.Controls
             _control.SwapBuffers(); // swaps front and back buffers
             _control.Invalidate();
         }
-
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            int height = (int)this.ActualHeight;
-            int width = (int)this.ActualWidth;
-            GL.Viewport(0, 0, width, height);
+            GL.Viewport(0, 0, (int)this.ActualWidth, (int)this.ActualHeight);
         }
-
-        #region Rotation and Zooming
-        private Point previousPosition = new Point(0, 0);
-        private float mouseSensitivity = 0.25f;
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            float dx = (float)(e.X - previousPosition.X);
-            float dy = (float)(e.Y - previousPosition.Y);
-
-            if ((Control.MouseButtons & MouseButtons.Left) != 0)
-            {
-                _camera.RotationX += (-dy * mouseSensitivity);
-                _camera.RotationY += (-dx * mouseSensitivity);
-            }
-
-            previousPosition = new Point(e.X, e.Y);
-        }
-
-        private float wheelSensitivity = 0.05f;
-        private void OnMouseWheel(object sender, MouseEventArgs e)
-        {
-            int direction = e.Delta / 120;
-            float newScale = _camera.Scale + (direction * wheelSensitivity);
-
-            if (newScale >= 3.0f) newScale = 3.0f;
-            if (newScale <= 0.05f) newScale = 0.05f;
-
-            _camera.Scale = newScale;
-        }
-        #endregion
-
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
@@ -176,6 +141,33 @@ namespace GCodeViewer.WPF.Controls
             _vbos.ForEach(v => v.Dispose());
 
             _shaderFactory.DisposeAll();
+        }
+
+        private Point _previousMousePosition = new Point(0, 0);
+        private float _mouseSensitivity = 0.25f;
+        private float _mouseWheelSensitivity = 0.05f;
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            float dx = (float)(e.X - _previousMousePosition.X);
+            float dy = (float)(e.Y - _previousMousePosition.Y);
+
+            if ((Control.MouseButtons & MouseButtons.Left) != 0)
+            {
+                _camera.RotationX += (-dy * _mouseSensitivity);
+                _camera.RotationY += (-dx * _mouseSensitivity);
+            }
+
+            _previousMousePosition = new Point(e.X, e.Y);
+        }
+        private void OnMouseWheel(object sender, MouseEventArgs e)
+        {
+            int direction = e.Delta / 120;
+            float newScale = _camera.Scale + (direction * _mouseWheelSensitivity);
+
+            if (newScale >= 3.0f) newScale = 3.0f;
+            if (newScale <= 0.05f) newScale = 0.05f;
+
+            _camera.Scale = newScale;
         }
     }
 }
