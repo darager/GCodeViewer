@@ -24,14 +24,17 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
                 "FragColor = vec4(%RED%, %GREEN%, %BLUE%, %ALPHA%);\n" +
             "}";
 
-        private List<Shader> _shaders = new List<Shader>();
+        private Dictionary<Color, Shader> _shaders = new Dictionary<Color, Shader>();
 
         public Shader FromColor(Color color)
         {
-            string red = ScaleFromRGBValueToFloat(color.R).ToString();
-            string green = ScaleFromRGBValueToFloat(color.G).ToString();
-            string blue = ScaleFromRGBValueToFloat(color.B).ToString();
-            string alpha = ScaleFromRGBValueToFloat(color.A).ToString();
+            if (_shaders.ContainsKey(color))
+                return _shaders[color];
+
+            string red = ToFloat(color.R).ToString();
+            string green = ToFloat(color.G).ToString();
+            string blue = ToFloat(color.B).ToString();
+            string alpha = ToFloat(color.A).ToString();
 
             string fragmentShaderSource = _originalFragmentShaderSource
                                             .Replace("%RED%", red)
@@ -44,24 +47,24 @@ namespace GCodeViewer.OpenTK.Helpers.Shaders
 
             var shader = new Shader(vertexShaderSource, fragmentShaderSource);
 
-            _shaders.Add(shader);
+            _shaders.Add(color, shader);
 
             return shader;
         }
         public void SetTransformationMatrix(Matrix4 matrix)
         {
-            foreach (Shader shader in _shaders)
+            foreach (Shader shader in _shaders.Values)
                 shader.SetMatrix4(_uniformName, matrix);
         }
         public void DisposeAll()
         {
-            foreach (Shader shader in _shaders)
+            foreach (Shader shader in _shaders.Values)
                 shader.Dispose();
 
-            _shaders.RemoveAll(_ => true);
+            _shaders.Clear();
         }
 
-        private float ScaleFromRGBValueToFloat(int value)
+        private float ToFloat(int value)
         {
             return Scale(value, 0, 255, 0, 1);
 
