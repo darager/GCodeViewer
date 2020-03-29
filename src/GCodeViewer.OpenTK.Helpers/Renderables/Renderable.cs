@@ -2,15 +2,15 @@
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
 
-namespace GCodeViewer.OpenTK.Helpers.Objects3D
+namespace GCodeViewer.OpenTK.Helpers.Renderables
 {
-    public class Object3D
+    public class Renderable
     {
         public readonly Color Color;
         public readonly float[] Vertices;
         public readonly PrimitiveType Type;
 
-        public Object3D(Color color, float[] vertices, ObjectType type)
+        public Renderable(Color color, float[] vertices, RenderableType type)
         {
             if (vertices.Length % 3 != 0)
                 throw new Exception("The vertices contain at least one incomplete Vector!");
@@ -19,9 +19,9 @@ namespace GCodeViewer.OpenTK.Helpers.Objects3D
             Vertices = vertices;
             Type = type switch
             {
-                ObjectType.Lines => PrimitiveType.Lines,
-                ObjectType.Points => PrimitiveType.Points,
-                ObjectType.Triangles => PrimitiveType.Triangles,
+                RenderableType.Lines => PrimitiveType.Lines,
+                RenderableType.Points => PrimitiveType.Points,
+                RenderableType.Triangles => PrimitiveType.Triangles,
                 _ => PrimitiveType.Points
             };
         }
