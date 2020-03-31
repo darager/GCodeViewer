@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GCodeViewer\GCodeViewer.WPF.csproj" />
+    <ProjectReference Include="..\GCodeViewer.WPF\GCodeViewer.WPF.csproj" />
   </ItemGroup>
 
 </Project>

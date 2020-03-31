@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF", "GCodeViewer\GCodeViewer.WPF.csproj", "{BC9DB81E-8402-47E9-B619-C97577E1961C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF", "GCodeViewer.WPF\GCodeViewer.WPF.csproj", "{BC9DB81E-8402-47E9-B619-C97577E1961C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Tests", "GCodeViewer.Tests\GCodeViewer.Tests.csproj", "{43E855E7-2B24-45CC-9D28-86111D5DE006}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenGL-Playground", "OpenGL-Playground", "{BDD28A23-614E-47D1-8B55-E940DC59DBEF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{BDD28A23-614E-47D1-8B55-E940DC59DBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkTest", "OpenGL-Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkTest", "Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls", "GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.OpenTK.Helpers", "GCodeViewer.OpenTK.Helpers\GCodeViewer.OpenTK.Helpers.csproj", "{6B77C13F-535D-4F9B-A1C9-93091D21511F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls.PointCloud", "GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,26 +107,6 @@ Global
 		{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}.Release|x64.Build.0 = Release|Any CPU
 		{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}.Release|x86.ActiveCfg = Release|Any CPU
 		{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}.Release|x86.Build.0 = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|x64.Build.0 = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Debug|x86.Build.0 = Debug|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|ARM.Build.0 = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|ARM64.Build.0 = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|x64.ActiveCfg = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|x64.Build.0 = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|x86.ActiveCfg = Release|Any CPU
-		{6B77C13F-535D-4F9B-A1C9-93091D21511F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
