@@ -9,6 +9,9 @@ namespace GCodeViewer.Library.PointExtraction.Tests
         private static object[] _testCases =
         {
             new object[] {"X0 Y0 Z0", (0.0f, 0.0f, 0.0f)},
+            new object[] {"X24.5 Y0 Z0", (24.5f, 0.0f, 0.0f)},
+            new object[] {"X0 Y100.4 Z0", (0.0f, 100.4f, 0.0f)},
+            new object[] {"X0 Y100.4 Z3333.34", (0.0f, 100.4f, 3333.34f)}
         };
 
         [TestCaseSource("_testCases")]
