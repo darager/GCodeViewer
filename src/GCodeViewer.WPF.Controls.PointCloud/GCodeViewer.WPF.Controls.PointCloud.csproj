@@ -83,7 +83,7 @@
     <Compile Include="Renderable.cs" />
     <Compile Include="RenderableType.cs" />
     <Compile Include="Shaders\Shader.cs" />
-    <Compile Include="Shaders\ShaderFactory.cs" />
+    <Compile Include="Shaders\ShaderBuilder.cs" />
     <Compile Include="Primitives\VertexBufferObject.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
         private readonly GLControl _control;
         private readonly OrbitCamera _camera;
 
-        internal readonly ShaderFactory _shaderFactory;
+        internal readonly ShaderBuilder _shaderBuilder;
         internal Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
         public ObservableCollection<Renderable> Renderables
@@ -76,7 +76,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
 
         private static void AddRenderable(PointCloudViewer pclViewer, Renderable renderable)
         {
-            var shader = pclViewer._shaderFactory.FromColor(renderable.Color);
+            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
             var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
 
             pclViewer._vbos.Add(renderable, vbo);
@@ -92,8 +92,8 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
 
             this.Child = _control;
 
-            _shaderFactory = new ShaderFactory();
-            _camera = new OrbitCamera(startScale: 0.5f, _shaderFactory);
+            _shaderBuilder = new ShaderBuilder();
+            _camera = new OrbitCamera(startScale: 0.5f, _shaderBuilder);
 
             _control.Paint += OnPaint;
             _control.MouseMove += OnMouseMove;
@@ -135,7 +135,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             foreach (var vbo in _vbos.Values)
                 vbo.Dispose();
 
-            _shaderFactory.DisposeAll();
+            _shaderBuilder.DisposeAll();
         }
 
         private Point _previousMousePosition = new Point(0, 0);

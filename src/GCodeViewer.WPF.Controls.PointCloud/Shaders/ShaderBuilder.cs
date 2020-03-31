@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
 {
-    internal class ShaderFactory
+    internal class ShaderBuilder
     {
         private const string _uniformName = "transform";
         private const string _originalVertexShaderSource =
