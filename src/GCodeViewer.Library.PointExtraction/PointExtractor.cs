@@ -5,6 +5,8 @@ namespace GCodeViewer.Library.PointExtraction
 {
     public class PointExtractor
     {
+        private Dictionary<char, Regex> _expressions = new Dictionary<char, Regex>();
+
         public List<(float X, float Y, float Z)> ExtractUniquePoints(IEnumerable<string> lines)
         {
             var result = new List<(float X, float Y, float Z)>();
@@ -33,18 +35,16 @@ namespace GCodeViewer.Library.PointExtraction
         private bool ContainsValue(char c, string text)
         {
             Regex regex = GetNumberRegex(c);
+            bool result = regex.Match(text).Success;
 
-            var match = regex.Match(text);
-
-            return match.Success;
-
+            return result;
         }
         private float ExtractValue(char c, string text)
         {
             Regex regex = GetNumberRegex(c);
 
-            var match = regex.Match(text);
-            var number = match.Groups[1].ToString();
+            Match match = regex.Match(text);
+            string number = match.Groups[1].ToString();
 
             if (string.IsNullOrEmpty(number))
                 return 0;
@@ -55,7 +55,13 @@ namespace GCodeViewer.Library.PointExtraction
         }
         private Regex GetNumberRegex(char c)
         {
-            return new Regex(c + "(\\d+\\.\\d+|\\d+)");
+            if (_expressions.ContainsKey(c))
+                return _expressions[c];
+
+            var regex = new Regex(c + "(\\d+\\.\\d+|\\d+)");
+            _expressions[c] = regex;
+
+            return regex;
         }
     }
 }
