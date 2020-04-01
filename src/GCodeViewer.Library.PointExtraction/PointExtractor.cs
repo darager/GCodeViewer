@@ -23,7 +23,8 @@ namespace GCodeViewer.Library
                 if (ContainsValue('Z', line))
                     position.Z = ExtractValue('Z', line);
 
-                if (prevPosition != position)
+                // HACK: only include points when material is extruded
+                if (ContainsValue('E', line) && prevPosition != position)
                     result.Add(position);
 
                 prevPosition = position;
