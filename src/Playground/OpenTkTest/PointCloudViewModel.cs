@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using GCodeViewer.Library.PointExtraction;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest
@@ -63,20 +66,33 @@ namespace OpenTkTest
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 
-            var coordSystem = new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines);
-            PointCloudObjects.Add(coordSystem);
-            PointCloudObjects.Remove(coordSystem);
+            PointCloudObjects.Add(new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines));
 
-            PointCloudObjects.Add(new Renderable(Color.GreenYellow, _smallCubeVertices, RenderableType.Lines));
-            PointCloudObjects.Add(new Renderable(Color.GreenYellow, _bigCubeVertices, RenderableType.Lines));
+            var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
+            var extractor = new PointExtractor();
+            var points = extractor.ExtractUniquePoints(content);
 
-            var rnd = new Random();
-            int count = 1000;
-            var randomPointVertices = Enumerable.Range(0, count * 3)
-                .Select(_ => rnd.NextDouble())
-                .Select(r => (float)r * 2 - 1)
+            var verts = new List<float>();
+            foreach (var point in points)
+            {
+                verts.Add(point.X);
+                verts.Add(point.Y);
+                verts.Add(point.Z);
+            }
+
+            float max = verts.Max();
+            float min = verts.Min();
+
+            var vertices = verts
+                .Take(9000000)
+                .Select(n => Scale(n, min, max, -1, 1))
                 .ToArray();
-            PointCloudObjects.Add(new Renderable(Color.CornflowerBlue, randomPointVertices, RenderableType.Points));
+            PointCloudObjects.Add(new Renderable(Color.GreenYellow, vertices, RenderableType.Points));
+        }
+
+        private float Scale(float value, float min, float max, int minScale, int maxScale)
+        {
+            return minScale + (float)(value - min) / (max - min) * (maxScale - minScale);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

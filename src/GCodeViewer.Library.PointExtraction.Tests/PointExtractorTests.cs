@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -6,21 +7,27 @@ namespace GCodeViewer.Library.PointExtraction.Tests
     [TestFixture]
     public class PointExtractorTests
     {
-        private static object[] _extractPointsTestCases =
+        private static object[] _extractUniquePointsTestCases =
         {
-            new object[] {"X0 Y0 Z0", (0.0f, 0.0f, 0.0f)},
-            new object[] {"X24.5 Y0 Z0", (24.5f, 0.0f, 0.0f)},
-            new object[] {"X0 Y100.4 Z0", (0.0f, 100.4f, 0.0f)},
-            new object[] {"X0 Y100.4 Z3333.34", (0.0f, 100.4f, 3333.34f)}
+            new object[]
+            {
+                new string[] { "X100.0 Y9.0", "Z10"},
+                new List<(float X, float Y, float Z)> { (100,9,0), (100,9,10) }
+            },
+            new object[]
+            {
+                new string[] { "X0.0 Y0.0 Z0.0", "X10", "X10.0 Z0.0", "Y10.0" },
+                new List<(float X, float Y, float Z)> { (0,0,0), (10,0,0), (10,10,0) }
+            }
         };
-        [TestCaseSource(nameof(_extractPointsTestCases))]
-        public void ExtractPoint_ExtractsRightPoint(string content, (float, float, float) expected)
+        [TestCaseSource(nameof(_extractUniquePointsTestCases))]
+        public void ExtractPoints_ExtractsCorrectUniquePoints(string[] lines, IEnumerable<(float X, float Y, float Z)> expectedPoints)
         {
             var pointExtractor = new PointExtractor();
 
-            (float, float, float) actual = pointExtractor.ExtractPoint(content);
+            var actual = pointExtractor.ExtractUniquePoints(lines);
 
-            actual.Should().Be(expected);
+            actual.Should().Equal(expectedPoints);
         }
     }
 }
