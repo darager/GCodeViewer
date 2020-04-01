@@ -23,7 +23,7 @@ namespace GCodeViewer.Library
                 if (ContainsValue('Z', line))
                     position.Z = ExtractValue('Z', line);
 
-                if (!prevPosition.Equals(position))
+                if (prevPosition != position)
                     result.Add(position);
 
                 prevPosition = position;

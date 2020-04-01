@@ -13,13 +13,30 @@
             Z = z;
         }
 
-        public bool Equals(Point3D other)
-        {
-            return this.X == other.X
-                && this.Y == other.Y
-                && this.Z == other.Z;
-        }
-
         public static Point3D NaN => new Point3D(float.NaN, float.NaN, float.NaN);
+
+        public override bool Equals(object obj)
+        {
+            return (obj is Point3D other) && this == other;
+        }
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return this.X.GetHashCode() * 17
+                     + this.Y.GetHashCode() * 17
+                     + this.Z.GetHashCode() * 17;
+            }
+        }
+        public static bool operator ==(Point3D a, Point3D b)
+        {
+            return a.X == b.X
+                && a.Y == b.Y
+                && a.Z == b.Z;
+        }
+        public static bool operator !=(Point3D a, Point3D b)
+        {
+            return !(a == b);
+        }
     };
 }
