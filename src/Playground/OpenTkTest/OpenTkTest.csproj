@@ -110,9 +110,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.PointExtraction.csproj">
+    <ProjectReference Include="..\..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj">
       <Project>{7b425f55-52b7-4776-b888-e9bc0ae970e7}</Project>
-      <Name>GCodeViewer.Library.PointExtraction</Name>
+      <Name>GCodeViewer.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.WPF.Controls.Pointcloud\GCodeViewer.WPF.Controls.PointCloud.csproj">
       <Project>{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}</Project>

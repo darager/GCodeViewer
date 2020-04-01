@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace GCodeViewer.Library.PointExtraction.Tests
+namespace GCodeViewer.Library.Tests
 {
     [TestFixture]
     public class PointExtractorTests

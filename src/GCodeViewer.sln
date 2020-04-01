@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCode-Files", "GCode-Files"
 		Examples\SinkingBenchy.gcode = Examples\SinkingBenchy.gcode
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.Library.PointExtraction", "GCodeViewer.Library.PointExtraction\GCodeViewer.Library.PointExtraction.csproj", "{7B425F55-52B7-4776-B888-E9BC0AE970E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library", "GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj", "{7B425F55-52B7-4776-B888-E9BC0AE970E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.Library.PointExtraction.Tests", "GCodeViewer.Library.PointExtraction.Tests\GCodeViewer.Library.PointExtraction.Tests.csproj", "{047599D5-6E73-4CBB-AF80-C83C42736E2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library.Tests", "GCodeViewer.Library.PointExtraction.Tests\GCodeViewer.Library.Tests.csproj", "{047599D5-6E73-4CBB-AF80-C83C42736E2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

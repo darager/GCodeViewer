@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace GCodeViewer.Library.PointExtraction
+namespace GCodeViewer.Library
 {
     public class PointExtractor
     {
