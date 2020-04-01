@@ -5,9 +5,9 @@ using NUnit.Framework;
 namespace GCodeViewer.Library.Tests
 {
     [TestFixture]
-    public class PointExtractorTests
+    public class GcodePointExtractorTests
     {
-        private static object[] _extractUniquePointsTestCases =
+        private readonly static object[] _extractPointsTestCases =
         {
             new object[]
             {
@@ -20,12 +20,12 @@ namespace GCodeViewer.Library.Tests
                 new List<Point3D> { new Point3D(0,0,0), new Point3D(10,0,0), new Point3D(10,10,0) }
             }
         };
-        [TestCaseSource(nameof(_extractUniquePointsTestCases))]
-        public void ExtractPoints_ExtractsCorrectUniquePoints(string[] lines, IEnumerable<Point3D> expectedPoints)
+        [TestCaseSource(nameof(_extractPointsTestCases))]
+        public void ExtractPoints_ExtractsCorrectPoints(string[] lines, IEnumerable<Point3D> expectedPoints)
         {
-            var pointExtractor = new PointExtractor();
+            var pointExtractor = new GCodePointExtractor();
 
-            var actual = pointExtractor.ExtractUniquePoints(lines);
+            var actual = pointExtractor.ExtractPoints(lines);
 
             actual.Should().Equal(expectedPoints);
         }

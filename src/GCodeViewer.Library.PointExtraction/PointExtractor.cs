@@ -3,11 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace GCodeViewer.Library
 {
-    public class PointExtractor
+    public class GCodePointExtractor
     {
         private Dictionary<char, Regex> _expressions = new Dictionary<char, Regex>();
 
-        public List<Point3D> ExtractUniquePoints(IEnumerable<string> lines)
+        public List<Point3D> ExtractPoints(IEnumerable<string> lines)
         {
             var result = new List<Point3D>();
 
