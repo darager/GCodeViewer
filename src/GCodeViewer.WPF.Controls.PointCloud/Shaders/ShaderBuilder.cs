@@ -6,15 +6,15 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
 {
     internal class ShaderBuilder
     {
-        private const string _uniformName = "transform";
+        private const string _projectionMatrixName = "transform";
         private const string _originalVertexShaderSource =
             "#version 330 core\n" +
             "layout (location = 0) in vec3 aPosition;\n" +
             "uniform mat4 %UNIFORMNAME%;\n" +
             "void main()\n" +
             "{\n" +
-                "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
                 "gl_PointSize = 3.0;\n" +
+                "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
             "}";
         private const string _originalFragmentShaderSource =
             "#version 330 core\n" +
@@ -41,10 +41,10 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
             return shader;
         }
 
-        public void SetTransformationMatrix(Matrix4 matrix)
+        public void SetProjectionMatrix(Matrix4 matrix)
         {
             foreach (Shader shader in _shaders.Values)
-                shader.SetMatrix4(_uniformName, matrix);
+                shader.SetMatrix4(_projectionMatrixName, matrix);
         }
         public void DisposeAll()
         {
@@ -70,7 +70,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
         private string GetVertexShaderSource()
         {
             return _originalVertexShaderSource
-                       .Replace("%UNIFORMNAME%", _uniformName);
+                       .Replace("%UNIFORMNAME%", _projectionMatrixName);
         }
         private float ToFloat(int value)
         {

@@ -28,7 +28,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Camera
             transform *= Matrix4.CreateRotationY(DegToRad(-RotationY));
             transform *= Matrix4.CreateScale(Scale);
 
-            _shaderFactory.SetTransformationMatrix(transform);
+            _shaderFactory.SetProjectionMatrix(transform);
         }
 
         private float DegToRad(float angleInDeg)
