@@ -67,28 +67,32 @@ namespace OpenTkTest
             PointCloudObjects.Add(new Renderable(Color.LightGray, gridverts.ToArray(), RenderableType.Lines));
             #endregion
 
+            // HACK
+            #region sinking benchy
+            var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
+            var extractor = new GCodePointExtractor();
+            var points = extractor.ExtractPoints(content);
 
-            //var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
-            //var extractor = new GCodePointExtractor();
-            //var points = extractor.ExtractPoints(content);
+            var verts = new List<float>();
+            foreach (var point in points)
+            {
+                verts.Add(point.Y);
+                verts.Add(point.Z);
+                verts.Add(point.X);
+            }
+            float max = verts.Max();
+            float min = verts.Min();
 
-            //var verts = new List<float>();
-            //foreach (var point in points)
-            //{
-            //    verts.Add(point.Y);
-            //    verts.Add(point.X);
-            //    verts.Add(point.Z);
-            //}
+            verts.Clear();
+            foreach (var point in points)
+            {
+                verts.Add(Scale(point.Y, min, max, -1, 1));
+                verts.Add(Scale(point.Z, min, max, -1, 1) + 1);
+                verts.Add(Scale(point.X, min, max, -1, 1));
+            }
 
-            //float max = verts.Max();
-            //float min = verts.Min();
-
-            //var vertices = verts
-            //    .Skip(3000)
-            //    //.Take(9000000)
-            //    //.Select(n => Scale(n, min, max, 0, 1))
-            //    .ToArray();
-            //PointCloudObjects.Add(new Renderable(Color.GreenYellow, vertices, RenderableType.Points));
+            PointCloudObjects.Add(new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points));
+            #endregion
         }
 
         private float Scale(float value, float min, float max, int minScale, int maxScale)

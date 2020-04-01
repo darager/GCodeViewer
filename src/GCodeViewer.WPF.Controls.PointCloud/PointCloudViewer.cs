@@ -111,7 +111,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
         private void OnPaint(object sender, PaintEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.ClearColor(0.117f, 0.117f, 0.117f, 1.0f);
 
             GL.Enable(EnableCap.PointSmooth);
             GL.Enable(EnableCap.ProgramPointSize);
