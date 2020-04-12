@@ -10,5 +10,15 @@
     Height="700"
     mc:Ignorable="d">
 
-    <pcv:PointCloudViewer x:Name="pclViewer" Renderables="{Binding PointCloudObjects}" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <pcv:PointCloudViewer
+            x:Name="pclViewer"
+            Grid.Column="0"
+            Renderables="{Binding PointCloudObjects}" />
+    </Grid>
 </Window>
