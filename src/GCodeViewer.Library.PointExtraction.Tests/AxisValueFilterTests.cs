@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace GCodeViewer.Library.Tests
 {
     [TestFixture]
-    public class FilterTests
+    public class AxisValueFilterTests
     {
         [Test]
         public void FilterNonExtrudingValues_ReturnsExtrudingValues()
