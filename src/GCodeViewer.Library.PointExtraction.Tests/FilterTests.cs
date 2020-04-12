@@ -7,34 +7,28 @@ namespace GCodeViewer.Library.Tests
     [TestFixture]
     public class FilterTests
     {
-        private readonly static object[] _caseSource =
+        [Test]
+        public void FilterNonExtrudingValues_ReturnsExtrudingValues()
         {
-            new object[]
+            var values = new List<AxisValues>()
             {
-                new List<AxisValues>()
-                {
-                    new AxisValues(0, 0, 0, 0),
-                    new AxisValues(10, 3, 0, 0),
-                    new AxisValues(10, 3, 0, 2),
-                    new AxisValues(0, 0, 0, 0)
-                },
-                new List<AxisValues>()
-                {
-                    new AxisValues(0, 0, 0, 0),
-                    new AxisValues(10, 3, 0, 2),
-                    new AxisValues(0, 0, 0, 0)
-                }
-            }
-        };
+                new AxisValues(0, 0, 0, 0),
+                new AxisValues(10, 3, 0, 0),
+                new AxisValues(10, 3, 0, 2),
+                new AxisValues(0, 0, 0, 0)
+            };
+            var expected = new List<AxisValues>()
+            {
+                new AxisValues(0, 0, 0, 0),
+                new AxisValues(10, 3, 0, 2),
+                new AxisValues(0, 0, 0, 0)
+            };
 
-        [TestCaseSource(nameof(_caseSource))]
-        public void FilterNonExtrudingValues_ReturnsExtrudingValues(IEnumerable<AxisValues> values, IEnumerable<AxisValues> expectedValues)
-        {
             var filter = new AxisValueFilter();
 
             var actual = filter.FilterNonExtrudingValues(values);
 
-            actual.Should().Equal(expectedValues);
+            actual.Should().Equal(expected);
         }
     }
 }
