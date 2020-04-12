@@ -26,13 +26,13 @@ namespace GCodeViewer.Library.Tests
             }
         };
         [TestCaseSource(nameof(_extractPrinterAxisValuesTestCases))]
-        public void ExtractPrinterAxisValues_ExtractsCorrectValues(string[] lines, IEnumerable<AxisValues> expectedPoints)
+        public void ExtractPrinterAxisValues_ExtractsCorrectValues(string[] lines, IEnumerable<AxisValues> expectedValues)
         {
-            var pointExtractor = new GCodeAxisValueExtractor();
+            var axisValueExtractor = new GCodeAxisValueExtractor();
 
-            var actual = pointExtractor.ExtractPrinterAxisValues(lines);
+            var actual = axisValueExtractor.ExtractPrinterAxisValues(lines);
 
-            actual.Should().Equal(expectedPoints);
+            actual.Should().Equal(expectedValues);
         }
     }
 }

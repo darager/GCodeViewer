@@ -4,7 +4,7 @@ namespace GCodeViewer.Library
 {
     public class AxisValueFilter
     {
-        public IEnumerable<AxisValues> RemoveNonExtrudingPoints(IEnumerable<AxisValues> values)
+        public IEnumerable<AxisValues> RemoveNonExtrudingValues(IEnumerable<AxisValues> values)
         {
             var prev = AxisValues.NaN;
 

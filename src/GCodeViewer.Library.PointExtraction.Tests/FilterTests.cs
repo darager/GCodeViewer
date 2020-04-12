@@ -18,7 +18,7 @@ namespace GCodeViewer.Library.Tests
                 new AxisValues(0, 0, 0, 0)
             };
 
-            var expectedPoints = new List<AxisValues>()
+            var expectedValues = new List<AxisValues>()
             {
                 new AxisValues(0, 0, 0, 0),
                 new AxisValues(10, 3, 0, 2),
@@ -27,9 +27,9 @@ namespace GCodeViewer.Library.Tests
 
             var filter = new AxisValueFilter();
 
-            var actual = filter.RemoveNonExtrudingPoints(values);
+            var actual = filter.RemoveNonExtrudingValues(values);
 
-            actual.Should().Equal(expectedPoints);
+            actual.Should().Equal(expectedValues);
         }
     }
 }
