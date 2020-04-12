@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GCodeViewer.Library.Tests
+namespace GCodeViewer.Library
 {
     public class AxisValueFilter
     {
