@@ -3,16 +3,14 @@ using System.Text.RegularExpressions;
 
 namespace GCodeViewer.Library
 {
-    public class GCodePointExtractor
+    public class GCodeAxisValueExtractor
     {
         private Dictionary<char, Regex> _expressions = new Dictionary<char, Regex>();
 
-        public List<Point3D> ExtractPoints(IEnumerable<string> lines)
+        public IEnumerable<AxisValues> ExtractPrinterAxisValues(IEnumerable<string> lines)
         {
-            var result = new List<Point3D>();
-
-            var position = new Point3D(0, 0, 0);
-            var prevPosition = Point3D.NaN;
+            var position = new AxisValues(0, 0, 0, 0);
+            var prevPosition = AxisValues.NaN;
 
             foreach (string line in lines)
             {
@@ -22,15 +20,14 @@ namespace GCodeViewer.Library
                     position.Y = ExtractValue('Y', line);
                 if (ContainsValue('Z', line))
                     position.Z = ExtractValue('Z', line);
+                if (ContainsValue('E', line))
+                    position.E = ExtractValue('E', line);
 
-                // HACK: only include points when material is extruded
-                if (ContainsValue('E', line) && prevPosition != position)
-                    result.Add(position);
+                if (prevPosition != position)
+                    yield return position;
 
                 prevPosition = position;
             }
-
-            return result;
         }
 
         private bool ContainsValue(char c, string text)

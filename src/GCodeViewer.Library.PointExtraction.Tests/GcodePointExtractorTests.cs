@@ -5,27 +5,27 @@ using NUnit.Framework;
 namespace GCodeViewer.Library.Tests
 {
     [TestFixture]
-    public class GcodePointExtractorTests
+    public class GcodeAxisValueExtractorTests
     {
-        private readonly static object[] _extractPointsTestCases =
+        private readonly static object[] _extractPrinterAxisValuesTestCases =
         {
             new object[]
             {
                 new string[] { "X100.0 Y9.0", "Z10"},
-                new List<Point3D> { new Point3D(100,9,0), new Point3D(100,9,10) }
+                new List<AxisValues> { new AxisValues(100,9,0,0), new AxisValues(100,9,10,0) }
             },
             new object[]
             {
                 new string[] { "X0.0 Y0.0 Z0.0", "X10", "X10.0 Z0.0", "Y10.0" },
-                new List<Point3D> { new Point3D(0,0,0), new Point3D(10,0,0), new Point3D(10,10,0) }
+                new List<AxisValues> { new AxisValues(0,0,0,0), new AxisValues(10,0,0,0), new AxisValues(10,10,0,0) }
             }
         };
-        [TestCaseSource(nameof(_extractPointsTestCases))]
-        public void ExtractPoints_ExtractsCorrectPoints(string[] lines, IEnumerable<Point3D> expectedPoints)
+        [TestCaseSource(nameof(_extractPrinterAxisValuesTestCases))]
+        public void ExtractPrinterAxisValues_ExtractsCorrectValues(string[] lines, IEnumerable<AxisValues> expectedPoints)
         {
-            var pointExtractor = new GCodePointExtractor();
+            var pointExtractor = new GCodeAxisValueExtractor();
 
-            var actual = pointExtractor.ExtractPoints(lines);
+            var actual = pointExtractor.ExtractPrinterAxisValues(lines);
 
             actual.Should().Equal(expectedPoints);
         }

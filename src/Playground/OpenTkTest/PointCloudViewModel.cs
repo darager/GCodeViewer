@@ -69,8 +69,8 @@ namespace OpenTkTest
             // HACK
             #region sinking benchy
             var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
-            var extractor = new GCodePointExtractor();
-            var points = extractor.ExtractPoints(content);
+            var extractor = new GCodeAxisValueExtractor();
+            var points = extractor.ExtractPrinterAxisValues(content);
 
             var verts = new List<float>();
             foreach (var point in points)
