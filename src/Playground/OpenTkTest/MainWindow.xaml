@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pcv="clr-namespace:GCodeViewer.WPF.Controls.Pointcloud;assembly=GCodeViewer.WPF.Controls"
     Title="MainWindow"
-    Width="700"
-    Height="700"
+    Width="1600"
+    Height="800"
     mc:Ignorable="d">
 
     <Grid>
