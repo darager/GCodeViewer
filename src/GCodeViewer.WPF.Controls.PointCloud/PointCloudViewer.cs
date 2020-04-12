@@ -149,13 +149,12 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             // TODO: Rotation should be relative to the current rotation!
             if ((Control.MouseButtons & MouseButtons.Left) != 0)
             {
-                _camera.RotationX += (-dy * _mouseSensitivity);
+                float newRotationX = (-dy * _mouseSensitivity) + _camera.RotationX;
+                if (newRotationX >= 90) newRotationX = 90;
+                if (newRotationX <= -90) newRotationX = -90;
+                _camera.RotationX = newRotationX;
 
-                float changeY = (-dx * _mouseSensitivity);
-                float rotX = Math.Abs(_camera.RotationX % 360);
-                if (rotX > 90 && rotX < 270)
-                    changeY *= -1;
-                _camera.RotationY += changeY;
+                _camera.RotationY += (-dx * _mouseSensitivity);
             }
 
             _previousMousePosition = new Point(e.X, e.Y);
