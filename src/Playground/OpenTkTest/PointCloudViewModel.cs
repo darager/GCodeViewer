@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
@@ -72,7 +70,7 @@ namespace OpenTkTest
         private Renderable _model;
         public void Update3DModel(string newText)
         {
-            var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
+            var content = newText.Split();
             var extractor = new GCodeAxisValueExtractor();
             var points = extractor.ExtractPrinterAxisValues(content);
 
