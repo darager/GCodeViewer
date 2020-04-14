@@ -22,6 +22,9 @@
             Grid.Column="0"
             Renderables="{Binding PointCloudObjects}" />
 
-        <av:TextEditor Grid.Column="1" ShowLineNumbers="True" />
+        <av:TextEditor
+            x:Name="TextEditor"
+            Grid.Column="1"
+            ShowLineNumbers="True" />
     </Grid>
 </Window>

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace OpenTkTest
 {
@@ -8,7 +10,16 @@ namespace OpenTkTest
         {
             InitializeComponent();
 
-            this.DataContext = new PointCloudViewModel();
+            var vm = new PointCloudViewModel();
+            this.DataContext = vm;
+
+            var doc = new TextDocument();
+            doc.TextChanged += (s, e) => vm.Update3DModel(doc.Text);
+
+            var path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
+            doc.Text = File.ReadAllText(path);
+
+            TextEditor.Document = doc;
         }
     }
 }

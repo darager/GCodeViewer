@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,6 +18,7 @@ namespace OpenTkTest
             0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
             0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
         };
+
 
         public ObservableCollection<Renderable> PointCloudObjects
         {
@@ -65,9 +67,11 @@ namespace OpenTkTest
             }
             PointCloudObjects.Add(new Renderable(Color.LightGray, gridverts.ToArray(), RenderableType.Lines));
             #endregion
+        }
 
-            // HACK
-            #region sinking benchy
+        private Renderable _model;
+        public void Update3DModel(string newText)
+        {
             var content = File.ReadLines(@"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode");
             var extractor = new GCodeAxisValueExtractor();
             var points = extractor.ExtractPrinterAxisValues(content);
@@ -90,8 +94,11 @@ namespace OpenTkTest
                 verts.Add(Scale(point.X, min, max, -1, 1));
             }
 
-            PointCloudObjects.Add(new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points));
-            #endregion
+            if (_model != null)
+                PointCloudObjects.Remove(_model);
+
+            _model = new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points);
+            PointCloudObjects.Add(_model);
         }
 
         private float Scale(float value, float min, float max, int minScale, int maxScale)
