@@ -1,28 +1,23 @@
 ﻿<?xml version="1.0"?>
 <SyntaxDefinition name="C#" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
-  <Color name="Comment" foreground="LightGreen" />
+  <Color name="Comment" foreground="Green" />
 
   <RuleSet>
     <Span color="Comment" begin=";" />
 
-    <!-- X-Axis-->
-    <Rule foreground="DarkRed">
-      X\d*(\.\d*)?
-    </Rule>
-
-    <!-- Y-Axis-->
+    <!-- XYZ-Axis -->
     <Rule foreground="DarkBlue">
-      Y\d*(\.\d*)?
+      [XYZ]\d*(\.\d*)?
     </Rule>
 
-    <!-- Z-Axis-->
-    <Rule foreground="DarkGreen">
-      Z\d*(\.\d*)?
-    </Rule>
-
-    <!-- X-Axis-->
+    <!-- Extruder-Axis -->
     <Rule foreground="DarkOrange">
       E\d*(\.\d*)?
+    </Rule>
+
+    <!-- G -->
+    <Rule foreground="#AAAAAA">
+      [GM]\d*
     </Rule>
 
   </RuleSet>

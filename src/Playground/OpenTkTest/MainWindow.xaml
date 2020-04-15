@@ -25,6 +25,7 @@
         <av:TextEditor
             x:Name="TextEditor"
             Grid.Column="1"
+            Background="#1e1e1e"
             ShowLineNumbers="True" />
     </Grid>
 </Window>
