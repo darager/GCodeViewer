@@ -15,9 +15,19 @@
       E-?\d*(\.\d*)?
     </Rule>
 
+    <!-- FT -->
+    <Rule foreground="#b5cea8">
+      [FT]-?\d*(\.\d*)?
+    </Rule>
+
     <!-- GM -->
     <Rule foreground="#e0bc67">
       [GM]\d*
+    </Rule>
+
+    <!-- S -->
+    <Rule foreground="#bc81c6">
+      S-?\d*
     </Rule>
 
   </RuleSet>
