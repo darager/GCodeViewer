@@ -31,8 +31,7 @@ namespace OpenTkTest
 
             TextEditor.Document = doc;
         }
-
-        public void SetupSyntaxHighlighting()
+        private void SetupSyntaxHighlighting()
         {
             string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Playground\OpenTkTest\GCodeSyntaxHighlighting.xml";
 
