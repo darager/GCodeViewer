@@ -21,13 +21,13 @@ namespace OpenTkTest
             LoadGCodeFile();
             SetupSyntaxHighlighting();
 
-            //TextEditor.TextChanged += DoSomething;
+            TextEditor.TextChanged += DoSomething;
         }
 
-        //private void DoSomething(object sender, EventArgs e)
-        //{
-        //    var editor = (sender as ICSharpCode.AvalonEdit.TextEditor);
-        //}
+        private void DoSomething(object sender, EventArgs e)
+        {
+            var editor = (sender as ICSharpCode.AvalonEdit.TextEditor);
+        }
 
         private void LoadGCodeFile()
         {
