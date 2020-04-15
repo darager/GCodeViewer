@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
@@ -19,6 +20,13 @@ namespace OpenTkTest
 
             LoadGCodeFile();
             SetupSyntaxHighlighting();
+
+            TextEditor.TextChanged += DoSomething;
+        }
+
+        private void DoSomething(object sender, EventArgs e)
+        {
+            var editor = (sender as ICSharpCode.AvalonEdit.TextEditor);
         }
 
         private void LoadGCodeFile()

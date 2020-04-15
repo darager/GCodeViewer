@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
 
@@ -70,33 +73,41 @@ namespace OpenTkTest
         private Renderable _model;
         public void Update3DModel(string newText)
         {
-            var content = newText.Split();
-            var extractor = new GCodeAxisValueExtractor();
-            var points = extractor.ExtractPrinterAxisValues(content);
+            var mainThread = Dispatcher.CurrentDispatcher;
 
-            var verts = new List<float>();
-            foreach (var point in points)
+            Task.Factory.StartNew(() =>
             {
-                verts.Add(point.Y);
-                verts.Add(point.Z);
-                verts.Add(point.X);
-            }
-            float max = verts.Max();
-            float min = verts.Min();
+                var content = newText.Split();
+                var extractor = new GCodeAxisValueExtractor();
+                var points = extractor.ExtractPrinterAxisValues(content);
 
-            verts.Clear();
-            foreach (var point in points)
-            {
-                verts.Add(Scale(point.Y, min, max, -1, 1));
-                verts.Add(Scale(point.Z, min, max, -1, 1) + 1);
-                verts.Add(Scale(point.X, min, max, -1, 1));
-            }
+                var verts = new List<float>();
+                foreach (var point in points)
+                {
+                    verts.Add(point.Y);
+                    verts.Add(point.Z);
+                    verts.Add(point.X);
+                }
+                float max = verts.Max();
+                float min = verts.Min();
 
-            if (_model != null)
-                PointCloudObjects.Remove(_model);
+                verts.Clear();
+                foreach (var point in points)
+                {
+                    verts.Add(Scale(point.Y, min, max, -1, 1));
+                    verts.Add(Scale(point.Z, min, max, -1, 1) + 1);
+                    verts.Add(Scale(point.X, min, max, -1, 1));
+                }
 
-            _model = new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points);
-            PointCloudObjects.Add(_model);
+                mainThread.Invoke(() =>
+                {
+                    if (_model != null)
+                        PointCloudObjects.Remove(_model);
+
+                    _model = new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points);
+                    PointCloudObjects.Add(_model);
+                });
+            });
         }
 
         private float Scale(float value, float min, float max, int minScale, int maxScale)
