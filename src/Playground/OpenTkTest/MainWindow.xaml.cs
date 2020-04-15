@@ -21,20 +21,20 @@ namespace OpenTkTest
             LoadGCodeFile();
             SetupSyntaxHighlighting();
 
-            TextEditor.TextChanged += DoSomething;
+            //TextEditor.TextChanged += DoSomething;
         }
 
-        private void DoSomething(object sender, EventArgs e)
-        {
-            var editor = (sender as ICSharpCode.AvalonEdit.TextEditor);
-        }
+        //private void DoSomething(object sender, EventArgs e)
+        //{
+        //    var editor = (sender as ICSharpCode.AvalonEdit.TextEditor);
+        //}
 
         private void LoadGCodeFile()
         {
             var doc = new TextDocument();
             doc.TextChanged += (s, e) => vm.Update3DModel(doc.Text);
 
-            var path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
+            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
             doc.Text = File.ReadAllText(path);
 
             TextEditor.Document = doc;

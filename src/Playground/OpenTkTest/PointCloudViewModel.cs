@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using GCodeViewer.Library;
@@ -79,7 +78,9 @@ namespace OpenTkTest
             {
                 var content = newText.Split();
                 var extractor = new GCodeAxisValueExtractor();
-                var points = extractor.ExtractPrinterAxisValues(content);
+                var filter = new AxisValueFilter();
+                var allPoints = extractor.ExtractPrinterAxisValues(content);
+                var points = filter.FilterNonExtrudingValues(allPoints);
 
                 var verts = new List<float>();
                 foreach (var point in points)
