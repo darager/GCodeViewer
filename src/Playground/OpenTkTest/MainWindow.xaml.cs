@@ -1,16 +1,15 @@
 ﻿using System.IO;
-using System.Reflection;
 using System.Windows;
+using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
-using System.Xml;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace OpenTkTest
 {
     public partial class MainWindow : Window
     {
-        PointCloudViewModel vm;
+        private PointCloudViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
@@ -19,7 +18,6 @@ namespace OpenTkTest
             this.DataContext = vm;
 
             LoadGCodeFile();
-
             SetupSyntaxHighlighting();
         }
 
@@ -27,20 +25,24 @@ namespace OpenTkTest
         {
             var doc = new TextDocument();
             doc.TextChanged += (s, e) => vm.Update3DModel(doc.Text);
+
             var path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
             doc.Text = File.ReadAllText(path);
+
             TextEditor.Document = doc;
         }
 
         public void SetupSyntaxHighlighting()
         {
-            string xshd_path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Playground\OpenTkTest\GCodeSyntaxHighlighting.xml";
-            using var xshd_stream = File.OpenRead(xshd_path);
+            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Playground\OpenTkTest\GCodeSyntaxHighlighting.xml";
 
-            var xshd_reader = new XmlTextReader(xshd_stream);
-            TextEditor.SyntaxHighlighting = HighlightingLoader.Load(xshd_reader, HighlightingManager.Instance);
-            xshd_reader.Close();
-            xshd_stream.Close();
+            using var stream = File.OpenRead(path);
+            using var reader = new XmlTextReader(stream);
+
+            TextEditor.SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+
+            reader.Close();
+            stream.Close();
         }
     }
 }
