@@ -7,28 +7,30 @@
 
     <!-- XYZ-Axis -->
     <Rule foreground="#7bdcf0">
-      [XYZ]-?\d*(\.\d*)?
+      [XYZ]-?\d+(\.\d+)?
     </Rule>
 
     <!-- Extruder-Axis -->
-    <Rule foreground="#b5cea8">
-      E-?\d*(\.\d*)?
+    <Rule fontWeight="bold" foreground="#b5cea8">
+      E-?\d+(\.\d+)?
     </Rule>
 
     <!-- FT -->
     <Rule foreground="#b5cea8">
-      [FT]-?\d*(\.\d*)?
+      [FT]-?\d+(\.\d+)?
     </Rule>
 
     <!-- GM -->
     <Rule foreground="#e0bc67">
-      [GM]\d*
+      [GM]\d+
     </Rule>
 
     <!-- S -->
     <Rule foreground="#bc81c6">
-      S-?\d*
+      S-?\d+
     </Rule>
 
   </RuleSet>
 </SyntaxDefinition>
+
+<!-- http://avalonedit.net/documentation/html/4d4ceb51-154d-43f0-b876-ad9640c5d2d8.htm -->
