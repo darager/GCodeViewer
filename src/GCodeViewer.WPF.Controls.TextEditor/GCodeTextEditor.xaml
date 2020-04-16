@@ -89,13 +89,22 @@
         </Style>
     </UserControl.Resources>
 
-
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="18" />
+        </Grid.RowDefinitions>
+
         <avalonEdit:TextEditor
             x:Name="TextEditor"
+            Grid.Row="0"
             Background="#1e1e1e"
             Foreground="LightGray"
             ShowLineNumbers="True"
             WordWrap="True" />
+
+        <StatusBar Grid.Row="1" Background="{StaticResource ScrollbarBackgroundColor}">
+            <Button />
+        </StatusBar>
     </Grid>
 </UserControl>

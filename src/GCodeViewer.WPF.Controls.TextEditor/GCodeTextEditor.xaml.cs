@@ -10,7 +10,11 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 {
     public partial class GCodeTextEditor : UserControl
     {
-        public string Text => _doc.Text;
+        public string Text
+        {
+            get => _doc.Text;
+            set => _doc.Text = value;
+        }
 
         private TextDocument _doc = new TextDocument();
 
@@ -18,10 +22,11 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             InitializeComponent();
 
+            SetupSyntaxHighlighting();
+
             _doc.TextChanged += (s, e) => TextChanged?.Invoke(this, _doc.Text);
 
-            SetupSyntaxHighlighting();
-            LoadGCodeFile();
+            TextEditor.Document = _doc;
         }
 
         private void SetupSyntaxHighlighting()
@@ -35,13 +40,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             reader.Close();
             stream.Close();
-        }
-        private void LoadGCodeFile()
-        {
-            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
-            _doc.Text = File.ReadAllText(path);
-
-            TextEditor.Document = _doc;
         }
 
         public EventHandler<string> TextChanged;

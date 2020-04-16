@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 
 namespace OpenTkTest
 {
@@ -11,8 +12,10 @@ namespace OpenTkTest
 
             this.DataContext = _vm;
 
+            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";
+
             TextEditor.TextChanged += (_, text) => _vm.Update3DModel(text);
-            _vm.Update3DModel(TextEditor.Text);
+            TextEditor.Text = File.ReadAllText(path);
         }
     }
 }
