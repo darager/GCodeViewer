@@ -4,14 +4,15 @@ namespace OpenTkTest
 {
     public partial class MainWindow : Window
     {
-        private PointCloudViewModel vm = new PointCloudViewModel();
+        private PointCloudViewModel _vm = new PointCloudViewModel();
         public MainWindow()
         {
             InitializeComponent();
 
-            this.DataContext = vm;
+            this.DataContext = _vm;
 
-            TextEditor.TextChanged += (s, text) => vm.Update3DModel(text);
+            TextEditor.TextChanged += (_, text) => _vm.Update3DModel(text);
+            _vm.Update3DModel(TextEditor.Text);
         }
     }
 }
