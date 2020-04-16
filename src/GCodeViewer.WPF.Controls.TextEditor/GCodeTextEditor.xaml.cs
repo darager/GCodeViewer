@@ -20,7 +20,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         private void SetupSyntaxHighlighting()
         {
-            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Playground\OpenTkTest\GCodeSyntaxHighlighting.xml";
+            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\GCodeViewer.WPF.Controls.TextEditor\GCodeSyntaxHighlighting.xml";
 
             using var stream = File.OpenRead(path);
             using var reader = new XmlTextReader(stream);

@@ -70,10 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GCodeTextEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,9 +77,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="GCodeTextEditor.xaml.cs">
-      <DependentUpon>GCodeTextEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -132,11 +125,6 @@
       <Project>{25ad0cc6-5acc-42cc-9681-7ccd71277dd7}</Project>
       <Name>GCodeViewer.WPF.Controls.TextEditor</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GCodeSyntaxHighlighting.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets" Condition="Exists('..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets')" />
