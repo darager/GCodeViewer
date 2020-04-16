@@ -22,7 +22,6 @@
             Grid.Column="0"
             Renderables="{Binding PointCloudObjects}" />
 
-        <local:GCodeTextEditor />
-
+        <local:GCodeTextEditor x:Name="TextEditor" Grid.Column="1" />
     </Grid>
 </Window>
