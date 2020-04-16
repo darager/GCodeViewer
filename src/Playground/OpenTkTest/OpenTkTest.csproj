@@ -128,6 +128,10 @@
       <Project>{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}</Project>
       <Name>GCodeViewer.WPF.Controls.PointCloud</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj">
+      <Project>{25ad0cc6-5acc-42cc-9681-7ccd71277dd7}</Project>
+      <Name>GCodeViewer.WPF.Controls.TextEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GCodeSyntaxHighlighting.xml">
