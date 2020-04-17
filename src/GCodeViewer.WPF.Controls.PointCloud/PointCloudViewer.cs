@@ -102,7 +102,6 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             this.Unloaded += OnUnloaded;
             this.SizeChanged += OnSizeChanged;
 
-            GL.Enable(EnableCap.DepthTest);
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate();
@@ -115,6 +114,9 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
 
             GL.Enable(EnableCap.PointSmooth);
             GL.Enable(EnableCap.ProgramPointSize);
+
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthRange(1, 0); // reverse mappings have to be used  ¯\_(ツ)_/¯
 
             _camera.ApplyTransformation();
 
