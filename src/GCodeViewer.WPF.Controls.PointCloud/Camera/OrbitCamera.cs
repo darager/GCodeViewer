@@ -1,5 +1,4 @@
-﻿using System;
-using GCodeViewer.WPF.Controls.Pointcloud.Shaders;
+﻿using GCodeViewer.WPF.Controls.Pointcloud.Shaders;
 using OpenTK;
 
 namespace GCodeViewer.WPF.Controls.Pointcloud.Camera

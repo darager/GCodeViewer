@@ -95,7 +95,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             _shaderBuilder = new ShaderBuilder();
             _camera = new OrbitCamera(startScale: 0.5f, _shaderBuilder);
 
-            _control.Paint += OnPaint;
+            _control.Paint += Draw;
             _control.MouseMove += OnMouseMove;
             _control.MouseWheel += OnMouseWheel;
 
@@ -105,10 +105,10 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             GL.Enable(EnableCap.DepthTest);
             GL.EnableVertexAttribArray(0);
 
-            _control.Invalidate(); // causes control to be redrawn
+            _control.Invalidate();
         }
 
-        private void OnPaint(object sender, PaintEventArgs e)
+        private void Draw(object sender, PaintEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(0.117f, 0.117f, 0.117f, 1.0f);
@@ -121,7 +121,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             foreach (var vbo in _vbos.Values)
                 vbo.Draw();
 
-            _control.SwapBuffers(); // swaps front and back buffers
+            _control.SwapBuffers();
             _control.Invalidate();
         }
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -146,7 +146,6 @@ namespace GCodeViewer.WPF.Controls.Pointcloud
             float dx = (float)(e.X - _previousMousePosition.X);
             float dy = (float)(e.Y - _previousMousePosition.Y);
 
-            // TODO: Rotation should be relative to the current rotation!
             if ((Control.MouseButtons & MouseButtons.Left) != 0)
             {
                 float newRotationX = (-dy * _mouseSensitivity) + _camera.RotationX;
