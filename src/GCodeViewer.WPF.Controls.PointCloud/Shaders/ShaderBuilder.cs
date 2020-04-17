@@ -13,7 +13,7 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
             "uniform mat4 %UNIFORMNAME%;\n" +
             "void main()\n" +
             "{\n" +
-                "gl_PointSize = 3.0;\n" +
+                "gl_PointSize = 1.0;\n" +
                 "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
             "}";
         private const string _originalFragmentShaderSource =
