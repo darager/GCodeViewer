@@ -66,6 +66,18 @@ namespace OpenTkTest
                 gridverts.Add(-1 + dy);
             }
             PointCloudObjects.Add(new Renderable(Color.LightGray, gridverts.ToArray(), RenderableType.Lines));
+
+            float[] verts =
+            {
+                1, 0, 1,
+                1, 0, -1,
+                -1, 0, -1,
+
+                -1, 0, 1,
+                -1, 0, -1,
+                1, 0, 1,
+            };
+            PointCloudObjects.Add(new Renderable(Color.DarkGray, verts, RenderableType.Triangles));
             #endregion
         }
 
