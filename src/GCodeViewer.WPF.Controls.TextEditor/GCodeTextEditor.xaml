@@ -44,7 +44,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Foreground" Value="#F1F1F1" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -110,22 +110,44 @@
             VerticalAlignment="Stretch"
             Background="{StaticResource ScrollbarBackgroundColor}">
 
-            <Grid Width="100" HorizontalAlignment="Left">
+            <Grid
+                Width="40"
+                Margin="3"
+                HorizontalAlignment="Left"
+                Background="{StaticResource ScrollbarBackgroundColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBox
                     Grid.Row="0"
                     Grid.RowSpan="2"
-                    Grid.Column="0" />
-                <RepeatButton Grid.Row="0" Grid.Column="1" />
-                <RepeatButton Grid.Row="1" Grid.Column="1" />
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="#F1F1F1"
+                    Text="{Binding ElementName=TextEditor, Path=FontSize}" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                    <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{StaticResource ScrollbarForegroundColor}" />
+                </Button>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                    <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{StaticResource ScrollbarForegroundColor}" />
+                </Button>
             </Grid>
 
             <StackPanel
@@ -136,27 +158,27 @@
                 <Label
                     VerticalContentAlignment="Center"
                     Content="Ln:"
-                    Foreground="White" />
+                    Foreground="#F1F1F1" />
                 <TextBox
                     Width="{Binding ElementName=LineCountLabel, Path=ActualWidth}"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Foreground="White"
+                    Foreground="#F1F1F1"
                     Text="{Binding Path=CurrentLine}"
                     TextAlignment="Right" />
                 <Label
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Content="/"
-                    Foreground="White" />
+                    Foreground="#F1F1F1" />
                 <Label
                     x:Name="LineCountLabel"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Content="{Binding LineCount}"
-                    Foreground="White" />
+                    Foreground="#F1F1F1" />
             </StackPanel>
         </DockPanel>
     </Grid>
