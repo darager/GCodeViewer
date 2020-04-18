@@ -111,10 +111,35 @@
             Background="{StaticResource ScrollbarBackgroundColor}"
             Orientation="Horizontal">
 
-            <Label>Ln:</Label>
-
-            <TextBox Width="100" Text="{Binding Path=CurrentLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="{Binding LineCount}" />
+            <StackPanel
+                VerticalAlignment="Stretch"
+                Background="{StaticResource ScrollbarBackgroundColor}"
+                Orientation="Horizontal">
+                <Label
+                    VerticalContentAlignment="Center"
+                    Content="Ln:"
+                    Foreground="White" />
+                <TextBox
+                    Width="{Binding ElementName=LineCountLabel, Path=ActualWidth}"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    Text="{Binding Path=CurrentLine}"
+                    TextAlignment="Right" />
+                <Label
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="/"
+                    Foreground="White" />
+                <Label
+                    x:Name="LineCountLabel"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="{Binding LineCount}"
+                    Foreground="White" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
