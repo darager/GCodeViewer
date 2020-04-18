@@ -13,15 +13,15 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
             "uniform mat4 %UNIFORMNAME%;\n" +
             "void main()\n" +
             "{\n" +
-                "gl_PointSize = 1.0;\n" +
-                "gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
+            "   gl_PointSize = 1.0;\n" +
+            "   gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
             "}";
         private const string _originalFragmentShaderSource =
             "#version 330 core\n" +
             "out vec4 FragColor;\n" +
             "void main()\n" +
             "{\n" +
-                "FragColor = vec4(%RED%, %GREEN%, %BLUE%, %ALPHA%);\n" +
+            "   FragColor = vec4(%RED%, %GREEN%, %BLUE%, %ALPHA%);\n" +
             "}";
 
         private Dictionary<Color, Shader> _shaders = new Dictionary<Color, Shader>();
