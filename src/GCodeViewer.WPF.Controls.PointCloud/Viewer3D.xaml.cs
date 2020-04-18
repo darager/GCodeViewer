@@ -148,7 +148,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             float dx = (float)(e.X - _previousMousePosition.X);
             float dy = (float)(e.Y - _previousMousePosition.Y);
 
-            if ((Control.MouseButtons & MouseButtons.Left) != 0)
+            if ((System.Windows.Forms.Control.MouseButtons & MouseButtons.Left) != 0)
             {
                 float newRotationX = (-dy * _mouseSensitivity) + _camera.RotationX;
                 if (newRotationX >= 90) newRotationX = 90;
@@ -170,7 +170,5 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _camera.Scale = newScale;
         }
-
-
     }
 }
