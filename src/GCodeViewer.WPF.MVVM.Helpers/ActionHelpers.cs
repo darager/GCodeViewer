@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace GCodeViewer.WPF.MVVM.Helpers
 {
-    public static class EventHelpers
+    public static class ActionHelpers
     {
         private static Dictionary<Action, DateTime> _times = new Dictionary<Action, DateTime>();
 
-        public static void ThrottleAction(Action action, int maxTimesPerSecond)
+        public static void Throttle(this Action action, int maxTimesPerSecond)
         {
             if (!_times.ContainsKey(action))
             {
