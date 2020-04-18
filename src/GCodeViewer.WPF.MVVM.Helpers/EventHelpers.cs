@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GCodeViewer.WPF.MVVM.Helpers
 {
@@ -10,9 +7,25 @@ namespace GCodeViewer.WPF.MVVM.Helpers
     {
         private static Dictionary<Action, System.Timers.Timer> _timers = new Dictionary<Action, System.Timers.Timer>();
 
-        public static void DebounceAction(Action action, int delay = 300)
+        public static void DebounceAction(Action action, int delay = 300, bool returnToThread = true)
         {
-            action();
+            if (!_timers.ContainsKey(action))
+            {
+                var timer = new System.Timers.Timer
+                {
+                    AutoReset = false,
+                    Interval = delay
+                };
+                timer.Elapsed += (s, e) => action();
+
+                _timers.Add(action, timer);
+                timer.Start();
+            }
+            else
+            {
+                _timers[action].Stop();
+                _timers[action].Start();
+            }
         }
     }
 }
