@@ -31,7 +31,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             TextEditor.TextChanged += (s, e) => TextChanged?.Invoke(this, TextEditor.Text);
             TextEditor.Document = _doc;
-
         }
 
         private void SetupSyntaxHighlighting()

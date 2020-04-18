@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using ICSharpCode.AvalonEdit.Document;
+using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -48,24 +48,19 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         public StatusBarViewModel(ICSharpCode.AvalonEdit.TextEditor editor)
         {
             _editor = editor;
-            _editor.GotMouseCapture += UpdateCurrentLine;
-            _editor.TextChanged += UpdateCurrentLine;
+
+            _editor.GotMouseCapture += (s, e) => EventHelpers.DebounceAction(UpdateCurrentLine);
+            _editor.TextChanged += (s, e) => EventHelpers.DebounceAction(UpdateCurrentLine);
+
         }
 
-        private void UpdateCurrentLine(object sender, EventArgs e)
+        private void UpdateCurrentLine()
         {
             var offset = _editor.CaretOffset;
             var textlocation = _editor.Document.GetLocation(offset);
 
             LineCount = _editor.Document.LineCount;
             CurrentLine = textlocation.Line.ToString();
-        }
-        private void SetCurrentLine(int line)
-        {
-            var newloc = new TextLocation(line, 0);
-            int offset = _editor.Document.GetOffset(newloc);
-
-            _editor.CaretOffset = offset;
         }
 
         private bool IsNotNumberOrEmpty(string str)
