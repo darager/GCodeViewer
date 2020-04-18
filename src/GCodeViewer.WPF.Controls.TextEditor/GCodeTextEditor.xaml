@@ -92,7 +92,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="18" />
+            <RowDefinition Height="25" />
         </Grid.RowDefinitions>
 
         <avalonEdit:TextEditor
@@ -103,8 +103,17 @@
             ShowLineNumbers="True"
             WordWrap="True" />
 
-        <StatusBar Grid.Row="1" Background="{StaticResource ScrollbarBackgroundColor}">
-            <Button />
-        </StatusBar>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            Background="{StaticResource ScrollbarBackgroundColor}"
+            Orientation="Horizontal">
+            <Label Foreground="White">this is a test</Label>
+            <Label
+                x:Name="locationlabel"
+                HorizontalAlignment="Right"
+                FontSize="10"
+                Foreground="White" />
+        </StackPanel>
     </Grid>
 </UserControl>
