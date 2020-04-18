@@ -6,8 +6,6 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using System.Windows.Input;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -19,37 +17,24 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             set => _doc.Text = value;
         }
 
-        private TextDocument _doc = new TextDocument();
+        private TextDocument _doc;
+        private StatusBarViewModel _statusbarViewModel;
 
         public GCodeTextEditor()
         {
             InitializeComponent();
-
             SetupSyntaxHighlighting();
+
+            _statusbarViewModel = new StatusBarViewModel(TextEditor);
+            Statusbar.DataContext = _statusbarViewModel;
+
+            _doc = new TextDocument();
 
             TextEditor.TextChanged += (s, e) => TextChanged?.Invoke(this, TextEditor.Text);
             TextEditor.Document = _doc;
 
-
-            TextEditor.MouseDown += TextEditor_MouseDown;
-
-            this.DataContext = vm;
         }
 
-
-        private SimpleTestVM vm = new SimpleTestVM();
-        private void TextEditor_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var offset = TextEditor.CaretOffset;
-
-            var textlocation = _doc.GetLocation(offset);
-
-            //var newloc = new TextLocation(300, 0);
-            //TextEditor.CaretOffset = _doc.GetOffset(newloc);
-
-            vm.CurrentLine = textlocation.Line.ToString();
-            //locationlabel.Content = $"Ln:{textlocation.Line} / {_doc.LineCount}";
-        }
 
         private void SetupSyntaxHighlighting()
         {
@@ -66,6 +51,5 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
 
         public EventHandler<string> TextChanged;
-
     }
 }
