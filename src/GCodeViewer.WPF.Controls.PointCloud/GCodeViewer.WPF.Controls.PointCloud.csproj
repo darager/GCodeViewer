@@ -67,6 +67,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,10 +86,19 @@
     <Compile Include="Shaders\Shader.cs" />
     <Compile Include="Shaders\ShaderBuilder.cs" />
     <Compile Include="Primitives\VertexBufferObject.cs" />
+    <Compile Include="Viewer3D.xaml.cs">
+      <DependentUpon>Viewer3D.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Viewer3D.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets" Condition="Exists('..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets')" />

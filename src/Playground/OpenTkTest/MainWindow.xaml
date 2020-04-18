@@ -17,7 +17,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <pcv:PointCloudViewer
+        <pcv:Viewer3D
             x:Name="pclViewer"
             Grid.Column="0"
             Renderables="{Binding PointCloudObjects}" />
