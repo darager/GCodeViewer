@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
@@ -12,9 +13,25 @@ namespace GCodeViewer.WPF.Controls.TextEditor
     {
         public string Text
         {
-            get => _doc.Text;
-            set => _doc.Text = value;
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(
+                "Text",
+                typeof(string),
+                typeof(GCodeTextEditor),
+                new FrameworkPropertyMetadata(HandleTextChange));
+
+        private static void HandleTextChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        //public string Text
+        //{
+        //    get => _doc.Text;
+        //    set => _doc.Text = value;
+        //}
 
         private TextDocument _doc;
         private StatusBarViewModel _statusbarViewModel;
