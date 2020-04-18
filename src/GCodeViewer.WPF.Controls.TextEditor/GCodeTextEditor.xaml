@@ -164,7 +164,7 @@
                     Content="Ln:"
                     Foreground="#F1F1F1" />
                 <TextBox
-                    Width="{Binding ElementName=LineCountLabel, Path=ActualWidth}"
+                    Width="Auto"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Background="Transparent"
