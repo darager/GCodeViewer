@@ -54,7 +54,8 @@ namespace GCodeViewer.WPF.Controls.TextEditor
                 if (value == _fontSize)
                     return;
 
-                _fontSize = value;
+                _fontSize = (value >= 1) ? value : 1;
+
                 OnPropertyChanged("FontSize");
             }
         }
