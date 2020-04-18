@@ -6,6 +6,8 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -26,12 +28,16 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             SetupSyntaxHighlighting();
 
             TextEditor.TextChanged += (s, e) => TextChanged?.Invoke(this, TextEditor.Text);
+            TextEditor.Document = _doc;
+
 
             TextEditor.MouseDown += TextEditor_MouseDown;
 
-            TextEditor.Document = _doc;
+            this.DataContext = vm;
         }
 
+
+        private SimpleTestVM vm = new SimpleTestVM();
         private void TextEditor_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var offset = TextEditor.CaretOffset;
@@ -41,7 +47,8 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             //var newloc = new TextLocation(300, 0);
             //TextEditor.CaretOffset = _doc.GetOffset(newloc);
 
-            locationlabel.Content = $"Ln:{textlocation.Line} / {_doc.LineCount}";
+            vm.CurrentLine = textlocation.Line.ToString();
+            //locationlabel.Content = $"Ln:{textlocation.Line} / {_doc.LineCount}";
         }
 
         private void SetupSyntaxHighlighting()
@@ -59,5 +66,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
 
         public EventHandler<string> TextChanged;
+
     }
 }

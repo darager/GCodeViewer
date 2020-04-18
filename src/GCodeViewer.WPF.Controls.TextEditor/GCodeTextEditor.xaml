@@ -105,15 +105,15 @@
 
         <StackPanel
             Grid.Row="1"
-            HorizontalAlignment="Stretch"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
             Background="{StaticResource ScrollbarBackgroundColor}"
             Orientation="Horizontal">
-            <Label Foreground="White">this is a test</Label>
-            <Label
-                x:Name="locationlabel"
-                HorizontalAlignment="Right"
-                FontSize="10"
-                Foreground="White" />
+
+            <Label>Ln:</Label>
+
+            <TextBox Width="100" Text="{Binding Path=CurrentLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="{Binding LineCount}" />
         </StackPanel>
     </Grid>
 </UserControl>
