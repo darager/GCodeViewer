@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
@@ -43,30 +44,35 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private int _lineCount;
 
-        public int TextSizeFactor
+        public ICommand IncreaseFontSize { get; private set; }
+        public ICommand DecreaseFontSize { get; private set; }
+        public int FontSize
         {
-            get => _textSizeFactor;
+            get => _fontSize;
             set
             {
-                if (value == _textSizeFactor)
+                if (value == _fontSize)
                     return;
 
-                _textSizeFactor = value;
-                OnPropertyChanged("TextSizeFactor");
+                _fontSize = value;
+                OnPropertyChanged("FontSize");
             }
         }
-        private int _textSizeFactor;
+        private int _fontSize;
 
-        private ICSharpCode.AvalonEdit.TextEditor _editor;
+        private readonly ICSharpCode.AvalonEdit.TextEditor _editor;
 
         public StatusBarViewModel(ICSharpCode.AvalonEdit.TextEditor editor)
         {
             _editor = editor;
 
-            Action updateCurrentLine = (Action)UpdateCurrentLine;
-
+            var updateCurrentLine = (Action)UpdateCurrentLine;
             _editor.GotMouseCapture += (s, e) => updateCurrentLine.Throttle(10);
             _editor.TextChanged += (s, e) => updateCurrentLine.Throttle(10);
+
+            FontSize = 12;
+            IncreaseFontSize = new RelayCommand((_) => FontSize++);
+            DecreaseFontSize = new RelayCommand((_) => FontSize--);
         }
 
         private void UpdateCurrentLine()

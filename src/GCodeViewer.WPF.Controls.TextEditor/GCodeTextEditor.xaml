@@ -99,6 +99,7 @@
             x:Name="TextEditor"
             Grid.Row="0"
             Background="#1e1e1e"
+            FontSize="{Binding ElementName=FontSizeChooser, Path=Text}"
             Foreground="LightGray"
             ShowLineNumbers="True"
             WordWrap="True" />
@@ -125,6 +126,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox
+                    x:Name="FontSizeChooser"
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="0"
@@ -133,20 +135,22 @@
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Foreground="#F1F1F1"
-                    Text="{Binding ElementName=TextEditor, Path=FontSize}" />
+                    Text="{Binding FontSize}" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
                     Background="Transparent"
-                    BorderBrush="Transparent">
-                    <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{StaticResource ScrollbarForegroundColor}" />
+                    BorderBrush="Transparent"
+                    Command="{Binding IncreaseFontSize}">
+                    <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="#F1F1F1" />
                 </Button>
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
                     Background="Transparent"
-                    BorderBrush="Transparent">
-                    <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{StaticResource ScrollbarForegroundColor}" />
+                    BorderBrush="Transparent"
+                    Command="{Binding DecreaseFontSize}">
+                    <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="#F1F1F1" />
                 </Button>
             </Grid>
 
