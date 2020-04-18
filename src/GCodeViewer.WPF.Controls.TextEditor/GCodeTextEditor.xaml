@@ -103,15 +103,33 @@
             ShowLineNumbers="True"
             WordWrap="True" />
 
-        <StackPanel
+        <DockPanel
             x:Name="Statusbar"
             Grid.Row="1"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="{StaticResource ScrollbarBackgroundColor}"
-            Orientation="Horizontal">
+            Background="{StaticResource ScrollbarBackgroundColor}">
+
+            <Grid Width="100" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0" />
+                <RepeatButton Grid.Row="0" Grid.Column="1" />
+                <RepeatButton Grid.Row="1" Grid.Column="1" />
+            </Grid>
 
             <StackPanel
+                HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
                 Background="{StaticResource ScrollbarBackgroundColor}"
                 Orientation="Horizontal">
@@ -140,6 +158,6 @@
                     Content="{Binding LineCount}"
                     Foreground="White" />
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

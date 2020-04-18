@@ -43,6 +43,20 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private int _lineCount;
 
+        public int TextSizeFactor
+        {
+            get => _textSizeFactor;
+            set
+            {
+                if (value == _textSizeFactor)
+                    return;
+
+                _textSizeFactor = value;
+                OnPropertyChanged("TextSizeFactor");
+            }
+        }
+        private int _textSizeFactor;
+
         private ICSharpCode.AvalonEdit.TextEditor _editor;
 
         public StatusBarViewModel(ICSharpCode.AvalonEdit.TextEditor editor)
@@ -63,7 +77,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             LineCount = _editor.Document.LineCount;
             CurrentLine = textlocation.Line.ToString();
         }
-
         private bool IsNotNumberOrEmpty(string str)
         {
             return !Regex.IsMatch(str, "^[0-9]*$");
