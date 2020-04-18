@@ -24,13 +24,14 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             SetupSyntaxHighlighting();
 
-            _doc.TextChanged += (s, e) => TextChanged?.Invoke(this, _doc.Text);
+            TextEditor.TextChanged += (s, e) => TextChanged?.Invoke(this, TextEditor.Text);
 
             TextEditor.Document = _doc;
         }
 
         private void SetupSyntaxHighlighting()
         {
+            // TODO: you know what to do
             string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\GCodeViewer.WPF.Controls.TextEditor\GCodeSyntaxHighlighting.xml";
 
             using var stream = File.OpenRead(path);
