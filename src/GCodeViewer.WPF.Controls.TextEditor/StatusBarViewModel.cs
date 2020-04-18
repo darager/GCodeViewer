@@ -29,12 +29,19 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private int _currentLine;
 
-        public string LineCount { get; set; }
+        public int LineCount
+        {
+            get => _lineCount;
+            set
+            {
+                if (value == LineCount)
+                    return;
+
+                _lineCount = value;
+                OnPropertyChanged("LineCount");
+            }
+        }
         private int _lineCount;
-
-        public string FontSizeFactor { get; set; }
-        private float _fontSizeFactor = 1.0f;
-
 
         private ICSharpCode.AvalonEdit.TextEditor _editor;
 
@@ -50,6 +57,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             var offset = _editor.CaretOffset;
             var textlocation = _editor.Document.GetLocation(offset);
 
+            LineCount = _editor.Document.LineCount;
             CurrentLine = textlocation.Line.ToString();
         }
         private void SetCurrentLine(int line)
