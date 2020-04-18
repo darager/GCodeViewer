@@ -5,7 +5,6 @@ using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
-using System.Windows.Input;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -34,7 +33,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             TextEditor.Document = _doc;
 
         }
-
 
         private void SetupSyntaxHighlighting()
         {

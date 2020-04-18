@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -47,16 +48,18 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         private void UpdateCurrentLine(object sender, EventArgs e)
         {
             var offset = _editor.CaretOffset;
-
             var textlocation = _editor.Document.GetLocation(offset);
-
-            // TextEditor.SelectionStart
-
-            //var newloc = new TextLocation(300, 0);
-            //TextEditor.CaretOffset = _doc.GetOffset(newloc);
 
             CurrentLine = textlocation.Line.ToString();
         }
+        private void SetCurrentLine(int line)
+        {
+            var newloc = new TextLocation(line, 0);
+            int offset = _editor.Document.GetOffset(newloc);
+
+            _editor.CaretOffset = offset;
+        }
+
         private bool IsNotNumberOrEmpty(string str)
         {
             return !Regex.IsMatch(str, "^[0-9]*$");
@@ -66,6 +69,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public event PropertyChangedEventHandler PropertyChanged; // should be in viewmodel instead
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
