@@ -5,26 +5,23 @@ namespace GCodeViewer.WPF.MVVM.Helpers
 {
     public static class EventHelpers
     {
-        private static Dictionary<Action, System.Timers.Timer> _timers = new Dictionary<Action, System.Timers.Timer>();
+        private static Dictionary<Action, DateTime> _times = new Dictionary<Action, DateTime>();
 
-        public static void DebounceAction(Action action, int delay = 300, bool returnToThread = true)
+        public static void ThrottleAction(Action action, int maxTimesPerSecond)
         {
-            if (!_timers.ContainsKey(action))
+            if (!_times.ContainsKey(action))
             {
-                var timer = new System.Timers.Timer
-                {
-                    AutoReset = false,
-                    Interval = delay
-                };
-                timer.Elapsed += (s, e) => action();
-
-                _timers.Add(action, timer);
-                timer.Start();
+                _times.Add(action, DateTime.UtcNow);
             }
-            else
+
+            var lastCall = _times[action];
+            var passedTime = DateTime.UtcNow - lastCall;
+
+            int minDelay = 1000 / maxTimesPerSecond;
+            if (passedTime.Milliseconds > minDelay)
             {
-                _timers[action].Stop();
-                _timers[action].Start();
+                _times[action] = DateTime.UtcNow;
+                action();
             }
         }
     }

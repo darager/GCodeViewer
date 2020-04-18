@@ -49,8 +49,8 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             _editor = editor;
 
-            _editor.GotMouseCapture += (s, e) => EventHelpers.DebounceAction(UpdateCurrentLine);
-            _editor.TextChanged += (s, e) => EventHelpers.DebounceAction(UpdateCurrentLine);
+            _editor.GotMouseCapture += (s, e) => EventHelpers.ThrottleAction(UpdateCurrentLine, 10);
+            _editor.TextChanged += (s, e) => EventHelpers.ThrottleAction(UpdateCurrentLine, 10);
 
         }
 
