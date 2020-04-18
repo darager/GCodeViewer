@@ -30,6 +30,9 @@
             VerticalAlignment="Stretch"
             Background="#1e1e1e" />
 
-        <editor:GCodeTextEditor x:Name="TextEditor" Grid.Column="2" />
+        <editor:GCodeTextEditor
+            x:Name="TextEditor"
+            Grid.Column="2"
+            Text="{Binding Text}" />
     </Grid>
 </Window>

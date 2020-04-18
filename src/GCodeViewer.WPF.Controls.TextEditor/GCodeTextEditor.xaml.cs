@@ -25,6 +25,8 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         private static void HandleTextChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            //if (e.NewValue != null)
+            //  _doc.Text = e.NewValue;
         }
 
         //public string Text

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace OpenTkTest
 {
@@ -14,9 +15,12 @@ namespace OpenTkTest
 
                 _text = value;
                 OnPropertyChanged("Text");
+                TextChanged?.Invoke(this, Text);
             }
         }
         private string _text;
+
+        public event EventHandler<string> TextChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
