@@ -1,3 +1,5 @@
+using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace GCodeViewer.WPF.MVVM.Helpers.Tests
@@ -7,7 +9,15 @@ namespace GCodeViewer.WPF.MVVM.Helpers.Tests
         [Test]
         public void ThrottleActionWorks()
         {
-            Assert.Pass();
+            int count = 0;
+            Action action = () => count++;
+
+            for (int i = 0; i < 10; i++)
+            {
+                action.Throttle(5);
+            }
+
+            count.Should().Be(1);
         }
     }
 }

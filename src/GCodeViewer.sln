@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.MVVM.Helpers", "GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj", "{3BAFF321-457D-47A4-A589-D3B197AFC740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.MVVM.Helpers.Tests", "GCodeViewer.WPF.MVVM.Helpers.Tests\GCodeViewer.WPF.MVVM.Helpers.Tests.csproj", "{AB31C8BC-9B89-4984-B77C-CA2842788042}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,26 +156,6 @@ Global
 		{3BAFF321-457D-47A4-A589-D3B197AFC740}.Release|x64.Build.0 = Release|Any CPU
 		{3BAFF321-457D-47A4-A589-D3B197AFC740}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BAFF321-457D-47A4-A589-D3B197AFC740}.Release|x86.Build.0 = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|ARM.Build.0 = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|x64.Build.0 = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Debug|x86.Build.0 = Debug|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|ARM.ActiveCfg = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|ARM.Build.0 = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|ARM64.Build.0 = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|x64.ActiveCfg = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|x64.Build.0 = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|x86.ActiveCfg = Release|Any CPU
-		{AB31C8BC-9B89-4984-B77C-CA2842788042}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
