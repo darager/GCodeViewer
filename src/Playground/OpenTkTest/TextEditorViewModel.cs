@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.WPF.Controls.TextEditor;
 using GCodeViewer.WPF.MVVM.Helpers;
@@ -24,20 +23,14 @@ namespace OpenTkTest
             _viewer3DVM = viewerVM;
             _editor = editor;
 
-            //HandleTextChanged = new RelayCommand((o) =>
-            //{
-            //    Action action = () =>
-            //    {
-            //        string newText = o as string;
-            //        _viewer3DVM.Update3DModel(newText);
-            //    };
-
-            //    action();
-            //    //action.WaitFor(500);
-            //});
+            HandleTextChanged = new RelayCommand((o) =>
+            {
+                string newText = o as string;
+                _viewer3DVM.Update3DModel(newText);
+            });
         }
 
-        private void OnPropertyChanged(string propertyName)
+        public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

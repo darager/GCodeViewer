@@ -13,17 +13,17 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 {
     public partial class GCodeTextEditor : UserControl
     {
+        public ICommand TextChanged
+        {
+            get => (ICommand)this.GetValue(TextChangedProperty);
+            set => this.SetValue(TextChangedProperty, value);
+        }
         public static readonly DependencyProperty TextChangedProperty =
             DependencyProperty.Register(
                 "TextChanged",
                 typeof(ICommand),
                 typeof(GCodeTextEditor));
 
-        public ICommand TextChanged
-        {
-            get => (ICommand)this.GetValue(TextChangedProperty);
-            set => this.SetValue(TextChangedProperty, value);
-        }
         public string Text
         {
             get => _doc.Text;
@@ -37,10 +37,9 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             InitializeComponent();
             SetupSyntaxHighlighting();
 
-            TextEditor.Document = _doc;
-
             Statusbar.DataContext = new StatusBarViewModel(TextEditor);
 
+            TextEditor.Document = _doc;
             _doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
