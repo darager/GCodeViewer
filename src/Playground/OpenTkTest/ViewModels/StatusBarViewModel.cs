@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
 using Microsoft.Win32;
@@ -10,8 +11,12 @@ namespace OpenTkTest.ViewModels
     {
         public ICommand OpenFile { get; private set; }
 
-        public StatusBarViewModel()
+        private readonly TextEditorViewModel _editorVM;
+
+        public StatusBarViewModel(TextEditorViewModel editorVM)
         {
+            _editorVM = editorVM;
+
             OpenFile = new RelayCommand((_) => StartOpenFileDialogue());
         }
 
@@ -25,7 +30,9 @@ namespace OpenTkTest.ViewModels
             if (ofd.ShowDialog() == true)
             {
                 string filePath = ofd.FileName;
+                string content = File.ReadAllText(filePath);
 
+                _editorVM.Text = content;
             }
         }
 

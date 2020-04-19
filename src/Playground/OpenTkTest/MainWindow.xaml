@@ -15,7 +15,6 @@
         <Menu
             x:Name="Statusbar"
             Height="25"
-            Background="#2D2D30"
             DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Command="{Binding OpenFile}" Header="Open" />
