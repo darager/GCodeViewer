@@ -13,36 +13,21 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 {
     public partial class GCodeTextEditor : UserControl
     {
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(
-                "Text",
-                typeof(string),
-                typeof(GCodeTextEditor),
-                new FrameworkPropertyMetadata(HandleTextChange));
-        private static void HandleTextChange(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue is null)
-                return;
-
-            var editor = (GCodeTextEditor)sender;
-            editor._doc.Text = (string)e.NewValue;
-        }
-
         public static readonly DependencyProperty TextChangedProperty =
             DependencyProperty.Register(
                 "TextChanged",
                 typeof(ICommand),
                 typeof(GCodeTextEditor));
 
-        public string Text
-        {
-            get => (string)this.GetValue(TextProperty);
-            set => this.SetValue(TextProperty, value);
-        }
         public ICommand TextChanged
         {
             get => (ICommand)this.GetValue(TextChangedProperty);
             set => this.SetValue(TextChangedProperty, value);
+        }
+        public string Text
+        {
+            get => _doc.Text;
+            set => _doc.Text = value;
         }
 
         private TextDocument _doc = new TextDocument();
@@ -74,8 +59,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private void CallTextChangedCommand()
         {
-            Text = _doc.Text;
-
             if (TextChanged is null)
                 return;
 
