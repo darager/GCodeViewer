@@ -4,7 +4,7 @@ using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
 using Microsoft.Win32;
 
-namespace OpenTkTest
+namespace OpenTkTest.ViewModels
 {
     public class StatusBarViewModel : INotifyPropertyChanged
     {

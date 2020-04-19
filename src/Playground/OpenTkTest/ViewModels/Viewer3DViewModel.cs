@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace OpenTkTest
+namespace OpenTkTest.ViewModels
 {
     public class Viewer3DViewModel : INotifyPropertyChanged
     {

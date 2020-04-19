@@ -3,7 +3,7 @@ using System.Windows.Input;
 using GCodeViewer.WPF.Controls.TextEditor;
 using GCodeViewer.WPF.MVVM.Helpers;
 
-namespace OpenTkTest
+namespace OpenTkTest.ViewModels
 {
     public class TextEditorViewModel : INotifyPropertyChanged
     {

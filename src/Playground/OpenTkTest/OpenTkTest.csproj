@@ -64,8 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="StatusBarViewModel.cs" />
-    <Compile Include="TextEditorViewModel.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="ViewModels\TextEditorViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,7 +80,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Viewer3DViewModel.cs" />
+    <Compile Include="ViewModels\Viewer3DViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +126,7 @@
       <Name>GCodeViewer.WPF.MVVM.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets" Condition="Exists('..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
