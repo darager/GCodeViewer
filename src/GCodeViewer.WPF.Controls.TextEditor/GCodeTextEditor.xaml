@@ -98,6 +98,7 @@
         <avalonEdit:TextEditor
             x:Name="TextEditor"
             Grid.Row="0"
+            Padding="2,0,0,0"
             Background="#1e1e1e"
             FontSize="{Binding ElementName=FontSizeChooser, Path=Text}"
             Foreground="LightGray"

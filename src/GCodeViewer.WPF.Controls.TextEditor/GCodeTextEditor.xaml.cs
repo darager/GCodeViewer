@@ -44,21 +44,18 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             set => this.SetValue(TextChangedProperty, value);
         }
 
-        private TextDocument _doc;
-        private StatusBarViewModel _statusbarViewModel;
+        private TextDocument _doc = new TextDocument();
 
         public GCodeTextEditor()
         {
             InitializeComponent();
             SetupSyntaxHighlighting();
 
-            _statusbarViewModel = new StatusBarViewModel(TextEditor);
-            Statusbar.DataContext = _statusbarViewModel;
-
-            _doc = new TextDocument();
-
-            _doc.TextChanged += (s, e) => CallTextChangedCommand();
             TextEditor.Document = _doc;
+
+            Statusbar.DataContext = new StatusBarViewModel(TextEditor);
+
+            //_doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
         private void SetupSyntaxHighlighting()
