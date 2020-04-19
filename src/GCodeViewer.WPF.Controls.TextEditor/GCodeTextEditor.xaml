@@ -164,12 +164,14 @@
                     VerticalContentAlignment="Center"
                     Content="Ln:"
                     Foreground="#F1F1F1" />
+                <!--  TODO: make this useable  -->
                 <TextBox
                     Width="Auto"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Background="Transparent"
                     BorderBrush="Transparent"
+                    Focusable="False"
                     Foreground="#F1F1F1"
                     Text="{Binding Path=CurrentLine}"
                     TextAlignment="Right" />
