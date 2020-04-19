@@ -12,12 +12,18 @@
     mc:Ignorable="d">
 
     <DockPanel>
-        <StatusBar
+        <Menu
+            x:Name="Statusbar"
             Height="25"
             Background="#2D2D30"
             DockPanel.Dock="Top">
-            <Button Height="Auto" Content="ClickMe" />
-        </StatusBar>
+            <MenuItem Header="File">
+                <MenuItem Command="{Binding OpenFile}" Header="Open" />
+                <MenuItem Command="{Binding SaveFile}" Header="Save" />
+                <MenuItem Command="{Binding SaveAsFile}" Header="SaveAs" />
+                <MenuItem Command="{Binding CloseFile}" Header="Close" />
+            </MenuItem>
+        </Menu>
 
         <Grid Background="DarkGray" DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>

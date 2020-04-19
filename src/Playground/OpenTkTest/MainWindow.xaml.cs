@@ -5,12 +5,15 @@ namespace OpenTkTest
 {
     public partial class MainWindow : Window
     {
+        private StatusBarViewModel _statusbarVM;
         private Viewer3DViewModel _viewer3DVM;
         private TextEditorViewModel _textEditorVM;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Statusbar.DataContext = new StatusBarViewModel();
 
             _viewer3DVM = new Viewer3DViewModel();
             Viewer3D.DataContext = _viewer3DVM;
