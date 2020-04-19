@@ -15,8 +15,7 @@ namespace OpenTkTest
             _viewer3DVM = new Viewer3DViewModel();
             Viewer3D.DataContext = _viewer3DVM;
 
-            _textEditorVM = new TextEditorViewModel();
-            //_textEditorVM.TextChanged += (_, text) => _viewer3DVM.Update3DModel(text);
+            _textEditorVM = new TextEditorViewModel(_viewer3DVM);
             TextEditor.DataContext = _textEditorVM;
 
             string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\Examples\SinkingBenchy.gcode";

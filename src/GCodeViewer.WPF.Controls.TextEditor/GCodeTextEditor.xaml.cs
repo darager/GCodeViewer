@@ -57,7 +57,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             _doc = new TextDocument();
 
-            TextEditor.TextChanged += (s, e) => CallTextChangedCommand();
+            _doc.TextChanged += (s, e) => CallTextChangedCommand();
             TextEditor.Document = _doc;
         }
 
@@ -76,6 +76,8 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private void CallTextChangedCommand()
         {
+            Text = _doc.Text;
+
             if (TextChanged is null)
                 return;
 

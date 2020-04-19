@@ -22,15 +22,22 @@ namespace OpenTkTest
 
         public ICommand HandleTextChanged { get; private set; }
 
+        private Viewer3DViewModel _viewer3DVM;
+
+        public TextEditorViewModel(Viewer3DViewModel viewerVM)
+        {
+            _viewer3DVM = viewerVM;
+
+            HandleTextChanged = new RelayCommand((o) =>
+            {
+                string newText = o as string;
+                _viewer3DVM.Update3DModel(newText);
+            });
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            HandleTextChanged = new RelayCommand((text) =>
-            {
-                int i = 0;
-                i++;
-            });
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }
