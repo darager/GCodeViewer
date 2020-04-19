@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
+using GCodeViewer.WPF.MVVM.Helpers;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
@@ -55,7 +56,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             Statusbar.DataContext = new StatusBarViewModel(TextEditor);
 
-            //_doc.TextChanged += (s, e) => CallTextChangedCommand();
+            _doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
         private void SetupSyntaxHighlighting()
