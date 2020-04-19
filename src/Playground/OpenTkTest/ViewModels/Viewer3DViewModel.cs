@@ -82,11 +82,11 @@ namespace OpenTkTest.ViewModels
         }
 
         private Renderable _model;
-        public void Update3DModel(string newText)
+        public async void Update3DModel(string newText)
         {
             var mainThread = Dispatcher.CurrentDispatcher;
 
-            Task.Factory.StartNew(() =>
+            await Task.Factory.StartNew(() =>
             {
                 var content = newText.Split();
                 var extractor = new GCodeAxisValueExtractor();
@@ -120,7 +120,7 @@ namespace OpenTkTest.ViewModels
                     _model = new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points);
                     PointCloudObjects.Add(_model);
                 });
-            });
+            }).ConfigureAwait(false);
         }
 
         private float Scale(float value, float min, float max, int minScale, int maxScale)

@@ -67,9 +67,11 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             _editor = editor;
 
-            var updateCurrentLine = (Action)UpdateCurrentLine;
-            _editor.GotMouseCapture += (s, e) => updateCurrentLine.Throttle(10);
-            _editor.TextChanged += (s, e) => updateCurrentLine.Throttle(10);
+            var updateCurrentLine = ((Action)UpdateCurrentLine).Throttle(10);
+            _editor.GotMouseCapture += (s, e) => updateCurrentLine();
+            _editor.TextChanged += (s, e) => updateCurrentLine();
+            // TODO: make sure this works
+            //_editor.KeyDown += (s, e) => updateCurrentLine();
 
             FontSize = 12;
             IncreaseFontSize = new RelayCommand((_) => FontSize++);
