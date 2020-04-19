@@ -11,28 +11,37 @@
     Height="800"
     mc:Ignorable="d">
 
-    <Grid Background="DarkGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+        <StatusBar
+            Height="25"
+            Background="#2D2D30"
+            DockPanel.Dock="Top">
+            <Button Height="Auto" Content="ClickMe" />
+        </StatusBar>
 
-        <viewer:Viewer3D
-            x:Name="Viewer3D"
-            Grid.Column="0"
-            Renderables="{Binding PointCloudObjects}" />
+        <Grid Background="DarkGray" DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-        <GridSplitter
-            Grid.Column="1"
-            Width="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Stretch"
-            Background="#1e1e1e" />
+            <viewer:Viewer3D
+                x:Name="Viewer3D"
+                Grid.Column="0"
+                Renderables="{Binding PointCloudObjects}" />
 
-        <editor:GCodeTextEditor
-            x:Name="TextEditor"
-            Grid.Column="2"
-            TextChanged="{Binding HandleTextChanged}" />
-    </Grid>
+            <GridSplitter
+                Grid.Column="1"
+                Width="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch"
+                Background="#1e1e1e" />
+
+            <editor:GCodeTextEditor
+                x:Name="TextEditor"
+                Grid.Column="2"
+                TextChanged="{Binding HandleTextChanged}" />
+        </Grid>
+    </DockPanel>
 </Window>
