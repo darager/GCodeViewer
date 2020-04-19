@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <viewer:Viewer3D
-            x:Name="pclViewer"
+            x:Name="Viewer3D"
             Grid.Column="0"
             Renderables="{Binding PointCloudObjects}" />
 

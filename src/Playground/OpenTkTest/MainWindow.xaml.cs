@@ -5,15 +5,15 @@ namespace OpenTkTest
 {
     public partial class MainWindow : Window
     {
-        private PointCloudViewModel _viewer3DVM;
+        private Viewer3DViewModel _viewer3DVM;
         private TextEditorViewModel _textEditorVM;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _viewer3DVM = new PointCloudViewModel();
-            pclViewer.DataContext = _viewer3DVM;
+            _viewer3DVM = new Viewer3DViewModel();
+            Viewer3D.DataContext = _viewer3DVM;
 
             _textEditorVM = new TextEditorViewModel();
             _textEditorVM.TextChanged += (_, text) => _viewer3DVM.Update3DModel(text);

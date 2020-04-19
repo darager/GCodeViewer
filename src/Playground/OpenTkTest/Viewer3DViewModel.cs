@@ -10,7 +10,7 @@ using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest
 {
-    public class PointCloudViewModel : INotifyPropertyChanged
+    public class Viewer3DViewModel : INotifyPropertyChanged
     {
         float[] _coordinateSytemVertices =
         {
@@ -31,7 +31,7 @@ namespace OpenTkTest
         }
         private ObservableCollection<Renderable> _pointCloudObjects;
 
-        public PointCloudViewModel()
+        public Viewer3DViewModel()
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 

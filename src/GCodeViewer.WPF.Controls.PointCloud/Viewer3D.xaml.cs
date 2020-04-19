@@ -31,9 +31,9 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                 "Renderables",
                 typeof(ObservableCollection<Renderable>),
                 typeof(Viewer3D),
-                new FrameworkPropertyMetadata(DoSomething));
+                new FrameworkPropertyMetadata(UpdateRenderables));
 
-        private static void DoSomething(DependencyObject source, DependencyPropertyChangedEventArgs args)
+        private static void UpdateRenderables(DependencyObject source, DependencyPropertyChangedEventArgs args)
         {
             var pclViewer = (Viewer3D)source;
 
