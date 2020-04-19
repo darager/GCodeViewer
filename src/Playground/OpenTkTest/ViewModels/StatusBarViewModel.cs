@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace OpenTkTest.ViewModels
 {
-    public class StatusBarViewModel : INotifyPropertyChanged
+    public class StatusBarViewModel
     {
         public ICommand OpenFile { get; private set; }
 
@@ -20,7 +20,7 @@ namespace OpenTkTest.ViewModels
             OpenFile = new RelayCommand((_) => StartOpenFileDialogue());
         }
 
-        private void StartOpenFileDialogue()
+        private async void StartOpenFileDialogue()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -30,16 +30,12 @@ namespace OpenTkTest.ViewModels
             if (ofd.ShowDialog() == true)
             {
                 string filePath = ofd.FileName;
-                string content = File.ReadAllText(filePath);
+
+                using var reader = File.OpenText(filePath);
+                string content = await reader.ReadToEndAsync();
 
                 _editorVM.Text = content;
             }
         }
-
-        public void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
