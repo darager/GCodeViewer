@@ -33,6 +33,7 @@
         <editor:GCodeTextEditor
             x:Name="TextEditor"
             Grid.Column="2"
-            Text="{Binding Text}" />
+            Text="{Binding Text}"
+            TextChanged="{Binding HandleTextChanged}" />
     </Grid>
 </Window>

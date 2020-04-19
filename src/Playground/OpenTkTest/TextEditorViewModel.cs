@@ -1,5 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Windows.Input;
+using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace OpenTkTest
 {
@@ -15,16 +16,21 @@ namespace OpenTkTest
 
                 _text = value;
                 OnPropertyChanged("Text");
-                TextChanged?.Invoke(this, Text);
             }
         }
         private string _text;
 
-        public event EventHandler<string> TextChanged;
+        public ICommand HandleTextChanged { get; private set; }
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            HandleTextChanged = new RelayCommand((text) =>
+            {
+                int i = 0;
+                i++;
+            });
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

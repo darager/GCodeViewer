@@ -120,6 +120,10 @@
       <Project>{25ad0cc6-5acc-42cc-9681-7ccd71277dd7}</Project>
       <Name>GCodeViewer.WPF.Controls.TextEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj">
+      <Project>{3baff321-457d-47a4-a589-d3b197afc740}</Project>
+      <Name>GCodeViewer.WPF.MVVM.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets" Condition="Exists('..\..\packages\opentoolkit.redist.glfw.3.3.0-pre20190424184726\build\opentoolkit.redist.glfw.targets')" />
