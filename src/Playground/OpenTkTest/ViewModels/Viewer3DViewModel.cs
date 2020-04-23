@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
@@ -84,7 +85,7 @@ namespace OpenTkTest.ViewModels
         private Renderable _model;
         public async void Update3DModel(string newText)
         {
-            var mainThread = Dispatcher.CurrentDispatcher;
+            var uiThread = Application.Current.Dispatcher;
 
             await Task.Factory.StartNew(() =>
             {
@@ -112,7 +113,7 @@ namespace OpenTkTest.ViewModels
                     verts.Add(Scale(point.X, min, max, -1, 1));
                 }
 
-                mainThread.Invoke(() =>
+                uiThread.Invoke(() =>
                 {
                     if (_model != null)
                         PointCloudObjects.Remove(_model);
