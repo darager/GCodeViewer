@@ -5,6 +5,6 @@ namespace OpenTkTest.Printbeds
 {
     public interface ICompositeRenderable
     {
-        List<Renderable> Parts { get; }
+        void AddTo(ICollection<Renderable> collection);
     }
 }

@@ -5,22 +5,14 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
+using OpenTkTest.Printbeds;
 
 namespace OpenTkTest.ViewModels
 {
     public class Viewer3DViewModel : INotifyPropertyChanged
     {
-        float[] _coordinateSytemVertices =
-        {
-            0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-            0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-            0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
-        };
-
-
         public ObservableCollection<Renderable> PointCloudObjects
         {
             get => _pointCloudObjects;
@@ -36,7 +28,18 @@ namespace OpenTkTest.ViewModels
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 
-            PointCloudObjects.Add(new Renderable(Color.Red, _coordinateSytemVertices, RenderableType.Lines));
+            float[] coordinateSytemVertices =
+            {
+                0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
+                0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
+                0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
+            };
+            PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
+
+
+            // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
+            var printbed = new CircularPrintbed(50, Color.DarkGray, Color.White);
+            printbed.AddTo(PointCloudObjects);
         }
 
         private Renderable _model;

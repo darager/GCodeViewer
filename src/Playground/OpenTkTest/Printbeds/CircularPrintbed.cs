@@ -10,14 +10,14 @@ namespace OpenTkTest.Printbeds
 {
     public class CircularPrintbed : ICompositeRenderable
     {
-        public List<Renderable> Parts { get; private set; }
+        private List<Renderable> _parts = new List<Renderable>();
 
         public CircularPrintbed(float radius, Color color, Color lineColo, int triangleCount = 32)
         {
             List<float> printbedVerts = GetPrintbedVerts(radius, triangleCount);
             var printbed = new Renderable(color, printbedVerts.ToArray(), RenderableType.Triangles);
 
-            Parts.Add(printbed);
+            _parts.Add(printbed);
         }
 
         private static List<float> GetPrintbedVerts(float radius, int triangleCount)
@@ -40,6 +40,12 @@ namespace OpenTkTest.Printbeds
             }
 
             return verts;
+        }
+
+        public void AddTo(ICollection<Renderable> collection)
+        {
+            foreach (var part in _parts)
+                collection.Add(part);
         }
     }
 }
