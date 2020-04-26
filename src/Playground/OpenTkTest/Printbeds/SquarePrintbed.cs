@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenTkTest._3DObjects
+namespace OpenTkTest.Printbeds
 {
-    public class CircularPrintbed
+    public class SquarePrintbed
     {
     }
 }
