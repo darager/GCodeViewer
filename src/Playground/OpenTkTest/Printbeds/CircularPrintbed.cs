@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest.Printbeds
@@ -17,39 +14,17 @@ namespace OpenTkTest.Printbeds
             List<float> printbedVerts = GetPrintbedVerts(radius, triangleCount);
             var printbed = new Renderable(color, printbedVerts.ToArray(), RenderableType.Triangles);
 
-            List<float> lineVerts = GetLineVertices(radius, triangleCount);
+            List<float> lineVerts = GetLineVertices(radius, 101);
             var lines = new Renderable(lineColo, lineVerts.ToArray(), RenderableType.Lines);
 
             _parts.Add(printbed);
             _parts.Add(lines);
         }
 
-        private List<float> GetLineVertices(float radius, int triangleCount)
+        // TODO: implement
+        private List<float> GetLineVertices(float radius, int lineCount)
         {
-            var verts = new List<float>();
-            float dAngle = (float)(2 * Math.PI / triangleCount);
-            for (int i = 0; i < triangleCount; i++)
-            {
-                float angle = i * dAngle;
-
-                verts.Add(0);
-                verts.Add((float)Math.Cos(angle) * radius);
-                verts.Add((float)Math.Sin(angle) * radius);
-
-                verts.Add(0);
-                verts.Add(-(float)Math.Cos(angle) * radius);
-                verts.Add((float)Math.Sin(angle) * radius);
-
-                verts.Add(0);
-                verts.Add((float)Math.Cos(angle) * radius);
-                verts.Add((float)Math.Sin(angle) * radius);
-
-                verts.Add(0);
-                verts.Add((float)Math.Cos(angle) * radius);
-                verts.Add(-(float)Math.Sin(angle) * radius);
-            }
-
-            return verts;
+            return new List<float>();
         }
         private static List<float> GetPrintbedVerts(float radius, int triangleCount)
         {
@@ -61,12 +36,12 @@ namespace OpenTkTest.Printbeds
 
                 verts.AddRange(new List<float> { 0, 0, 0 });
 
-                verts.Add(0);
                 verts.Add((float)Math.Cos(angle) * radius);
+                verts.Add(0);
                 verts.Add((float)Math.Sin(angle) * radius);
 
-                verts.Add(0);
                 verts.Add((float)Math.Cos(angle + dAngle) * radius);
+                verts.Add(0);
                 verts.Add((float)Math.Sin(angle + dAngle) * radius);
             }
 
