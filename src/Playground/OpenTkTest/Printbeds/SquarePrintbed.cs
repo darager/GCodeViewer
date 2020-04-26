@@ -6,11 +6,11 @@ namespace OpenTkTest.Printbeds
 {
     public class SquarePrintbed : ICompositeRenderable
     {
-        private List<Renderable> _parts = new List<Renderable>();
+        private readonly List<Renderable> _parts = new List<Renderable>();
 
         public SquarePrintbed(float x, float y, Color color, Color lineColor)
         {
-            var lineVerts = GetLineVertices().ToArray();
+            var lineVerts = GetLineVertices(x, y).ToArray();
             var lines = new Renderable(lineColor, lineVerts, RenderableType.Lines);
             _parts.Add(lines);
 
@@ -19,29 +19,34 @@ namespace OpenTkTest.Printbeds
             _parts.Add(bed);
         }
 
-        private List<float> GetLineVertices(int lineCount = 10)
+        private List<float> GetLineVertices(float x, float y, int lineCount = 10)
         {
             var gridverts = new List<float>();
 
-            float lineSpacing = 2.0f / lineCount;
+            float xSpacing = x / lineCount;
             for (int i = 0; i < lineCount + 1; i++)
             {
-                float spacing = lineSpacing * i;
-                gridverts.Add(-1 + spacing);
+                float dx = xSpacing * i;
+                gridverts.Add(dx);
                 gridverts.Add(0);
-                gridverts.Add(1);
+                gridverts.Add(y);
 
-                gridverts.Add(-1 + spacing);
+                gridverts.Add(dx);
                 gridverts.Add(0);
-                gridverts.Add(-1);
+                gridverts.Add(0);
+            }
 
-                gridverts.Add(-1);
+            float ySpacing = y / lineCount;
+            for (int i = 0; i < lineCount + 1; i++)
+            {
+                float dy = ySpacing * i;
+                gridverts.Add(x);
                 gridverts.Add(0);
-                gridverts.Add(-1 + spacing);
+                gridverts.Add(dy);
 
-                gridverts.Add(1);
                 gridverts.Add(0);
-                gridverts.Add(-1 + spacing);
+                gridverts.Add(0);
+                gridverts.Add(dy);
             }
 
             return gridverts;
