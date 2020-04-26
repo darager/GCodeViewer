@@ -12,14 +12,45 @@ namespace OpenTkTest.Printbeds
     {
         private List<Renderable> _parts = new List<Renderable>();
 
-        public CircularPrintbed(float radius, Color color, Color lineColo, int triangleCount = 32)
+        public CircularPrintbed(float radius, Color color, Color lineColo, int triangleCount = 64)
         {
             List<float> printbedVerts = GetPrintbedVerts(radius, triangleCount);
             var printbed = new Renderable(color, printbedVerts.ToArray(), RenderableType.Triangles);
 
+            List<float> lineVerts = GetLineVertices(radius, triangleCount);
+            var lines = new Renderable(lineColo, lineVerts.ToArray(), RenderableType.Lines);
+
             _parts.Add(printbed);
+            _parts.Add(lines);
         }
 
+        private List<float> GetLineVertices(float radius, int triangleCount)
+        {
+            var verts = new List<float>();
+            float dAngle = (float)(2 * Math.PI / triangleCount);
+            for (int i = 0; i < triangleCount; i++)
+            {
+                float angle = i * dAngle;
+
+                verts.Add(0);
+                verts.Add((float)Math.Cos(angle) * radius);
+                verts.Add((float)Math.Sin(angle) * radius);
+
+                verts.Add(0);
+                verts.Add(-(float)Math.Cos(angle) * radius);
+                verts.Add((float)Math.Sin(angle) * radius);
+
+                verts.Add(0);
+                verts.Add((float)Math.Cos(angle) * radius);
+                verts.Add((float)Math.Sin(angle) * radius);
+
+                verts.Add(0);
+                verts.Add((float)Math.Cos(angle) * radius);
+                verts.Add(-(float)Math.Sin(angle) * radius);
+            }
+
+            return verts;
+        }
         private static List<float> GetPrintbedVerts(float radius, int triangleCount)
         {
             var verts = new List<float>();

@@ -36,9 +36,8 @@ namespace OpenTkTest.ViewModels
             };
             PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
 
-
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            var printbed = new CircularPrintbed(50, Color.DarkGray, Color.White);
+            var printbed = new CircularPrintbed(5, Color.DarkGray, Color.White);
             printbed.AddTo(PointCloudObjects);
         }
 
