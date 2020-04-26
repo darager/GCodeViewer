@@ -1,52 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest.Printbeds
 {
-    public class SquarePrintbed
+    public class SquarePrintbed : ICompositeRenderable
     {
-        //var gridverts = new List<float>();
+        private List<Renderable> _parts = new List<Renderable>();
 
-        //int lineCount = 10;
-        //float xSpacing = 2.0f / lineCount;
-        //for (int i = 0; i < lineCount + 1; i++)
-        //{
-        //    float dx = xSpacing * i;
-        //    gridverts.Add(-1 + dx);
-        //    gridverts.Add(0);
-        //    gridverts.Add(1);
+        public SquarePrintbed(float x, float y, Color color, Color lineColor)
+        {
+            var lineVerts = GetLineVertices().ToArray();
+            var lines = new Renderable(lineColor, lineVerts, RenderableType.Lines);
+            _parts.Add(lines);
 
-        //    gridverts.Add(-1 + dx);
-        //    gridverts.Add(0);
-        //    gridverts.Add(-1);
-        //}
-        //float ySpacing = 2.0f / lineCount;
-        //for (int i = 0; i < lineCount + 1; i++)
-        //{
-        //    float dy = xSpacing * i;
-        //    gridverts.Add(-1);
-        //    gridverts.Add(0);
-        //    gridverts.Add(-1 + dy);
+            var bedVerts = GetPrintbedVertices(x, y).ToArray();
+            var bed = new Renderable(color, bedVerts, RenderableType.Triangles);
+            _parts.Add(bed);
+        }
 
-        //    gridverts.Add(1);
-        //    gridverts.Add(0);
-        //    gridverts.Add(-1 + dy);
-        //}
-        //PointCloudObjects.Add(new Renderable(Color.LightGray, gridverts.ToArray(), RenderableType.Lines));
+        private List<float> GetLineVertices(int lineCount = 10)
+        {
+            var gridverts = new List<float>();
 
-        //float[] verts =
-        //{
-        //    1, 0, 1,
-        //    1, 0, -1,
-        //    -1, 0, -1,
+            float lineSpacing = 2.0f / lineCount;
+            for (int i = 0; i < lineCount + 1; i++)
+            {
+                float spacing = lineSpacing * i;
+                gridverts.Add(-1 + spacing);
+                gridverts.Add(0);
+                gridverts.Add(1);
 
-        //    -1, 0, 1,
-        //    -1, 0, -1,
-        //    1, 0, 1,
-        //};
-        //PointCloudObjects.Add(new Renderable(Color.DarkGray, verts, RenderableType.Triangles));
+                gridverts.Add(-1 + spacing);
+                gridverts.Add(0);
+                gridverts.Add(-1);
+
+                gridverts.Add(-1);
+                gridverts.Add(0);
+                gridverts.Add(-1 + spacing);
+
+                gridverts.Add(1);
+                gridverts.Add(0);
+                gridverts.Add(-1 + spacing);
+            }
+
+            return gridverts;
+        }
+        private List<float> GetPrintbedVertices(float x, float y)
+        {
+            var verts = new List<float>();
+
+            verts.AddRange(new List<float> { 0, 0, 0 });
+            verts.AddRange(new List<float> { x, 0, 0 });
+            verts.AddRange(new List<float> { x, 0, y });
+
+            verts.AddRange(new List<float> { 0, 0, 0 });
+            verts.AddRange(new List<float> { 0, 0, y });
+            verts.AddRange(new List<float> { x, 0, y });
+
+            return verts;
+        }
+
+        public void AddTo(ICollection<Renderable> collection)
+        {
+            foreach (Renderable part in _parts)
+                collection.Add(part);
+        }
     }
 }
