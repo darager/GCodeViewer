@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.MVVM.Helper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls", "GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj", "{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlTest", "UserControlTest\UserControlTest.csproj", "{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,12 +180,33 @@ Global
 		{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}.Release|x64.Build.0 = Release|Any CPU
 		{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}.Release|x86.ActiveCfg = Release|Any CPU
 		{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}.Release|x86.Build.0 = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|x64.Build.0 = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Debug|x86.Build.0 = Debug|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|ARM.Build.0 = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|ARM64.Build.0 = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|x64.ActiveCfg = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|x64.Build.0 = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|x86.ActiveCfg = Release|Any CPU
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{79341027-20C2-4AA7-A18E-32CB0B8913D4} = {BDD28A23-614E-47D1-8B55-E940DC59DBEF}
+		{B157BE87-BD27-4B2A-89AB-E26CFA23AB17} = {BDD28A23-614E-47D1-8B55-E940DC59DBEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D1A69A3-5F6E-4EAE-91B3-DE068366B479}
