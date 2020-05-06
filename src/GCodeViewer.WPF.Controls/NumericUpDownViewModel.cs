@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Media;
+using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -95,6 +96,16 @@ namespace GCodeViewer.WPF.Controls
 
         public NumericUpDownViewModel()
         {
+            DecreaseValue = new RelayCommand((_) =>
+            {
+                float newValue = Value - StepSize;
+                this.Value = (newValue < MaxValue) ? MaxValue : newValue;
+            });
+            IncreaseValue = new RelayCommand((_) =>
+            {
+                float newValue = Value + StepSize;
+                this.Value = (newValue > MaxValue) ? MaxValue : newValue;
+            });
         }
 
         private void OnPropertyChanged(string propertyName)
