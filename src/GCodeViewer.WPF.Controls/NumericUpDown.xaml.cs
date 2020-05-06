@@ -23,6 +23,7 @@ namespace GCodeViewer.WPF.Controls
         public NumericUpDown()
         {
             InitializeComponent();
+            this.DataContext = new NumericUpDownViewModel();
         }
     }
 }
