@@ -4,15 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="200"
+    MaxHeight="50"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
     mc:Ignorable="d">
+
     <Grid
-        MaxWidth="200"
-        MaxHeight="50"
         Margin="3"
         HorizontalAlignment="Stretch"
-        Background="CornflowerBlue">
+        Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -28,23 +29,24 @@
             Grid.Column="0"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Background="Transparent"
+            Background="{Binding Background}"
             BorderBrush="Transparent"
-            Foreground="#F1F1F1" />
+            Foreground="{Binding Foreground}"
+            Text="{Binding Value}" />
         <Button
             Grid.Row="0"
             Grid.Column="1"
-            Background="Transparent"
+            Background="{Binding Background}"
             BorderBrush="transparent"
             DockPanel.Dock="Top">
-            <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="#F1F1F1" />
+            <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{Binding Foreground}" />
         </Button>
         <Button
             Grid.Row="1"
             Grid.Column="1"
-            Background="Transparent"
+            Background="{Binding Background}"
             BorderBrush="Transparent">
-            <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="#F1F1F1" />
+            <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
         </Button>
     </Grid>
 </UserControl>

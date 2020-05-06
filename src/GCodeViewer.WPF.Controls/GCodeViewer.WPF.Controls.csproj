@@ -58,6 +58,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NumericUpDownViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

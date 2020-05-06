@@ -5,18 +5,18 @@ namespace GCodeViewer.WPF.Controls
 {
     public class NumericUpDownViewModel : INotifyPropertyChanged
     {
-        public float Value
+        public string Text
         {
-            get => _value;
+            get => _text;
             set
             {
-                if (value == _value) return;
+                if (value == _text) return;
 
-                _value = value;
+                _text = value;
                 OnPropertyChanged("Value");
             }
         }
-        private float _value;
+        private string _text;
 
         public float MinValue
         {

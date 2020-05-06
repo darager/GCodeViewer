@@ -15,15 +15,19 @@ using System.Windows.Shapes;
 
 namespace GCodeViewer.WPF.Controls
 {
-    /// <summary>
-    /// Interaction logic for UserControl1.xaml
-    /// </summary>
     public partial class NumericUpDown : UserControl
     {
         public NumericUpDown()
         {
             InitializeComponent();
-            this.DataContext = new NumericUpDownViewModel();
+            var viewmodel = new NumericUpDownViewModel();
+
+            // HACK: only for design time
+            viewmodel.Foreground = new SolidColorBrush(Colors.White);
+            viewmodel.Background = new SolidColorBrush(Colors.DarkGray);
+
+
+            this.DataContext = viewmodel;
         }
     }
 }
