@@ -5,6 +5,12 @@ namespace GCodeViewer.WPF.Controls
 {
     public class NumericUpDownViewModel : INotifyPropertyChanged
     {
+        public float Value
+        {
+            get;
+            set;
+        }
+
         public string Text
         {
             get => _text;
