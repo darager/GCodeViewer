@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="GCodeViewer.WPF.Controls.NumericUpDown"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
