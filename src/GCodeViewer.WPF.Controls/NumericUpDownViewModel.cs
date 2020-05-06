@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace GCodeViewer.WPF.Controls
@@ -35,7 +36,7 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("MinValue");
             }
         }
-        private float _minValue;
+        private float _minValue = 0;
 
         public float MaxValue
         {
@@ -48,7 +49,7 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("MaxValue");
             }
         }
-        private float _maxValue;
+        private float _maxValue = 100;
 
         public float StepSize
         {
@@ -61,7 +62,7 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("StepSize");
             }
         }
-        private float _stepSize;
+        private float _stepSize = 10;
 
         public Brush Foreground
         {
@@ -74,7 +75,7 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("Foreground");
             }
         }
-        private Brush _foreground;
+        private Brush _foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
         public Brush Background
         {
@@ -87,7 +88,10 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("Background");
             }
         }
-        private Brush _background;
+        private Brush _background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+
+        public ICommand DecreaseValue { get; private set; }
+        public ICommand IncreaseValue { get; private set; }
 
         public NumericUpDownViewModel()
         {
