@@ -8,7 +8,10 @@ namespace UserControlTest
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new NumUpDownViewModel();
+            var vm = new NumUpDownViewModel();
+            this.DataContext = vm;
+
+            vm.Value = 111;
         }
     }
 

@@ -16,6 +16,6 @@
             Foreground="White"
             MaxValue="200"
             MinValue="-100"
-            Value="100" />
+            Value="{Binding Path=Value, Mode=TwoWay}" />
     </Grid>
 </Window>
