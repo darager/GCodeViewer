@@ -50,31 +50,6 @@ namespace GCodeViewer.WPF.Controls
         public float MinValue { get; set; } = 0;
         public float MaxValue { get; set; } = 100;
 
-        public Brush Foreground
-        {
-            get => _foreground;
-            set
-            {
-                if (value == _foreground) return;
-
-                _foreground = value;
-                OnPropertyChanged("Foreground");
-            }
-        }
-        public Brush Background
-        {
-            get => _background;
-            set
-            {
-                if (value == _background) return;
-
-                _background = value;
-                OnPropertyChanged("Background");
-            }
-        }
-        private Brush _foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-        private Brush _background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-
         public ICommand DecreaseValue { get; private set; }
         public ICommand IncreaseValue { get; private set; }
 

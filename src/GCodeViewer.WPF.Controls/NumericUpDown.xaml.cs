@@ -81,13 +81,8 @@ namespace GCodeViewer.WPF.Controls
             DependencyProperty.Register(
                 "Background",
                 typeof(Brush),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateBackground));
-        private static void UpdateBackground(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.Background = (Brush)e.NewValue;
-        }
-
+                typeof(NumericUpDown),
+                new PropertyMetadata(new SolidColorBrush(Color.FromRgb(239, 239, 245))));
         new public Brush Foreground
         {
             get => (Brush)this.GetValue(ForegroundProperty);
@@ -97,12 +92,8 @@ namespace GCodeViewer.WPF.Controls
             DependencyProperty.Register(
                 "Foreground",
                 typeof(Brush),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateForeground));
-        private static void UpdateForeground(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.Foreground = (Brush)e.NewValue;
-        }
+                typeof(NumericUpDown),
+                new PropertyMetadata(new SolidColorBrush(Color.FromRgb(51, 51, 77))));
         #endregion
 
         internal NumericUpDownViewModel ViewModel;
@@ -110,11 +101,12 @@ namespace GCodeViewer.WPF.Controls
         public NumericUpDown()
         {
             InitializeComponent();
+            this.DataContext = this;
 
             ViewModel = new NumericUpDownViewModel();
-            ViewModel.ValueChanged += (_, newValue) => this.Value = newValue;
+            //ViewModel.ValueChanged += (_, newValue) => this.Value = newValue;
 
-            this.DataContext = ViewModel;
+            //this.DataContext = ViewModel;
         }
 
         private Regex _numberPattern = new Regex("^-?\\d*\\.?\\d*$");

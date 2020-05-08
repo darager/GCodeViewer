@@ -14,8 +14,6 @@
         <ctrl:NumericUpDown
             x:Name="numUpDown"
             Height="100"
-            Background="LightGray"
-            Foreground="DarkGray"
             MaxValue="200"
             MinValue="-100"
             Value="{Binding NumValue}" />
