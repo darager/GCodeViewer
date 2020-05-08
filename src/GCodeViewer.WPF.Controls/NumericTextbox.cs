@@ -4,7 +4,7 @@ namespace GCodeViewer.WPF.Controls
 {
     public class NumericTextbox : TextBox
     {
-        public NumericTextbox()
+        public NumericTextbox() : base()
         {
 
         }

@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GCodeViewer.WPF.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="200"
     MaxHeight="50"
@@ -25,7 +26,8 @@
                 <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
 
-            <TextBox
+
+            <local:NumericTextbox
                 x:Name="TextBox"
                 Grid.Row="0"
                 Grid.RowSpan="2"
