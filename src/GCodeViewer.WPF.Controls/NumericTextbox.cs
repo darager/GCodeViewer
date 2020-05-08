@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -6,7 +7,27 @@ namespace GCodeViewer.WPF.Controls
 {
     public class NumericTextbox : TextBox
     {
-        // TODO: Handle constraints in this class
+        public float MinValue
+        {
+            get => (float)this.GetValue(MinValueProperty);
+            set => this.SetValue(MinValueProperty, value);
+        }
+        public static readonly DependencyProperty MinValueProperty =
+            DependencyProperty.Register(
+                "MinValue",
+                typeof(float), typeof(NumericTextbox),
+                new PropertyMetadata(float.NaN));
+
+        public float MaxValue
+        {
+            get => (float)this.GetValue(MaxValueProperty);
+            set => this.SetValue(MaxValueProperty, value);
+        }
+        public static readonly DependencyProperty MaxValueProperty =
+            DependencyProperty.Register(
+                "MaxValue",
+                typeof(float), typeof(NumericTextbox),
+                new PropertyMetadata(float.NaN));
 
         public NumericTextbox() : base()
         {
