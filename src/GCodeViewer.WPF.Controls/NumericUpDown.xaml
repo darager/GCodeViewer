@@ -26,7 +26,6 @@
                 <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
 
-
             <local:NumericTextbox
                 x:Name="TextBox"
                 Grid.Row="0"
