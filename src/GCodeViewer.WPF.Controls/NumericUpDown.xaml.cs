@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -104,12 +105,28 @@ namespace GCodeViewer.WPF.Controls
         }
         #endregion
 
-        internal NumericUpDownViewModel ViewModel = new NumericUpDownViewModel();
+        internal NumericUpDownViewModel ViewModel;
 
         public NumericUpDown()
         {
             InitializeComponent();
+
+            ViewModel = new NumericUpDownViewModel(TextBox);
+
             this.DataContext = ViewModel;
+
+            TextBox.PreviewTextInput += EnsureNumberInput;
+            TextBox.LostFocus += SetToLastValidValue;
+        }
+
+        private void SetToLastValidValue(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Text = ViewModel.Value.ToString();
+        }
+        private Regex _numberPattern = new Regex("^-?\\d*\\.?\\d*$");
+        private void EnsureNumberInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !_numberPattern.IsMatch(e.Text);
         }
     }
 }

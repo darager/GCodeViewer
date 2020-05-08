@@ -13,8 +13,10 @@
     <Grid
         Margin="3"
         HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
         Background="{Binding Background}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -24,6 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBox
+            x:Name="TextBox"
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="0"
@@ -32,7 +35,7 @@
             Background="Transparent"
             BorderBrush="Transparent"
             Foreground="{Binding Foreground}"
-            Text="{Binding Text, Mode=TwoWay}" />
+            Text="{Binding Path=Text, Mode=TwoWay}" />
 
         <Button
             Grid.Row="0"
@@ -52,5 +55,7 @@
             Command="{Binding DecreaseValue}">
             <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
         </Button>
+
+        <Button Grid.Row="2" Background="Black" />
     </Grid>
 </UserControl>

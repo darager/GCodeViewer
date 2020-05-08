@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GCodeViewer.WPF.MVVM.Helpers;
@@ -31,9 +33,13 @@ namespace GCodeViewer.WPF.Controls
             get => _text;
             set
             {
-                if (value == _text) return;
+                if (_text == value) return;
 
                 _text = value;
+
+                if (!(Text == "-"))
+                    Value = float.Parse(Text);
+
                 OnPropertyChanged("Text");
             }
         }
@@ -67,20 +73,29 @@ namespace GCodeViewer.WPF.Controls
         public ICommand DecreaseValue { get; private set; }
         public ICommand IncreaseValue { get; private set; }
 
-        public NumericUpDownViewModel()
+        private TextBox InputTextBox;
+
+        public NumericUpDownViewModel(TextBox inputBox)
         {
-            DecreaseValue = new RelayCommand((_) =>
+            InputTextBox = inputBox;
+
+            InitCommands();
+
+            Text = Value.ToString();
+        }
+
+        private void InitCommands()
+        {
+            this.DecreaseValue = new RelayCommand((_) =>
             {
                 float newValue = Value - StepSize;
                 this.Value = (newValue < MinValue) ? MinValue : newValue;
             });
-            IncreaseValue = new RelayCommand((_) =>
+            this.IncreaseValue = new RelayCommand((_) =>
             {
                 float newValue = Value + StepSize;
                 this.Value = (newValue > MaxValue) ? MaxValue : newValue;
             });
-
-            Text = Value.ToString();
         }
 
         private void OnPropertyChanged(string propertyName)
