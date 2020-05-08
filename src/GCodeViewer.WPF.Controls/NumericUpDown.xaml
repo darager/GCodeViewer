@@ -32,22 +32,24 @@
             Background="Transparent"
             BorderBrush="Transparent"
             Foreground="{Binding Foreground}"
-            Text="{Binding Text}" />
+            Text="{Binding Text, Mode=TwoWay}" />
+
         <Button
             Grid.Row="0"
             Grid.Column="1"
             Background="Transparent"
             BorderBrush="transparent"
-            Click="{Binding IncreaseValue}"
+            Command="{Binding IncreaseValue}"
             DockPanel.Dock="Top">
             <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{Binding Foreground}" />
         </Button>
+
         <Button
             Grid.Row="1"
             Grid.Column="1"
             Background="Transparent"
             BorderBrush="Transparent"
-            Click="{Binding DecreaseValue}">
+            Command="{Binding DecreaseValue}">
             <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
         </Button>
     </Grid>

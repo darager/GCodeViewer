@@ -9,9 +9,22 @@ namespace GCodeViewer.WPF.Controls
     {
         public float Value
         {
-            get;
-            set;
+            get => _value;
+            set
+            {
+                if (_value == value) return;
+
+                _value = value;
+
+                Text = _value.ToString();
+            }
         }
+        public float _value = 0;
+
+        public float StepSize { get; set; } = 10;
+
+        public float MinValue { get; set; } = 0;
+        public float MaxValue { get; set; } = 100;
 
         public string Text
         {
@@ -21,49 +34,10 @@ namespace GCodeViewer.WPF.Controls
                 if (value == _text) return;
 
                 _text = value;
-                OnPropertyChanged("Value");
+                OnPropertyChanged("Text");
             }
         }
         private string _text;
-
-        public float MinValue
-        {
-            get => _minValue;
-            set
-            {
-                if (value == _minValue) return;
-
-                _minValue = value;
-                OnPropertyChanged("MinValue");
-            }
-        }
-        private float _minValue = 0;
-
-        public float MaxValue
-        {
-            get => _maxValue;
-            set
-            {
-                if (value == _maxValue) return;
-
-                _maxValue = value;
-                OnPropertyChanged("MaxValue");
-            }
-        }
-        private float _maxValue = 100;
-
-        public float StepSize
-        {
-            get => _stepSize;
-            set
-            {
-                if (value == _stepSize) return;
-
-                _stepSize = value;
-                OnPropertyChanged("StepSize");
-            }
-        }
-        private float _stepSize = 10;
 
         public Brush Foreground
         {
@@ -76,8 +50,6 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("Foreground");
             }
         }
-        private Brush _foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-
         public Brush Background
         {
             get => _background;
@@ -89,6 +61,7 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("Background");
             }
         }
+        private Brush _foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         private Brush _background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
         public ICommand DecreaseValue { get; private set; }
@@ -99,13 +72,15 @@ namespace GCodeViewer.WPF.Controls
             DecreaseValue = new RelayCommand((_) =>
             {
                 float newValue = Value - StepSize;
-                this.Value = (newValue < MaxValue) ? MaxValue : newValue;
+                this.Value = (newValue < MinValue) ? MinValue : newValue;
             });
             IncreaseValue = new RelayCommand((_) =>
             {
                 float newValue = Value + StepSize;
                 this.Value = (newValue > MaxValue) ? MaxValue : newValue;
             });
+
+            Text = Value.ToString();
         }
 
         private void OnPropertyChanged(string propertyName)

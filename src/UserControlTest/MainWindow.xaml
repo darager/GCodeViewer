@@ -11,6 +11,10 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <ctrl:NumericUpDown Background="DarkGray" Foreground="White" />
+        <ctrl:NumericUpDown
+            Background="DarkGray"
+            Foreground="White"
+            MaxValue="100"
+            MinValue="-100" />
     </Grid>
 </Window>
