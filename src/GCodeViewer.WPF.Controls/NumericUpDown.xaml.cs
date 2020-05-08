@@ -1,7 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -16,13 +18,8 @@ namespace GCodeViewer.WPF.Controls
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(
                 "Value",
-                typeof(float),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateValue));
-        private static void UpdateValue(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.Value = (float)e.NewValue;
-        }
+                typeof(float), typeof(NumericUpDown),
+        new PropertyMetadata(0.0f));
 
         public float MinValue
         {
@@ -32,13 +29,8 @@ namespace GCodeViewer.WPF.Controls
         public static readonly DependencyProperty MinValueProperty =
             DependencyProperty.Register(
                 "MinValue",
-                typeof(float),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateMinValue));
-        private static void UpdateMinValue(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.MinValue = (float)e.NewValue;
-        }
+                typeof(float), typeof(NumericUpDown),
+                new PropertyMetadata(0.0f));
 
         public float MaxValue
         {
@@ -48,13 +40,8 @@ namespace GCodeViewer.WPF.Controls
         public static readonly DependencyProperty MaxValueProperty =
             DependencyProperty.Register(
                 "MaxValue",
-                typeof(float),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateMaxValue));
-        private static void UpdateMaxValue(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.MaxValue = (float)e.NewValue;
-        }
+                typeof(float), typeof(NumericUpDown),
+                new PropertyMetadata(100.0f));
 
         public float StepSize
         {
@@ -64,13 +51,8 @@ namespace GCodeViewer.WPF.Controls
         public static readonly DependencyProperty StepSizeProperty =
             DependencyProperty.Register(
                 "StepSize",
-                typeof(float),
-                typeof(NumericUpDown), new FrameworkPropertyMetadata(UpdateStepSize));
-        private static void UpdateStepSize(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var sender = d as NumericUpDown;
-            sender.ViewModel.StepSize = (float)e.NewValue;
-        }
+                typeof(float), typeof(NumericUpDown),
+                new PropertyMetadata(10.0f));
 
         new public Brush Background
         {
@@ -80,37 +62,57 @@ namespace GCodeViewer.WPF.Controls
         new public static readonly DependencyProperty BackgroundProperty =
             DependencyProperty.Register(
                 "Background",
-                typeof(Brush),
-                typeof(NumericUpDown),
+                typeof(Brush), typeof(NumericUpDown),
                 new PropertyMetadata(new SolidColorBrush(Color.FromRgb(239, 239, 245))));
         new public Brush Foreground
         {
             get => (Brush)this.GetValue(ForegroundProperty);
             set => this.SetValue(ForegroundProperty, value);
         }
+
         new public static readonly DependencyProperty ForegroundProperty =
             DependencyProperty.Register(
                 "Foreground",
-                typeof(Brush),
-                typeof(NumericUpDown),
+                typeof(Brush), typeof(NumericUpDown),
                 new PropertyMetadata(new SolidColorBrush(Color.FromRgb(51, 51, 77))));
         #endregion
 
-        internal NumericUpDownViewModel ViewModel;
+        public ICommand DecreaseValue { get; private set; }
+        public ICommand IncreaseValue { get; private set; }
 
         public NumericUpDown()
         {
             InitializeComponent();
+            InitCommands();
+
             this.DataContext = this;
+        }
 
-            ViewModel = new NumericUpDownViewModel();
-            //ViewModel.ValueChanged += (_, newValue) => this.Value = newValue;
+        private void InitCommands()
+        {
+            this.DecreaseValue = new RelayCommand((_) =>
+            {
+                this.Value = EnsureValueConstraints(Value - StepSize);
+            });
+            this.IncreaseValue = new RelayCommand((_) =>
+            {
+                this.Value = EnsureValueConstraints(Value + StepSize);
+            });
+        }
+        private float EnsureValueConstraints(float newValue)
+        {
+            float result = newValue;
 
-            //this.DataContext = ViewModel;
+            if (newValue > MaxValue)
+                result = MaxValue;
+            else if (newValue < MinValue)
+                result = MinValue;
+
+            return result;
         }
 
         private Regex _numberPattern = new Regex("^-?\\d*\\.?\\d*$");
-        private void EnsureNumberInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void EnsureNumberInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !_numberPattern.IsMatch(e.Text);
         }
