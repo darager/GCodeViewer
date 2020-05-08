@@ -110,11 +110,5 @@ namespace GCodeViewer.WPF.Controls
 
             return result;
         }
-
-        private Regex _numberPattern = new Regex("^-?\\d*\\.?\\d*$");
-        private void EnsureNumberInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !_numberPattern.IsMatch(e.Text);
-        }
     }
 }
