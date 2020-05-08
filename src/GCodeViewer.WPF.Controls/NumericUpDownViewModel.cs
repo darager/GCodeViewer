@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GCodeViewer.WPF.MVVM.Helpers;
@@ -19,14 +18,11 @@ namespace GCodeViewer.WPF.Controls
                 _value = value;
 
                 Text = _value.ToString();
+
+                ValueChanged?.Invoke(this, _value);
             }
         }
         public float _value = 0;
-
-        public float StepSize { get; set; } = 10;
-
-        public float MinValue { get; set; } = 0;
-        public float MaxValue { get; set; } = 100;
 
         public string Text
         {
@@ -47,8 +43,12 @@ namespace GCodeViewer.WPF.Controls
                 OnPropertyChanged("Text");
             }
         }
-
         private string _text;
+
+        public float StepSize { get; set; } = 10;
+
+        public float MinValue { get; set; } = 0;
+        public float MaxValue { get; set; } = 100;
 
         public Brush Foreground
         {
@@ -78,12 +78,8 @@ namespace GCodeViewer.WPF.Controls
         public ICommand DecreaseValue { get; private set; }
         public ICommand IncreaseValue { get; private set; }
 
-        private TextBox InputTextBox;
-
-        public NumericUpDownViewModel(TextBox inputBox)
+        public NumericUpDownViewModel()
         {
-            InputTextBox = inputBox;
-
             InitCommands();
 
             Text = Value.ToString();
@@ -117,5 +113,7 @@ namespace GCodeViewer.WPF.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public event EventHandler<float> ValueChanged;
     }
 }

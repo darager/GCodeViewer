@@ -111,7 +111,8 @@ namespace GCodeViewer.WPF.Controls
         {
             InitializeComponent();
 
-            ViewModel = new NumericUpDownViewModel(TextBox);
+            ViewModel = new NumericUpDownViewModel();
+            ViewModel.ValueChanged += (s, newValue) => this.Value = newValue;
 
             this.DataContext = ViewModel;
         }

@@ -12,8 +12,8 @@
     <Grid>
         <ctrl:NumericUpDown
             x:Name="numUpDown"
-            Background="DarkGray"
-            Foreground="White"
+            Background="CornflowerBlue"
+            Foreground="Orange"
             MaxValue="200"
             MinValue="-100"
             Value="{Binding Path=NumValue, Mode=TwoWay}" />
