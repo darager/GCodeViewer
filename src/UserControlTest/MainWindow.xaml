@@ -11,16 +11,13 @@
     mc:Ignorable="d">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label HorizontalAlignment="Center" Content="{Binding ElementName=numUpDown, Path=Value}" />
+
         <ctrl:NumericUpDown
             x:Name="numUpDown"
             Height="100"
             MaxValue="200"
             MinValue="-100"
             Value="{Binding NumValue}" />
-
-        <Button
-            Height="50"
-            Margin="0,10,0,0"
-            Click="Button_Click" />
     </StackPanel>
 </Window>
