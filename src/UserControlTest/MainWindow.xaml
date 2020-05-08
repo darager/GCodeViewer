@@ -9,13 +9,17 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <ctrl:NumericUpDown
             x:Name="numUpDown"
+            Height="100"
             Background="CornflowerBlue"
             Foreground="Orange"
             MaxValue="200"
             MinValue="-100"
             Value="{Binding Path=NumValue, Mode=TwoWay}" />
-    </Grid>
+
+        <Button Height="50" />
+    </StackPanel>
 </Window>

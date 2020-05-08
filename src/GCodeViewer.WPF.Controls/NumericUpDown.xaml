@@ -11,18 +11,16 @@
     mc:Ignorable="d">
 
     <Grid
-        Margin="3"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="25" />
         </Grid.ColumnDefinitions>
 
         <TextBox
@@ -56,7 +54,5 @@
             Command="{Binding DecreaseValue}">
             <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
         </Button>
-
-        <Button Grid.Row="2" Background="Black" />
     </Grid>
 </UserControl>
