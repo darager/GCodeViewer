@@ -55,7 +55,30 @@ namespace GCodeViewer.WPF.Controls
                 SetCursorPosition(pos);
             }
 
+            if (IsNotEmptyOrMinus(this.Text))
+            {
+                float currentValue = float.Parse(this.Text);
+                this.Text = EnsureValueConstraints(currentValue).ToString();
+            }
+
             _previousText = this.Text;
+        }
+
+        private bool IsNotEmptyOrMinus(string text)
+        {
+            return !string.IsNullOrEmpty(text)
+                && !(this.Text == "-");
+        }
+        private float EnsureValueConstraints(float newValue)
+        {
+            float result = newValue;
+
+            if (newValue > MaxValue)
+                result = MaxValue;
+            else if (newValue < MinValue)
+                result = MinValue;
+
+            return result;
         }
 
         private Regex _numberPattern = new Regex("^-?\\d*(\\.\\d*)?$");

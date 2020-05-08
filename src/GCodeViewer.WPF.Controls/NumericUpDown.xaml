@@ -38,6 +38,8 @@
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Foreground="{Binding Foreground}"
+                MaxValue="{Binding MaxValue}"
+                MinValue="{Binding MinValue}"
                 Text="{Binding Path=Value, Mode=TwoWay}" />
 
             <Button
