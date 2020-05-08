@@ -32,7 +32,7 @@ namespace GCodeViewer.WPF.Controls
                 if (_text == value)
                     return;
 
-                if (value == "-")
+                if (string.IsNullOrEmpty(value) || value == "-")
                     return;
 
                 _text = value;

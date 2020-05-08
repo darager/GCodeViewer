@@ -14,12 +14,15 @@
         <ctrl:NumericUpDown
             x:Name="numUpDown"
             Height="100"
-            Background="CornflowerBlue"
-            Foreground="Orange"
+            Background="LightGray"
+            Foreground="DarkGray"
             MaxValue="200"
             MinValue="-100"
-            Value="{Binding Path=NumValue, Mode=TwoWay}" />
+            Value="{Binding NumValue}" />
 
-        <Button Height="50" />
+        <Button
+            Height="50"
+            Margin="0,10,0,0"
+            Click="Button_Click" />
     </StackPanel>
 </Window>
