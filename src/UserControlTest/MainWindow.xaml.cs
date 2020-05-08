@@ -8,26 +8,25 @@ namespace UserControlTest
         public MainWindow()
         {
             InitializeComponent();
+
             var vm = new NumUpDownViewModel();
             this.DataContext = vm;
-
-            vm.Value = 111;
+            vm.NumValue = 111;
         }
     }
 
     public class NumUpDownViewModel : INotifyPropertyChanged
     {
-        private float _value;
-
-        public float Value
+        public float NumValue
         {
             get => _value;
             set
             {
                 _value = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NumValue"));
             }
         }
+        private float _value;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
