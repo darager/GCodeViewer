@@ -33,16 +33,21 @@ namespace GCodeViewer.WPF.Controls
             get => _text;
             set
             {
-                if (_text == value) return;
+                if (_text == value)
+                    return;
+
+                if (value == "-")
+                    return;
 
                 _text = value;
 
-                if (!(Text == "-"))
-                    Value = float.Parse(Text);
+                float newValue = float.Parse(Text);
+                Value = EnsureValueConstraints(newValue);
 
                 OnPropertyChanged("Text");
             }
         }
+
         private string _text;
 
         public Brush Foreground
@@ -88,14 +93,23 @@ namespace GCodeViewer.WPF.Controls
         {
             this.DecreaseValue = new RelayCommand((_) =>
             {
-                float newValue = Value - StepSize;
-                this.Value = (newValue < MinValue) ? MinValue : newValue;
+                this.Value = EnsureValueConstraints(Value - StepSize);
             });
             this.IncreaseValue = new RelayCommand((_) =>
             {
-                float newValue = Value + StepSize;
-                this.Value = (newValue > MaxValue) ? MaxValue : newValue;
+                this.Value = EnsureValueConstraints(Value + StepSize);
             });
+        }
+        private float EnsureValueConstraints(float newValue)
+        {
+            float result = newValue;
+
+            if (newValue > MaxValue)
+                result = MaxValue;
+            else if (newValue < MinValue)
+                result = MinValue;
+
+            return result;
         }
 
         private void OnPropertyChanged(string propertyName)

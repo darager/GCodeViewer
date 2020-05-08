@@ -35,6 +35,7 @@
             Background="Transparent"
             BorderBrush="Transparent"
             Foreground="{Binding Foreground}"
+            PreviewTextInput="EnsureNumberInput"
             Text="{Binding Path=Text, Mode=TwoWay}" />
 
         <Button

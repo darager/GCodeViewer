@@ -114,15 +114,8 @@ namespace GCodeViewer.WPF.Controls
             ViewModel = new NumericUpDownViewModel(TextBox);
 
             this.DataContext = ViewModel;
-
-            TextBox.PreviewTextInput += EnsureNumberInput;
-            TextBox.LostFocus += SetToLastValidValue;
         }
 
-        private void SetToLastValidValue(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Text = ViewModel.Value.ToString();
-        }
         private Regex _numberPattern = new Regex("^-?\\d*\\.?\\d*$");
         private void EnsureNumberInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {

@@ -14,7 +14,8 @@
         <ctrl:NumericUpDown
             Background="DarkGray"
             Foreground="White"
-            MaxValue="100"
-            MinValue="-100" />
+            MaxValue="200"
+            MinValue="-100"
+            Value="100" />
     </Grid>
 </Window>
