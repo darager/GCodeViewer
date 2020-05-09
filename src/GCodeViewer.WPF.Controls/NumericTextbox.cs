@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,8 +34,19 @@ namespace GCodeViewer.WPF.Controls
         {
             this.PreviewTextInput += OnlyAllowValidCharacters;
             this.TextChanged += EnsureValidNumber;
+            this.KeyDown += UnFocusIfEnter;
 
             _previousText = this.Text;
+        }
+
+        // TODO: 2 way binding does not work (value in numericupdown is not updated properly)
+        private void UnFocusIfEnter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Keyboard.ClearFocus();
+                this.UpdateLayout();
+            }
         }
 
         private Regex _inputPattern = new Regex("[-\\d\\.]");

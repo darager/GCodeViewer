@@ -12,8 +12,8 @@ namespace GCodeViewer.WPF.Controls
         #region DependencyProperties
         public float Value
         {
-            get => EnsureValueConstraints((float)this.GetValue(ValueProperty));
-            set => this.SetValue(ValueProperty, EnsureValueConstraints(value));
+            get => (float)this.GetValue(ValueProperty);
+            set => this.SetValue(ValueProperty, value);
         }
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(

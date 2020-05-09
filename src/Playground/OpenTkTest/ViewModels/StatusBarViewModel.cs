@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;

@@ -13,11 +13,16 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Label HorizontalAlignment="Center" Content="{Binding ElementName=numUpDown, Path=Value}" />
 
-        <ctrl:NumericUpDown
+        <!--<ctrl:NumericUpDown
             x:Name="numUpDown"
             Height="100"
-            MaxValue="200"
-            MinValue="-100"
-            Value="{Binding NumValue}" />
+            Background="{Binding Background}"
+            Foreground="{Binding Foreground}"
+            MaxValue="{Binding MaxValue}"
+            MinValue="{Binding MinValue}"
+            Value="{Binding NumValue}" />-->
+
+        <ctrl:NumericUpDown Name="numUpDown" />
+
     </StackPanel>
 </Window>

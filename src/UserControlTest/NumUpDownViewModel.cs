@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Media;
 
 namespace UserControlTest
 {
@@ -15,7 +16,13 @@ namespace UserControlTest
                 OnPropertyChanged("NumValue");
             }
         }
-        private float _value = 0;
+        private float _value = 10;
+
+        public float MaxValue { get; } = 100;
+        public float MinValue { get; } = -100;
+
+        public SolidColorBrush Foreground { get; } = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+        public SolidColorBrush Background { get; } = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
         private void OnPropertyChanged(string propertyName)
         {
