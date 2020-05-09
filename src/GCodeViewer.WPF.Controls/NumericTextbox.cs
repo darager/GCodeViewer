@@ -32,6 +32,9 @@ namespace GCodeViewer.WPF.Controls
 
         public NumericTextbox() : base()
         {
+            this.HorizontalContentAlignment = HorizontalAlignment.Center;
+            this.VerticalContentAlignment = VerticalAlignment.Center;
+
             this.KeyDown += UnFocusIfEnter;
             this.GotFocus += SetCursorToEnd;
             this.TextChanged += EnsureValidNumber;
@@ -109,10 +112,7 @@ namespace GCodeViewer.WPF.Controls
         private void UnFocusIfEnter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
                 Keyboard.ClearFocus();
-                this.UpdateLayout();
-            }
         }
     }
 }

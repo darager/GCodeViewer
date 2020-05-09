@@ -10,15 +10,13 @@ namespace UserControlTest
         {
             InitializeComponent();
 
-            //_vm = new NumUpDownViewModel();
-            //_vm.NumValue = 111;
-            //// TODO: when this is used the controls looks fine
-            ////       but when DataContext of the control itself is set nothing works anymore
-            ////       I am completely and utterly lost for words!  :'(
-            //this.DataContext = _vm;
+            _vm = new NumUpDownViewModel();
+            // TODO: when this is used the controls looks fine
+            //       but when DataContext of the control itself is set nothing works anymore
+            //       I am completely and utterly lost for words!  :'(
+            _vm.NumValue = 50;
 
-            ////getting and setting the value by hand works but the binding does not!!!
-            ////numUpDown.Value = 123;
+            this.DataContext = _vm;
         }
     }
 }

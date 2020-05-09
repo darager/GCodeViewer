@@ -22,9 +22,12 @@
             MinValue="{Binding MinValue}"
             Value="{Binding NumValue}" />-->
 
-        <ctrl:NumericUpDown x:Name="numUpDown" Margin="0,5,0,5" />
+        <ctrl:NumericUpDown
+            x:Name="numUpDown"
+            Margin="0,5,0,5"
+            Value="{Binding Path=NumValue, Mode=OneWay}" />
 
-        <ctrl:NumericUpDown Foreground="Black" Margin="0,5,0,5" />
-        <ctrl:NumericUpDown Background="CornflowerBlue" Margin="0,5,0,5" />
+        <ctrl:NumericUpDown Margin="0,5,0,5" Foreground="Black" />
+        <ctrl:NumericUpDown Margin="0,5,0,5" Background="CornflowerBlue" />
     </StackPanel>
 </Window>

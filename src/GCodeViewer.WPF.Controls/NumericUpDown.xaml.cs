@@ -19,7 +19,8 @@ namespace GCodeViewer.WPF.Controls
             DependencyProperty.Register(
                 "Value",
                 typeof(float), typeof(NumericUpDown),
-        new PropertyMetadata(0.0f));
+                new FrameworkPropertyMetadata(default(float),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public float MinValue
         {
@@ -92,11 +93,12 @@ namespace GCodeViewer.WPF.Controls
         {
             this.DecreaseValue = new RelayCommand((_) =>
             {
-                this.Value = EnsureValueConstraints(Value - StepSize);
+                // Apparently Binding is Broken if you do not use SetCurrentValue
+                SetCurrentValue(ValueProperty, EnsureValueConstraints(Value - StepSize));
             });
             this.IncreaseValue = new RelayCommand((_) =>
             {
-                this.Value = EnsureValueConstraints(Value + StepSize);
+                SetCurrentValue(ValueProperty, EnsureValueConstraints(Value + StepSize));
             });
         }
         private float EnsureValueConstraints(float newValue)

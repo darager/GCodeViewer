@@ -40,7 +40,7 @@
                 Foreground="{Binding Foreground}"
                 MaxValue="{Binding MaxValue}"
                 MinValue="{Binding MinValue}"
-                Text="{Binding Path=Value, Mode=TwoWay}" />
+                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button
                 Grid.Row="0"
