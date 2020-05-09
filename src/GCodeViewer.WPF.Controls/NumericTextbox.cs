@@ -32,21 +32,12 @@ namespace GCodeViewer.WPF.Controls
 
         public NumericTextbox() : base()
         {
-            this.PreviewTextInput += OnlyAllowValidCharacters;
-            this.TextChanged += EnsureValidNumber;
             this.KeyDown += UnFocusIfEnter;
+            this.GotFocus += SetCursorToEnd;
+            this.TextChanged += EnsureValidNumber;
+            this.PreviewTextInput += OnlyAllowValidCharacters;
 
             _previousText = this.Text;
-        }
-
-        // TODO: 2 way binding does not work (value in numericupdown is not updated properly)
-        private void UnFocusIfEnter(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                Keyboard.ClearFocus();
-                this.UpdateLayout();
-            }
         }
 
         private Regex _inputPattern = new Regex("[-\\d\\.]");
@@ -106,6 +97,22 @@ namespace GCodeViewer.WPF.Controls
         {
             this.SelectionStart = position;
             this.SelectionLength = position;
+        }
+
+        private void SetCursorToEnd(object sender, RoutedEventArgs e)
+        {
+            int length = this.Text.Length;
+            SetCursorPosition(length);
+        }
+
+        // TODO: 2 way binding does not work (value in numericupdown is not updated properly)
+        private void UnFocusIfEnter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Keyboard.ClearFocus();
+                this.UpdateLayout();
+            }
         }
     }
 }

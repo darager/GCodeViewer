@@ -46,6 +46,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Background="Transparent"
+                Focusable="False"
                 BorderBrush="transparent"
                 Command="{Binding IncreaseValue}"
                 DockPanel.Dock="Top">
@@ -56,6 +57,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Background="Transparent"
+                Focusable="False"
                 BorderBrush="Transparent"
                 Command="{Binding DecreaseValue}">
                 <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
