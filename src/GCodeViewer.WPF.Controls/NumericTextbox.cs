@@ -57,8 +57,11 @@ namespace GCodeViewer.WPF.Controls
 
             if (IsNotEmptyOrMinus(this.Text))
             {
-                float currentValue = float.Parse(this.Text);
-                this.Text = EnsureValueConstraints(currentValue).ToString();
+                int pos = this.SelectionStart;
+
+                this.Text = EnsureValueConstraints(this.Text);
+
+                SetCursorPosition(pos);
             }
 
             _previousText = this.Text;
@@ -69,14 +72,15 @@ namespace GCodeViewer.WPF.Controls
             return !string.IsNullOrEmpty(text)
                 && !(this.Text == "-");
         }
-        private float EnsureValueConstraints(float newValue)
+        private string EnsureValueConstraints(string currentText)
         {
-            float result = newValue;
+            string result = currentText;
 
-            if (newValue > MaxValue)
-                result = MaxValue;
-            else if (newValue < MinValue)
-                result = MinValue;
+            float currentValue = float.Parse(this.Text);
+            if (currentValue > MaxValue)
+                result = MaxValue.ToString();
+            else if (currentValue < MinValue)
+                result = MinValue.ToString();
 
             return result;
         }
