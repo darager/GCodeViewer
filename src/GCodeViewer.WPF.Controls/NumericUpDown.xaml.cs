@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GCodeViewer.WPF.MVVM.Helpers;
-
 namespace GCodeViewer.WPF.Controls
 {
     public partial class NumericUpDown : UserControl

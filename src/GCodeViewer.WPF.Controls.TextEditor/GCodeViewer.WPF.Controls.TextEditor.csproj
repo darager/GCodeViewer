@@ -92,6 +92,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
+      <Project>{cf5f85e2-91fa-4583-ac68-c57c27e1ee6c}</Project>
+      <Name>GCodeViewer.WPF.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj">
       <Project>{3baff321-457d-47a4-a589-d3b197afc740}</Project>
       <Name>GCodeViewer.WPF.MVVM.Helpers</Name>

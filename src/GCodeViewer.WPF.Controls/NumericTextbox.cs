@@ -29,7 +29,7 @@ namespace GCodeViewer.WPF.Controls
                 typeof(float), typeof(NumericTextbox),
                 new PropertyMetadata(float.NaN));
 
-        public NumericTextbox() : base()
+        public NumericTextbox()
         {
             this.KeyDown += UnFocusIfEnter;
             this.GotFocus += SetCursorToEnd;

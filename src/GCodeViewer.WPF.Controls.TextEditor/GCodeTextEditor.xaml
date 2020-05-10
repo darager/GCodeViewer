@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:ctrl="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
@@ -112,48 +113,16 @@
             VerticalAlignment="Stretch"
             Background="{StaticResource ScrollbarBackgroundColor}">
 
-            <Grid
+            <!--<ctrl:NumericUpDown Value="{Binding FontSize}" />-->
+            <!--
                 Width="40"
                 Margin="3"
-                HorizontalAlignment="Left"
-                Background="{StaticResource ScrollbarBackgroundColor}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-
-                <TextBox
-                    x:Name="FontSizeChooser"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Foreground="#F1F1F1"
-                    Text="{Binding FontSize}" />
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding IncreaseFontSize}">
-                    <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="#F1F1F1" />
-                </Button>
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding DecreaseFontSize}">
-                    <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="#F1F1F1" />
-                </Button>
-            </Grid>
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="#F1F1F1"
+                MaxValue="30"
+                MinValue="1"
+            -->
 
             <StackPanel
                 HorizontalAlignment="Right"
@@ -165,7 +134,7 @@
                     Content="Ln:"
                     Foreground="#F1F1F1" />
                 <!--  TODO: make this useable  -->
-                <TextBox
+                <ctrl:NumericTextbox
                     Width="Auto"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
