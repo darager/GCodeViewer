@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,9 +31,6 @@ namespace GCodeViewer.WPF.Controls
 
         public NumericTextbox() : base()
         {
-            this.HorizontalContentAlignment = HorizontalAlignment.Center;
-            this.VerticalContentAlignment = VerticalAlignment.Center;
-
             this.KeyDown += UnFocusIfEnter;
             this.GotFocus += SetCursorToEnd;
             this.TextChanged += EnsureValidNumber;
@@ -43,40 +39,35 @@ namespace GCodeViewer.WPF.Controls
             _previousText = this.Text;
         }
 
-        private Regex _inputPattern = new Regex("[-\\d\\.]");
-        private void OnlyAllowValidCharacters(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !_inputPattern.IsMatch(e.Text);
-        }
-
         private string _previousText;
         private void EnsureValidNumber(object sender, TextChangedEventArgs e)
         {
-            if (NotValidNumber(this.Text))
-            {
-                int pos = this.SelectionStart;
-
-                this.Text = _previousText;
-
-                SetCursorPosition(pos);
-            }
-
-            if (IsNotEmptyOrMinus(this.Text))
-            {
-                int pos = this.SelectionStart;
-
-                this.Text = EnsureValueConstraints(this.Text);
-
-                SetCursorPosition(pos);
-            }
+            ResetIfInvalidInput(_previousText);
+            AdjustIfOutSideOfRange();
 
             _previousText = this.Text;
         }
-
-        private bool IsNotEmptyOrMinus(string text)
+        private void AdjustIfOutSideOfRange()
         {
-            return !string.IsNullOrEmpty(text)
-                && !(this.Text == "-");
+            if (IsNotEmptyOrMinus(this.Text))
+            {
+                int cursorPos = this.SelectionStart;
+
+                this.Text = EnsureValueConstraints(this.Text);
+
+                SetCursorPosition(cursorPos);
+            }
+        }
+        private void ResetIfInvalidInput(string previousText)
+        {
+            if (NotValidNumber(this.Text))
+            {
+                int cursorPos = this.SelectionStart;
+
+                this.Text = previousText;
+
+                SetCursorPosition(cursorPos);
+            }
         }
         private string EnsureValueConstraints(string currentText)
         {
@@ -90,6 +81,17 @@ namespace GCodeViewer.WPF.Controls
 
             return result;
         }
+        private bool IsNotEmptyOrMinus(string text)
+        {
+            return !string.IsNullOrEmpty(text)
+                && !(this.Text == "-");
+        }
+
+        private Regex _inputPattern = new Regex("[-\\d\\.]");
+        private void OnlyAllowValidCharacters(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !_inputPattern.IsMatch(e.Text);
+        }
 
         private Regex _numberPattern = new Regex("^-?\\d*(\\.\\d*)?$");
         private bool NotValidNumber(string text)
@@ -99,16 +101,15 @@ namespace GCodeViewer.WPF.Controls
         private void SetCursorPosition(int position)
         {
             this.SelectionStart = position;
-            this.SelectionLength = position;
+            this.SelectionLength = 0;
         }
 
         private void SetCursorToEnd(object sender, RoutedEventArgs e)
         {
-            int length = this.Text.Length;
-            SetCursorPosition(length);
+            int lastPos = this.Text.Length;
+            SetCursorPosition(lastPos);
         }
 
-        // TODO: 2 way binding does not work (value in numericupdown is not updated properly)
         private void UnFocusIfEnter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
