@@ -11,23 +11,14 @@
     mc:Ignorable="d">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Label HorizontalAlignment="Center" Content="{Binding ElementName=numUpDown, Path=Value}" />
-
-        <!--<ctrl:NumericUpDown
-            x:Name="numUpDown"
-            Height="100"
-            Background="{Binding Background}"
-            Foreground="{Binding Foreground}"
-            MaxValue="{Binding MaxValue}"
-            MinValue="{Binding MinValue}"
-            Value="{Binding NumValue}" />-->
+        <Label HorizontalAlignment="Center" Content="{Binding NumValue}" />
 
         <ctrl:NumericUpDown
             x:Name="numUpDown"
             Margin="0,5,0,5"
-            Value="{Binding Path=NumValue, Mode=OneWay}" />
-
-        <ctrl:NumericUpDown Margin="0,5,0,5" Foreground="Black" />
-        <ctrl:NumericUpDown Margin="0,5,0,5" Background="CornflowerBlue" />
+            MaxValue="100"
+            MinValue="-100"
+            Value="{Binding Path=NumValue, Mode=TwoWay}" />
+        <Button Height="25" Margin="0,5,0,5" />
     </StackPanel>
 </Window>

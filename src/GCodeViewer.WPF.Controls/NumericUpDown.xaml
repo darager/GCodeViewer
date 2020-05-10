@@ -11,7 +11,10 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
 
-    <Border BorderBrush="{Binding Foreground}" BorderThickness="1">
+    <Border
+        x:Name="rootElement"
+        BorderBrush="{Binding Foreground}"
+        BorderThickness="1">
         <Grid
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
@@ -46,10 +49,10 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Background="Transparent"
-                Focusable="False"
                 BorderBrush="transparent"
                 Command="{Binding IncreaseValue}"
-                DockPanel.Dock="Top">
+                DockPanel.Dock="Top"
+                Focusable="False">
                 <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{Binding Foreground}" />
             </Button>
 
@@ -57,9 +60,9 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Background="Transparent"
-                Focusable="False"
                 BorderBrush="Transparent"
-                Command="{Binding DecreaseValue}">
+                Command="{Binding DecreaseValue}"
+                Focusable="False">
                 <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
             </Button>
         </Grid>

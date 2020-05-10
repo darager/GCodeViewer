@@ -86,7 +86,7 @@ namespace GCodeViewer.WPF.Controls
             InitializeComponent();
             InitCommands();
 
-            this.DataContext = this;
+            rootElement.DataContext = this;
         }
 
         private void InitCommands()
