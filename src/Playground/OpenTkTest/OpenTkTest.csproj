@@ -116,13 +116,17 @@
       <Project>{7b425f55-52b7-4776-b888-e9bc0ae970e7}</Project>
       <Name>GCodeViewer.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\GCodeViewer.WPF.Controls.Pointcloud\GCodeViewer.WPF.Controls.PointCloud.csproj">
-      <Project>{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}</Project>
+    <ProjectReference Include="..\..\GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj">
+      <Project>{0b166abc-a1f9-4160-ba5a-0a332bfd8ed0}</Project>
       <Name>GCodeViewer.WPF.Controls.PointCloud</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj">
       <Project>{25ad0cc6-5acc-42cc-9681-7ccd71277dd7}</Project>
       <Name>GCodeViewer.WPF.Controls.TextEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
+      <Project>{cf5f85e2-91fa-4583-ac68-c57c27e1ee6c}</Project>
+      <Name>GCodeViewer.WPF.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj">
       <Project>{3baff321-457d-47a4-a589-d3b197afc740}</Project>
