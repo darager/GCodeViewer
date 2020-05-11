@@ -13,6 +13,8 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="ScrollbarBackgroundColor" Color="#3E3E42" />
         <SolidColorBrush x:Key="ScrollbarForegroundColor" Color="#7A7A7A" />
+        <SolidColorBrush x:Key="StatusBarForegroundColor" Color="#F1F1F1" />
+        <SolidColorBrush x:Key="TextEditorBackgroundColor" Color="#1e1e1e" />
 
         <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
@@ -45,7 +47,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#F1F1F1" />
+                                <Setter Property="Foreground" Value="{StaticResource StatusBarForegroundColor}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -100,7 +102,7 @@
             x:Name="TextEditor"
             Grid.Row="0"
             Padding="2,0,0,0"
-            Background="#1e1e1e"
+            Background="{StaticResource TextEditorBackgroundColor}"
             FontSize="{Binding ElementName=FontSizeChooser, Path=Value}"
             Foreground="LightGray"
             ShowLineNumbers="True"
@@ -112,29 +114,26 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="{StaticResource ScrollbarBackgroundColor}">
-
             <local:NumericUpDown
                 x:Name="FontSizeChooser"
                 Width="50"
                 Margin="3"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Foreground="#F1F1F1"
+                Foreground="{StaticResource StatusBarForegroundColor}"
                 MaxValue="30"
                 MinValue="1"
                 Value="{Binding FontSize}" />
-
 
             <StackPanel
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
                 Background="{StaticResource ScrollbarBackgroundColor}"
                 Orientation="Horizontal">
-
                 <Label
                     VerticalContentAlignment="Center"
                     Content="Ln:"
-                    Foreground="#F1F1F1" />
+                    Foreground="{StaticResource StatusBarForegroundColor}" />
                 <local:NumericTextbox
                     Width="Auto"
                     Padding="0,2,0,0"
@@ -144,14 +143,14 @@
                     BorderBrush="Transparent"
                     Focusable="False"
                     FontSize="12"
-                    Foreground="#F1F1F1"
+                    Foreground="{StaticResource StatusBarForegroundColor}"
                     Text="{Binding Path=CurrentLine}"
                     TextAlignment="Right" />
                 <Label
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Top"
                     Content="/"
-                    Foreground="#F1F1F1" />
+                    Foreground="{StaticResource StatusBarForegroundColor}" />
                 <Label
                     x:Name="LineCountLabel"
                     Padding="2,2,20,0"
@@ -159,7 +158,7 @@
                     VerticalContentAlignment="Center"
                     Content="{Binding LineCount}"
                     FontSize="12"
-                    Foreground="#F1F1F1" />
+                    Foreground="{StaticResource StatusBarForegroundColor}" />
             </StackPanel>
         </DockPanel>
     </Grid>
