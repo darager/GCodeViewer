@@ -1,30 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
-using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
     internal class StatusBarViewModel : INotifyPropertyChanged
     {
-        public string CurrentLine
+        public int CurrentLine
         {
-            get => _currentLine.ToString();
+            get => _currentLine;
             set
             {
-                if (value == _currentLine.ToString())
-                    return;
+                if (_currentLine == value) return;
 
-                if (IsNotNumberOrEmpty(value))
-                {
-                    CurrentLine = _currentLine.ToString();
-                    return;
-                }
-
-                int.TryParse(value, out int line);
-
-                _currentLine = line;
+                _currentLine = value;
                 OnPropertyChanged("CurrentLine");
             }
         }
@@ -35,8 +24,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             get => _lineCount;
             set
             {
-                if (value == LineCount)
-                    return;
+                if (_lineCount == value) return;
 
                 _lineCount = value;
                 OnPropertyChanged("LineCount");
@@ -50,24 +38,27 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             _editor = editor;
 
-            var updateCurrentLine = ((Action)UpdateCurrentLine).Throttle(10);
-            _editor.GotMouseCapture += (s, e) => updateCurrentLine();
-            _editor.TextChanged += (s, e) => updateCurrentLine();
+            BindCurrentLineUpdates();
+
             // TODO: make sure this works
             //_editor.KeyDown += (s, e) => updateCurrentLine();
         }
 
-        private void UpdateCurrentLine()
+        private void BindCurrentLineUpdates()
         {
-            var offset = _editor.CaretOffset;
-            var textlocation = _editor.Document.GetLocation(offset);
+            var updateCurrentLine = ((Action)UpdateLineStatistics).Throttle(10);
 
-            LineCount = _editor.Document.LineCount;
-            CurrentLine = textlocation.Line.ToString();
+            _editor.TextChanged += (s, e) => updateCurrentLine();
+            _editor.PreviewKeyDown += (s, e) => updateCurrentLine();
+            _editor.GotMouseCapture += (s, e) => updateCurrentLine();
         }
-        private bool IsNotNumberOrEmpty(string str)
+        private void UpdateLineStatistics()
         {
-            return !Regex.IsMatch(str, "^[0-9]*$");
+            LineCount = _editor.Document.LineCount;
+
+            int offset = _editor.CaretOffset;
+            var textlocation = _editor.Document.GetLocation(offset);
+            CurrentLine = textlocation.Line;
         }
 
         private void OnPropertyChanged(string propertyName)
