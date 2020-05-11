@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace GCodeViewer.WPF.Controls.TextEditor
+namespace GCodeViewer.WPF.Controls
 {
     public class NumericTextbox : TextBox
     {
