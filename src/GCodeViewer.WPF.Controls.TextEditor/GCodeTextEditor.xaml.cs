@@ -44,7 +44,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         private void SetupSyntaxHighlighting()
         {
             // TODO: you know what to do
-            string path = @"C:\Users\florager\source\repos\darager\GCodeViewer\src\GCodeViewer.WPF.Controls.TextEditor\GCodeSyntaxHighlighting.xml";
+            string path = "GCodeSyntaxHighlighting.xml";
 
             using var stream = File.OpenRead(path);
             using var reader = new XmlTextReader(stream);

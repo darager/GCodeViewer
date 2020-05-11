@@ -94,9 +94,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GCodeSyntaxHighlighting.xml">
+    <EmbeddedResource Include="GCodeSyntaxHighlighting.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
