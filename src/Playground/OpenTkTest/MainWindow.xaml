@@ -22,8 +22,6 @@
                 <MenuItem Command="{Binding SaveAsFile}" Header="SaveAs" />
                 <MenuItem Command="{Binding CloseFile}" Header="Close" />
             </MenuItem>
-            <!--  xmlns:ctrl="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"  -->
-            <!--<ctrl:NumericTextbox Width="100" />-->
         </Menu>
 
         <Grid Background="DarkGray" DockPanel.Dock="Bottom">
@@ -33,10 +31,10 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <!--<viewer:Viewer3D
+            <viewer:Viewer3D
                 x:Name="Viewer3D"
                 Grid.Column="0"
-                Renderables="{Binding PointCloudObjects}" />-->
+                Renderables="{Binding PointCloudObjects}" />
 
             <GridSplitter
                 Grid.Column="1"

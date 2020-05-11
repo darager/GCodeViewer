@@ -13,7 +13,7 @@ namespace OpenTkTest
             InitializeComponent();
 
             _viewer3DVM = new Viewer3DViewModel();
-            //Viewer3D.DataContext = _viewer3DVM;
+            Viewer3D.DataContext = _viewer3DVM;
 
             _textEditorVM = new TextEditorViewModel(TextEditor, _viewer3DVM);
             TextEditor.DataContext = _textEditorVM;

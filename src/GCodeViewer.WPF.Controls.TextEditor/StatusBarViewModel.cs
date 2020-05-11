@@ -44,23 +44,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
         private int _lineCount;
 
-        public ICommand IncreaseFontSize { get; private set; }
-        public ICommand DecreaseFontSize { get; private set; }
-        public int FontSize
-        {
-            get => _fontSize;
-            set
-            {
-                if (value == _fontSize)
-                    return;
-
-                _fontSize = (value >= 1) ? value : 1;
-
-                OnPropertyChanged("FontSize");
-            }
-        }
-        private int _fontSize;
-
         private readonly ICSharpCode.AvalonEdit.TextEditor _editor;
 
         public StatusBarViewModel(ICSharpCode.AvalonEdit.TextEditor editor)
@@ -72,10 +55,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             _editor.TextChanged += (s, e) => updateCurrentLine();
             // TODO: make sure this works
             //_editor.KeyDown += (s, e) => updateCurrentLine();
-
-            FontSize = 12;
-            IncreaseFontSize = new RelayCommand((_) => FontSize++);
-            DecreaseFontSize = new RelayCommand((_) => FontSize--);
         }
 
         private void UpdateCurrentLine()

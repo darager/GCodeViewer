@@ -121,9 +121,10 @@
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Foreground="{StaticResource StatusBarForegroundColor}"
-                MaxValue="30"
+                MaxValue="40"
                 MinValue="1"
-                Value="{Binding FontSize}" />
+                StepSize="2"
+                Value="14" />
 
             <StackPanel
                 HorizontalAlignment="Right"
