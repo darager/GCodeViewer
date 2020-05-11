@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:editor="clr-namespace:GCodeViewer.WPF.Controls.TextEditor;assembly=GCodeViewer.WPF.Controls.TextEditor"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewer="clr-namespace:GCodeViewer.WPF.Controls.PoinCloud;assembly=GCodeViewer.WPF.Controls.PoinCloud"
+    xmlns:viewer="clr-namespace:GCodeViewer.WPF.Controls.PointCloud;assembly=GCodeViewer.WPF.Controls.PointCloud"
     Title="MainWindow"
     Width="1600"
     Height="800"
@@ -33,10 +33,10 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <viewer:Viewer3D
+            <!--<viewer:Viewer3D
                 x:Name="Viewer3D"
                 Grid.Column="0"
-                Renderables="{Binding PointCloudObjects}" />
+                Renderables="{Binding PointCloudObjects}" />-->
 
             <GridSplitter
                 Grid.Column="1"

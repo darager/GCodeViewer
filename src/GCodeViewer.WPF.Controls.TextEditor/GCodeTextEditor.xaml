@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GCodeViewer.WPF.Controls.TextEditor"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:num="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
     d:DesignHeight="450"
@@ -101,7 +102,7 @@
             Grid.Row="0"
             Padding="2,0,0,0"
             Background="#1e1e1e"
-            FontSize="{Binding ElementName=FontSizeChooser, Path=Text}"
+            FontSize="{Binding ElementName=FontSizeChooser, Path=Value}"
             Foreground="LightGray"
             ShowLineNumbers="True"
             WordWrap="True" />
@@ -113,16 +114,17 @@
             VerticalAlignment="Stretch"
             Background="{StaticResource ScrollbarBackgroundColor}">
 
-            <!--<num:NumericUpDown Value="{Binding FontSize}" />-->
-            <!--
-                Width="40"
+            <local:NumericUpDown
+                x:Name="FontSizeChooser"
+                Width="50"
                 Margin="3"
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Foreground="#F1F1F1"
                 MaxValue="30"
                 MinValue="1"
-            -->
+                Value="{Binding FontSize}" />
+
 
             <StackPanel
                 HorizontalAlignment="Right"
@@ -133,8 +135,7 @@
                     VerticalContentAlignment="Center"
                     Content="Ln:"
                     Foreground="#F1F1F1" />
-                <!--  TODO: make this useable  -->
-                <!--<ctrl:NumericTextbox
+                <local:NumericTextbox
                     Width="Auto"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
@@ -143,7 +144,7 @@
                     Focusable="False"
                     Foreground="#F1F1F1"
                     Text="{Binding Path=CurrentLine}"
-                    TextAlignment="Right" />-->
+                    TextAlignment="Right" />
                 <Label
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"

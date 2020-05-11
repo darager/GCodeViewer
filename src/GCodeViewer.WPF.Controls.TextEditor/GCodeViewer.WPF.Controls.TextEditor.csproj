@@ -55,6 +55,10 @@
     <Compile Include="GCodeTextEditor.xaml.cs">
       <DependentUpon>GCodeTextEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NumericTextbox.cs" />
+    <Compile Include="NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="GCodeTextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NumericUpDown.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
