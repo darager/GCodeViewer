@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GCodeViewer.WPF.Controls.TextEditor"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:num="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -131,30 +130,35 @@
                 VerticalAlignment="Stretch"
                 Background="{StaticResource ScrollbarBackgroundColor}"
                 Orientation="Horizontal">
+
                 <Label
                     VerticalContentAlignment="Center"
                     Content="Ln:"
                     Foreground="#F1F1F1" />
                 <local:NumericTextbox
                     Width="Auto"
+                    Padding="0,2,0,0"
                     VerticalAlignment="Center"
-                    VerticalContentAlignment="Center"
+                    VerticalContentAlignment="Bottom"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Focusable="False"
+                    FontSize="12"
                     Foreground="#F1F1F1"
                     Text="{Binding Path=CurrentLine}"
                     TextAlignment="Right" />
                 <Label
                     VerticalAlignment="Center"
-                    VerticalContentAlignment="Center"
+                    VerticalContentAlignment="Top"
                     Content="/"
                     Foreground="#F1F1F1" />
                 <Label
                     x:Name="LineCountLabel"
+                    Padding="2,2,20,0"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Content="{Binding LineCount}"
+                    FontSize="12"
                     Foreground="#F1F1F1" />
             </StackPanel>
         </DockPanel>
