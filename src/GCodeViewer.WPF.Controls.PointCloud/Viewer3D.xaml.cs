@@ -15,12 +15,6 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 {
     public partial class Viewer3D : System.Windows.Controls.UserControl
     {
-        private readonly GLControl _control;
-        private readonly OrbitCamera _camera;
-
-        internal readonly ShaderBuilder _shaderBuilder;
-        internal Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
-
         public ObservableCollection<Renderable> Renderables
         {
             get => (ObservableCollection<Renderable>)this.GetValue(RenderablesProperty);
@@ -32,7 +26,6 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                 typeof(ObservableCollection<Renderable>),
                 typeof(Viewer3D),
                 new FrameworkPropertyMetadata(UpdateRenderables));
-
         private static void UpdateRenderables(DependencyObject source, DependencyPropertyChangedEventArgs args)
         {
             var pclViewer = (Viewer3D)source;
@@ -53,31 +46,11 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             }
         }
 
-        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
-        {
-            if (args.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Renderable renderable in args.NewItems)
-                {
-                    AddRenderable(pclViewer, renderable);
-                }
-            }
-            else if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Renderable renderable in args.OldItems)
-                    pclViewer._vbos.Remove(renderable);
-            }
-            else
-                throw new NotImplementedException();
-        }
+        private readonly GLControl _control;
+        private readonly OrbitCamera _camera;
+        internal readonly ShaderBuilder _shaderBuilder;
 
-        private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
-        {
-            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
-            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-            pclViewer._vbos.Add(renderable, vbo);
-        }
+        internal Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
         public Viewer3D()
         {
@@ -98,12 +71,37 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             _control.MouseMove += OnMouseMove;
             _control.MouseWheel += OnMouseWheel;
 
-            this.Unloaded += OnUnloaded;
-            this.SizeChanged += OnSizeChanged;
+            this.Unloaded += DisposeEverything;
+            this.SizeChanged += ResizeWindow;
 
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate();
+        }
+
+        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Renderable renderable in args.NewItems)
+                {
+                    AddRenderable(pclViewer, renderable);
+                }
+            }
+            else if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+            else
+                throw new NotImplementedException();
+        }
+        private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
+        {
+            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
+            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+
+            pclViewer._vbos.Add(renderable, vbo);
         }
 
         private void Draw(object sender, PaintEventArgs e)
@@ -125,11 +123,11 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             _control.SwapBuffers();
             _control.Invalidate();
         }
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        private void ResizeWindow(object sender, SizeChangedEventArgs e)
         {
             GL.Viewport(0, 0, (int)this.ActualWidth, (int)this.ActualHeight);
         }
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        private void DisposeEverything(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
@@ -142,32 +140,32 @@ namespace GCodeViewer.WPF.Controls.PointCloud
         private Point _previousMousePosition = new Point(0, 0);
         private readonly float _mouseSensitivity = 0.25f;
         private readonly float _mouseWheelSensitivity = 0.05f;
-        private void OnMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void OnMouseMove(object sender, MouseEventArgs e)
         {
             float dx = (float)(e.X - _previousMousePosition.X);
             float dy = (float)(e.Y - _previousMousePosition.Y);
 
-            if ((System.Windows.Forms.Control.MouseButtons & MouseButtons.Left) != 0)
+            bool leftMouseButtonPressed = (Control.MouseButtons & MouseButtons.Left) != 0;
+
+            if (leftMouseButtonPressed)
             {
                 float newRotationX = (-dy * _mouseSensitivity) + _camera.RotationX;
-                if (newRotationX >= 90) newRotationX = 90;
-                if (newRotationX <= -90) newRotationX = -90;
-                _camera.RotationX = newRotationX;
+                _camera.RotationX = newRotationX.Constrain(-90, 90);
 
                 _camera.RotationY += (-dx * _mouseSensitivity);
             }
 
             _previousMousePosition = new Point(e.X, e.Y);
         }
-        private void OnMouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;
-            float newScale = _camera.Scale + (direction * _mouseWheelSensitivity);
 
-            if (newScale >= 3.0f) newScale = 3.0f;
-            if (newScale <= 0.05f) newScale = 0.05f;
+            float newScale = _camera.Scale + (direction * _mouseWheelSensitivity);
+            newScale.Constrain(0.05f, 3.0f);
 
             _camera.Scale = newScale;
         }
+
     }
 }
