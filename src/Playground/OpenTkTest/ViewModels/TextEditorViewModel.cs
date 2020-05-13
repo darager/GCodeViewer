@@ -25,8 +25,8 @@ namespace OpenTkTest.ViewModels
 
             HandleTextChanged = new RelayCommand((o) =>
             {
-                //string newText = o as string;
-                //_viewer3DVM.Update3DModel(newText);
+                string newText = o as string;
+                _viewer3DVM.Update3DModel(newText);
             });
         }
 

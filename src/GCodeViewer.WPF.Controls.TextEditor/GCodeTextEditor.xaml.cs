@@ -44,7 +44,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             TextEditor.Document = _doc;
 
             // TODO: this causes performance issues
-            //_doc.TextChanged += (s, e) => CallTextChangedCommand();
+            _doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
         private void SetupSyntaxHighlighting()
