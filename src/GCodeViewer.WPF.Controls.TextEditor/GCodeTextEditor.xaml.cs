@@ -6,6 +6,7 @@ using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+using FindReplace;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -29,21 +30,25 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         }
 
         private TextDocument _doc = new TextDocument();
+        private FindReplaceMgr _findReplaceWindow = new FindReplaceMgr();
 
         public GCodeTextEditor()
         {
             InitializeComponent();
             SetupSyntaxHighlighting();
 
-            Statusbar.DataContext = new StatusBarViewModel(TextEditor);
+            // this has to be done so the parent window is not null
+            this.Loaded += (s, e) => SetupSearchReplace();
 
+            Statusbar.DataContext = new StatusBarViewModel(TextEditor);
             TextEditor.Document = _doc;
-            _doc.TextChanged += (s, e) => CallTextChangedCommand();
+
+            // TODO: this causes performance issues
+            //_doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
         private void SetupSyntaxHighlighting()
         {
-            // TODO: you know what to do
             string path = "GCodeSyntaxHighlighting.xml";
 
             using var stream = File.OpenRead(path);
@@ -53,6 +58,17 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             reader.Close();
             stream.Close();
+        }
+        private void SetupSearchReplace()
+        {
+            // TODO: after the search/replace functionality is used the texteditor freezes
+            _findReplaceWindow.CurrentEditor = new TextEditorAdapter(TextEditor);
+            _findReplaceWindow.ShowSearchIn = false;
+            _findReplaceWindow.OwnerWindow = Window.GetWindow(TextEditor);
+
+            CommandBindings.Add(_findReplaceWindow.FindBinding);
+            CommandBindings.Add(_findReplaceWindow.ReplaceBinding);
+            CommandBindings.Add(_findReplaceWindow.FindNextBinding);
         }
         private void CallTextChangedCommand()
         {
