@@ -1,5 +1,5 @@
 ﻿using System;
-using GCodeViewer.WPF.Controls.Pointcloud.Shaders;
+using GCodeViewer.WPF.Controls.PointCloud.Shaders;
 using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.WPF.Controls.PointCloud.Primitives
