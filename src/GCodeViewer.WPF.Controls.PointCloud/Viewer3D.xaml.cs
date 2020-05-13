@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Forms;
 using GCodeViewer.WPF.Controls.Pointcloud.Camera;
 using GCodeViewer.WPF.Controls.Pointcloud.Shaders;
+using GCodeViewer.WPF.Controls.PointCloud.Helpers;
 using GCodeViewer.WPF.Controls.PointCloud.Primitives;
 using OpenTK;
 using OpenTK.Graphics;
@@ -166,6 +167,5 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _camera.Scale = newScale;
         }
-
     }
 }
