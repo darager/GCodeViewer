@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using OpenTK;
+using GCodeViewer.WPF.Controls.PointCloud.Helpers;
 
 namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
 {
@@ -56,10 +57,10 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
 
         private string GetFragmentShaderSource(Color color)
         {
-            string red = ToFloat(color.R).ToString();
-            string green = ToFloat(color.G).ToString();
-            string blue = ToFloat(color.B).ToString();
-            string alpha = ToFloat(color.A).ToString();
+            string red = ScaleToFloat(color.R).ToString();
+            string green = ScaleToFloat(color.G).ToString();
+            string blue = ScaleToFloat(color.B).ToString();
+            string alpha = ScaleToFloat(color.A).ToString();
 
             return _originalFragmentShaderSource
                        .Replace("%RED%", red)
@@ -72,14 +73,6 @@ namespace GCodeViewer.WPF.Controls.Pointcloud.Shaders
             return _originalVertexShaderSource
                        .Replace("%UNIFORMNAME%", _projectionMatrixName);
         }
-        private float ToFloat(int value)
-        {
-            return Scale(value, 0, 255, 0, 1);
-
-            static float Scale(int value, int min, int max, int minScale, int maxScale)
-            {
-                return minScale + (float)(value - min) / (max - min) * (maxScale - minScale);
-            }
-        }
+        private float ScaleToFloat(int value) => ((float)value).Scale(0, 255, 0, 1);
     }
 }
