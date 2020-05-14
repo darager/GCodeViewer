@@ -1,6 +1,6 @@
 ﻿namespace GCodeViewer.WPF.Controls.PointCloud.Helpers
 {
-    internal static class MiscHelpers
+    public static class ValueHelpers
     {
         public static float Constrain(this float @this, float min, float max)
         {
