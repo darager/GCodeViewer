@@ -47,9 +47,7 @@ namespace GCodeViewer.Library
             if (string.IsNullOrEmpty(number))
                 return 0;
 
-            float value = float.Parse(number);
-
-            return value;
+            return float.Parse(number);
         }
         private Regex GetNumberRegex(char c)
         {
