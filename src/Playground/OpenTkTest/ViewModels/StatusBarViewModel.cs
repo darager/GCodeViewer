@@ -23,7 +23,7 @@ namespace OpenTkTest.ViewModels
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            ofd.Filter = "gcode files (*.gcode)|*.gcode|All files (*.*)|*.*";
+            ofd.Filter = "gcode files (*.gcode)|*.gcode";
             ofd.FilterIndex = 2;
 
             if (ofd.ShowDialog() == true)
