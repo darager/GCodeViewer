@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using g3;
+using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
 
 namespace OpenTkTest
@@ -31,11 +35,34 @@ namespace OpenTkTest
             string file = "Benchy_Christmas_1.stl";
 
             using var stream = File.OpenRead(file);
-            using var breader = new BinaryReader(stream);
+            using var binaryReader = new BinaryReader(stream);
 
-            var stlReader = new STLReader();
-            //stlReader.Read(breader, ReadOptions.Defaults,)
+            var reader = new STLReader();
+            var builder = new SimpleMeshBuilder();
 
+            var result = reader.Read(binaryReader, ReadOptions.Defaults, builder);
+
+            if (result.code == IOCode.Ok)
+            {
+                SimpleMesh mesh = builder.Meshes[0];
+
+                double[] dVerts = mesh.Vertices.ToArray();
+
+                float max = (float)dVerts.Max();
+                float min = (float)dVerts.Min();
+
+                var verts = new List<float>();
+                foreach (double vert in dVerts)
+                {
+                    verts.Add((float)vert);
+                }
+
+                var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Triangles);
+
+                _viewer3DVM.PointCloudObjects.Add(model);
+            }
+
+            binaryReader.Close();
             stream.Close();
         }
     }
