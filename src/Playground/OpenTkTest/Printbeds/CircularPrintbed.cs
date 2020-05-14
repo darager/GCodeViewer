@@ -21,7 +21,6 @@ namespace OpenTkTest.Printbeds
             _parts.Add(lines);
         }
 
-        // TODO: fix the horizontal lines
         private List<float> GetLineVertices(float radius, int lineCount = 11)
         {
             var verts = new List<float>();
@@ -41,8 +40,8 @@ namespace OpenTkTest.Printbeds
 
                 // horizontal Lines
                 AddPoint(verts, y, x);
-                AddPoint(verts, y, -x);
                 AddPoint(verts, -y, x);
+                AddPoint(verts, y, -x);
                 AddPoint(verts, -y, -x);
             }
 
