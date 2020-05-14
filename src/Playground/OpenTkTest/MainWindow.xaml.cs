@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
+using g3;
 using OpenTkTest.ViewModels;
 
 namespace OpenTkTest
@@ -19,6 +22,21 @@ namespace OpenTkTest
             TextEditor.DataContext = _textEditorVM;
 
             Statusbar.DataContext = new StatusBarViewModel(_textEditorVM);
+
+            LoadAndDisplayModelFromStl();
+        }
+
+        private void LoadAndDisplayModelFromStl()
+        {
+            string file = "Benchy_Christmas_1.stl";
+
+            using var stream = File.OpenRead(file);
+            using var breader = new BinaryReader(stream);
+
+            var stlReader = new STLReader();
+            //stlReader.Read(breader, ReadOptions.Defaults,)
+
+            stream.Close();
         }
     }
 }
