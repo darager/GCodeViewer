@@ -38,32 +38,27 @@ namespace OpenTkTest
             using var binaryReader = new BinaryReader(stream);
 
             var reader = new STLReader();
-            var builder = new DMesh3Builder();
+            var builder = new SimpleMeshBuilder();
 
             var result = reader.Read(binaryReader, ReadOptions.Defaults, builder);
 
             if (result.code == IOCode.Ok)
             {
-                DMesh3 mesh = builder.Meshes[0];
-                //var smoother = new LaplacianMeshSmoother(mesh);
+                var mesh = builder.Meshes[0];
 
-                var dVerts = mesh.Vertices();
+                var dVerts = mesh.Vertices;
 
-                //float max = (float)dVerts.Max();
-                //float min = (float)dVerts.Min();
+                float max = (float)dVerts.Max();
+                float min = (float)dVerts.Min();
 
                 var verts = new List<float>();
-                foreach (var vert in dVerts)
+                foreach (float vert in dVerts)
                 {
-                    //float sccaledValue = vert.Scale(min, max, -0.5f, 0.5f);
-
-                    verts.Add((float)vert.x);
-                    verts.Add((float)vert.y);
-                    verts.Add((float)vert.z);
+                    verts.Add(vert.Scale(min, max, -0.5f, 0.5f));
                 }
 
-                //var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Triangles);
-                //_viewer3DVM.PointCloudObjects.Add(model);
+                var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Points);
+                _viewer3DVM.PointCloudObjects.Add(model);
             }
 
             binaryReader.Close();

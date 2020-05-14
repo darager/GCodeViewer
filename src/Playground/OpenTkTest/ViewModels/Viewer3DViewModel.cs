@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using GCodeViewer.Library;
 using GCodeViewer.Helpers;
+using GCodeViewer.Library;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.Renderables;
 
@@ -25,24 +25,22 @@ namespace OpenTkTest.ViewModels
         }
         private ObservableCollection<Renderable> _pointCloudObjects;
 
+        private AxisValueFilter _filter = new AxisValueFilter();
+        private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
+
+        private Renderable _model;
+        private ICompositeRenderable _printbed = new CircularPrintbed(1.0f, Color.DarkGray, Color.White);
+
         public Viewer3DViewModel()
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 
-            float[] coordinateSytemVertices =
-            {
-                0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-                0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-                0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
-            };
-            PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
+            AddCoordinateSystem();
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            var printbed = new CircularPrintbed(1.0f, Color.DarkGray, Color.White);
-            printbed.AddTo(PointCloudObjects);
+            _printbed.AddTo(PointCloudObjects);
         }
 
-        private Renderable _model;
         public async void Update3DModel(string newText)
         {
             var uiThread = Application.Current.Dispatcher;
@@ -50,10 +48,8 @@ namespace OpenTkTest.ViewModels
             await Task.Factory.StartNew(() =>
             {
                 var content = newText.Split();
-                var extractor = new GCodeAxisValueExtractor();
-                var filter = new AxisValueFilter();
-                var allPoints = extractor.ExtractPrinterAxisValues(content);
-                var points = filter.FilterNonExtrudingValues(allPoints);
+                var allPoints = _extractor.ExtractPrinterAxisValues(content);
+                var points = _filter.FilterNonExtrudingValues(allPoints);
 
                 var verts = new List<float>();
                 foreach (var point in points)
@@ -82,6 +78,17 @@ namespace OpenTkTest.ViewModels
                     PointCloudObjects.Add(_model);
                 });
             }).ConfigureAwait(false);
+        }
+
+        private void AddCoordinateSystem()
+        {
+            float[] coordinateSytemVertices =
+            {
+                0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
+                0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
+                0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
+            };
+            PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
