@@ -33,17 +33,26 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Primitives
                                    normalized: false,
                                    3 * sizeof(float),
                                    offset: 0);
+
+            // TODO: when this is only done once the stl model is shown but the rest is not
+            //       since the data does not have to be loaded every time performance is much better
+            GL.BufferData(BufferTarget.ArrayBuffer,
+                          _vertices.Length * sizeof(float),
+                          _vertices,
+                          _usageHint);
         }
 
         public void Draw()
         {
             int count = _vertices.Length / 3;
 
-            GL.BufferData(BufferTarget.ArrayBuffer,
-                          _vertices.Length * sizeof(float),
-                          _vertices,
-                          _usageHint);
+            //    GL.BufferData(BufferTarget.ArrayBuffer,
+            //                  _vertices.Length * sizeof(float),
+            //                  _vertices,
+            //                  _usageHint);
 
+
+            // mby call these two for every renderable VBO with the correct offset and count
             _shader.Use();
             GL.DrawArrays(_type, first: 0, count);
         }
