@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace OpenTkTest.Printbeds
+namespace OpenTkTest.Renderables
 {
     public interface ICompositeRenderable
     {

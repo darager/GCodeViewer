@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace OpenTkTest.Printbeds
+namespace OpenTkTest.Renderables
 {
     public class CircularPrintbed : ICompositeRenderable
     {

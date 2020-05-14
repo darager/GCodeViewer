@@ -8,7 +8,7 @@ using System.Windows;
 using GCodeViewer.Library;
 using GCodeViewer.Helpers;
 using GCodeViewer.WPF.Controls.PointCloud;
-using OpenTkTest.Printbeds;
+using OpenTkTest.Renderables;
 
 namespace OpenTkTest.ViewModels
 {
@@ -38,7 +38,7 @@ namespace OpenTkTest.ViewModels
             PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            var printbed = new CircularPrintbed(0.5f, Color.DarkGray, Color.White);
+            var printbed = new CircularPrintbed(1.0f, Color.DarkGray, Color.White);
             printbed.AddTo(PointCloudObjects);
         }
 
