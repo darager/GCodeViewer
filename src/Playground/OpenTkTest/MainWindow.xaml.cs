@@ -57,7 +57,10 @@ namespace OpenTkTest
                 {
                     var triangle = mesh.GetTriangle(idx);
 
+                    AddPoint(triangle.c);
                     AddPoint(triangle.a);
+                    AddPoint(triangle.a);
+                    AddPoint(triangle.b);
                     AddPoint(triangle.b);
                     AddPoint(triangle.c);
 
@@ -71,7 +74,7 @@ namespace OpenTkTest
                     }
                 }
 
-                var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Triangles);
+                var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Lines);
                 _viewer3DVM.PointCloudObjects.Add(model);
             }
 
