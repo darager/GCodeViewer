@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using GCodeViewer.Helpers;
 using OpenTK;
 
@@ -8,22 +9,6 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
     internal class ShaderBuilder
     {
         private const string _projectionMatrixName = "transform";
-        private const string _originalVertexShaderSource =
-            "#version 330 core\n" +
-            "layout (location = 0) in vec3 aPosition;\n" +
-            "uniform mat4 %UNIFORMNAME%;\n" +
-            "void main()\n" +
-            "{\n" +
-            "   gl_PointSize = 1.0;\n" +
-            "   gl_Position = %UNIFORMNAME% * vec4(aPosition, 1.0);\n" +
-            "}";
-        private const string _originalFragmentShaderSource =
-            "#version 330 core\n" +
-            "out vec4 FragColor;\n" +
-            "void main()\n" +
-            "{\n" +
-            "   FragColor = vec4(%RED%, %GREEN%, %BLUE%, %ALPHA%);\n" +
-            "}";
 
         private Dictionary<Color, Shader> _shaders = new Dictionary<Color, Shader>();
 
@@ -57,22 +42,17 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
 
         private string GetFragmentShaderSource(Color color)
         {
-            string red = ScaleToFloat(color.R).ToString();
-            string green = ScaleToFloat(color.G).ToString();
-            string blue = ScaleToFloat(color.B).ToString();
-            string alpha = ScaleToFloat(color.A).ToString();
-
-            return _originalFragmentShaderSource
-                       .Replace("%RED%", red)
-                       .Replace("%GREEN%", green)
-                       .Replace("%BLUE%", blue)
-                       .Replace("%ALPHA%", alpha);
+            return File.ReadAllText(@"Shaders\shader.frag")
+                       .Replace("%RED%", ScaleToFloat(color.R))
+                       .Replace("%GREEN%", ScaleToFloat(color.G))
+                       .Replace("%BLUE%", ScaleToFloat(color.B))
+                       .Replace("%ALPHA%", ScaleToFloat(color.A));
         }
         private string GetVertexShaderSource()
         {
-            return _originalVertexShaderSource
+            return File.ReadAllText(@"Shaders\shader.vert")
                        .Replace("%UNIFORMNAME%", _projectionMatrixName);
         }
-        private float ScaleToFloat(int value) => ((float)value).Scale(0, 255, 0, 1);
+        private string ScaleToFloat(int value) => ((float)value).Scale(0, 255, 0, 1).ToString();
     }
 }
