@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.WPF.Controls.PointCloud.Helpers
+﻿namespace GCodeViewer.Helpers
 {
     public static class ValueHelpers
     {

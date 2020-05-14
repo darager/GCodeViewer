@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using GCodeViewer.Helpers;
 using OpenTK;
-using GCodeViewer.WPF.Controls.PointCloud.Helpers;
 
 namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
 {

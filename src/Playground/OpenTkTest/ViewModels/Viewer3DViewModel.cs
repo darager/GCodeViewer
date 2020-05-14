@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using GCodeViewer.Library;
+using GCodeViewer.Helpers;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.Printbeds;
 
@@ -68,9 +69,9 @@ namespace OpenTkTest.ViewModels
                 verts.Clear();
                 foreach (var point in points)
                 {
-                    verts.Add(Scale(point.Y, min, max, -1, 1));
-                    verts.Add(Scale(point.Z, min, max, -1, 1) + 1);
-                    verts.Add(Scale(point.X, min, max, -1, 1));
+                    verts.Add(point.Y.Scale(min, max, -1, 1));
+                    verts.Add(point.Z.Scale(min, max, -1, 1) + 1);
+                    verts.Add(point.X.Scale(min, max, -1, 1));
                 }
 
                 uiThread.Invoke(() =>
@@ -82,11 +83,6 @@ namespace OpenTkTest.ViewModels
                     PointCloudObjects.Add(_model);
                 });
             }).ConfigureAwait(false);
-        }
-
-        private float Scale(float value, float min, float max, int minScale, int maxScale)
-        {
-            return minScale + (float)(value - min) / (max - min) * (maxScale - minScale);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

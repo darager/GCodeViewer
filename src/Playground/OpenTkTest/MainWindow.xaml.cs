@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using GCodeViewer.Helpers;
 using g3;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
@@ -54,7 +54,9 @@ namespace OpenTkTest
                 var verts = new List<float>();
                 foreach (double vert in dVerts)
                 {
-                    verts.Add((float)vert);
+                    float sccaledValue = ((float)vert).Scale(min, max, -1, 1);
+
+                    verts.Add(sccaledValue);
                 }
 
                 var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Triangles);

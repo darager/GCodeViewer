@@ -118,6 +118,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GCodeViewer.Helpers\GCodeViewer.Helpers.csproj">
+      <Project>{a34ea9ad-edcc-44d9-8b58-29ba9f7f2061}</Project>
+      <Name>GCodeViewer.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj">
       <Project>{7b425f55-52b7-4776-b888-e9bc0ae970e7}</Project>
       <Name>GCodeViewer.Library</Name>
