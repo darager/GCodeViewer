@@ -44,16 +44,18 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Primitives
 
         public void Draw()
         {
-            int count = _vertices.Length / 3;
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
 
-            //    GL.BufferData(BufferTarget.ArrayBuffer,
-            //                  _vertices.Length * sizeof(float),
-            //                  _vertices,
-            //                  _usageHint);
+            GL.VertexAttribPointer(0,
+                                   size: 3,
+                                   VertexAttribPointerType.Float,
+                                   normalized: false,
+                                   3 * sizeof(float),
+                                   offset: 0);
 
-
-            // mby call these two for every renderable VBO with the correct offset and count
             _shader.Use();
+
+            int count = _vertices.Length / 3;
             GL.DrawArrays(_type, first: 0, count);
         }
 
