@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.PointCloud;
-using g3;
-using System.Windows.Media;
 
 namespace GCodeViewer.Library.Renderables
 {
@@ -68,12 +66,10 @@ namespace GCodeViewer.Library.Renderables
 
         public Renderable Build()
         {
-            var points = GetCirclePoints(_radius, _triangleCount);
-
-            RotatePointsXY(points);
-            TranslatePoints(points);
-
-            float[] vertices = GetVertices(points);
+            float[] vertices = GetCirclePoints(_radius, _triangleCount)
+                        .RotateXYZ(_rotationX, _rotationY, 0)
+                        .Translate(_position)
+                        .ToVertices();
 
             return new Renderable(_color, vertices, RenderableType.Triangles);
         }
@@ -104,31 +100,6 @@ namespace GCodeViewer.Library.Renderables
             }
 
             return result;
-        }
-        private void RotatePointsXY(List<Point3D> points)
-        {
-            for (int i = 0; i < points.Count; i++)
-            {
-                var point = points[i];
-
-                point = point.RotateX(_rotationX);
-                point = point.RotateY(_rotationY);
-
-                points[i] = point;
-            }
-        }
-        private void TranslatePoints(List<Point3D> points)
-        {
-            for (int i = 0; i < points.Count; i++)
-            {
-                var point = points[i];
-
-                point.X += _position.X;
-                point.Y += _position.Y;
-                point.Z += _position.Z;
-
-                points[i] = point;
-            }
         }
         private float[] GetVertices(List<Point3D> points)
         {

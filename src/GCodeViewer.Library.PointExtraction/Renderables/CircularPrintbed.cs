@@ -9,26 +9,29 @@ namespace GCodeViewer.Library.Renderables
     {
         private List<Renderable> _parts = new List<Renderable>();
 
-        public CircularPrintbed(float radius, Color color, Color lineColor, int triangleCount = 100)
+        public CircularPrintbed(float radius, Color color, Color lineColor, float rotationX = 0, float rotationY = 0, int triangleCount = 100)
         {
             var printbed = Circle.With()
-                .Position(new Point3D(0, 0, 1))
+                .Position(new Point3D(0, 0, 0))
                 .Radius(radius)
-                .RotationX(45)
+                .RotationX(rotationX)
+                .RotationY(rotationY)
                 .Color(color)
                 .TriangleCount(triangleCount)
                 .Build();
 
-            List<float> lineVerts = GetLineVertices(radius);
-            var lines = new Renderable(lineColor, lineVerts.ToArray(), RenderableType.Lines);
+            var lineVerts = GetLinePoints(radius)
+                        .RotateXYZ(rotationY, rotationY, 0)
+                        .ToVertices();
+            var lines = new Renderable(lineColor, lineVerts, RenderableType.Lines);
 
             _parts.Add(printbed);
             _parts.Add(lines);
         }
 
-        private List<float> GetLineVertices(float radius, int lineCount = 11)
+        private List<Point3D> GetLinePoints(float radius, int lineCount = 11)
         {
-            var verts = new List<float>();
+            var verts = new List<Point3D>();
 
             float lineSpacing = (2 * radius) / lineCount;
 
@@ -36,27 +39,22 @@ namespace GCodeViewer.Library.Renderables
             {
                 float x = i * lineSpacing;
                 float y = (float)Math.Sqrt((radius * radius) - (x * x));
+                float z = 0.001f; // lines should be slightly above circle of printbed
 
                 // vertical Lines
-                AddPoint(verts, x, y);
-                AddPoint(verts, x, -y);
-                AddPoint(verts, -x, y);
-                AddPoint(verts, -x, -y);
+                verts.Add(new Point3D(x, y, z));
+                verts.Add(new Point3D(x, -y, z));
+                verts.Add(new Point3D(-x, y, z));
+                verts.Add(new Point3D(-x, -y, z));
 
                 // horizontal Lines
-                AddPoint(verts, y, x);
-                AddPoint(verts, -y, x);
-                AddPoint(verts, y, -x);
-                AddPoint(verts, -y, -x);
+                verts.Add(new Point3D(y, x, z));
+                verts.Add(new Point3D(-y, x, z));
+                verts.Add(new Point3D(y, -x, z));
+                verts.Add(new Point3D(-y, -x, z));
             }
 
             return verts;
-        }
-        private void AddPoint(List<float> vertices, float x, float y)
-        {
-            vertices.Add(x);
-            vertices.Add(y);
-            vertices.Add(0.001f);
         }
 
         public void AddTo(ICollection<Renderable> collection)
@@ -64,7 +62,6 @@ namespace GCodeViewer.Library.Renderables
             foreach (var part in _parts)
                 collection.Add(part);
         }
-
         public void RemoveFrom(ICollection<Renderable> collection)
         {
             foreach (var part in _parts)
