@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.Library.GCodeParsing
+﻿namespace GCodeViewer.Library
 {
     public struct Point3D
     {
