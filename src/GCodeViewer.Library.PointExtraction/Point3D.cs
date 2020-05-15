@@ -41,27 +41,29 @@ namespace GCodeViewer.Library
 
         public Point3D RotateX(float deg)
         {
-            var temp = Y;
-            Y = Z;
-            Z = temp;
-
-            //var vec = new Vector3f(point.X, point.Y, point.Z);
-            //var mat = Matrix3f.AxisAngleD(new Vector3f(0, 1, 0), _rotationY);
-
-            //vec = mat.Multiply(ref vec);
-
-            //point.X = vec.x;
-            //point.Y = vec.y;
-            //point.Z = vec.z;
+            Rotate(new Vector3f(1, 0, 0), deg);
             return this;
         }
         public Point3D RotateY(float deg)
         {
+            Rotate(new Vector3f(0, 1, 0), deg);
             return this;
         }
         public Point3D RotateZ(float deg)
         {
+            Rotate(new Vector3f(0, 0, 1), deg);
             return this;
+        }
+        private void Rotate(Vector3f axis, float deg)
+        {
+            var vec = new Vector3f(this.X, this.Y, this.Z);
+            var mat = Matrix3f.AxisAngleD(axis, deg);
+
+            vec = mat.Multiply(ref vec);
+
+            this.X = vec.x;
+            this.Y = vec.y;
+            this.Z = vec.z;
         }
     };
 }
