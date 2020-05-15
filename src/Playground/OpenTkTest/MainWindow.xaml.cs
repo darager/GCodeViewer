@@ -57,6 +57,7 @@ namespace OpenTkTest
                 {
                     var triangle = mesh.GetTriangle(idx);
 
+                    // TODO: this is drawing some lines twice many lines
                     AddPoint(triangle.c);
                     AddPoint(triangle.a);
                     AddPoint(triangle.a);
