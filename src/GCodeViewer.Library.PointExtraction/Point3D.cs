@@ -2,7 +2,7 @@
 
 namespace GCodeViewer.Library
 {
-    public struct Point3D
+    public class Point3D
     {
         public float X;
         public float Y;

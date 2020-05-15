@@ -21,7 +21,7 @@ namespace GCodeViewer.Library.Renderables
                 .Build();
 
             var lineVerts = GetLinePoints(radius)
-                        .RotateXYZ(rotationY, rotationY, 0)
+                        .RotateXYX(rotationY, rotationY, 0)
                         .ToVertices();
             var lines = new Renderable(lineColor, lineVerts, RenderableType.Lines);
 

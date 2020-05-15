@@ -67,7 +67,7 @@ namespace GCodeViewer.Library.Renderables
         public Renderable Build()
         {
             float[] vertices = GetCirclePoints(_radius, _triangleCount)
-                        .RotateXYZ(_rotationX, _rotationY, 0)
+                        .RotateXYX(_rotationX, _rotationY, 0)
                         .Translate(_position)
                         .ToVertices();
 

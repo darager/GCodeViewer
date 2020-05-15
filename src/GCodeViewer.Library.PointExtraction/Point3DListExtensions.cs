@@ -4,15 +4,15 @@ namespace GCodeViewer.Library
 {
     public static class Point3DListExtensions
     {
-        public static List<Point3D> RotateXYZ(this List<Point3D> @this, float rotX, float rotY, float rotZ)
+        public static List<Point3D> RotateXYX(this List<Point3D> @this, float rotXdeg, float rotYdeg, float rotX2deg)
         {
             for (int i = 0; i < @this.Count; i++)
             {
                 var point = @this[i];
 
-                point = point.RotateX(rotX);
-                point = point.RotateY(rotY);
-                point = point.RotateZ(rotZ);
+                point = point.RotateX(rotXdeg);
+                point = point.RotateY(rotYdeg);
+                point = point.RotateX(rotX2deg);
 
                 @this[i] = point;
             }
