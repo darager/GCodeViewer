@@ -1,7 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.PointCloud;
+using g3;
+using System.Windows.Media;
 
 namespace GCodeViewer.Library.Renderables
 {
@@ -66,20 +68,68 @@ namespace GCodeViewer.Library.Renderables
 
         public Renderable Build()
         {
-            var points = GetCirclePoints(_radius, _position, _triangleCount);
+            var points = GetCirclePoints(_radius, _triangleCount);
 
             RotatePointsXY(points);
+            TranslatePoints(points);
 
             float[] vertices = GetVertices(points);
 
             return new Renderable(_color, vertices, RenderableType.Triangles);
         }
 
+
+        private List<Point3D> GetCirclePoints(float radius, int triangleCount)
+        {
+            var result = new List<Point3D>();
+            var zero = new Point3D(0, 0, 0);
+
+            float dAngle = (float)(2 * Math.PI / triangleCount);
+            for (int i = 0; i < triangleCount; i++)
+            {
+                float angle = i * dAngle;
+
+                result.Add(zero);
+                result.Add(GetPointOnCircle(angle));
+                result.Add(GetPointOnCircle(angle + dAngle));
+
+                Point3D GetPointOnCircle(float ang)
+                {
+                    return new Point3D(
+                        (float)Math.Cos(ang) * radius,
+                        (float)Math.Sin(ang) * radius,
+                        0
+                    );
+                }
+            }
+
+            return result;
+        }
         private void RotatePointsXY(List<Point3D> points)
         {
-            // TODO:
-        }
+            for (int i = 0; i < points.Count; i++)
+            {
+                var point = points[i];
 
+                point = point.RotateX(_rotationX);
+                point = point.RotateY(_rotationY);
+
+                points[i] = point;
+            }
+        }
+        private void TranslatePoints(List<Point3D> points)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                var point = points[i];
+
+                point.X += _position.X;
+                point.Y += _position.Y;
+                point.Z += _position.Z;
+
+                points[i] = point;
+            }
+        }
         private float[] GetVertices(List<Point3D> points)
         {
             var verts = new List<float>();
@@ -92,32 +142,6 @@ namespace GCodeViewer.Library.Renderables
             }
 
             return verts.ToArray();
-        }
-
-        private List<Point3D> GetCirclePoints(float radius, Point3D position, int triangleCount)
-        {
-            var result = new List<Point3D>();
-
-            float dAngle = (float)(2 * Math.PI / triangleCount);
-            for (int i = 0; i < triangleCount; i++)
-            {
-                float angle = i * dAngle;
-
-                result.Add(position);
-                result.Add(GetPointOnCircle(angle));
-                result.Add(GetPointOnCircle(angle + dAngle));
-
-                Point3D GetPointOnCircle(float ang)
-                {
-                    return new Point3D(
-                        position.X + (float)Math.Cos(ang) * radius,
-                        position.Y,
-                        position.Z + (float)Math.Sin(ang) * radius
-                    );
-                }
-            }
-
-            return result;
         }
     }
 }
