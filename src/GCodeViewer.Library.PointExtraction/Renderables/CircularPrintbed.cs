@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace OpenTkTest.Renderables
+namespace GCodeViewer.Library.Renderables
 {
     public class CircularPrintbed : ICompositeRenderable
     {
@@ -80,6 +80,12 @@ namespace OpenTkTest.Renderables
         {
             foreach (var part in _parts)
                 collection.Add(part);
+        }
+
+        public void RemoveFrom(ICollection<Renderable> collection)
+        {
+            foreach (var part in _parts)
+                collection.Remove(part);
         }
     }
 }

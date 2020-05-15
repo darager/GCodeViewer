@@ -67,8 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Renderables\CircularPrintbed.cs" />
-    <Compile Include="Renderables\ICompositeRenderable.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TextEditorViewModel.cs" />
     <Page Include="MainWindow.xaml">

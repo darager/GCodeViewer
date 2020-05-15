@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using GCodeViewer.Helpers;
 using GCodeViewer.Library.GCodeParsing;
+using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.Controls.PointCloud;
-using OpenTkTest.Renderables;
 
 namespace OpenTkTest.ViewModels
 {
