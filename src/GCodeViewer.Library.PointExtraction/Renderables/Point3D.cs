@@ -1,6 +1,6 @@
 ﻿using g3;
 
-namespace GCodeViewer.Library
+namespace GCodeViewer.Library.Renderables
 {
     public class Point3D
     {

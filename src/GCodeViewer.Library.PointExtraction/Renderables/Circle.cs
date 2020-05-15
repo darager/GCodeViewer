@@ -74,7 +74,6 @@ namespace GCodeViewer.Library.Renderables
             return new Renderable(_color, vertices, RenderableType.Triangles);
         }
 
-
         private List<Point3D> GetCirclePoints(float radius, int triangleCount)
         {
             var result = new List<Point3D>();
@@ -116,4 +115,3 @@ namespace GCodeViewer.Library.Renderables
         }
     }
 }
-
