@@ -15,7 +15,9 @@ namespace UserControlTest
             TestOutConfigFunctionality().Wait();
         }
 
-        private static async Task TestOutConfigFunctionality()
+        private Configuration _config;
+
+        private async Task TestOutConfigFunctionality()
         {
             string fileName = "gcodeviewer-config.json";
 
@@ -32,15 +34,15 @@ namespace UserControlTest
                 using var stream = File.Create(filePath);
 
                 var config = new Configuration();
-                await config.SaveConfiguration(stream, CancellationToken.None);
+                await config.Save(stream, CancellationToken.None);
                 stream.Close();
             }
-            //else
-            //{
-            //    using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-            //    var conf = await Configuration.LoadConfiguration(stream);
-            //    stream.Close();
-            //}
+            else
+            {
+                using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+                _config = Configuration.Load(stream);
+                stream.Close();
+            }
         }
     }
 }

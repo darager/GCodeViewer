@@ -9,18 +9,22 @@ namespace GCodeViewer.Library
     {
         public PrintArea PrintArea { get; set; } = new PrintArea();
 
-        public async Task SaveConfiguration(FileStream stream, CancellationToken token)
+        public async Task Save(FileStream stream, CancellationToken token)
         {
             var writer = new StreamWriter(stream);
-            var text = JsonConvert.SerializeObject(this);
+
+            var formatSettings = new JsonSerializerSettings();
+            formatSettings.Formatting = Formatting.Indented;
+
+            var text = JsonConvert.SerializeObject(this, formatSettings);
 
             await writer.WriteAsync(text);
             writer.Close();
         }
-        public async static Task<Configuration> LoadConfiguration(FileStream stream)
+        public static Configuration Load(FileStream stream)
         {
             var reader = new StreamReader(stream);
-            var text = await reader.ReadToEndAsync();
+            var text = reader.ReadToEnd();
             reader.Close();
 
             return JsonConvert.DeserializeObject<Configuration>(text);
