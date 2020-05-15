@@ -33,7 +33,7 @@ namespace OpenTkTest
 
         private void LoadAndDisplayModelFromStl()
         {
-            string file = @"STL-Files\Benchy_Christmas_1.stl";
+            string file = @"STL-Files\xyz-calibrationCube.stl";
 
             using var stream = File.OpenRead(file);
             using var binaryReader = new BinaryReader(stream);
@@ -49,6 +49,8 @@ namespace OpenTkTest
 
                 var triangleIndices = mesh.TriangleIndices();
 
+                // TODO: in the future these are controled by the printvolume set in the renderpipeline
+                // max and min are not retrieved perfectly
                 float max = (float)mesh.Vertices.back;
                 float min = (float)mesh.Vertices.front;
 
