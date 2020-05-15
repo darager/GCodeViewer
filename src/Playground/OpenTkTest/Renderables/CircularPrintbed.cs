@@ -50,7 +50,7 @@ namespace OpenTkTest.Renderables
         private void AddPoint(List<float> vertices, float x, float y)
         {
             vertices.Add(x);
-            vertices.Add(0);
+            vertices.Add(0.001f);
             vertices.Add(y);
         }
 

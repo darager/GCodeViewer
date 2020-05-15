@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows;
-using GCodeViewer.Helpers;
 using g3;
+using GCodeViewer.Helpers;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
-using System;
 
 namespace OpenTkTest
 {

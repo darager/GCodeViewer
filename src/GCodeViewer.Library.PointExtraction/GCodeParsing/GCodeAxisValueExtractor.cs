@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace GCodeViewer.Library
+namespace GCodeViewer.Library.GCodeParsing
 {
     public class GCodeAxisValueExtractor
     {

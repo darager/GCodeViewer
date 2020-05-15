@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.Library
+﻿namespace GCodeViewer.Library.GCodeParsing
 {
     public struct AxisValues
     {
