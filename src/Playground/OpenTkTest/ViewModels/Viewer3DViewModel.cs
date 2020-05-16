@@ -33,7 +33,7 @@ namespace OpenTkTest.ViewModels
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 
-            this.Add(new CoordinateSystem(new Point3D(0, 0, 0), 0.2f, 0, 0));
+            this.Add(new CoordinateSystem(new Point3D(0, 0, 0), 0.2f));
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
             this.Add(new CircularPrintbed(1.0f, Color.DarkGray, Color.White));

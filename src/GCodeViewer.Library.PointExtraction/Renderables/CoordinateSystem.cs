@@ -8,7 +8,7 @@ namespace GCodeViewer.Library.Renderables
     {
         private List<Renderable> _parts = new List<Renderable>();
 
-        public CoordinateSystem(Point3D position, float length, float rotationX, float rotationY)
+        public CoordinateSystem(Point3D position, float length)
         {
             float radius = length / 10;
             int opacity = 255;
@@ -19,8 +19,7 @@ namespace GCodeViewer.Library.Renderables
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
-                               .RotationX(rotationX)
-                               .RotationY(90 + rotationY)
+                               .RotationY(90)
                                .Build());
             // Y-Axis
             _parts.Add(Cylinder.With()
@@ -28,8 +27,7 @@ namespace GCodeViewer.Library.Renderables
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
-                               .RotationX(-90 + rotationX)
-                               .RotationY(rotationY)
+                               .RotationX(-90)
                                .Build());
             // Z-Axis
             _parts.Add(Cylinder.With()
@@ -37,8 +35,6 @@ namespace GCodeViewer.Library.Renderables
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
-                               .RotationX(rotationX)
-                               .RotationY(rotationY)
                                .Build());
         }
 
