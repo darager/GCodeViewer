@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using g3;
 using GCodeViewer.Helpers;
+using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
 
@@ -52,7 +53,7 @@ namespace OpenTkTest
                 float max = (float)mesh.Vertices.back;
                 float min = (float)mesh.Vertices.front;
 
-                var verts = new List<float>();
+                var points = new List<Point3D>();
                 foreach (int idx in triangleIndices)
                 {
                     var triangle = mesh.GetTriangle(idx);
@@ -69,13 +70,15 @@ namespace OpenTkTest
                     {
                         Vector3d vert = mesh.GetVertex(vertexIndex);
 
-                        verts.Add(((float)vert.x).Scale(min, max, -0.5f, 0.5f));
-                        verts.Add(((float)vert.y).Scale(min, max, -0.5f, 0.5f));
-                        verts.Add(((float)vert.z).Scale(min, max, -0.5f, 0.5f));
+                        float x = ((float)vert.x).Scale(min, max, -0.5f, 0.5f);
+                        float y = ((float)vert.y).Scale(min, max, -0.5f, 0.5f);
+                        float z = ((float)vert.z).Scale(min, max, -0.5f, 0.5f);
+
+                        points.Add(new Point3D(x, y, z));
                     }
                 }
 
-                var model = new Renderable(Color.Aqua, verts.ToArray(), RenderableType.Lines);
+                var model = new Renderable(Color.Aqua, points, RenderableType.Lines);
                 _viewer3DVM.PointCloudObjects.Add(model);
             }
 

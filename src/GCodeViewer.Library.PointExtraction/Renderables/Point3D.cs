@@ -1,12 +1,13 @@
 ﻿using g3;
+using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
 {
-    public class Point3D
+    public class Point3D : IPoint3F
     {
-        public float X;
-        public float Y;
-        public float Z;
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
 
         public Point3D(float x, float y, float z)
         {
@@ -15,6 +16,7 @@ namespace GCodeViewer.Library.Renderables
 
         public static Point3D NaN => new Point3D(float.NaN, float.NaN, float.NaN);
 
+        public bool Equals(Point3D other) => Equals((object)other);
         public override bool Equals(object obj)
         {
             return (obj is Point3D other) && this == other;

@@ -49,10 +49,10 @@ namespace OpenTkTest.ViewModels
             {
                 var content = newText.Split();
                 var allPoints = _extractor.ExtractPrinterAxisValues(content);
-                var points = _filter.FilterNonExtrudingValues(allPoints);
+                var filteredPoints = _filter.FilterNonExtrudingValues(allPoints);
 
                 var verts = new List<float>();
-                foreach (var point in points)
+                foreach (var point in filteredPoints)
                 {
                     verts.Add(point.Y);
                     verts.Add(point.Z);
@@ -61,12 +61,13 @@ namespace OpenTkTest.ViewModels
                 float max = verts.Max();
                 float min = verts.Min();
 
-                verts.Clear();
-                foreach (var point in points)
+                var points = new List<Point3D>();
+                foreach (var point in filteredPoints)
                 {
-                    verts.Add(point.Y.Scale(min, max, -1, 1));
-                    verts.Add(point.Z.Scale(min, max, -1, 1) + 1);
-                    verts.Add(point.X.Scale(min, max, -1, 1));
+                    float x = point.Y.Scale(min, max, -1, 1);
+                    float y = point.Z.Scale(min, max, -1, 1) + 1;
+                    float z = point.X.Scale(min, max, -1, 1);
+                    points.Add(new Point3D(x, y, z));
                 }
 
                 uiThread.Invoke(() =>
@@ -74,7 +75,7 @@ namespace OpenTkTest.ViewModels
                     if (_model != null)
                         PointCloudObjects.Remove(_model);
 
-                    _model = new Renderable(Color.GreenYellow, verts.ToArray(), RenderableType.Points);
+                    _model = new Renderable(Color.GreenYellow, points, RenderableType.Points);
                     PointCloudObjects.Add(_model);
                 });
             }).ConfigureAwait(false);
@@ -82,11 +83,14 @@ namespace OpenTkTest.ViewModels
 
         private void AddCoordinateSystem()
         {
-            float[] coordinateSytemVertices =
+            var coordinateSytemVertices = new List<Point3D>()
             {
-                0.0f, 0.0f, 0.0f,   0.1f, 0.0f, 0.0f, // X
-                0.0f, 0.0f, 0.0f,   0.0f, 0.1f, 0.0f, // Y
-                0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 0.1f  // Z
+                new Point3D(0.0f, 0.0f, 0.0f),
+                new Point3D(0.1f, 0.0f, 0.0f), // X
+                new Point3D(0.0f, 0.0f, 0.0f),
+                new Point3D(0.0f, 0.1f, 0.0f), // Y
+                new Point3D(0.0f, 0.0f, 0.0f),
+                new Point3D(0.0f, 0.0f, 0.1f)  // Z
             };
             PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
         }

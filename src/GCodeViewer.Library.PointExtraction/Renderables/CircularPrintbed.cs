@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
@@ -20,10 +21,9 @@ namespace GCodeViewer.Library.Renderables
                 .TriangleCount(triangleCount)
                 .Build();
 
-            var lineVerts = GetLinePoints(radius)
-                        .RotateXYX(rotationY, rotationY, 0)
-                        .ToVertices();
-            var lines = new Renderable(lineColor, lineVerts, RenderableType.Lines);
+            var linePoints = GetLinePoints(radius)
+                            .RotateXYX(rotationY, rotationY, 0);
+            var lines = new Renderable(lineColor, linePoints, RenderableType.Lines);
 
             _parts.Add(printbed);
             _parts.Add(lines);

@@ -66,12 +66,11 @@ namespace GCodeViewer.Library.Renderables
 
         public Renderable Build()
         {
-            float[] vertices = GetCirclePoints(_radius, _triangleCount)
+            var points = GetCirclePoints(_radius, _triangleCount)
                         .RotateXYX(_rotationX, _rotationY, 0)
-                        .Translate(_position)
-                        .ToVertices();
+                        .Translate(_position);
 
-            return new Renderable(_color, vertices, RenderableType.Triangles);
+            return new Renderable(_color, points, RenderableType.Triangles);
         }
 
         private List<Point3D> GetCirclePoints(float radius, int triangleCount)

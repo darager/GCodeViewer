@@ -34,18 +34,5 @@ namespace GCodeViewer.Library.Renderables
 
             return @this;
         }
-        public static float[] ToVertices(this List<Point3D> @this)
-        {
-            var verts = new List<float>();
-
-            foreach (var point in @this)
-            {
-                verts.Add(point.X);
-                verts.Add(point.Y);
-                verts.Add(point.Z);
-            }
-
-            return verts.ToArray();
-        }
     }
 }
