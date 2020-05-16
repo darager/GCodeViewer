@@ -113,6 +113,9 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             GL.Enable(EnableCap.PointSmooth);
             GL.Enable(EnableCap.ProgramPointSize);
 
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
             GL.Enable(EnableCap.DepthTest);
             GL.DepthRange(1, 0); // reverse mappings have to be used  ¯\_(ツ)_/¯
 

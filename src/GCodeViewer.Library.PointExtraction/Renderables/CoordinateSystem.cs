@@ -11,10 +11,11 @@ namespace GCodeViewer.Library.Renderables
         public CoordinateSystem(Point3D position, float length, float rotationX, float rotationY)
         {
             float radius = length / 10;
+            int opacity = 255;
 
             // X-Axis
             _parts.Add(Cylinder.With()
-                               .Color(Color.Red)
+                               .Color(Color.FromArgb(opacity, 255, 0, 0))
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
@@ -23,7 +24,7 @@ namespace GCodeViewer.Library.Renderables
                                .Build());
             // Y-Axis
             _parts.Add(Cylinder.With()
-                               .Color(Color.Green)
+                               .Color(Color.FromArgb(opacity, 0, 255, 0))
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
@@ -32,7 +33,7 @@ namespace GCodeViewer.Library.Renderables
                                .Build());
             // Z-Axis
             _parts.Add(Cylinder.With()
-                               .Color(Color.Blue)
+                               .Color(Color.FromArgb(opacity, 0, 0, 255))
                                .Position(position)
                                .Height(length)
                                .Radius(radius)
