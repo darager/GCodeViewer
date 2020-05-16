@@ -19,15 +19,15 @@ namespace GCodeViewer.Library.Renderables
 
             return @this;
         }
-        public static List<Point3D> Translate(this List<Point3D> @this, Point3D _position)
+        public static List<Point3D> Translate(this List<Point3D> @this, Point3D offset)
         {
             for (int i = 0; i < @this.Count; i++)
             {
                 var point = @this[i];
 
-                point.X += _position.X;
-                point.Y += _position.Y;
-                point.Z += _position.Z;
+                point.X += offset.X;
+                point.Y += offset.Y;
+                point.Z += offset.Z;
 
                 @this[i] = point;
             }

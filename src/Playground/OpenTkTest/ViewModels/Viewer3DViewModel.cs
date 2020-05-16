@@ -39,13 +39,14 @@ namespace OpenTkTest.ViewModels
             AddCoordinateSystem();
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            //this.Add(_printbed);
+            this.Add(_printbed);
 
             this.Add(Cylinder
                         .With()
-                        //.Position(new Point3D(0, 0.5f, 0.5f))
-                        .Height(0.7f)
-                        .Radius(0.5f)
+                        .Position(new Point3D(0.1f, 0, 0)) // TODO: for some godforsaken reason setting the position does not work?
+                        .Height(0.2f)
+                        .Radius(0.3f)
+                        //.RotationX(90) // TODO: rotation also causes an issue (middle point of 2nd circle is not correct when rotated)
                         .Color(Color.CornflowerBlue)
                         .Build());
         }

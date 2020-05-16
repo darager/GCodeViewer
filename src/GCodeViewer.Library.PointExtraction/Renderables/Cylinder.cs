@@ -13,7 +13,7 @@ namespace GCodeViewer.Library.Renderables
         private Point3D _position;
         private float _rotationX;
         private float _rotationY;
-        private int _triangleCount = 300;
+        private int _perCircleTriangleCount = 100;
 
         private Color _color;
 
@@ -67,7 +67,7 @@ namespace GCodeViewer.Library.Renderables
 
         public Renderable Build()
         {
-            var points = GetZylinderPoints(_radius, _triangleCount)
+            var points = GetZylinderPoints(_radius, _perCircleTriangleCount)
                         .RotateXYX(_rotationX, _rotationY, 0)
                         .Translate(_position);
 
@@ -78,33 +78,35 @@ namespace GCodeViewer.Library.Renderables
         {
             var result = new List<Point3D>();
 
-            var c1middle = _position;
+            var c1middle = new Point3D(0, 0, 0);
             var c2middle = new Point3D(0, 0, _height);
 
             float dAngle = (float)(2 * Math.PI / triangleCount);
             for (int i = 0; i < triangleCount; i++)
             {
                 float angle = i * dAngle;
+                float nextAngle = angle + dAngle;
 
                 // circle 1
                 result.Add(c1middle);
-                result.Add(GetPointOnZylinder(angle, 0));
-                result.Add(GetPointOnZylinder(angle + dAngle, 0));
+                result.Add(GetPointOnCircle(angle, 0));
+                result.Add(GetPointOnCircle(nextAngle, 0));
 
-                // circle 2
+                //// circle 2
                 result.Add(c2middle);
-                result.Add(GetPointOnZylinder(angle, _height));
-                result.Add(GetPointOnZylinder(angle + dAngle, _height));
+                result.Add(GetPointOnCircle(angle, _height));
+                result.Add(GetPointOnCircle(nextAngle, _height));
 
-                // zylinder mantle
-                result.Add(GetPointOnZylinder(angle, 0));
-                result.Add(GetPointOnZylinder(angle + dAngle, 0));
-                result.Add(GetPointOnZylinder(angle, _height));
-                result.Add(GetPointOnZylinder(angle, _height));
-                result.Add(GetPointOnZylinder(angle + dAngle, _height));
-                result.Add(GetPointOnZylinder(angle + dAngle, 0));
+                //// zylinder mantle
+                result.Add(GetPointOnCircle(angle, 0));
+                result.Add(GetPointOnCircle(angle + dAngle, 0));
+                result.Add(GetPointOnCircle(angle, _height));
 
-                Point3D GetPointOnZylinder(float ang, float z)
+                result.Add(GetPointOnCircle(angle, _height));
+                result.Add(GetPointOnCircle(angle + dAngle, _height));
+                result.Add(GetPointOnCircle(angle + dAngle, 0));
+
+                Point3D GetPointOnCircle(float ang, float z)
                 {
                     return new Point3D(
                         (float)Math.Cos(ang) * radius,
