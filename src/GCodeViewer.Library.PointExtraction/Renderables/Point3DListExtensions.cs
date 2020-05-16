@@ -6,33 +6,36 @@ namespace GCodeViewer.Library.Renderables
     {
         public static List<Point3D> RotateXYX(this List<Point3D> @this, float rotXdeg, float rotYdeg, float rotX2deg)
         {
-            for (int i = 0; i < @this.Count; i++)
+            var result = new List<Point3D>();
+
+            foreach (var p in @this)
             {
-                var point = @this[i];
+                var point = new Point3D(p.X, p.Y, p.Z);
 
                 point = point.RotateX(rotXdeg);
                 point = point.RotateY(rotYdeg);
                 point = point.RotateX(rotX2deg);
 
-                @this[i] = point;
+                result.Add(point);
             }
 
-            return @this;
+            return result;
         }
         public static List<Point3D> Translate(this List<Point3D> @this, Point3D offset)
         {
-            for (int i = 0; i < @this.Count; i++)
-            {
-                var point = @this[i];
+            var result = new List<Point3D>();
 
+            foreach (var p in @this)
+            {
+                var point = new Point3D(p.X, p.Y, p.Z);
                 point.X += offset.X;
                 point.Y += offset.Y;
                 point.Z += offset.Z;
 
-                @this[i] = point;
+                result.Add(point);
             }
 
-            return @this;
+            return result;
         }
     }
 }

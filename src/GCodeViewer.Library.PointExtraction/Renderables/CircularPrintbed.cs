@@ -9,19 +9,18 @@ namespace GCodeViewer.Library.Renderables
     {
         private List<Renderable> _parts = new List<Renderable>();
 
-        public CircularPrintbed(float radius, Color color, Color lineColor, float rotationX = 0, float rotationY = 0, int triangleCount = 100)
+        public CircularPrintbed(float radius, Color color, Color lineColor, float rotationX = 0, float rotationY = 0)
         {
             var printbed = Circle.With()
-                .Position(new Point3D(0, 0, 0))
-                .Radius(radius)
-                .RotationX(rotationX)
-                .RotationY(rotationY)
-                .Color(color)
-                .TriangleCount(triangleCount)
-                .Build();
+                                 .Position(new Point3D(0, 0, 0)) // HACK: offset does not work for circles
+                                 .Radius(radius)
+                                 .RotationX(rotationX)
+                                 .RotationY(rotationY)
+                                 .Color(color)
+                                 .Build();
 
             var linePoints = GetLinePoints(radius)
-                            .RotateXYX(rotationY, rotationY, 0);
+                            .RotateXYX(rotationX, rotationY, 0);
             var lines = new Renderable(lineColor, linePoints, RenderableType.Lines);
 
             _parts.Add(printbed);
