@@ -99,18 +99,5 @@ namespace GCodeViewer.Library.Renderables
 
             return result;
         }
-        private float[] GetVertices(List<Point3D> points)
-        {
-            var verts = new List<float>();
-
-            foreach (var point in points)
-            {
-                verts.Add(point.X);
-                verts.Add(point.Y);
-                verts.Add(point.Z);
-            }
-
-            return verts.ToArray();
-        }
     }
 }
