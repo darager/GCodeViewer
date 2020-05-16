@@ -41,7 +41,7 @@ namespace OpenTkTest.ViewModels
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
             //this.Add(_printbed);
 
-            this.Add(Zylinder
+            this.Add(Cylinder
                         .With()
                         //.Position(new Point3D(0, 0.5f, 0.5f))
                         .Height(0.7f)

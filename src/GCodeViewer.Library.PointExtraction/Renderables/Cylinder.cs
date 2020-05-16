@@ -5,7 +5,7 @@ using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
 {
-    public class Zylinder
+    public class Cylinder
     {
         private float _height;
         private float _radius;
@@ -17,11 +17,11 @@ namespace GCodeViewer.Library.Renderables
 
         private Color _color;
 
-        private Zylinder() { }
+        private Cylinder() { }
 
-        public static Zylinder With()
+        public static Cylinder With()
         {
-            var circle = new Zylinder()
+            var circle = new Cylinder()
             {
                 _radius = 1,
                 _position = new Point3D(0, 0, 0),
@@ -34,32 +34,32 @@ namespace GCodeViewer.Library.Renderables
             return circle;
         }
 
-        public Zylinder Height(float height)
+        public Cylinder Height(float height)
         {
             _height = height;
             return this;
         }
-        public Zylinder Radius(float radius)
+        public Cylinder Radius(float radius)
         {
             _radius = radius;
             return this;
         }
-        public Zylinder Position(Point3D position)
+        public Cylinder Position(Point3D position)
         {
             _position = position;
             return this;
         }
-        public Zylinder RotationX(float rotationX)
+        public Cylinder RotationX(float rotationX)
         {
             _rotationX = rotationX;
             return this;
         }
-        public Zylinder RotationY(float rotationY)
+        public Cylinder RotationY(float rotationY)
         {
             _rotationY = rotationY;
             return this;
         }
-        public Zylinder Color(Color color)
+        public Cylinder Color(Color color)
         {
             _color = color;
             return this;
@@ -91,18 +91,18 @@ namespace GCodeViewer.Library.Renderables
                 result.Add(GetPointOnZylinder(angle, 0));
                 result.Add(GetPointOnZylinder(angle + dAngle, 0));
 
-                result.Add(GetPointOnZylinder(angle, 0));
-                result.Add(GetPointOnZylinder(angle + dAngle, 0));
-                result.Add(GetPointOnZylinder(angle, _height));
-
-                result.Add(GetPointOnZylinder(angle, _height));
-                result.Add(GetPointOnZylinder(angle + dAngle, _height));
-                result.Add(GetPointOnZylinder(angle + dAngle, 0));
-
                 // circle 2
                 result.Add(c2middle);
                 result.Add(GetPointOnZylinder(angle, _height));
                 result.Add(GetPointOnZylinder(angle + dAngle, _height));
+
+                // zylinder mantle
+                result.Add(GetPointOnZylinder(angle, 0));
+                result.Add(GetPointOnZylinder(angle + dAngle, 0));
+                result.Add(GetPointOnZylinder(angle, _height));
+                result.Add(GetPointOnZylinder(angle, _height));
+                result.Add(GetPointOnZylinder(angle + dAngle, _height));
+                result.Add(GetPointOnZylinder(angle + dAngle, 0));
 
                 Point3D GetPointOnZylinder(float ang, float z)
                 {
