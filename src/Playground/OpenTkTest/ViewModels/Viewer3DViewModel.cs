@@ -6,13 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using GCodeViewer.Helpers;
+using GCodeViewer.Library;
 using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest.ViewModels
 {
-    public class Viewer3DViewModel : INotifyPropertyChanged
+    public class Viewer3DViewModel : INotifyPropertyChanged, IRenderService
     {
         public ObservableCollection<Renderable> PointCloudObjects
         {
@@ -28,8 +29,8 @@ namespace OpenTkTest.ViewModels
         private AxisValueFilter _filter = new AxisValueFilter();
         private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
 
-        private Renderable _model;
         private ICompositeRenderable _printbed = new CircularPrintbed(1.0f, Color.DarkGray, Color.White);
+        private Renderable _model;
 
         public Viewer3DViewModel()
         {
@@ -38,7 +39,7 @@ namespace OpenTkTest.ViewModels
             AddCoordinateSystem();
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            _printbed.AddTo(PointCloudObjects);
+            this.Add(_printbed);
         }
 
         public async void Update3DModel(string newText)
@@ -93,6 +94,25 @@ namespace OpenTkTest.ViewModels
                 new Point3D(0.0f, 0.0f, 0.1f)  // Z
             };
             PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
+        }
+
+        public void Add(Renderable renderable)
+        {
+            _pointCloudObjects.Add(renderable);
+        }
+        public void Add(ICompositeRenderable compositeRenderable)
+        {
+            foreach (var renderable in compositeRenderable.GetParts())
+                _pointCloudObjects.Add(renderable);
+        }
+        public void Remove(Renderable renderable)
+        {
+            _pointCloudObjects.Add(renderable);
+        }
+        public void Remove(ICompositeRenderable compositeRenderable)
+        {
+            foreach (var renderable in compositeRenderable.GetParts())
+                _pointCloudObjects.Remove(renderable);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

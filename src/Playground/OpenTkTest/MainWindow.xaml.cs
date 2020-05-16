@@ -79,7 +79,7 @@ namespace OpenTkTest
                 }
 
                 var model = new Renderable(Color.Aqua, points, RenderableType.Lines);
-                _viewer3DVM.PointCloudObjects.Add(model);
+                _viewer3DVM.Add(model);
             }
 
             binaryReader.Close();

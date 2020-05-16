@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
@@ -57,15 +56,6 @@ namespace GCodeViewer.Library.Renderables
             return verts;
         }
 
-        public void AddTo(ICollection<Renderable> collection)
-        {
-            foreach (var part in _parts)
-                collection.Add(part);
-        }
-        public void RemoveFrom(ICollection<Renderable> collection)
-        {
-            foreach (var part in _parts)
-                collection.Remove(part);
-        }
+        public IEnumerable<Renderable> GetParts() => _parts;
     }
 }

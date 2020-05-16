@@ -5,7 +5,6 @@ namespace GCodeViewer.Library.Renderables
 {
     public interface ICompositeRenderable
     {
-        void AddTo(ICollection<Renderable> collection);
-        void RemoveFrom(ICollection<Renderable> collection);
+        IEnumerable<Renderable> GetParts();
     }
 }
