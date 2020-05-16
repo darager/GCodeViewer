@@ -86,10 +86,20 @@ namespace GCodeViewer.Library.Renderables
             {
                 float angle = i * dAngle;
 
+                // circle 1
                 result.Add(c1middle);
                 result.Add(GetPointOnZylinder(angle, 0));
                 result.Add(GetPointOnZylinder(angle + dAngle, 0));
 
+                result.Add(GetPointOnZylinder(angle, 0));
+                result.Add(GetPointOnZylinder(angle + dAngle, 0));
+                result.Add(GetPointOnZylinder(angle, _height));
+
+                result.Add(GetPointOnZylinder(angle, _height));
+                result.Add(GetPointOnZylinder(angle + dAngle, _height));
+                result.Add(GetPointOnZylinder(angle + dAngle, 0));
+
+                // circle 2
                 result.Add(c2middle);
                 result.Add(GetPointOnZylinder(angle, _height));
                 result.Add(GetPointOnZylinder(angle + dAngle, _height));
