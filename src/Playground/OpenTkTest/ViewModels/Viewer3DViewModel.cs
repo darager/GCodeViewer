@@ -29,9 +29,6 @@ namespace OpenTkTest.ViewModels
         private AxisValueFilter _filter = new AxisValueFilter();
         private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
 
-        private ICompositeRenderable _printbed = new CircularPrintbed(0.5f, Color.DarkGray, Color.White);
-        private Renderable _model;
-
         public Viewer3DViewModel()
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
@@ -39,18 +36,19 @@ namespace OpenTkTest.ViewModels
             this.Add(new CoordinateSystem(new Point3D(0, 0, 0), 0.2f, 0, 0));
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            this.Add(_printbed);
+            this.Add(new CircularPrintbed(1.0f, Color.DarkGray, Color.White));
 
             //HACK: fix these problems
             //this.Add(Cylinder
             //            .With()
-            //            .Position(new Point3D(0, 0, 0))
+            //            .Position(new Point3D(0.5f, 0.5f, 0))
             //            .Height(0.2f)
             //            .Radius(0.1f)
             //            .Color(Color.FromArgb(100, 120, 0, 120))
-            //            .Build());
+            //            .Build())0
         }
 
+        private Renderable _model;
         public async void Update3DModel(string newText)
         {
             var uiThread = Application.Current.Dispatcher;

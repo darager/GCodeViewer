@@ -166,9 +166,8 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             int direction = e.Delta / 120;
 
             float newScale = _camera.Scale + (direction * _mouseWheelSensitivity);
-            newScale.Constrain(0.05f, 3.0f);
 
-            _camera.Scale = newScale;
+            _camera.Scale = newScale.Constrain(0.05f, 2.0f);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace OpenTkTest
 
             Statusbar.DataContext = new StatusBarViewModel(_textEditorVM);
 
-            //LoadAndDisplayModelFromStl();
+            LoadAndDisplayModelFromStl();
         }
 
         private void LoadAndDisplayModelFromStl()
