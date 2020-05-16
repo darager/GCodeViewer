@@ -36,20 +36,20 @@ namespace OpenTkTest.ViewModels
         {
             PointCloudObjects = new ObservableCollection<Renderable>();
 
-            AddCoordinateSystem();
+            this.Add(new CoordinateSystem(new Point3D(0, 0, 0), 0.2f, 0, 0));
+            this.Add(new CoordinateSystem(new Point3D(0, 0, 1), 0.2f, 0, 0));
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
-            this.Add(_printbed);
+            //this.Add(_printbed);
 
             //HACK: fix these problems
-            this.Add(Cylinder
-                        .With()
-                        .Position(new Point3D(0, 0, 0))
-                        .Height(0.2f)
-                        .Radius(0.1f)
-                        .Color(Color.CornflowerBlue)
-                        .Build());
-
+            //this.Add(Cylinder
+            //            .With()
+            //            .Position(new Point3D(0, 0, 0))
+            //            .Height(0.2f)
+            //            .Radius(0.1f)
+            //            .Color(Color.CornflowerBlue)
+            //            .Build());
         }
 
         public async void Update3DModel(string newText)
@@ -90,20 +90,6 @@ namespace OpenTkTest.ViewModels
                     PointCloudObjects.Add(_model);
                 });
             }).ConfigureAwait(false);
-        }
-
-        private void AddCoordinateSystem()
-        {
-            var coordinateSytemVertices = new List<Point3D>()
-            {
-                new Point3D(0.0f, 0.0f, 0.0f),
-                new Point3D(0.1f, 0.0f, 0.0f), // X
-                new Point3D(0.0f, 0.0f, 0.0f),
-                new Point3D(0.0f, 0.1f, 0.0f), // Y
-                new Point3D(0.0f, 0.0f, 0.0f),
-                new Point3D(0.0f, 0.0f, 0.1f)  // Z
-            };
-            PointCloudObjects.Add(new Renderable(Color.Red, coordinateSytemVertices, RenderableType.Lines));
         }
 
         public void Add(Renderable renderable)
