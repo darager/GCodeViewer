@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using GCodeViewer.WPF.Pages;
+using Ninject;
 
 namespace GCodeViewer.WPF
 {
@@ -18,12 +19,21 @@ namespace GCodeViewer.WPF
     public class PageNavigationService
     {
         private Stack<Navigation> _visitedPages = new Stack<Navigation>();
-        private Dictionary<Navigation, Page> _pages = new Dictionary<Navigation, Page>();
 
-        public PageNavigationService(StartingPage startingPage, TextEditorPage textEditorPage)
+        [Inject]
+        public StartingPage StartingPage { get; set; }
+        [Inject]
+        public SettingsPage SettingsPage { get; set; }
+
+        private Page GetPage(Navigation page)
         {
-            _pages.Add(Navigation.StartingPage, startingPage);
-            _pages.Add(Navigation.GCodePreviewPage, textEditorPage);
+            return page switch
+            {
+                Navigation.StartingPage => StartingPage,
+                Navigation.SettingsPage => SettingsPage,
+
+                _ => throw new Exception("this page has not been added yet")
+            };
         }
 
         public void GoTo(Navigation page)
@@ -41,7 +51,7 @@ namespace GCodeViewer.WPF
 
         private void SetPage(Navigation page)
         {
-            PageChanged?.Invoke(this, _pages[page]);
+            PageChanged?.Invoke(this, GetPage(page));
         }
 
         public event EventHandler<Page> PageChanged;

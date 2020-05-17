@@ -11,10 +11,10 @@ namespace GCodeViewer.WPF
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            var window = kernel.Get<MainWindow>();
-            window.Show();
-
             var navService = kernel.Get<PageNavigationService>();
+            var window = kernel.Get<MainWindow>();
+
+            window.Show();
             navService.GoTo(Navigation.StartingPage);
         }
     }

@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C117EF64-CBE2-4705-ACA3-4B5BE3EDE257}</ProjectGuid>
+    <LangVersion>8.0</LangVersion>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GCodeViewer.WPF</RootNamespace>
     <AssemblyName>GCodeViewer.WPF</AssemblyName>
@@ -67,6 +68,10 @@
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
     <Compile Include="PageNavigationService.cs" />
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPageViewModel.cs" />
     <Compile Include="Pages\StartingPage.xaml.cs">
       <DependentUpon>StartingPage.xaml</DependentUpon>
     </Compile>
@@ -87,6 +92,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\StartingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
