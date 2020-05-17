@@ -23,7 +23,7 @@ namespace GCodeViewer.WPF.ViewModels
         public PagingViewModel()
         {
             // HACK
-            Page = new TextEditorPage();
+            Page = new StartingPage();
         }
 
         private void OnPropertyChanged(string propertyName)
