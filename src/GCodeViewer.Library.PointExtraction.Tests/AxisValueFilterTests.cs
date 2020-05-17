@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FluentAssertions;
+using GCodeViewer.Library.GCodeParsing;
 using NUnit.Framework;
 
 namespace GCodeViewer.Library.Tests

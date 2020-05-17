@@ -35,8 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="geometry3Sharp, Version=1.0.324.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\geometry3Sharp.1.0.324\lib\net45\geometry3Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.2.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.2\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Viewer3DViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +94,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +103,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GCodeViewer.Helpers\GCodeViewer.Helpers.csproj">
+      <Project>{a34ea9ad-edcc-44d9-8b58-29ba9f7f2061}</Project>
+      <Name>GCodeViewer.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj">
+      <Project>{7b425f55-52b7-4776-b888-e9bc0ae970e7}</Project>
+      <Name>GCodeViewer.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj">
+      <Project>{0b166abc-a1f9-4160-ba5a-0a332bfd8ed0}</Project>
+      <Name>GCodeViewer.WPF.Controls.PointCloud</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj">
+      <Project>{25ad0cc6-5acc-42cc-9681-7ccd71277dd7}</Project>
+      <Name>GCodeViewer.WPF.Controls.TextEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj">
+      <Project>{cf5f85e2-91fa-4583-ac68-c57c27e1ee6c}</Project>
+      <Name>GCodeViewer.WPF.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj">
+      <Project>{3baff321-457d-47a4-a589-d3b197afc740}</Project>
+      <Name>GCodeViewer.WPF.MVVM.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
