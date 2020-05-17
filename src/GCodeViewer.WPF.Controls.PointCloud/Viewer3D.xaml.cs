@@ -145,6 +145,13 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             float dx = (float)(e.X - _previousMousePosition.X);
             float dy = (float)(e.Y - _previousMousePosition.Y);
 
+            // this fixes the camera jumping after a slider or something has been adjusted
+            if (dx > 60 || dy > 60)
+            {
+                _previousMousePosition = new Point(e.X, e.Y);
+                return;
+            }
+
             bool leftMouseButtonPressed = (Control.MouseButtons & MouseButtons.Left) != 0;
 
             if (leftMouseButtonPressed)
