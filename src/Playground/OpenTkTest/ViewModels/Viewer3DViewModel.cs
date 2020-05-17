@@ -100,7 +100,7 @@ namespace OpenTkTest.ViewModels
         }
         public void Remove(Renderable renderable)
         {
-            _pointCloudObjects.Add(renderable);
+            _pointCloudObjects.Remove(renderable);
         }
         public void Remove(ICompositeRenderable compositeRenderable)
         {

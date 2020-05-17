@@ -85,5 +85,20 @@ namespace OpenTkTest
             binaryReader.Close();
             stream.Close();
         }
+
+        private Renderable movemodel;
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (movemodel != null)
+                _viewer3DVM.Remove(movemodel);
+
+            movemodel = Cylinder.With()
+                                .Position(new Point3D((float)e.OldValue, 0, (float)e.NewValue))
+                                .Height((float)e.NewValue)
+                                .Radius(0.5f)
+                                .Build();
+
+            _viewer3DVM?.Add(movemodel);
+        }
     }
 }

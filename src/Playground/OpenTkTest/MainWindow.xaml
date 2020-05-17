@@ -22,6 +22,12 @@
                 <MenuItem Command="{Binding SaveAsFile}" Header="SaveAs" />
                 <MenuItem Command="{Binding CloseFile}" Header="Close" />
             </MenuItem>
+            <Slider
+                Width="100"
+                Maximum="1"
+                Minimum="-1"
+                ValueChanged="Slider_ValueChanged"
+                Value="0.1" />
         </Menu>
 
         <Grid Background="DarkGray" DockPanel.Dock="Bottom">

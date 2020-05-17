@@ -82,20 +82,16 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
         private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
         {
-            if (args.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Renderable renderable in args.NewItems)
-                {
-                    AddRenderable(pclViewer, renderable);
-                }
-            }
-            else if (args.Action == NotifyCollectionChangedAction.Remove)
+            if (args.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (Renderable renderable in args.OldItems)
                     pclViewer._vbos.Remove(renderable);
             }
-            else
-                throw new NotImplementedException();
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Renderable renderable in args.NewItems)
+                    AddRenderable(pclViewer, renderable);
+            }
         }
         private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
         {
