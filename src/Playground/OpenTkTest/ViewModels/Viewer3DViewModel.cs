@@ -37,15 +37,6 @@ namespace OpenTkTest.ViewModels
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
             this.Add(new CircularPrintbed(1.0f, Color.DarkGray, Color.White));
-
-            //HACK: fix these problems
-            //this.Add(Cylinder
-            //            .With()
-            //            .Position(new Point3D(0.5f, 0.5f, 0))
-            //            .Height(0.2f)
-            //            .Radius(0.1f)
-            //            .Color(Color.FromArgb(100, 120, 0, 120))
-            //            .Build())0
         }
 
         private Renderable _model;

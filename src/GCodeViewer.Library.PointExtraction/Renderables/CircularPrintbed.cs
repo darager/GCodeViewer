@@ -12,7 +12,7 @@ namespace GCodeViewer.Library.Renderables
         public CircularPrintbed(float radius, Color color, Color lineColor, float rotationX = 0, float rotationY = 0)
         {
             var printbed = Circle.With()
-                                 .Position(new Point3D(0, 0, 0)) // HACK: offset does not work for circles
+                                 .Position(new Point3D(0, 0, 0))
                                  .Radius(radius)
                                  .RotationX(rotationX)
                                  .RotationY(rotationY)

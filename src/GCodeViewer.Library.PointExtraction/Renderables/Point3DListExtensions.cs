@@ -4,6 +4,7 @@ namespace GCodeViewer.Library.Renderables
 {
     public static class Point3DListExtensions
     {
+        // If the existing lists are changed instead of new ones being created weird bugs start to appear!
         public static List<Point3D> RotateXYX(this List<Point3D> @this, float rotXdeg, float rotYdeg, float rotX2deg)
         {
             var result = new List<Point3D>();
