@@ -84,7 +84,7 @@
       <DependentUpon>TextEditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsService.cs" />
-    <Compile Include="TextEditor\TextEditorViewModel.cs" />
+    <Compile Include="TextEditor\TextEditorPageViewModel.cs" />
     <Compile Include="ViewModels\PagingViewModel.cs" />
     <Compile Include="ViewModels\Viewer3DViewModel.cs" />
     <Page Include="MainWindow.xaml">

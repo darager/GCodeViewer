@@ -6,13 +6,13 @@ using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.TextEditor
 {
-    public class TextEditorViewModel : INotifyPropertyChanged, ITextEditor
+    public class TextEditorPageViewModel : INotifyPropertyChanged, ITextEditor
     {
         public ICommand HandleTextChanged { get; private set; }
 
         public GCodeTextEditor TextEditor { get; internal set; }
 
-        public TextEditorViewModel()
+        public TextEditorPageViewModel()
         {
             HandleTextChanged = new RelayCommand((_) => TextChanged?.Invoke(this, EventArgs.Empty));
         }
@@ -23,6 +23,9 @@ namespace GCodeViewer.WPF.TextEditor
         }
         public void SetText(string text)
         {
+            // HACK: the texteditor is null even if it has been set before
+            if (TextEditor == null) return;
+
             TextEditor.Text = text;
         }
 

@@ -17,7 +17,7 @@ namespace GCodeViewer.WPF.TextEditor
 {
     public partial class TextEditorPage : Page
     {
-        public TextEditorPage(TextEditorViewModel vm)
+        public TextEditorPage(TextEditorPageViewModel vm)
         {
             InitializeComponent();
 

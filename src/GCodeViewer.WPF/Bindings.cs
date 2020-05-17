@@ -12,17 +12,24 @@ namespace GCodeViewer.WPF
     {
         public override void Load()
         {
-            Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
+            Bind<MainWindow>().To<MainWindow>().InSingletonScope();
 
-            Bind<ITextEditor>().To<TextEditorViewModel>().InSingletonScope();
-            Bind<TextEditorViewModel>().To<TextEditorViewModel>().InSingletonScope();
-
-            Bind<SettingsService>().To<SettingsService>().InSingletonScope();
             Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
 
-            Bind<SettingsPage>().To<SettingsPage>().InSingletonScope();
             Bind<StartingPage>().To<StartingPage>().InSingletonScope();
+            Bind<StartingPageViewModel>().To<StartingPageViewModel>().InSingletonScope();
+
+            Bind<SettingsService>().To<SettingsService>().InSingletonScope();
+            Bind<SettingsPage>().To<SettingsPage>().InSingletonScope();
+            Bind<SettingsPageViewModel>().To<SettingsPageViewModel>().InSingletonScope();
+
+            Bind<ITextEditor>().To<TextEditorPageViewModel>().InSingletonScope();
             Bind<TextEditorPage>().To<TextEditorPage>().InSingletonScope();
+            Bind<TextEditorPageViewModel>().To<TextEditorPageViewModel>().InSingletonScope();
+
+            Bind<PagingViewModel>().To<PagingViewModel>().InSingletonScope();
+
+            Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
         }
     }
 }
