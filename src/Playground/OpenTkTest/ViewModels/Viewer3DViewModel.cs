@@ -53,9 +53,9 @@ namespace OpenTkTest.ViewModels
                 var verts = new List<float>();
                 foreach (var point in filteredPoints)
                 {
+                    verts.Add(point.X);
                     verts.Add(point.Y);
                     verts.Add(point.Z);
-                    verts.Add(point.X);
                 }
                 float max = verts.Max();
                 float min = verts.Min();
@@ -63,9 +63,9 @@ namespace OpenTkTest.ViewModels
                 var points = new List<Point3D>();
                 foreach (var point in filteredPoints)
                 {
-                    float x = point.Y.Scale(min, max, -1, 1);
-                    float y = point.Z.Scale(min, max, -1, 1) + 1;
-                    float z = point.X.Scale(min, max, -1, 1);
+                    float x = point.X.Scale(min, max, -1, 1);
+                    float y = point.Y.Scale(min, max, -1, 1);
+                    float z = point.Z.Scale(min, max, -1, 1) + 1;
                     points.Add(new Point3D(x, y, z));
                 }
 
