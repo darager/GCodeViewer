@@ -23,14 +23,14 @@ namespace GCodeViewer.WPF.Starting
             _navigationService = navigationService;
             _texteditor = texteditor;
 
+            OpenGCodeFile = new RelayCommand(LoadGcodeFile);
+            StartSlicingWorkflow = new RelayCommand(LoadSTLFile);
             GoToSettingsPage = new RelayCommand((_) => navigationService.GoTo(Navigation.Navigation.SettingsPage));
-            OpenGCodeFile = new RelayCommand((_) => LoadGcodeFile());
-            StartSlicingWorkflow = new RelayCommand((_) => LoadSTLFile());
         }
 
-        private async void LoadGcodeFile()
+        private async void LoadGcodeFile(object _)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             ofd.Filter = "gcode files (*.gcode)|*.gcode";
             ofd.FilterIndex = 2;
@@ -46,7 +46,7 @@ namespace GCodeViewer.WPF.Starting
                 _navigationService.GoTo(Navigation.Navigation.GCodePreviewPage);
             }
         }
-        private void LoadSTLFile()
+        private void LoadSTLFile(object _)
         {
             // TODO:
         }
