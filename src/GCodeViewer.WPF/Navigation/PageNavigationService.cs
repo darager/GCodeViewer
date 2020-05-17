@@ -15,16 +15,12 @@ namespace GCodeViewer.WPF.Navigation
         [Inject]
         public SettingsPage SettingsPage { get; set; }
 
-        private Page GetPage(Navigation page)
+        private Page GetPage(Navigation page) => page switch
         {
-            return page switch
-            {
-                Navigation.StartingPage => StartingPage,
-                Navigation.SettingsPage => SettingsPage,
-
-                _ => throw new Exception("this page has not been added yet")
-            };
-        }
+            Navigation.StartingPage => StartingPage,
+            Navigation.SettingsPage => SettingsPage,
+            _ => throw new Exception("this page has not been added yet")
+        };
 
         public void GoTo(Navigation page)
         {
