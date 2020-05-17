@@ -39,6 +39,9 @@
     <Reference Include="geometry3Sharp, Version=1.0.324.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\geometry3Sharp.1.0.324\lib\net45\geometry3Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -79,6 +82,7 @@
     <Compile Include="Pages\TextEditorPage.xaml.cs">
       <DependentUpon>TextEditorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="ViewModels\PagingViewModel.cs" />
     <Compile Include="ViewModels\Viewer3DViewModel.cs" />
     <Page Include="MainWindow.xaml">

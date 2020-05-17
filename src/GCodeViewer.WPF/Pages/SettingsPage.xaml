@@ -32,14 +32,14 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                Content="Radius:" />
+                Content="Diameter:" />
 
             <ctrl:NumericUpDown
                 Grid.Row="0"
                 Grid.Column="1"
                 Width="100"
                 MinValue="1"
-                Value="{Binding PrintBedRadius}" />
+                Value="{Binding PrintBedDiameter}" />
             <Label Grid.Row="0" Grid.Column="2">mm</Label>
 
             <Label
