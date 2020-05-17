@@ -10,7 +10,7 @@ namespace GCodeViewer.Library.Renderables
 
         public CoordinateSystem(Point3D position, float length)
         {
-            float radius = length / 10;
+            float radius = length / 25;
             int opacity = 255;
 
             // X-Axis
