@@ -11,5 +11,5 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <editor:GCodeTextEditor />
+    <editor:GCodeTextEditor x:Name="textEditor" TextChanged="{Binding HandleTextChanged}" />
 </Page>

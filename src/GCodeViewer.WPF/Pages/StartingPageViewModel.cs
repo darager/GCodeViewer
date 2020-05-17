@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
@@ -26,10 +25,10 @@ namespace GCodeViewer.WPF.Pages
 
             GoToSettingsPage = new RelayCommand((_) => navigationService.GoTo(Navigation.Navigation.SettingsPage));
             OpenGCodeFile = new RelayCommand((_) => LoadGcodeFile());
-            //ImportSTLFile = new RelayCommand((_) => soemthing());
+            StartSlicingWorkflow = new RelayCommand((_) => LoadSTLFile());
         }
 
-        private async Task LoadGcodeFile()
+        private async void LoadGcodeFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -48,9 +47,9 @@ namespace GCodeViewer.WPF.Pages
                 _navigationService.GoTo(Navigation.Navigation.GCodePreviewPage);
             }
         }
-        private void soemthing()
+        private void LoadSTLFile()
         {
-
+            // TODO:
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

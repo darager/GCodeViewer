@@ -72,6 +72,7 @@
     <Compile Include="Bindings.cs" />
     <Compile Include="Navigation\Navigation.cs" />
     <Compile Include="Navigation\PageNavigationService.cs" />
+    <Compile Include="TextEditor\ITextEditor.cs" />
     <Compile Include="Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -79,10 +80,11 @@
     <Compile Include="Pages\StartingPage.xaml.cs">
       <DependentUpon>StartingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TextEditorPage.xaml.cs">
+    <Compile Include="TextEditor\TextEditorPage.xaml.cs">
       <DependentUpon>TextEditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsService.cs" />
+    <Compile Include="TextEditor\TextEditorViewModel.cs" />
     <Compile Include="ViewModels\PagingViewModel.cs" />
     <Compile Include="ViewModels\Viewer3DViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -105,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TextEditorPage.xaml">
+    <Page Include="TextEditor\TextEditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

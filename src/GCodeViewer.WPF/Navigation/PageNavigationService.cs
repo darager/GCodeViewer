@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using GCodeViewer.WPF.Pages;
 using GCodeViewer.WPF.Settings;
+using GCodeViewer.WPF.TextEditor;
 using Ninject;
 
 namespace GCodeViewer.WPF.Navigation
@@ -15,11 +16,14 @@ namespace GCodeViewer.WPF.Navigation
         public StartingPage StartingPage { get; set; }
         [Inject]
         public SettingsPage SettingsPage { get; set; }
+        [Inject]
+        public TextEditorPage TextEditorPage { get; set; }
 
         private Page GetPage(Navigation page) => page switch
         {
             Navigation.StartingPage => StartingPage,
             Navigation.SettingsPage => SettingsPage,
+            Navigation.GCodePreviewPage => TextEditorPage,
             _ => throw new Exception("this page has not been added yet")
         };
 

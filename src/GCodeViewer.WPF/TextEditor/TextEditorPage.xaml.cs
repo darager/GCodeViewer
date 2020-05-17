@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace GCodeViewer.WPF.TextEditor
 {
-    /// <summary>
-    /// Interaction logic for TextEditorPage.xaml
-    /// </summary>
     public partial class TextEditorPage : Page
     {
-        public TextEditorPage()
+        public TextEditorPage(TextEditorViewModel vm)
         {
             InitializeComponent();
+
+            vm.TextEditor = textEditor;
+            this.DataContext = vm;
         }
     }
 }
