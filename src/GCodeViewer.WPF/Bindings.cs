@@ -3,7 +3,7 @@ using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.Pages;
 using GCodeViewer.WPF.Settings;
 using GCodeViewer.WPF.TextEditor;
-using GCodeViewer.WPF.ViewModels;
+using GCodeViewer.WPF.MainWindow;
 using Ninject.Modules;
 
 namespace GCodeViewer.WPF
@@ -12,7 +12,7 @@ namespace GCodeViewer.WPF
     {
         public override void Load()
         {
-            Bind<MainWindow>().To<MainWindow>().InSingletonScope();
+            Bind<MainWindow.MainWindow>().To<MainWindow.MainWindow>().InSingletonScope();
 
             Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
 

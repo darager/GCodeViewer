@@ -6,7 +6,7 @@ using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace GCodeViewer.WPF.ViewModels
+namespace GCodeViewer.WPF.MainWindow
 {
     public class Viewer3DViewModel : INotifyPropertyChanged, IRenderService
     {

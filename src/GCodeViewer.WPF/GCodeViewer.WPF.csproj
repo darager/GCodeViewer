@@ -85,9 +85,9 @@
     </Compile>
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="TextEditor\TextEditorPageViewModel.cs" />
-    <Compile Include="ViewModels\PagingViewModel.cs" />
-    <Compile Include="ViewModels\Viewer3DViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="MainWindow\PagingViewModel.cs" />
+    <Compile Include="MainWindow\Viewer3DViewModel.cs" />
+    <Page Include="MainWindow\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,7 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

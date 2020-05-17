@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using GCodeViewer.WPF.Navigation;
 using Ninject;
 
-namespace GCodeViewer.WPF.ViewModels
+namespace GCodeViewer.WPF.MainWindow
 {
     public class PagingViewModel : INotifyPropertyChanged
     {
