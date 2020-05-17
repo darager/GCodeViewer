@@ -1,4 +1,5 @@
 ﻿using GCodeViewer.Library.Renderables;
+using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.ViewModels;
 using Ninject.Modules;
 

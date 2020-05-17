@@ -67,7 +67,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
-    <Compile Include="PageNavigationService.cs" />
+    <Compile Include="Navigation\Navigation.cs" />
+    <Compile Include="Navigation\PageNavigationService.cs" />
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>

@@ -33,6 +33,7 @@
         <Frame
             x:Name="Frame"
             Grid.Column="2"
-            Content="{Binding Page}" />
+            Content="{Binding Page}"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

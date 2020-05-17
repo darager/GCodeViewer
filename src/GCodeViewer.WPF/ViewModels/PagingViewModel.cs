@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
+using GCodeViewer.WPF.Navigation;
 using Ninject;
 
 namespace GCodeViewer.WPF.ViewModels

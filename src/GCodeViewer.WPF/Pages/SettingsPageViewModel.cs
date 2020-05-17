@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
+using GCodeViewer.WPF.Navigation;
 
 namespace GCodeViewer.WPF.Pages
 {

@@ -4,18 +4,8 @@ using System.Windows.Controls;
 using GCodeViewer.WPF.Pages;
 using Ninject;
 
-namespace GCodeViewer.WPF
+namespace GCodeViewer.WPF.Navigation
 {
-    public enum Navigation
-    {
-        StartingPage,
-        STLPositioningPage,
-        SettingsPage,
-        PrintSurfacePage,
-        SliceSettingsPage,
-        GCodePreviewPage
-    }
-
     public class PageNavigationService
     {
         private Stack<Navigation> _visitedPages = new Stack<Navigation>();

@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Windows;
+using GCodeViewer.WPF.Navigation;
 using Ninject;
 
 namespace GCodeViewer.WPF
@@ -15,7 +16,7 @@ namespace GCodeViewer.WPF
             var window = kernel.Get<MainWindow>();
 
             window.Show();
-            navService.GoTo(Navigation.StartingPage);
+            navService.GoTo(Navigation.Navigation.StartingPage);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.WPF.MVVM.Helpers;
+using GCodeViewer.WPF.Navigation;
 
 namespace GCodeViewer.WPF.Pages
 {
@@ -12,7 +13,7 @@ namespace GCodeViewer.WPF.Pages
 
         public StartingPageViewModel(PageNavigationService navigationService)
         {
-            GoToSettingsPage = new RelayCommand((_) => navigationService.GoTo(Navigation.SettingsPage));
+            GoToSettingsPage = new RelayCommand((_) => navigationService.GoTo(Navigation.Navigation.SettingsPage));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
