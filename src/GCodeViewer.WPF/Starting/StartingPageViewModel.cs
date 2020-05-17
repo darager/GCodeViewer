@@ -43,7 +43,6 @@ namespace GCodeViewer.WPF.Starting
                 string content = await reader.ReadToEndAsync();
 
                 _texteditor.SetText(content);
-
                 _navigationService.GoTo(Navigation.Navigation.GCodePreviewPage);
             }
         }

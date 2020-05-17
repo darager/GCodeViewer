@@ -23,7 +23,6 @@ namespace GCodeViewer.WPF
             Bind<SettingsPage>().To<SettingsPage>().InSingletonScope();
             Bind<SettingsPageViewModel>().To<SettingsPageViewModel>().InSingletonScope();
 
-            Bind<ITextEditor>().To<TextEditorPage>().InSingletonScope();
             Bind<TextEditorPage>().To<TextEditorPage>().InSingletonScope();
             Bind<TextEditorPageViewModel>().To<TextEditorPageViewModel>().InSingletonScope();
 

@@ -11,10 +11,19 @@
     mc:Ignorable="d">
 
     <DockPanel>
-        <Grid Height="25" DockPanel.Dock="Top">
-            <Button>this is a test button</Button>
-        </Grid>
+        <StackPanel
+            Height="25"
+            DockPanel.Dock="Top"
+            Orientation="Horizontal">
+            <Button Command="{Binding OpenOtherFile}">Open</Button>
+            <Button Command="{Binding SaveFile}">Save</Button>
+            <Button Command="{Binding SaveFileAs}">Save As</Button>
+            <Button Command="{Binding CloseFile}">Close</Button>
+        </StackPanel>
 
-        <editor:GCodeTextEditor x:Name="textEditor" DockPanel.Dock="Bottom" />
+        <editor:GCodeTextEditor
+            x:Name="textEditor"
+            DockPanel.Dock="Bottom"
+            TextChanged="{Binding HandleTextChanged}" />
     </DockPanel>
 </Page>
