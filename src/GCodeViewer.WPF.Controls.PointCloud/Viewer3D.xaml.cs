@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
@@ -27,6 +26,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                 typeof(ObservableCollection<Renderable>),
                 typeof(Viewer3D),
                 new FrameworkPropertyMetadata(UpdateRenderables));
+
         private static void UpdateRenderables(DependencyObject source, DependencyPropertyChangedEventArgs args)
         {
             var pclViewer = (Viewer3D)source;
@@ -46,12 +46,38 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                 pclViewer.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, pclViewer);
             }
         }
+        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Renderable renderable in args.NewItems)
+                    AddRenderable(pclViewer, renderable);
+            }
+
+            if (args.Action == NotifyCollectionChangedAction.Reset)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+        }
+        private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
+        {
+            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
+            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
+
+            pclViewer._vbos.Add(renderable, vbo);
+        }
 
         private readonly GLControl _control;
         private readonly OrbitCamera _camera;
         internal readonly ShaderBuilder _shaderBuilder;
-
-        internal Dictionary<Renderable, VertexBufferObject> _vbos = new Dictionary<Renderable, VertexBufferObject>();
+        internal Dictionary<Renderable, VertexBufferObject> _vbos;
 
         public Viewer3D()
         {
@@ -66,39 +92,19 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             Host.Child = _control;
 
             _shaderBuilder = new ShaderBuilder();
-            _camera = new OrbitCamera(startScale: 0.5f, _shaderBuilder);
+            _camera = new OrbitCamera(_shaderBuilder);
+            _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
             _control.Paint += Draw;
             _control.MouseMove += OnMouseMove;
             _control.MouseWheel += OnMouseWheel;
 
-            this.Unloaded += DisposeEverything;
             this.SizeChanged += ResizeWindow;
+            this.Unloaded += DisposeEverything;
 
             GL.EnableVertexAttribArray(0);
 
             _control.Invalidate();
-        }
-
-        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
-        {
-            if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Renderable renderable in args.OldItems)
-                    pclViewer._vbos.Remove(renderable);
-            }
-            if (args.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Renderable renderable in args.NewItems)
-                    AddRenderable(pclViewer, renderable);
-            }
-        }
-        private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
-        {
-            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
-            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-            pclViewer._vbos.Add(renderable, vbo);
         }
 
         private void Draw(object sender, PaintEventArgs e)
@@ -137,6 +143,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             _shaderBuilder.DisposeAll();
         }
 
+        #region Mouse Movement
         private Point _previousMousePosition = new Point(0, 0);
         private readonly float _mouseSensitivity = 0.25f;
         private readonly float _mouseWheelSensitivity = 0.05f;
@@ -172,5 +179,6 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _camera.Scale = newScale.Constrain(0.05f, 2.0f);
         }
+        #endregion
     }
 }

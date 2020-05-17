@@ -5,13 +5,13 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Camera
 {
     internal class OrbitCamera
     {
+        public float Scale;
         public float RotationX = 0.0f;
         public float RotationY = 0.0f;
-        public float Scale;
 
         private ShaderBuilder _shaderFactory;
 
-        public OrbitCamera(float startScale, ShaderBuilder shaderFactory)
+        public OrbitCamera(ShaderBuilder shaderFactory, float startScale = 0.5f)
         {
             this._shaderFactory = shaderFactory;
             this.Scale = startScale;
