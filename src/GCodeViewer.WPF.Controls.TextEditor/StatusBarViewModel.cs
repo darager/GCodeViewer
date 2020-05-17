@@ -39,9 +39,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             _editor = editor;
 
             BindCurrentLineUpdates();
-
-            // TODO: make sure this works
-            //_editor.KeyDown += (s, e) => updateCurrentLine();
         }
 
         private void BindCurrentLineUpdates()
