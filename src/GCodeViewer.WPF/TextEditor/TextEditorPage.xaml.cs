@@ -1,28 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GCodeViewer.WPF.TextEditor
 {
-    public partial class TextEditorPage : Page
+    public partial class TextEditorPage : Page, ITextEditor
     {
         public TextEditorPage(TextEditorPageViewModel vm)
         {
             InitializeComponent();
 
-            vm.TextEditor = textEditor;
             this.DataContext = vm;
+
+            textEditor.TextChanged
+        }
+
+        public event EventHandler TextChanged;
+
+        public string GetText()
+        {
+            return textEditor.Text;
+        }
+        public void SetText(string text)
+        {
+            textEditor.Text = text;
         }
     }
 }

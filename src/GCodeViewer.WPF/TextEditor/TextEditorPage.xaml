@@ -10,5 +10,11 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <editor:GCodeTextEditor x:Name="textEditor" TextChanged="{Binding HandleTextChanged}" />
+    <DockPanel>
+        <Grid Height="25" DockPanel.Dock="Top">
+            <Button>this is a test button</Button>
+        </Grid>
+
+        <editor:GCodeTextEditor x:Name="textEditor" DockPanel.Dock="Bottom" />
+    </DockPanel>
 </Page>
