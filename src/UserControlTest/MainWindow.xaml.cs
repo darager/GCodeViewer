@@ -12,6 +12,8 @@ namespace UserControlTest
         {
             InitializeComponent();
 
+            this.DataContext = new NumUpDownViewModel();
+
             TestOutConfigFunctionality().Wait();
         }
 

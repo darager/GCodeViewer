@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GCodeViewer.WPF.MVVM.Helpers;
+using GCodeViewer.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -114,16 +115,7 @@ namespace GCodeViewer.WPF.Controls
                 SetCurrentValue(ValueProperty, EnsureValueConstraints(Value + StepSize));
             });
         }
-        private float EnsureValueConstraints(float newValue)
-        {
-            float result = newValue;
 
-            if (newValue > MaxValue)
-                result = MaxValue;
-            else if (newValue < MinValue)
-                result = MinValue;
-
-            return result;
-        }
+        private float EnsureValueConstraints(float newValue) => newValue.Constrain(MinValue, MaxValue);
     }
 }

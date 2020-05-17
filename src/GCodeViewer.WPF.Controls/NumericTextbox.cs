@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GCodeViewer.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
@@ -71,15 +72,10 @@ namespace GCodeViewer.WPF.Controls
         }
         private string EnsureValueConstraints(string currentText)
         {
-            string result = currentText;
-
             float currentValue = float.Parse(this.Text);
-            if (currentValue > MaxValue)
-                result = MaxValue.ToString();
-            else if (currentValue < MinValue)
-                result = MinValue.ToString();
+            float constrainedValue = currentValue.Constrain(MinValue, MaxValue);
 
-            return result;
+            return constrainedValue.ToString();
         }
         private bool IsNotEmptyOrMinus(string text)
         {
