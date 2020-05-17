@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using GCodeViewer.WPF.Pages;
+using GCodeViewer.WPF.Starting;
 using GCodeViewer.WPF.Settings;
 using GCodeViewer.WPF.TextEditor;
 using Ninject;

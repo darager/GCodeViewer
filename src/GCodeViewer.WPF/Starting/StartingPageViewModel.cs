@@ -7,7 +7,7 @@ using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.TextEditor;
 using Microsoft.Win32;
 
-namespace GCodeViewer.WPF.Pages
+namespace GCodeViewer.WPF.Starting
 {
     public class StartingPageViewModel : INotifyPropertyChanged
     {
