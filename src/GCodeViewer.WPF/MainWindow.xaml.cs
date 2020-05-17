@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using GCodeViewer.WPF.ViewModels;
 
-namespace GCodeViewer.WPF.Pages
+namespace GCodeViewer.WPF
 {
     public partial class MainWindow : Window
     {
