@@ -9,6 +9,8 @@ namespace GCodeViewer.WPF
         public override void Load()
         {
             Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
+
+            Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
-using GCodeViewer.WPF.Pages;
 
 namespace GCodeViewer.WPF.ViewModels
 {
@@ -20,10 +19,9 @@ namespace GCodeViewer.WPF.ViewModels
             }
         }
 
-        public PagingViewModel()
+        public PagingViewModel(PageNavigationService navService)
         {
-            // HACK
-            Page = new StartingPage();
+            navService.PageChanged += (s, newPage) => Page = newPage;
         }
 
         private void OnPropertyChanged(string propertyName)
