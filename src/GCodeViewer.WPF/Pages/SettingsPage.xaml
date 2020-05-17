@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <StackPanel VerticalAlignment="Center">
-        <Button Command="{Binding GoBack}">Go back</Button>
+        <Button Command="{Binding GoBackAndSave}">Go back</Button>
         <Label HorizontalAlignment="Center">Settings</Label>
 
         <Label FontWeight="Bold">PrintVolume</Label>
