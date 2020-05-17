@@ -17,6 +17,7 @@ namespace GCodeViewer.WPF
 
     public class PageNavigationService
     {
+        private Stack<Navigation> _visitedPages = new Stack<Navigation>();
         private Dictionary<Navigation, Page> _pages = new Dictionary<Navigation, Page>();
 
         public PageNavigationService(StartingPage startingPage, TextEditorPage textEditorPage)
@@ -27,12 +28,20 @@ namespace GCodeViewer.WPF
 
         public void GoTo(Navigation page)
         {
-            SetPage(_pages[page]);
+            _visitedPages.Push(page);
+            SetPage(page);
+        }
+        public void GoBack()
+        {
+            _visitedPages.Pop();
+            var page = _visitedPages.Peek();
+
+            SetPage(page);
         }
 
-        private void SetPage(Page page)
+        private void SetPage(Navigation page)
         {
-            PageChanged?.Invoke(this, page);
+            PageChanged?.Invoke(this, _pages[page]);
         }
 
         public event EventHandler<Page> PageChanged;
