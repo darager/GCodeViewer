@@ -12,8 +12,8 @@ namespace GCodeViewer.WPF
         {
             Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
 
-            Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
             Bind<SettingsService>().To<SettingsService>().InSingletonScope();
+            Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
         }
     }
 }

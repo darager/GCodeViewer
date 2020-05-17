@@ -27,7 +27,7 @@ namespace GCodeViewer.WPF.ViewModels
 
             // TODO: the scaling of the renderables should be according to the printbed at first when the height has not changed yet
             this.Add(new CoordinateSystem(new Point3D(0, 0, 0), 0.2f));
-            this.Add(new CircularPrintbed(1.0f, Color.DarkGray, Color.White));
+            this.Add(new CircularPrintbed(radius: 1.0f, Color.DarkGray, Color.White));
         }
 
         public void Add(Renderable renderable)
