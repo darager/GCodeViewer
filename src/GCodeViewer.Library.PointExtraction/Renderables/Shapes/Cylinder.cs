@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace GCodeViewer.Library.Renderables
+namespace GCodeViewer.Library.Renderables.Shapes
 {
     public class Cylinder
     {

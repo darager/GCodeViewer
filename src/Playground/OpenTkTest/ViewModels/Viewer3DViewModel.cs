@@ -9,6 +9,7 @@ using GCodeViewer.Helpers;
 using GCodeViewer.Library;
 using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.Renderables;
+using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace OpenTkTest.ViewModels

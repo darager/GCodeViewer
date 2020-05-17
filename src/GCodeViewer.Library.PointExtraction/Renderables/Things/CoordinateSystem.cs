@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace GCodeViewer.Library.Renderables
+namespace GCodeViewer.Library.Renderables.Things
 {
     public class CoordinateSystem : ICompositeRenderable
     {

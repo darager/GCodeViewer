@@ -5,6 +5,7 @@ using System.Windows;
 using g3;
 using GCodeViewer.Helpers;
 using GCodeViewer.Library.Renderables;
+using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
 

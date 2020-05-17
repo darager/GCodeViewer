@@ -1,7 +1,7 @@
-﻿using GCodeViewer.Library.Renderables;
+﻿using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-namespace GCodeViewer.Library
+namespace GCodeViewer.Library.Renderables
 {
     public interface IRenderService
     {
