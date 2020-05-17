@@ -31,7 +31,7 @@ namespace GCodeViewer.WPF.Controls
             DependencyProperty.Register(
                 "MinValue",
                 typeof(float), typeof(NumericUpDown),
-                new PropertyMetadata(0.0f));
+                new PropertyMetadata(float.NaN));
 
         public float MaxValue
         {
@@ -42,7 +42,7 @@ namespace GCodeViewer.WPF.Controls
             DependencyProperty.Register(
                 "MaxValue",
                 typeof(float), typeof(NumericUpDown),
-                new PropertyMetadata(100.0f));
+                new PropertyMetadata(float.NaN));
 
         public float StepSize
         {
