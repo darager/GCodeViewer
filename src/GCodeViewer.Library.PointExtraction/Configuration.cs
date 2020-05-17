@@ -27,7 +27,10 @@ namespace GCodeViewer.Library
             var text = reader.ReadToEnd();
             reader.Close();
 
-            return JsonConvert.DeserializeObject<Configuration>(text);
+            var formatSettings = new JsonSerializerSettings();
+            formatSettings.Formatting = Formatting.Indented;
+
+            return JsonConvert.DeserializeObject<Configuration>(text, formatSettings);
         }
     }
 
