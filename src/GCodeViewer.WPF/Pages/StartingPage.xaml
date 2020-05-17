@@ -12,6 +12,7 @@
 
     <StackPanel Margin="10" VerticalAlignment="Center">
         <Button Command="{Binding GoToSettingsPage}">Settings</Button>
-        <Button Command="{Binding ImportSTLFile}">Create a GCode File</Button>
+        <Button Command="{Binding StartSlicingWorkflow}">Create a GCode File</Button>
+        <Button Command="{Binding OpenGCodeFile}">Edit and existing GCode File</Button>
     </StackPanel>
 </Page>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GCodeViewer.WPF.Pages
+namespace GCodeViewer.WPF.TextEditor
 {
     /// <summary>
     /// Interaction logic for TextEditorPage.xaml
