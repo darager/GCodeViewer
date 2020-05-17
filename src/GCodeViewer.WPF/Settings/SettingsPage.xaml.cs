@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace GCodeViewer.WPF.Pages
+namespace GCodeViewer.WPF.Settings
 {
     public partial class SettingsPage : Page
     {

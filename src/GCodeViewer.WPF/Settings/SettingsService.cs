@@ -9,7 +9,7 @@ namespace GCodeViewer.WPF.Settings
     {
         private string _filePath;
 
-        private string _fileName = "gcodeviewer-config.json";
+        private string _fileName = "config.json";
         private string _diretoryName = "Data";
 
         public SettingsService()
@@ -42,7 +42,8 @@ namespace GCodeViewer.WPF.Settings
 
         public async Task StoreSettings(Configuration settings)
         {
-            using var stream = File.OpenWrite(_filePath);
+            File.Delete(_filePath);
+            using var stream = File.Open(_filePath, FileMode.OpenOrCreate);
 
             await settings.Save(stream, CancellationToken.None);
             stream.Close();

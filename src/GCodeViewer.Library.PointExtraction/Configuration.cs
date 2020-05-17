@@ -9,14 +9,17 @@ namespace GCodeViewer.Library
     {
         public PrintArea PrintArea { get; set; } = new PrintArea();
 
+        private static JsonSerializerSettings _settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented
+        };
+
         public async Task Save(FileStream stream, CancellationToken token)
         {
             var writer = new StreamWriter(stream);
 
-            var formatSettings = new JsonSerializerSettings();
-            formatSettings.Formatting = Formatting.Indented;
 
-            var text = JsonConvert.SerializeObject(this, formatSettings);
+            var text = JsonConvert.SerializeObject(this, _settings);
 
             await writer.WriteAsync(text);
             writer.Close();
@@ -24,19 +27,10 @@ namespace GCodeViewer.Library
         public static Configuration Load(FileStream stream)
         {
             var reader = new StreamReader(stream);
-            var text = reader.ReadToEnd();
+            var text = reader.ReadToEnd().Trim();
             reader.Close();
 
-            var formatSettings = new JsonSerializerSettings();
-            formatSettings.Formatting = Formatting.Indented;
-
-            return JsonConvert.DeserializeObject<Configuration>(text, formatSettings);
+            return JsonConvert.DeserializeObject<Configuration>(text, _settings);
         }
-    }
-
-    public class PrintArea
-    {
-        public float Diameter { get; set; } = 100;
-        public float Height { get; set; } = 100;
     }
 }

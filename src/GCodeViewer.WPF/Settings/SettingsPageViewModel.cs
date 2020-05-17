@@ -6,7 +6,7 @@ using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.Settings;
 
-namespace GCodeViewer.WPF.Pages
+namespace GCodeViewer.WPF.Settings
 {
     public class SettingsPageViewModel : INotifyPropertyChanged
     {
