@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GCodeViewer.Library;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
-using GCodeViewer.WPF.Settings;
 
 namespace GCodeViewer.WPF.Settings
 {
@@ -38,22 +36,22 @@ namespace GCodeViewer.WPF.Settings
 
         public ICommand GoBackAndSave { get; private set; }
 
-        private PageNavigationService _navigationService;
-        private SettingsService _settingsService;
+        private Configuration _settings;
+
+        private readonly SettingsService _settingsService;
+        private readonly PageNavigationService _navigationService;
 
         public SettingsPageViewModel(PageNavigationService navigationService, SettingsService settingsService)
         {
             _navigationService = navigationService;
             _settingsService = settingsService;
 
-            GoBackAndSave = new RelayCommand((_) => GoBackAndSaveSettings());
+            GoBackAndSave = new RelayCommand(GoBackAndSaveSettings);
 
             LoadSettings();
         }
 
-        private Configuration _settings;
-
-        private void GoBackAndSaveSettings()
+        private void GoBackAndSaveSettings(object _)
         {
             StoreSettings();
             _navigationService.GoBack();
