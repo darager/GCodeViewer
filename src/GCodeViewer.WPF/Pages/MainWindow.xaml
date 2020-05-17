@@ -30,9 +30,9 @@
             VerticalAlignment="Stretch"
             Background="#1e1e1e" />
 
-        <texteditor:GCodeTextEditor
-            x:Name="TextEditor"
+        <Frame
+            x:Name="Frame"
             Grid.Column="2"
-            TextChanged="{Binding HandleTextChanged}" />
+            Content="{Binding Page}" />
     </Grid>
 </Window>
