@@ -85,17 +85,17 @@ namespace GCodeViewer.WPF.Settings
 
         private void LoadSettings()
         {
-            _settings = _settingsService.LoadSettings();
+            _settings = _settingsService.Settings;
 
             this.AAxisOffset = _settings.PrinterDimensions.AAxisOffset;
-            this.PrintBedDiameter = _settings.PrinterDimensions.Diameter;
-            this.PrintVolumeHeight = _settings.PrinterDimensions.Height;
+            this.PrintBedDiameter = _settings.PrinterDimensions.PrintBedDiameter;
+            this.PrintVolumeHeight = _settings.PrinterDimensions.PrintVolumeHeight;
         }
         private void StoreSettings()
         {
             _settings.PrinterDimensions.AAxisOffset = this.AAxisOffset;
-            _settings.PrinterDimensions.Diameter = this.PrintBedDiameter;
-            _settings.PrinterDimensions.Height = this.PrintVolumeHeight;
+            _settings.PrinterDimensions.PrintBedDiameter = this.PrintBedDiameter;
+            _settings.PrinterDimensions.PrintVolumeHeight = this.PrintVolumeHeight;
 
             _settingsService.StoreSettings(_settings).Wait();
         }

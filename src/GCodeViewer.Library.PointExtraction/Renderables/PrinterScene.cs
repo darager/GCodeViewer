@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using GCodeViewer.Library.Renderables.Things;
+using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
 {
@@ -12,6 +13,7 @@ namespace GCodeViewer.Library.Renderables
         #region Printer Components
         private CircularPrintbed _printbed = new CircularPrintbed(radius: 1.0f, Color.DarkGray, Color.White);
         private CoordinateSystem _coordinateSystem = new CoordinateSystem(new Point3D(0, 0, 0), 0.2f);
+        private Renderable _aAxis;
         #endregion
 
         private IRenderService _renderService;
@@ -26,11 +28,9 @@ namespace GCodeViewer.Library.Renderables
 
         public void SetPrintBedDiameter(float printBedDiameter)
         {
-            throw new NotImplementedException();
         }
         public void UpdateAAxisOffset(float aAxisOffset)
         {
-            throw new NotImplementedException();
         }
     }
 }

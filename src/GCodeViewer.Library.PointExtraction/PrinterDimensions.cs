@@ -2,8 +2,9 @@
 {
     public class PrinterDimensions
     {
-        public float Diameter { get; set; } = 100;
-        public float Height { get; set; } = 100;
+        public float PrintVolumeHeight { get; set; } = 200;
+        public float PrintBedDiameter { get; set; } = 100;
+
         public float AAxisOffset { get; set; } = 10;
     }
 }

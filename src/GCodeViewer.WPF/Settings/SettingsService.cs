@@ -12,11 +12,15 @@ namespace GCodeViewer.WPF.Settings
         private string _fileName = "config.json";
         private string _diretoryName = "Data";
 
+        public Library.Settings Settings { get; private set; }
+
         public SettingsService()
         {
             _filePath = Path.Combine(_diretoryName, _fileName);
 
             CreateConfigurationFileIfNoneExists().Wait();
+
+            Settings = LoadSettings();
         }
 
         private async Task CreateConfigurationFileIfNoneExists()
@@ -30,8 +34,7 @@ namespace GCodeViewer.WPF.Settings
             var config = new Library.Settings();
             await StoreSettings(config);
         }
-
-        public Library.Settings LoadSettings()
+        private Library.Settings LoadSettings()
         {
             using var stream = File.OpenRead(_filePath);
             var config = Library.Settings.Load(stream);
