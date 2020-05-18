@@ -11,12 +11,13 @@
     mc:Ignorable="d">
 
     <StackPanel VerticalAlignment="Center">
-        <Button Command="{Binding GoBackAndSave}">Go back</Button>
+        <Button Command="{Binding GoBack}">Go back</Button>
         <Label HorizontalAlignment="Center">Settings</Label>
 
-        <Label FontWeight="Bold">Printing Area</Label>
+        <Label FontWeight="Bold">Printer Dimensions:</Label>
         <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -52,6 +53,21 @@
                 MinValue="1"
                 Value="{Binding PrintVolumeHeight}" />
             <Label Grid.Row="1" Grid.Column="2">mm</Label>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Content="Height:" />
+            <ctrl:NumericUpDown
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="100"
+                MinValue="1"
+                Value="{Binding AAxisOffset}" />
+            <Label Grid.Row="2" Grid.Column="2">mm</Label>
         </Grid>
+
+        <Button Margin="0,50,0,0" Command="{Binding SaveAndApplySettings}">Apply</Button>
     </StackPanel>
 </Page>

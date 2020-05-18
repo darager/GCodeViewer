@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using GCodeViewer.Library;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 
@@ -34,7 +33,21 @@ namespace GCodeViewer.WPF.Settings
         }
         private float _printVolumeHeight;
 
-        public ICommand GoBackAndSave { get; private set; }
+        public float AAxisOffset
+        {
+            get => _aAxisOffset;
+            set
+            {
+                if (_aAxisOffset == value) return;
+
+                _aAxisOffset = value;
+                OnPropertyChanged("AAxisOffset");
+            }
+        }
+        private float _aAxisOffset;
+
+        public ICommand GoBack { get; private set; }
+        public ICommand SaveAndApplySettings { get; private set; }
 
         private Library.Settings _settings;
 
@@ -46,28 +59,36 @@ namespace GCodeViewer.WPF.Settings
             _navigationService = navigationService;
             _settingsService = settingsService;
 
-            GoBackAndSave = new RelayCommand(GoBackAndSaveSettings);
+            GoBack = new RelayCommand(GoBackAndResetSettings);
+            SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
 
             LoadSettings();
         }
 
-        private void GoBackAndSaveSettings(object _)
+        private void GoBackAndResetSettings(object _)
+        {
+            LoadSettings();
+            _navigationService.GoBack();
+        }
+        private void ApplySettingsAndSaveThem(object _)
         {
             StoreSettings();
-            _navigationService.GoBack();
+            // TODO: implement this stuff
         }
 
         private void LoadSettings()
         {
             _settings = _settingsService.LoadSettings();
 
-            this.PrintVolumeHeight = _settings.PrinterDimensions.Height;
+            this.AAxisOffset = _settings.PrinterDimensions.AAxisOffset;
             this.PrintBedDiameter = _settings.PrinterDimensions.Diameter;
+            this.PrintVolumeHeight = _settings.PrinterDimensions.Height;
         }
         private void StoreSettings()
         {
-            _settings.PrinterDimensions.Height = this.PrintVolumeHeight;
+            _settings.PrinterDimensions.AAxisOffset = this.AAxisOffset;
             _settings.PrinterDimensions.Diameter = this.PrintBedDiameter;
+            _settings.PrinterDimensions.Height = this.PrintVolumeHeight;
 
             _settingsService.StoreSettings(_settings).Wait();
         }

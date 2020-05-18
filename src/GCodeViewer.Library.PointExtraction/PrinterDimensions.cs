@@ -4,6 +4,6 @@
     {
         public float Diameter { get; set; } = 100;
         public float Height { get; set; } = 100;
-        public float AAxisOfffset { get; set; } = 10;
+        public float AAxisOffset { get; set; } = 10;
     }
 }
