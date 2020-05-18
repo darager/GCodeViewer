@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.Library
+﻿namespace GCodeViewer.Library.PrinterSettings
 {
     public class PrinterDimensions
     {

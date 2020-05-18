@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace GCodeViewer.Library
+namespace GCodeViewer.Library.PrinterSettings
 {
     public class Settings
     {

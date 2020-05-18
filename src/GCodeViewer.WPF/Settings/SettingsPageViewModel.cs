@@ -50,7 +50,7 @@ namespace GCodeViewer.WPF.Settings
         public ICommand GoBack { get; private set; }
         public ICommand SaveAndApplySettings { get; private set; }
 
-        private Library.Settings _settings;
+        private Library.PrinterSettings.Settings _settings;
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;

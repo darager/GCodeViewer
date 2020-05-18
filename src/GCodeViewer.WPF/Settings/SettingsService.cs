@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using GCodeViewer.Library;
 
 namespace GCodeViewer.WPF.Settings
 {
@@ -12,7 +11,7 @@ namespace GCodeViewer.WPF.Settings
         private string _fileName = "config.json";
         private string _diretoryName = "Data";
 
-        public Library.Settings Settings { get; private set; }
+        public Library.PrinterSettings.Settings Settings { get; private set; }
 
         public SettingsService()
         {
@@ -31,19 +30,19 @@ namespace GCodeViewer.WPF.Settings
             if (!Directory.Exists(_diretoryName))
                 Directory.CreateDirectory(_diretoryName);
 
-            var config = new Library.Settings();
+            var config = new Library.PrinterSettings.Settings();
             await StoreSettings(config);
         }
-        private Library.Settings LoadSettings()
+        private Library.PrinterSettings.Settings LoadSettings()
         {
             using var stream = File.OpenRead(_filePath);
-            var config = Library.Settings.Load(stream);
+            var config = Library.PrinterSettings.Settings.Load(stream);
             stream.Close();
 
             return config;
         }
 
-        public async Task StoreSettings(Library.Settings settings)
+        public async Task StoreSettings(Library.PrinterSettings.Settings settings)
         {
             File.Delete(_filePath);
             using var stream = File.Open(_filePath, FileMode.OpenOrCreate);
