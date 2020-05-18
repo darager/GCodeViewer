@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
+using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 
@@ -53,11 +54,15 @@ namespace GCodeViewer.WPF.Settings
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
+        private readonly PrinterScene _printerScene;
 
-        public SettingsPageViewModel(PageNavigationService navigationService, SettingsService settingsService)
+        public SettingsPageViewModel(PageNavigationService navigationService,
+                                     SettingsService settingsService,
+                                     PrinterScene printerScene)
         {
             _navigationService = navigationService;
             _settingsService = settingsService;
+            _printerScene = printerScene;
 
             GoBack = new RelayCommand(GoBackAndResetSettings);
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
@@ -73,7 +78,9 @@ namespace GCodeViewer.WPF.Settings
         private void ApplySettingsAndSaveThem(object _)
         {
             StoreSettings();
-            // TODO: implement this stuff
+
+            _printerScene.SetPrintBedDiameter(PrintBedDiameter);
+            _printerScene.UpdateAAxisOffset(AAxisOffset);
         }
 
         private void LoadSettings()

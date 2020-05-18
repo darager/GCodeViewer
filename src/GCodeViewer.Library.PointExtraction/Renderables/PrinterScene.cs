@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Drawing;
 using GCodeViewer.Library.Renderables.Things;
 
@@ -21,6 +22,15 @@ namespace GCodeViewer.Library.Renderables
 
             _renderService.Add(_printbed);
             _renderService.Add(_coordinateSystem);
+        }
+
+        public void SetPrintBedDiameter(float printBedDiameter)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateAAxisOffset(float aAxisOffset)
+        {
+            throw new NotImplementedException();
         }
     }
 }
