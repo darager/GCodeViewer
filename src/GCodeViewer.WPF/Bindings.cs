@@ -12,24 +12,29 @@ namespace GCodeViewer.WPF
     {
         public override void Load()
         {
-            Bind<MainWindow.MainWindow>().To<MainWindow.MainWindow>().InSingletonScope();
+            Bind<MainWindow.MainWindow>().ToSelf().InSingletonScope();
 
-            Bind<PageNavigationService>().To<PageNavigationService>().InSingletonScope();
-
-            Bind<StartingPage>().To<StartingPage>().InSingletonScope();
-            Bind<StartingPageViewModel>().To<StartingPageViewModel>().InSingletonScope();
-
-            Bind<SettingsService>().To<SettingsService>().InSingletonScope();
-            Bind<SettingsPage>().To<SettingsPage>().InSingletonScope();
-            Bind<SettingsPageViewModel>().To<SettingsPageViewModel>().InSingletonScope();
-
-            Bind<TextEditorPage>().To<TextEditorPage>().InSingletonScope();
-            Bind<TextEditorPageViewModel>().To<TextEditorPageViewModel>().InSingletonScope();
-
-            Bind<PagingViewModel>().To<PagingViewModel>().InSingletonScope();
-
+            // Rendering
             Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
-            Bind<PrinterScene>().To<PrinterScene>().InSingletonScope();
+            Bind<Viewer3DViewModel>().ToSelf().InSingletonScope();
+            Bind<PrinterScene>().ToSelf().InSingletonScope();
+
+            // Starting Page
+            Bind<StartingPage>().ToSelf().InSingletonScope();
+            Bind<StartingPageViewModel>().ToSelf().InSingletonScope();
+
+            // Settings
+            Bind<SettingsService>().ToSelf().InSingletonScope();
+            Bind<SettingsPage>().ToSelf().InSingletonScope();
+            Bind<SettingsPageViewModel>().ToSelf().InSingletonScope();
+
+            // Text Editor
+            Bind<TextEditorPage>().ToSelf().InSingletonScope();
+            Bind<TextEditorPageViewModel>().ToSelf().InSingletonScope();
+
+            // Page Navigation
+            Bind<PagingViewModel>().ToSelf().InSingletonScope();
+            Bind<PageNavigationService>().ToSelf().InSingletonScope();
         }
     }
 }

@@ -80,7 +80,6 @@ namespace GCodeViewer.WPF.Settings
             StoreSettings();
 
             _printerScene.SetPrintBedDiameter(PrintBedDiameter);
-            _printerScene.UpdateAAxisOffset(AAxisOffset);
         }
 
         private void LoadSettings()
