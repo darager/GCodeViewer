@@ -5,14 +5,9 @@ using Newtonsoft.Json;
 
 namespace GCodeViewer.Library
 {
-    public class Configuration
+    public class Settings
     {
-        public PrintArea PrintArea { get; set; } = new PrintArea();
-
-        private static JsonSerializerSettings _settings = new JsonSerializerSettings()
-        {
-            Formatting = Formatting.Indented
-        };
+        public PrinterDimensions PrinterDimensions { get; set; } = new PrinterDimensions();
 
         public async Task Save(FileStream stream, CancellationToken token)
         {
@@ -24,13 +19,17 @@ namespace GCodeViewer.Library
             await writer.WriteAsync(text);
             writer.Close();
         }
-        public static Configuration Load(FileStream stream)
+        public static Settings Load(FileStream stream)
         {
             var reader = new StreamReader(stream);
             var text = reader.ReadToEnd().Trim();
             reader.Close();
 
-            return JsonConvert.DeserializeObject<Configuration>(text, _settings);
+            return JsonConvert.DeserializeObject<Settings>(text, _settings);
         }
+        private static JsonSerializerSettings _settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented
+        };
     }
 }

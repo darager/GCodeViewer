@@ -27,20 +27,20 @@ namespace GCodeViewer.WPF.Settings
             if (!Directory.Exists(_diretoryName))
                 Directory.CreateDirectory(_diretoryName);
 
-            var config = new Configuration();
+            var config = new Library.Settings();
             await StoreSettings(config);
         }
 
-        public Configuration LoadSettings()
+        public Library.Settings LoadSettings()
         {
             using var stream = File.OpenRead(_filePath);
-            var config = Configuration.Load(stream);
+            var config = Library.Settings.Load(stream);
             stream.Close();
 
             return config;
         }
 
-        public async Task StoreSettings(Configuration settings)
+        public async Task StoreSettings(Library.Settings settings)
         {
             File.Delete(_filePath);
             using var stream = File.Open(_filePath, FileMode.OpenOrCreate);

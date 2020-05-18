@@ -17,7 +17,7 @@ namespace UserControlTest
             TestOutConfigFunctionality().Wait();
         }
 
-        private Configuration _config;
+        private Settings _config;
 
         private async Task TestOutConfigFunctionality()
         {
@@ -35,14 +35,14 @@ namespace UserControlTest
             {
                 using var stream = File.Create(filePath);
 
-                var config = new Configuration();
+                var config = new Settings();
                 await config.Save(stream, CancellationToken.None);
                 stream.Close();
             }
             else
             {
                 using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-                _config = Configuration.Load(stream);
+                _config = Settings.Load(stream);
                 stream.Close();
             }
         }

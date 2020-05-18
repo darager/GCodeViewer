@@ -36,7 +36,7 @@ namespace GCodeViewer.WPF.Settings
 
         public ICommand GoBackAndSave { get; private set; }
 
-        private Configuration _settings;
+        private Library.Settings _settings;
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
@@ -61,13 +61,13 @@ namespace GCodeViewer.WPF.Settings
         {
             _settings = _settingsService.LoadSettings();
 
-            this.PrintVolumeHeight = _settings.PrintArea.Height;
-            this.PrintBedDiameter = _settings.PrintArea.Diameter;
+            this.PrintVolumeHeight = _settings.PrinterDimensions.Height;
+            this.PrintBedDiameter = _settings.PrinterDimensions.Diameter;
         }
         private void StoreSettings()
         {
-            _settings.PrintArea.Height = this.PrintVolumeHeight;
-            _settings.PrintArea.Diameter = this.PrintBedDiameter;
+            _settings.PrinterDimensions.Height = this.PrintVolumeHeight;
+            _settings.PrinterDimensions.Diameter = this.PrintBedDiameter;
 
             _settingsService.StoreSettings(_settings).Wait();
         }
