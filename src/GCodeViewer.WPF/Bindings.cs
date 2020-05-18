@@ -29,6 +29,7 @@ namespace GCodeViewer.WPF
             Bind<PagingViewModel>().To<PagingViewModel>().InSingletonScope();
 
             Bind<IRenderService>().To<Viewer3DViewModel>().InSingletonScope();
+            Bind<PrinterScene>().To<PrinterScene>().InSingletonScope();
         }
     }
 }
