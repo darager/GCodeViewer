@@ -18,7 +18,7 @@ namespace GCodeViewer.WPF.Starting
         private readonly ITextEditor _texteditor;
         private readonly PageNavigationService _navigationService;
 
-        public StartingPageViewModel(PageNavigationService navigationService, TextEditorPageViewModel texteditor)
+        public StartingPageViewModel(PageNavigationService navigationService, ITextEditor texteditor)
         {
             _navigationService = navigationService;
             _texteditor = texteditor;

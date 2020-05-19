@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.WPF.Controls.TextEditor;
 using GCodeViewer.WPF.MVVM.Helpers;
+using Ninject.Activation;
 
 namespace GCodeViewer.WPF.TextEditor
 {
-    public class TextEditorPageViewModel : INotifyPropertyChanged, ITextEditor
+    public class TextEditorPageViewModel : INotifyPropertyChanged, ITextEditor, IProvider
     {
         public ICommand OpenOtherFile { get; private set; }
         public ICommand SaveFile { get; private set; }
@@ -16,6 +17,9 @@ namespace GCodeViewer.WPF.TextEditor
         public ICommand HandleTextChanged { get; internal set; }
 
         internal GCodeTextEditor TextEditor { get; set; }
+
+        public Type Type => typeof(TextEditorPageViewModel);
+        public object Create(IContext context) => this;
 
         public TextEditorPageViewModel()
         {

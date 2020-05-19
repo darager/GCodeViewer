@@ -31,6 +31,7 @@ namespace GCodeViewer.WPF
 
             // Text Editor
             Bind<TextEditorPage>().ToSelf().InSingletonScope();
+            Bind<ITextEditor>().ToProvider<TextEditorPageViewModel>();
             Bind<TextEditorPageViewModel>().ToSelf().InSingletonScope();
 
             // Page Navigation
