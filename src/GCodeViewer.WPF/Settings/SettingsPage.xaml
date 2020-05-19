@@ -37,6 +37,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Width="100"
+                MaxValue="2000"
                 MinValue="1"
                 Value="{Binding PrintBedDiameter}" />
             <Label Grid.Row="0" Grid.Column="2">mm</Label>
@@ -50,6 +51,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="100"
+                MaxValue="2000"
                 MinValue="1"
                 Value="{Binding PrintVolumeHeight}" />
             <Label Grid.Row="1" Grid.Column="2">mm</Label>
@@ -63,6 +65,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="100"
+                MaxValue="2000"
                 MinValue="1"
                 Value="{Binding AAxisOffset}" />
             <Label Grid.Row="2" Grid.Column="2">mm</Label>
