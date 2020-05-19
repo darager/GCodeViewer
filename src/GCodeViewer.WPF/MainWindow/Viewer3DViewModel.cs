@@ -1,13 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
+using Ninject.Activation;
 
 namespace GCodeViewer.WPF.MainWindow
 {
-    public class Viewer3DViewModel : INotifyPropertyChanged, IRenderService
+    public class Viewer3DViewModel : INotifyPropertyChanged, IRenderService, IProvider
     {
         public ObservableCollection<Renderable> PointCloudObjects
         {
@@ -27,22 +28,25 @@ namespace GCodeViewer.WPF.MainWindow
 
         public void Add(Renderable renderable)
         {
-            _pointCloudObjects.Add(renderable);
+            PointCloudObjects.Add(renderable);
         }
         public void Add(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
-                _pointCloudObjects.Add(renderable);
+                PointCloudObjects.Add(renderable);
         }
         public void Remove(Renderable renderable)
         {
-            _pointCloudObjects.Remove(renderable);
+            PointCloudObjects.Remove(renderable);
         }
         public void Remove(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
-                _pointCloudObjects.Remove(renderable);
+                PointCloudObjects.Remove(renderable);
         }
+
+        public Type Type => typeof(Viewer3DViewModel);
+        public object Create(IContext context) => this;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

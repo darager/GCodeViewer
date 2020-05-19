@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Windows;
-using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.Navigation;
 using Ninject;
 
