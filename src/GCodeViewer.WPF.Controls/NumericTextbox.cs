@@ -44,20 +44,9 @@ namespace GCodeViewer.WPF.Controls
         private void EnsureValidNumber(object sender, TextChangedEventArgs e)
         {
             ResetIfInvalidInput(_previousText);
-            AdjustIfOutSideOfRange();
+            AdjustCursorPosition();
 
             _previousText = this.Text;
-        }
-        private void AdjustIfOutSideOfRange()
-        {
-            if (IsNotEmptyOrMinus(this.Text))
-            {
-                int cursorPos = this.SelectionStart;
-
-                this.Text = EnsureValueConstraints(this.Text);
-
-                SetCursorPosition(cursorPos);
-            }
         }
         private void ResetIfInvalidInput(string previousText)
         {
@@ -66,6 +55,17 @@ namespace GCodeViewer.WPF.Controls
                 int cursorPos = this.SelectionStart;
 
                 this.Text = previousText;
+
+                SetCursorPosition(cursorPos);
+            }
+        }
+        private void AdjustCursorPosition()
+        {
+            if (IsNotEmptyOrMinus(this.Text))
+            {
+                int cursorPos = this.SelectionStart;
+
+                this.Text = EnsureValueConstraints(this.Text);
 
                 SetCursorPosition(cursorPos);
             }

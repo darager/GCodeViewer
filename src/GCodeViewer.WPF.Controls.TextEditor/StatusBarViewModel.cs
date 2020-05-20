@@ -43,11 +43,11 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         private void BindCurrentLineUpdates()
         {
-            var updateCurrentLine = ((Action)UpdateLineStatistics).Throttle(10);
+            var updateLineStatistics = ((Action)UpdateLineStatistics).Throttle(10);
 
-            _editor.TextChanged += (s, e) => updateCurrentLine();
-            _editor.PreviewKeyDown += (s, e) => updateCurrentLine();
-            _editor.GotMouseCapture += (s, e) => updateCurrentLine();
+            _editor.TextChanged += (s, e) => updateLineStatistics();
+            _editor.PreviewKeyDown += (s, e) => updateLineStatistics();
+            _editor.GotMouseCapture += (s, e) => updateLineStatistics();
         }
         private void UpdateLineStatistics()
         {

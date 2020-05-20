@@ -105,17 +105,17 @@ namespace GCodeViewer.WPF.Controls
 
         private void InitCommands()
         {
-            this.DecreaseValue = new RelayCommand((_) =>
+            DecreaseValue = new RelayCommand((_) =>
             {
                 // Apparently Binding is Broken if you do not use SetCurrentValue
                 SetCurrentValue(ValueProperty, EnsureValueConstraints(Value - StepSize));
             });
-            this.IncreaseValue = new RelayCommand((_) =>
+            IncreaseValue = new RelayCommand((_) =>
             {
                 SetCurrentValue(ValueProperty, EnsureValueConstraints(Value + StepSize));
             });
         }
 
-        private float EnsureValueConstraints(float newValue) => newValue.Constrain(MinValue, MaxValue);
+        private float EnsureValueConstraints(float value) => value.Constrain(MinValue, MaxValue);
     }
 }
