@@ -14,7 +14,7 @@ namespace GCodeViewer.WPF.TextEditor
         public ICommand SaveFileAs { get; private set; }
         public ICommand CloseFile { get; private set; }
 
-        public ICommand HandleTextChanged { get; internal set; }
+        public ICommand HandleTextChanged { get; private set; }
 
         internal GCodeTextEditor TextEditor { get; set; }
 

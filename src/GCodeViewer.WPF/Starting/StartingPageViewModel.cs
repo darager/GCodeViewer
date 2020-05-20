@@ -51,6 +51,7 @@ namespace GCodeViewer.WPF.Starting
         private void LoadSTLFile(object _)
         {
             // TODO:
+            throw new NotImplementedException();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
