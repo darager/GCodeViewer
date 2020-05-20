@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCode-Files", "GCode-Files"
 		Examples\SinkingBenchy.gcode = Examples\SinkingBenchy.gcode
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library", "GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj", "{7B425F55-52B7-4776-B888-E9BC0AE970E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library", "GCodeViewer.Library\GCodeViewer.Library.csproj", "{7B425F55-52B7-4776-B888-E9BC0AE970E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library.Tests", "GCodeViewer.Library.PointExtraction.Tests\GCodeViewer.Library.Tests.csproj", "{047599D5-6E73-4CBB-AF80-C83C42736E2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library.Tests", "GCodeViewer.Library.Tests\GCodeViewer.Library.Tests.csproj", "{047599D5-6E73-4CBB-AF80-C83C42736E2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls.TextEditor", "GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj", "{25AD0CC6-5ACC-42CC-9681-7CCD71277DD7}"
 EndProject
@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.MVVM.Helper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls", "GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj", "{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlTest", "UserControlTest\UserControlTest.csproj", "{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlTest", "Playground\UserControlTest\UserControlTest.csproj", "{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Helpers", "GCodeViewer.Helpers\GCodeViewer.Helpers.csproj", "{A34EA9AD-EDCC-44D9-8B58-29BA9F7F2061}"
 EndProject

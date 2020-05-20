@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj" />
+    <ProjectReference Include="..\GCodeViewer.Library\GCodeViewer.Library.csproj" />
   </ItemGroup>
 
 </Project>

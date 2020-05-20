@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\GCodeViewer.Helpers\GCodeViewer.Helpers.csproj" />
-    <ProjectReference Include="..\GCodeViewer.Library.PointExtraction\GCodeViewer.Library.csproj" />
+    <ProjectReference Include="..\GCodeViewer.Library\GCodeViewer.Library.csproj" />
     <ProjectReference Include="..\GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj" />
     <ProjectReference Include="..\GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj" />
     <ProjectReference Include="..\GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj" />
