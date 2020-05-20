@@ -3,9 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GCodeViewer.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:texteditor="clr-namespace:GCodeViewer.WPF.Controls.TextEditor;assembly=GCodeViewer.WPF.Controls.TextEditor"
     xmlns:viewer3D="clr-namespace:GCodeViewer.WPF.Controls.PointCloud;assembly=GCodeViewer.WPF.Controls.PointCloud"
     Title="MainWindow"
     Width="1600"
@@ -19,8 +17,8 @@
         </Grid.ColumnDefinitions>
 
         <viewer3D:Viewer3D
-            x:Name="Viewer3D"
             Grid.Column="0"
+            DataContext="{Binding Viewer3DViewModel}"
             Renderables="{Binding PointCloudObjects}" />
 
         <GridSplitter
@@ -31,9 +29,9 @@
             Background="#1e1e1e" />
 
         <Frame
-            x:Name="Frame"
             Grid.Column="2"
             Content="{Binding Page}"
+            DataContext="{Binding PagingViewModel}"
             NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
