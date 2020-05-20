@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{BDD28A23-614E-47D1-8B55-E940DC59DBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkTest", "Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTkTest", "Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls.PointCloud", "GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.Controls.PointCloud", "GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCode-Files", "GCode-Files", "{B7143DD1-D355-494F-B081-33DD51B3542F}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,17 +18,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library", "GCod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Library.Tests", "GCodeViewer.Library.Tests\GCodeViewer.Library.Tests.csproj", "{047599D5-6E73-4CBB-AF80-C83C42736E2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls.TextEditor", "GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj", "{25AD0CC6-5ACC-42CC-9681-7CCD71277DD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.Controls.TextEditor", "GCodeViewer.WPF.Controls.TextEditor\GCodeViewer.WPF.Controls.TextEditor.csproj", "{25AD0CC6-5ACC-42CC-9681-7CCD71277DD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.MVVM.Helpers", "GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj", "{3BAFF321-457D-47A4-A589-D3B197AFC740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.MVVM.Helpers", "GCodeViewer.WPF.MVVM.Helpers\GCodeViewer.WPF.MVVM.Helpers.csproj", "{3BAFF321-457D-47A4-A589-D3B197AFC740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF.Controls", "GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj", "{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.Controls", "GCodeViewer.WPF.Controls\GCodeViewer.WPF.Controls.csproj", "{CF5F85E2-91FA-4583-AC68-C57C27E1EE6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlTest", "Playground\UserControlTest\UserControlTest.csproj", "{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserControlTest", "Playground\UserControlTest\UserControlTest.csproj", "{B157BE87-BD27-4B2A-89AB-E26CFA23AB17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.Helpers", "GCodeViewer.Helpers\GCodeViewer.Helpers.csproj", "{A34EA9AD-EDCC-44D9-8B58-29BA9F7F2061}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCodeViewer.WPF", "GCodeViewer.WPF\GCodeViewer.WPF.csproj", "{C117EF64-CBE2-4705-ACA3-4B5BE3EDE257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF", "GCodeViewer.WPF\GCodeViewer.WPF.csproj", "{C117EF64-CBE2-4705-ACA3-4B5BE3EDE257}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

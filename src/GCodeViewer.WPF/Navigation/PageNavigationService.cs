@@ -24,7 +24,7 @@ namespace GCodeViewer.WPF.Navigation
             Navigation.StartingPage => StartingPage,
             Navigation.SettingsPage => SettingsPage,
             Navigation.GCodePreviewPage => TextEditorPage,
-            _ => throw new Exception("this page has not been added yet")
+            _ => throw new Exception("This page is not added in the NavigatorService!")
         };
 
         public void GoTo(Navigation page)
