@@ -9,33 +9,26 @@ namespace GCodeViewer.Library.Renderables.Things
     {
         private List<Renderable> _parts = new List<Renderable>();
 
-        public CoordinateSystem(Point3D position, float length)
+        public CoordinateSystem(Point3D position, float length, int opacity = 255)
         {
-            float radius = length / 25;
-            int opacity = 255;
-
+            var cylinder = Cylinder.With()
+                                   .Position(position)
+                                   .Height(length)
+                                   .Radius(length / 25);
             // X-Axis
-            _parts.Add(Cylinder.With()
-                               .Color(Color.FromArgb(opacity, 255, 0, 0))
-                               .Position(position)
-                               .Height(length)
-                               .Radius(radius)
+            _parts.Add(cylinder.Color(Color.FromArgb(opacity, 255, 0, 0))
+                               .RotationX(0)
                                .RotationY(90)
                                .Build());
             // Y-Axis
-            _parts.Add(Cylinder.With()
-                               .Color(Color.FromArgb(opacity, 0, 255, 0))
-                               .Position(position)
-                               .Height(length)
-                               .Radius(radius)
+            _parts.Add(cylinder.Color(Color.FromArgb(opacity, 0, 255, 0))
                                .RotationX(-90)
+                               .RotationY(0)
                                .Build());
             // Z-Axis
-            _parts.Add(Cylinder.With()
-                               .Color(Color.FromArgb(opacity, 0, 0, 255))
-                               .Position(position)
-                               .Height(length)
-                               .Radius(radius)
+            _parts.Add(cylinder.Color(Color.FromArgb(opacity, 0, 0, 255))
+                               .RotationX(0)
+                               .RotationY(0)
                                .Build());
         }
 
