@@ -13,12 +13,12 @@ namespace GCodeViewer.Library.PrinterSettings
         {
             var writer = new StreamWriter(stream);
 
-
             var text = JsonConvert.SerializeObject(this, _settings);
 
             await writer.WriteAsync(text);
             writer.Close();
         }
+
         public static Settings Load(FileStream stream)
         {
             var reader = new StreamReader(stream);
@@ -27,6 +27,7 @@ namespace GCodeViewer.Library.PrinterSettings
 
             return JsonConvert.DeserializeObject<Settings>(text, _settings);
         }
+
         private static JsonSerializerSettings _settings = new JsonSerializerSettings()
         {
             Formatting = Formatting.Indented

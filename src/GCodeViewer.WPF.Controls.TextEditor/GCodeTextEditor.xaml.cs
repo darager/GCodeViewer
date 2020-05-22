@@ -17,6 +17,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             get => (ICommand)this.GetValue(TextChangedProperty);
             set => this.SetValue(TextChangedProperty, value);
         }
+
         public static readonly DependencyProperty TextChangedProperty =
             DependencyProperty.Register(
                 "TextChanged",
@@ -59,6 +60,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             reader.Close();
             stream.Close();
         }
+
         private void SetupSearchReplace()
         {
             // TODO: after the search/replace functionality is used the texteditor takes a performance hit
@@ -70,6 +72,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             CommandBindings.Add(_findReplaceWindow.ReplaceBinding);
             CommandBindings.Add(_findReplaceWindow.FindNextBinding);
         }
+
         private void CallTextChangedCommand()
         {
             if (TextChanged is null)

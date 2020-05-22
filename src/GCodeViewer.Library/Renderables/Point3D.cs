@@ -17,10 +17,12 @@ namespace GCodeViewer.Library.Renderables
         public static Point3D NaN => new Point3D(float.NaN, float.NaN, float.NaN);
 
         public bool Equals(Point3D other) => Equals((object)other);
+
         public override bool Equals(object obj)
         {
             return (obj is Point3D other) && this == other;
         }
+
         public override int GetHashCode()
         {
             unchecked
@@ -30,12 +32,14 @@ namespace GCodeViewer.Library.Renderables
                      + this.Z.GetHashCode() * 17;
             }
         }
+
         public static bool operator ==(Point3D a, Point3D b)
         {
             return a.X == b.X
                 && a.Y == b.Y
                 && a.Z == b.Z;
         }
+
         public static bool operator !=(Point3D a, Point3D b)
         {
             return !(a == b);
@@ -46,16 +50,19 @@ namespace GCodeViewer.Library.Renderables
             Rotate(new Vector3f(1, 0, 0), deg);
             return this;
         }
+
         public Point3D RotateY(float deg)
         {
             Rotate(new Vector3f(0, 1, 0), deg);
             return this;
         }
+
         public Point3D RotateZ(float deg)
         {
             Rotate(new Vector3f(0, 0, 1), deg);
             return this;
         }
+
         private void Rotate(Vector3f axis, float deg)
         {
             var vec = new Vector3f(this.X, this.Y, this.Z);

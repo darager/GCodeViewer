@@ -29,7 +29,6 @@
     <Rule foreground="#bc81c6">
       S-?\d+
     </Rule>
-
   </RuleSet>
 </SyntaxDefinition>
 

@@ -9,8 +9,10 @@ namespace GCodeViewer.Library.Renderables
         private float _scalingFactor;
 
         #region Printer Components
+
         private CircularPrintbed _printbed = new CircularPrintbed(radius: 1.0f, Color.DarkGray, Color.White);
         private CoordinateSystem _coordinateSystem = new CoordinateSystem(new Point3D(0, 0, 0), 0.2f);
+
         #endregion
 
         private IRenderService _renderService;

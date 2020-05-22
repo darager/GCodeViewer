@@ -37,6 +37,7 @@ namespace GCodeViewer.Library.GCodeParsing
 
             return result;
         }
+
         private float ExtractValue(char c, string text)
         {
             Regex regex = GetNumberRegex(c);
@@ -49,6 +50,7 @@ namespace GCodeViewer.Library.GCodeParsing
 
             return float.Parse(number);
         }
+
         private Regex GetNumberRegex(char c)
         {
             if (_expressions.ContainsKey(c))

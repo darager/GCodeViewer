@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenTK.Graphics.OpenGL;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
 {
@@ -35,6 +35,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
 
             AddUniforms();
         }
+
         private void CleanUpShaders()
         {
             GL.DetachShader(_handle, _vertexShader);
@@ -42,6 +43,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
             GL.DeleteShader(_vertexShader);
             GL.DeleteShader(_fragmentShader);
         }
+
         private void AddUniforms()
         {
             GL.GetProgram(_handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
@@ -60,6 +62,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
         {
             GL.UseProgram(_handle);
         }
+
         public void SetMatrix4(string name, Matrix4 data)
         {
             GL.UseProgram(_handle);

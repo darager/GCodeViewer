@@ -16,7 +16,9 @@ namespace GCodeViewer.Library.Renderables.Shapes
         public int _triangleCount;
         public Color _color;
 
-        private Circle() { }
+        private Circle()
+        {
+        }
 
         public static Circle With()
         {
@@ -38,26 +40,31 @@ namespace GCodeViewer.Library.Renderables.Shapes
             _radius = radius;
             return this;
         }
+
         public Circle Position(Point3D position)
         {
             _position = position;
             return this;
         }
+
         public Circle RotationX(float rotationX)
         {
             _rotationX = rotationX;
             return this;
         }
+
         public Circle RotationY(float rotationY)
         {
             _rotationY = rotationY;
             return this;
         }
+
         public Circle TriangleCount(int triangleCount)
         {
             _triangleCount = triangleCount;
             return this;
         }
+
         public Circle Color(Color color)
         {
             _color = color;

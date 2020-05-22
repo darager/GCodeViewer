@@ -22,6 +22,7 @@ namespace GCodeViewer.Library.Renderables
 
             return result;
         }
+
         public static List<Point3D> Translate(this List<Point3D> @this, Point3D offset)
         {
             var result = new List<Point3D>();

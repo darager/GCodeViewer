@@ -32,6 +32,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
             foreach (Shader shader in _shaders.Values)
                 shader.SetMatrix4(_projectionMatrixName, matrix);
         }
+
         public void DisposeAll()
         {
             foreach (Shader shader in _shaders.Values)
@@ -48,11 +49,13 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
                        .Replace("%BLUE%", ScaleToFloat(color.B))
                        .Replace("%ALPHA%", ScaleToFloat(color.A));
         }
+
         private string GetVertexShaderSource()
         {
             return File.ReadAllText(@"Shaders\shader.vert")
                        .Replace("%UNIFORMNAME%", _projectionMatrixName);
         }
+
         private string ScaleToFloat(int value) => ((float)value).Scale(0, 255, 0, 1).ToString();
     }
 }

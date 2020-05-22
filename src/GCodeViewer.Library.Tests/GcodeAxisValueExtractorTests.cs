@@ -26,6 +26,7 @@ namespace GCodeViewer.Library.Tests
                 new List<AxisValues> { new AxisValues(0,0,0,1), new AxisValues(10,0,0,2), new AxisValues(10,10,0,2) }
             }
         };
+
         [TestCaseSource(nameof(_extractPrinterAxisValuesTestCases))]
         public void ExtractPrinterAxisValues_ExtractsCorrectValues(string[] lines, IEnumerable<AxisValues> expectedValues)
         {

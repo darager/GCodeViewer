@@ -20,6 +20,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             get => (ObservableCollection<Renderable>)this.GetValue(RenderablesProperty);
             set => this.SetValue(RenderablesProperty, value);
         }
+
         public static readonly DependencyProperty RenderablesProperty =
             DependencyProperty.Register(
                 "Renderables",
@@ -46,6 +47,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                 pclViewer.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, pclViewer);
             }
         }
+
         private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
         {
             if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -66,6 +68,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
                     pclViewer._vbos.Remove(renderable);
             }
         }
+
         private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
         {
             var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
@@ -129,10 +132,12 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             _control.SwapBuffers();
             _control.Invalidate();
         }
+
         private void ResizeWindow(object sender, SizeChangedEventArgs e)
         {
             GL.Viewport(0, 0, (int)this.ActualWidth, (int)this.ActualHeight);
         }
+
         private void DisposeEverything(object sender, RoutedEventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
@@ -144,9 +149,11 @@ namespace GCodeViewer.WPF.Controls.PointCloud
         }
 
         #region Mouse Movement
+
         private Point _previousMousePosition = new Point(0, 0);
         private readonly float _mouseSensitivity = 0.25f;
         private readonly float _mouseWheelSensitivity = 0.05f;
+
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             float dx = (float)(e.X - _previousMousePosition.X);
@@ -171,6 +178,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _previousMousePosition = new Point(e.X, e.Y);
         }
+
         private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;
@@ -179,6 +187,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _camera.Scale = newScale.Constrain(0.05f, 2.0f);
         }
+
         #endregion
     }
 }

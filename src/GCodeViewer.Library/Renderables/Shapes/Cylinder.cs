@@ -17,7 +17,9 @@ namespace GCodeViewer.Library.Renderables.Shapes
 
         private Color _color;
 
-        private Cylinder() { }
+        private Cylinder()
+        {
+        }
 
         public static Cylinder With()
         {
@@ -39,26 +41,31 @@ namespace GCodeViewer.Library.Renderables.Shapes
             _height = height;
             return this;
         }
+
         public Cylinder Radius(float radius)
         {
             _radius = radius;
             return this;
         }
+
         public Cylinder Position(Point3D position)
         {
             _position = position;
             return this;
         }
+
         public Cylinder RotationX(float rotationX)
         {
             _rotationX = rotationX;
             return this;
         }
+
         public Cylinder RotationY(float rotationY)
         {
             _rotationY = rotationY;
             return this;
         }
+
         public Cylinder Color(Color color)
         {
             _color = color;

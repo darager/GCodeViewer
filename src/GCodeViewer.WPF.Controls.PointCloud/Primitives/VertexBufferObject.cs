@@ -56,6 +56,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud.Primitives
             int pointCount = _vertices.Length / 3;
             GL.DrawArrays(_type, first: 0, pointCount);
         }
+
         public void Dispose()
         {
             GL.DeleteBuffer(_handle);

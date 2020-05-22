@@ -18,6 +18,7 @@
         {
             return (obj is AxisValues other) && this == other;
         }
+
         public override int GetHashCode()
         {
             unchecked
@@ -28,6 +29,7 @@
                      + this.E.GetHashCode() * 17;
             }
         }
+
         public static bool operator ==(AxisValues a, AxisValues b)
         {
             return a.X == b.X
@@ -35,6 +37,7 @@
                 && a.Z == b.Z
                 && a.E == b.E;
         }
+
         public static bool operator !=(AxisValues a, AxisValues b)
         {
             return !(a == b);
