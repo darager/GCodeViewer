@@ -8,6 +8,7 @@ namespace GCodeViewer.WPF.MVVM.Helpers
     public static class ActionHelpers
     {
         private static Dictionary<Action, DateTime> _throttleTimes = new Dictionary<Action, DateTime>();
+
         public static Action Throttle(this Action action, int maxTimesPerSecond)
         {
             if (!_throttleTimes.ContainsKey(action))
@@ -29,6 +30,7 @@ namespace GCodeViewer.WPF.MVVM.Helpers
         }
 
         private static Dictionary<Action, Timer> _waitForTimers = new Dictionary<Action, Timer>();
+
         public static Action WaitFor(this Action action, int debounceTimeInMillis)
         {
             if (!_waitForTimers.ContainsKey(action))

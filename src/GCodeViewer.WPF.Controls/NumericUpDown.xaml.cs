@@ -2,19 +2,21 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.Helpers;
+using GCodeViewer.WPF.MVVM.Helpers;
 
 namespace GCodeViewer.WPF.Controls
 {
     public partial class NumericUpDown : UserControl
     {
         #region DependencyProperties
+
         public float Value
         {
             get => (float)this.GetValue(ValueProperty);
             set => this.SetValue(ValueProperty, value);
         }
+
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(
                 "Value",
@@ -27,6 +29,7 @@ namespace GCodeViewer.WPF.Controls
             get => (float)this.GetValue(MinValueProperty);
             set => this.SetValue(MinValueProperty, value);
         }
+
         public static readonly DependencyProperty MinValueProperty =
             DependencyProperty.Register(
                 "MinValue",
@@ -38,6 +41,7 @@ namespace GCodeViewer.WPF.Controls
             get => (float)this.GetValue(MaxValueProperty);
             set => this.SetValue(MaxValueProperty, value);
         }
+
         public static readonly DependencyProperty MaxValueProperty =
             DependencyProperty.Register(
                 "MaxValue",
@@ -49,6 +53,7 @@ namespace GCodeViewer.WPF.Controls
             get => (float)this.GetValue(StepSizeProperty);
             set => this.SetValue(StepSizeProperty, value);
         }
+
         public static readonly DependencyProperty StepSizeProperty =
             DependencyProperty.Register(
                 "StepSize",
@@ -62,6 +67,7 @@ namespace GCodeViewer.WPF.Controls
             get => (Brush)this.GetValue(BackgroundProperty);
             set => this.SetValue(BackgroundProperty, value);
         }
+
         new public static readonly DependencyProperty BackgroundProperty =
             DependencyProperty.Register(
                 "Background",
@@ -73,6 +79,7 @@ namespace GCodeViewer.WPF.Controls
             get => (Brush)this.GetValue(ForegroundProperty);
             set => this.SetValue(ForegroundProperty, value);
         }
+
         new public static readonly DependencyProperty ForegroundProperty =
             DependencyProperty.Register(
                 "Foreground",
@@ -84,12 +91,15 @@ namespace GCodeViewer.WPF.Controls
             get => (Brush)this.GetValue(BorderBrushProperty);
             set => this.SetValue(BorderBrushProperty, value);
         }
+
         new public static readonly DependencyProperty BorderBrushProperty =
             DependencyProperty.Register(
                 "BorderBrush",
                 typeof(Brush), typeof(NumericUpDown),
                 new PropertyMetadata(new SolidColorBrush(Color.FromRgb(51, 51, 77))));
+
         #endregion
+
         #endregion
 
         public ICommand DecreaseValue { get; private set; }

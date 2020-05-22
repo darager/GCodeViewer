@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using GCodeViewer.WPF.Navigation;
-using Ninject;
 
 namespace GCodeViewer.WPF.MainWindow
 {
@@ -34,6 +33,7 @@ namespace GCodeViewer.WPF.MainWindow
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -48,6 +48,7 @@ namespace GCodeViewer.WPF.Starting
                 _navigationService.GoTo(Navigation.Navigation.GCodePreviewPage);
             }
         }
+
         private void LoadSTLFile(object _)
         {
             // TODO:

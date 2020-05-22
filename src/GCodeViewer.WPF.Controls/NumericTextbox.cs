@@ -13,6 +13,7 @@ namespace GCodeViewer.WPF.Controls
             get => (float)this.GetValue(MinValueProperty);
             set => this.SetValue(MinValueProperty, value);
         }
+
         public static readonly DependencyProperty MinValueProperty =
             DependencyProperty.Register(
                 "MinValue",
@@ -24,6 +25,7 @@ namespace GCodeViewer.WPF.Controls
             get => (float)this.GetValue(MaxValueProperty);
             set => this.SetValue(MaxValueProperty, value);
         }
+
         public static readonly DependencyProperty MaxValueProperty =
             DependencyProperty.Register(
                 "MaxValue",
@@ -41,6 +43,7 @@ namespace GCodeViewer.WPF.Controls
         }
 
         private string _previousText;
+
         private void EnsureValidNumber(object sender, TextChangedEventArgs e)
         {
             ResetIfInvalidInput(_previousText);
@@ -48,6 +51,7 @@ namespace GCodeViewer.WPF.Controls
 
             _previousText = this.Text;
         }
+
         private void ResetIfInvalidInput(string previousText)
         {
             if (NotValidNumber(this.Text))
@@ -59,6 +63,7 @@ namespace GCodeViewer.WPF.Controls
                 SetCursorPosition(cursorPos);
             }
         }
+
         private void AdjustCursorPosition()
         {
             if (IsNotEmptyOrMinus(this.Text))
@@ -70,6 +75,7 @@ namespace GCodeViewer.WPF.Controls
                 SetCursorPosition(cursorPos);
             }
         }
+
         private string EnsureValueConstraints(string currentText)
         {
             float currentValue = float.Parse(this.Text);
@@ -77,6 +83,7 @@ namespace GCodeViewer.WPF.Controls
 
             return constrainedValue.ToString();
         }
+
         private bool IsNotEmptyOrMinus(string text)
         {
             return !string.IsNullOrEmpty(text)
@@ -84,16 +91,19 @@ namespace GCodeViewer.WPF.Controls
         }
 
         private Regex _inputPattern = new Regex("[-\\d\\.]");
+
         private void OnlyAllowValidCharacters(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !_inputPattern.IsMatch(e.Text);
         }
 
         private Regex _numberPattern = new Regex("^-?\\d*(\\.\\d*)?$");
+
         private bool NotValidNumber(string text)
         {
             return !_numberPattern.IsMatch(text);
         }
+
         private void SetCursorPosition(int position)
         {
             this.SelectionStart = position;

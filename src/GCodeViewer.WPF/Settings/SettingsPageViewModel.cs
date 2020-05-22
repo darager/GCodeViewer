@@ -19,6 +19,7 @@ namespace GCodeViewer.WPF.Settings
                 OnPropertyChanged("PrintBedDiameter");
             }
         }
+
         private float _printBedDiameter;
 
         public float PrintVolumeHeight
@@ -32,6 +33,7 @@ namespace GCodeViewer.WPF.Settings
                 OnPropertyChanged("PrintVolumeHeight");
             }
         }
+
         private float _printVolumeHeight;
 
         public float AAxisOffset
@@ -45,6 +47,7 @@ namespace GCodeViewer.WPF.Settings
                 OnPropertyChanged("AAxisOffset");
             }
         }
+
         private float _aAxisOffset;
 
         public ICommand GoBack { get; private set; }
@@ -75,6 +78,7 @@ namespace GCodeViewer.WPF.Settings
             LoadSettings();
             _navigationService.GoBack();
         }
+
         private void ApplySettingsAndSaveThem(object _)
         {
             StoreSettings();
@@ -90,6 +94,7 @@ namespace GCodeViewer.WPF.Settings
             this.PrintBedDiameter = _settings.PrinterDimensions.PrintBedDiameter;
             this.PrintVolumeHeight = _settings.PrinterDimensions.PrintVolumeHeight;
         }
+
         private void StoreSettings()
         {
             _settings.PrinterDimensions.AAxisOffset = this.AAxisOffset;
@@ -103,6 +108,7 @@ namespace GCodeViewer.WPF.Settings
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

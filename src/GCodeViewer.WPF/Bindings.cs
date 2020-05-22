@@ -1,9 +1,9 @@
 ﻿using GCodeViewer.Library.Renderables;
-using GCodeViewer.WPF.Navigation;
-using GCodeViewer.WPF.Starting;
-using GCodeViewer.WPF.Settings;
-using GCodeViewer.WPF.TextEditor;
 using GCodeViewer.WPF.MainWindow;
+using GCodeViewer.WPF.Navigation;
+using GCodeViewer.WPF.Settings;
+using GCodeViewer.WPF.Starting;
+using GCodeViewer.WPF.TextEditor;
 using Ninject.Modules;
 
 namespace GCodeViewer.WPF

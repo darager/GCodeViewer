@@ -19,6 +19,7 @@ namespace GCodeViewer.WPF.MainWindow
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PointCloudObjects"));
             }
         }
+
         private ObservableCollection<Renderable> _pointCloudObjects;
 
         public Viewer3DViewModel()
@@ -30,15 +31,18 @@ namespace GCodeViewer.WPF.MainWindow
         {
             PointCloudObjects.Add(renderable);
         }
+
         public void Add(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
                 PointCloudObjects.Add(renderable);
         }
+
         public void Remove(Renderable renderable)
         {
             PointCloudObjects.Remove(renderable);
         }
+
         public void Remove(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
@@ -46,6 +50,7 @@ namespace GCodeViewer.WPF.MainWindow
         }
 
         public Type Type => typeof(Viewer3DViewModel);
+
         public object Create(IContext context) => this;
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -33,6 +33,7 @@ namespace GCodeViewer.WPF.Settings
             var config = new Library.PrinterSettings.Settings();
             await StoreSettings(config);
         }
+
         private Library.PrinterSettings.Settings LoadSettings()
         {
             using var stream = File.OpenRead(_filePath);

@@ -19,6 +19,7 @@ namespace GCodeViewer.WPF.TextEditor
         internal GCodeTextEditor TextEditor { get; set; }
 
         public Type Type => typeof(TextEditorPageViewModel);
+
         public object Create(IContext context) => this;
 
         public TextEditorPageViewModel()
@@ -30,6 +31,7 @@ namespace GCodeViewer.WPF.TextEditor
         {
             TextEditor.Text = text;
         }
+
         public string GetText()
         {
             return TextEditor.Text;

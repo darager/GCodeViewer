@@ -17,6 +17,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
                 OnPropertyChanged("CurrentLine");
             }
         }
+
         private int _currentLine;
 
         public int LineCount
@@ -30,6 +31,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
                 OnPropertyChanged("LineCount");
             }
         }
+
         private int _lineCount;
 
         private readonly ICSharpCode.AvalonEdit.TextEditor _editor;
@@ -49,6 +51,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             _editor.PreviewKeyDown += (s, e) => updateLineStatistics();
             _editor.GotMouseCapture += (s, e) => updateLineStatistics();
         }
+
         private void UpdateLineStatistics()
         {
             LineCount = _editor.Document.LineCount;
@@ -62,6 +65,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using GCodeViewer.WPF.Starting;
 using GCodeViewer.WPF.Settings;
+using GCodeViewer.WPF.Starting;
 using GCodeViewer.WPF.TextEditor;
 using Ninject;
 
@@ -14,8 +14,10 @@ namespace GCodeViewer.WPF.Navigation
 
         [Inject]
         public StartingPage StartingPage { get; set; }
+
         [Inject]
         public SettingsPage SettingsPage { get; set; }
+
         [Inject]
         public TextEditorPage TextEditorPage { get; set; }
 
@@ -32,6 +34,7 @@ namespace GCodeViewer.WPF.Navigation
             _visitedPages.Push(page);
             SetPage(page);
         }
+
         public void GoBack()
         {
             _visitedPages.Pop();
