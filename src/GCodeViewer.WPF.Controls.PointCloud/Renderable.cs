@@ -29,7 +29,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             };
         }
 
-        public float[] ToVertices(IEnumerable<IPoint3F> points)
+        private float[] ToVertices(IEnumerable<IPoint3F> points)
         {
             var verts = new List<float>();
 

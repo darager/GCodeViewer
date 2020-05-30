@@ -6,8 +6,6 @@ namespace GCodeViewer.Library.Renderables
     {
         public IRenderService RenderService { get; }
 
-        public bool Visible { get; set; }
-
         public void SetPrintBedDiameter(float printBedDiameter);
 
         public void Add(ICompositeRenderable renderable);

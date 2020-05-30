@@ -18,7 +18,7 @@ namespace GCodeViewer.WPF
             // when binding a class to an interface and to itself the interface has to be bound to a provider to ensure that the class is not created twice
             Bind<IRenderService>().ToProvider<Viewer3DViewModel>();
             Bind<Viewer3DViewModel>().ToSelf().InSingletonScope();
-            Bind<PrinterScene>().ToSelf().InSingletonScope();
+            Bind<BasicScene>().ToSelf().InSingletonScope();
 
             // Starting Page
             Bind<StartingPage>().ToSelf().InSingletonScope();
