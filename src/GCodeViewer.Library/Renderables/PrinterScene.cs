@@ -1,13 +1,11 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
+using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
 
 namespace GCodeViewer.Library.Renderables
 {
-    public class PrinterScene
+    public class BasicScene : IViewerScene
     {
-        private float _scalingFactor;
-
         #region Printer Components
 
         private CircularPrintbed _printbed = new CircularPrintbed(radius: 1.0f, Color.DarkGray, Color.White);
@@ -15,14 +13,44 @@ namespace GCodeViewer.Library.Renderables
 
         #endregion
 
-        private IRenderService _renderService;
+        public IRenderService RenderService { get; private set; }
 
-        public PrinterScene(IRenderService renderService)
+        public bool Visible
         {
-            _renderService = renderService;
+            get => _visible;
+            set
+            {
+                if (_visible == value) return;
+                _visible = value;
 
-            _renderService.Add(_printbed);
-            _renderService.Add(_coordinateSystem);
+                UpdateVisibility(_visible);
+            }
+        }
+
+        private bool _visible;
+        private float _scalingFactor;
+
+        private void UpdateVisibility(bool visible)
+        {
+        }
+
+        public BasicScene(IRenderService renderService, Settings settings)
+        {
+            this.RenderService = renderService;
+
+            SetPrintBedDiameter(settings.PrinterDimensions.PrintBedDiameter);
+        }
+
+        public void Add(ICompositeRenderable renderable)
+        {
+        }
+
+        public void Remove(ICompositeRenderable renderable)
+        {
+        }
+
+        public void SetOffset(ICompositeRenderable renderable, Point3D offset)
+        {
         }
 
         public void SetPrintBedDiameter(float printBedDiameter)
@@ -33,13 +61,6 @@ namespace GCodeViewer.Library.Renderables
                 return;
 
             _scalingFactor = scalingFactor;
-
-            ReScaleEverything();
-        }
-
-        private void ReScaleEverything()
-        {
-            throw new NotImplementedException();
         }
     }
 }

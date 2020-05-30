@@ -27,20 +27,10 @@ namespace GCodeViewer.WPF.MainWindow
             PointCloudObjects = new ObservableCollection<Renderable>();
         }
 
-        public void Add(Renderable renderable)
-        {
-            PointCloudObjects.Add(renderable);
-        }
-
         public void Add(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
                 PointCloudObjects.Add(renderable);
-        }
-
-        public void Remove(Renderable renderable)
-        {
-            PointCloudObjects.Remove(renderable);
         }
 
         public void Remove(ICompositeRenderable compositeRenderable)

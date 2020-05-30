@@ -57,11 +57,11 @@ namespace GCodeViewer.WPF.Settings
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
-        private readonly PrinterScene _printerScene;
+        private readonly BasicScene _printerScene;
 
         public SettingsPageViewModel(PageNavigationService navigationService,
                                      SettingsService settingsService,
-                                     PrinterScene printerScene)
+                                     BasicScene printerScene)
         {
             _navigationService = navigationService;
             _settingsService = settingsService;
