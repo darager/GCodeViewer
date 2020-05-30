@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
 
@@ -6,14 +7,16 @@ namespace GCodeViewer.Library.Renderables
 {
     public class BasicScene : IViewerScene
     {
-        #region Printer Components
+        public IRenderService RenderService { get; private set; }
+
+        #region Printbed Parts
 
         private CircularPrintbed _printbed = new CircularPrintbed(radius: 1.0f, Color.DarkGray, Color.White);
         private CoordinateSystem _coordinateSystem = new CoordinateSystem(new Point3D(0, 0, 0), 0.2f);
 
         #endregion
 
-        public IRenderService RenderService { get; private set; }
+        public List<ICompositeRenderable> AllRenderables = new List<ICompositeRenderable>();
 
         public bool Visible
         {
@@ -30,15 +33,22 @@ namespace GCodeViewer.Library.Renderables
         private bool _visible;
         private float _scalingFactor;
 
-        private void UpdateVisibility(bool visible)
-        {
-        }
-
         public BasicScene(IRenderService renderService, Settings settings)
         {
             this.RenderService = renderService;
 
+            AllRenderables.Add(_printbed);
+            AllRenderables.Add(_coordinateSystem);
+
             SetPrintBedDiameter(settings.PrinterDimensions.PrintBedDiameter);
+        }
+
+        private void UpdateVisibility(bool visible)
+        {
+            if (Visible)
+                AllRenderables.ForEach(r => RenderService.Add(r));
+            else
+                AllRenderables.ForEach(r => RenderService.Remove(r));
         }
 
         public void Add(ICompositeRenderable renderable)
