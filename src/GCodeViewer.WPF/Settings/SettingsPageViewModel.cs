@@ -68,9 +68,6 @@ namespace GCodeViewer.WPF.Settings
             _settingsService = settingsService;
             _printerScene = printerScene;
 
-            var cylinder = Cylinder.With().Radius(50).Height(10).Build();
-            _printerScene.Add(cylinder.AsComposite(), new Point3D(0, 0, 0));
-
             GoBack = new RelayCommand(GoBackAndResetSettings);
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
 

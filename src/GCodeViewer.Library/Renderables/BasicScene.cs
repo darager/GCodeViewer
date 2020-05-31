@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
-using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.Library.Renderables
 {
@@ -23,7 +22,7 @@ namespace GCodeViewer.Library.Renderables
 
         private float _scalingFactor;
 
-        public BasicScene(IRenderService renderService, Settings settings)
+        public BasicScene(IRenderService renderService, SettingsService settingsService)
         {
             RenderService = renderService;
             _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D)>();
@@ -31,7 +30,8 @@ namespace GCodeViewer.Library.Renderables
             RenderService.Add(_printbed);
             RenderService.Add(_coordinateSystem);
 
-            SetPrintBedDiameter(settings.PrinterDimensions.PrintBedDiameter);
+            float diameter = settingsService.Settings.PrinterDimensions.PrintBedDiameter;
+            SetPrintBedDiameter(diameter);
         }
 
         public void Add(ICompositeRenderable renderable, Point3D offset)

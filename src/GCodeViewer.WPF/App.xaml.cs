@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Windows;
 using GCodeViewer.WPF.Navigation;
+using GCodeViewer.WPF.Settings;
 using Ninject;
 
 namespace GCodeViewer.WPF
