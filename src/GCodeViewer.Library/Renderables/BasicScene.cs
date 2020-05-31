@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
 using OpenTK.Graphics.OpenGL;
@@ -18,7 +19,7 @@ namespace GCodeViewer.Library.Renderables
 
         #endregion
 
-        private Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D)> _renderables;
+        private Dictionary<ICompositeRenderable, (ICompositeRenderable Renderable, Point3D Offset)> _renderables;
 
         private float _scalingFactor;
 
@@ -48,7 +49,7 @@ namespace GCodeViewer.Library.Renderables
         {
             if (!(_renderables.ContainsKey(renderable))) return;
 
-            var offsetRenderable = _renderables[renderable].Item1;
+            var offsetRenderable = _renderables[renderable].Renderable;
             _renderables.Remove(renderable);
 
             RenderService.Remove(offsetRenderable);
@@ -74,10 +75,12 @@ namespace GCodeViewer.Library.Renderables
 
         private void UpdateEveryRenderable()
         {
-            foreach (var key in _renderables.Keys)
+            foreach (var renderable in _renderables.Keys.ToList())
             {
-                Remove(key);
-                Add(key, _renderables[key].Item2);
+                var offset = _renderables[renderable].Offset;
+
+                Remove(renderable);
+                Add(renderable, offset);
             }
         }
     }
