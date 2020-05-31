@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.Library.Renderables
 {
-
     public class ScaledAndOffsetRenderableBuilder
     {
         private ICompositeRenderable _renderable;

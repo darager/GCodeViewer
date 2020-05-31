@@ -30,7 +30,6 @@
             </Grid.ColumnDefinitions>
 
             <local:NumericTextbox
-                x:Name="TextBox"
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="0"
