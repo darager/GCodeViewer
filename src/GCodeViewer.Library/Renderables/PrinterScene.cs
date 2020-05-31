@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Windows.Navigation;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTK.Graphics.OpenGL;
-using OpenToolkit.Graphics.GL;
 
 namespace GCodeViewer.Library.Renderables
 {
@@ -22,14 +19,14 @@ namespace GCodeViewer.Library.Renderables
 
         #endregion
 
-        private Dictionary<ICompositeRenderable, OffsetScalingRenderable> _renderables;
+        private Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D)> _renderables;
 
         private float _scalingFactor;
 
         public BasicScene(IRenderService renderService, Settings settings)
         {
             RenderService = renderService;
-            _renderables = new Dictionary<ICompositeRenderable, OffsetScalingRenderable>();
+            _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D)>();
 
             RenderService.Add(_printbed);
             RenderService.Add(_coordinateSystem);
@@ -37,21 +34,31 @@ namespace GCodeViewer.Library.Renderables
             SetPrintBedDiameter(settings.PrinterDimensions.PrintBedDiameter);
         }
 
-        public void Add(ICompositeRenderable renderable)
+        public void Add(ICompositeRenderable renderable, Point3D offset)
         {
-            var offsetRenderable = new OffsetScalingRenderable(renderable);
+            var builder = new OffsetScalingRenderableBuilder(renderable);
+            builder.SetScalingFactor(_scalingFactor);
+            builder.SetOffset(offset);
+            var offsetRenderable = builder.Build();
 
-            _renderables.Add(renderable, offsetRenderable);
-
-            RenderService.Add(offsetRenderable.GetScaledAndOffsetRenderable());
+            _renderables.Add(renderable, (offsetRenderable, offset));
+            RenderService.Add(offsetRenderable);
         }
 
         public void Remove(ICompositeRenderable renderable)
         {
+            if (!(_renderables.ContainsKey(renderable))) return;
+
+            var offsetRenderable = _renderables[renderable].Item1;
+            _renderables.Remove(renderable);
+
+            RenderService.Remove(offsetRenderable);
         }
 
-        public void SetOffset(ICompositeRenderable renderable, Point3D offset)
+        public void UpdateOffset(ICompositeRenderable renderable, Point3D offset)
         {
+            Remove(renderable);
+            Add(renderable, offset);
         }
 
         public void SetPrintBedDiameter(float printBedDiameter)
@@ -62,17 +69,28 @@ namespace GCodeViewer.Library.Renderables
                 return;
 
             _scalingFactor = scalingFactor;
+
+            UpdateEveryRenderable();
+        }
+
+        private void UpdateEveryRenderable()
+        {
+            foreach (var key in _renderables.Keys)
+            {
+                Remove(key);
+                Add(key, _renderables[key].Item2);
+            }
         }
     }
 
-    public class OffsetScalingRenderable
+    public class OffsetScalingRenderableBuilder
     {
         private ICompositeRenderable _renderable;
 
         private float _scalingFactor;
         private Point3D _offset;
 
-        public OffsetScalingRenderable(ICompositeRenderable renderable)
+        public OffsetScalingRenderableBuilder(ICompositeRenderable renderable)
         {
             _renderable = renderable;
         }
@@ -87,7 +105,7 @@ namespace GCodeViewer.Library.Renderables
             _offset = offset;
         }
 
-        public ICompositeRenderable GetScaledAndOffsetRenderable()
+        public ICompositeRenderable Build()
         {
             var result = new ScaledAndOffsetRenderables();
 

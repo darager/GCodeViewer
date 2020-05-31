@@ -8,10 +8,10 @@ namespace GCodeViewer.Library.Renderables
 
         public void SetPrintBedDiameter(float printBedDiameter);
 
-        public void Add(ICompositeRenderable renderable);
+        public void Add(ICompositeRenderable renderable, Point3D offset);
 
         public void Remove(ICompositeRenderable renderable);
 
-        public void SetOffset(ICompositeRenderable renderable, Point3D offset);
+        public void UpdateOffset(ICompositeRenderable renderable, Point3D offset);
     }
 }
