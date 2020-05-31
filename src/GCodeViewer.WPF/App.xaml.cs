@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Windows;
 using GCodeViewer.WPF.Navigation;
-using GCodeViewer.WPF.Settings;
 using Ninject;
 
 namespace GCodeViewer.WPF
@@ -13,11 +12,11 @@ namespace GCodeViewer.WPF
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            var window = kernel.Get<MainWindow.MainWindow>();
-            window.Show();
+            kernel.Get<MainWindow.MainWindow>()
+                  .Show();
 
-            var navService = kernel.Get<PageNavigationService>();
-            navService.GoTo(Navigation.Navigation.StartingPage);
+            kernel.Get<PageNavigationService>()
+                  .GoTo(Navigation.Navigation.StartingPage);
         }
     }
 }

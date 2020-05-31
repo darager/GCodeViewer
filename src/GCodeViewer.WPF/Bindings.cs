@@ -1,4 +1,5 @@
-﻿using GCodeViewer.Library.Renderables;
+﻿using GCodeViewer.Library.PrinterSettings;
+using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.MainWindow;
 using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.Settings;

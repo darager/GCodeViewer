@@ -11,7 +11,7 @@ namespace GCodeViewer.Library.PrinterSettings
         private string _fileName = "config.json";
         private string _diretoryName = "Data";
 
-        public Library.PrinterSettings.Settings Settings { get; private set; }
+        public Settings Settings { get; private set; }
 
         public SettingsService()
         {
@@ -30,20 +30,20 @@ namespace GCodeViewer.Library.PrinterSettings
             if (!Directory.Exists(_diretoryName))
                 Directory.CreateDirectory(_diretoryName);
 
-            var config = new Library.PrinterSettings.Settings();
+            var config = new Settings();
             await StoreSettings(config);
         }
 
-        private Library.PrinterSettings.Settings LoadSettings()
+        private Settings LoadSettings()
         {
             using var stream = File.OpenRead(_filePath);
-            var config = Library.PrinterSettings.Settings.Load(stream);
+            var config = Settings.Load(stream);
             stream.Close();
 
             return config;
         }
 
-        public async Task StoreSettings(Library.PrinterSettings.Settings settings)
+        public async Task StoreSettings(Settings settings)
         {
             File.Delete(_filePath);
             using var stream = File.Open(_filePath, FileMode.OpenOrCreate);
