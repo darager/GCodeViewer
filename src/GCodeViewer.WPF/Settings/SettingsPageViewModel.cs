@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.Library.Renderables;
+using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 
@@ -57,15 +58,18 @@ namespace GCodeViewer.WPF.Settings
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
-        private readonly BasicScene _printerScene;
+        private readonly IViewerScene _printerScene;
 
         public SettingsPageViewModel(PageNavigationService navigationService,
                                      SettingsService settingsService,
-                                     BasicScene printerScene)
+                                     IViewerScene printerScene)
         {
             _navigationService = navigationService;
             _settingsService = settingsService;
             _printerScene = printerScene;
+
+            //var cylinder = Cylinder.With().Radius(10).Height(10).Build();
+            //_printerScene.Add(cylinder, new Point3D(0, 0, 0));
 
             GoBack = new RelayCommand(GoBackAndResetSettings);
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
