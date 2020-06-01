@@ -108,22 +108,19 @@ namespace GCodeViewer.WPF.Controls
         public NumericUpDown()
         {
             InitializeComponent();
-            InitCommands();
+
+            DecreaseValue = new RelayCommand((_) => Add(-StepSize));
+            IncreaseValue = new RelayCommand((_) => Add(StepSize));
 
             rootElement.DataContext = this;
         }
 
-        private void InitCommands()
+        private void Add(float num)
         {
-            DecreaseValue = new RelayCommand((_) =>
-            {
-                // Apparently Binding is Broken if you do not use SetCurrentValue
-                SetCurrentValue(ValueProperty, EnsureValueConstraints(Value - StepSize));
-            });
-            IncreaseValue = new RelayCommand((_) =>
-            {
-                SetCurrentValue(ValueProperty, EnsureValueConstraints(Value + StepSize));
-            });
+            float newValue = EnsureValueConstraints(Value + num);
+
+            // Apparently the Binding is Broken if you do not use SetCurrentValue
+            SetCurrentValue(ValueProperty, newValue);
         }
 
         private float EnsureValueConstraints(float value) => value.Constrain(MinValue, MaxValue);
