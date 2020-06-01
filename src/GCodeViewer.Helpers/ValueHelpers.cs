@@ -12,6 +12,12 @@
             return result;
         }
 
+        public static bool IsOutSideOf(this float @this, float min, float max)
+        {
+            return @this >= max
+                || @this <= min;
+        }
+
         public static float Scale(this float @this, float fromMin, float fromMax, float toMin, float toMax)
         {
             return toMin + (@this - fromMin) / (fromMax - fromMin) * (toMax - toMin);

@@ -14,12 +14,16 @@
         <Label HorizontalAlignment="Center" Content="{Binding NumValue}" />
 
         <ctrl:NumericUpDown
-            x:Name="numUpDown"
             Margin="0,5,0,5"
             MaxValue="100"
             MinValue="-100"
             Value="{Binding Path=NumValue, Mode=TwoWay}" />
 
-        <ctrl:NumericTextbox MaxValue="200" MinValue="-200" />
+        <ctrl:NumericTextbox
+            MaxValue="200"
+            MinValue="-200"
+            Text="{Binding NumValue, Mode=TwoWay}" />
+
+        <Button>some button</Button>
     </StackPanel>
 </Window>

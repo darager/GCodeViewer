@@ -8,6 +8,8 @@ namespace GCodeViewer.WPF.Controls
 {
     public class NumericTextbox : TextBox
     {
+        #region Dependency Properties
+
         public float MinValue
         {
             get => (float)this.GetValue(MinValueProperty);
@@ -31,6 +33,8 @@ namespace GCodeViewer.WPF.Controls
                 "MaxValue",
                 typeof(float), typeof(NumericTextbox),
                 new PropertyMetadata(float.NaN));
+
+        #endregion
 
         public NumericTextbox() : base()
         {
@@ -75,12 +79,25 @@ namespace GCodeViewer.WPF.Controls
             }
         }
 
-        private string EnsureValueConstraints(string currentText)
+        private string EnsureValueConstraints(string text)
         {
-            float currentValue = ParseFloatString(this.Text);
-            float constrainedValue = currentValue.Constrain(MinValue, MaxValue);
+            string result = text;
 
-            return constrainedValue.ToString();
+            if (OutSideOfRange(text))
+            {
+                result = ParseFloatString(text)
+                        .Constrain(MinValue, MaxValue)
+                        .ToString();
+            }
+
+            return result;
+        }
+
+        private bool OutSideOfRange(string text)
+        {
+            float value = ParseFloatString(text);
+
+            return value.IsOutSideOf(MinValue, MaxValue);
         }
 
         private float ParseFloatString(string text)
