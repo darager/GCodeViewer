@@ -11,9 +11,61 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
 
-    <ctrl:DecimalUpDown
+    <Border
         x:Name="rootElement"
-        Maximum="{Binding MaxValue}"
-        Minimum="{Binding MinValue}"
-        Value="{Binding Value}" />
+        BorderBrush="{Binding BorderBrush}"
+        BorderThickness="1">
+        <Grid
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="{Binding Background}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <ctrl:DecimalUpDown
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="{Binding Foreground}"
+                Maximum="{Binding MaxValue}"
+                Minimum="{Binding MinValue}"
+                ShowButtonSpinner="False"
+                TextAlignment="Center"
+                Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Background="Transparent"
+                BorderBrush="transparent"
+                Command="{Binding IncreaseValue}"
+                DockPanel.Dock="Top"
+                Focusable="False">
+                <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{Binding Foreground}" />
+            </Button>
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding DecreaseValue}"
+                Focusable="False">
+                <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding Foreground}" />
+            </Button>
+        </Grid>
+    </Border>
 </UserControl>
