@@ -37,7 +37,6 @@ namespace GCodeViewer.WPF.Controls
             this.KeyDown += UnFocusIfEnter;
             this.GotFocus += SetCursorToEnd;
             this.TextChanged += EnsureValidNumber;
-            this.PreviewTextInput += OnlyAllowValidCharacters;
 
             _previousText = this.Text;
         }
@@ -78,23 +77,21 @@ namespace GCodeViewer.WPF.Controls
 
         private string EnsureValueConstraints(string currentText)
         {
-            float currentValue = float.Parse(this.Text);
+            float currentValue = ParseFloatString(this.Text);
             float constrainedValue = currentValue.Constrain(MinValue, MaxValue);
 
             return constrainedValue.ToString();
+        }
+
+        private float ParseFloatString(string text)
+        {
+            return float.Parse(text);
         }
 
         private bool IsNotEmptyOrMinus(string text)
         {
             return !string.IsNullOrEmpty(text)
                 && !(this.Text == "-");
-        }
-
-        private Regex _inputPattern = new Regex("[-\\d\\.]");
-
-        private void OnlyAllowValidCharacters(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !_inputPattern.IsMatch(e.Text);
         }
 
         private Regex _numberPattern = new Regex("^-?\\d*(\\.\\d*)?$");

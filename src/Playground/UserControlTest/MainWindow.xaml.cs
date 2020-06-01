@@ -14,7 +14,7 @@ namespace UserControlTest
 
             this.DataContext = new NumUpDownViewModel();
 
-            TestOutConfigFunctionality().Wait();
+            //TestOutConfigFunctionality().Wait();
         }
 
         private Settings _config;
