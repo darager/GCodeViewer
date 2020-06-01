@@ -135,18 +135,18 @@
                     VerticalContentAlignment="Center"
                     Content="Ln:"
                     Foreground="{StaticResource StatusBarForegroundColor}" />
-                <ctrl:NumericTextbox
+                <Label
                     Width="Auto"
                     Padding="0,2,0,0"
                     VerticalAlignment="Center"
+                    HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Bottom"
                     Background="Transparent"
                     BorderBrush="Transparent"
+                    Content="{Binding Path=CurrentLine}"
                     Focusable="False"
                     FontSize="12"
-                    Foreground="{StaticResource StatusBarForegroundColor}"
-                    Text="{Binding Path=CurrentLine}"
-                    TextAlignment="Right" />
+                    Foreground="{StaticResource StatusBarForegroundColor}" />
                 <Label
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Top"

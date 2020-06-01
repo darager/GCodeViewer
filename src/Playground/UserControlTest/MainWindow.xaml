@@ -19,11 +19,6 @@
             MinValue="-100"
             Value="{Binding Path=NumValue, Mode=TwoWay}" />
 
-        <ctrl:NumericTextbox
-            MaxValue="200"
-            MinValue="-200"
-            Text="{Binding NumValue, Mode=TwoWay}" />
-
         <Button>some button</Button>
     </StackPanel>
 </Window>
