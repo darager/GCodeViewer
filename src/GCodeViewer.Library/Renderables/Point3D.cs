@@ -1,4 +1,5 @@
-﻿using g3;
+﻿using System;
+using g3;
 using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
@@ -23,15 +24,7 @@ namespace GCodeViewer.Library.Renderables
             return (obj is Point3D other) && this == other;
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return this.X.GetHashCode() * 17
-                     + this.Y.GetHashCode() * 17
-                     + this.Z.GetHashCode() * 17;
-            }
-        }
+        public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
         public static bool operator ==(Point3D a, Point3D b)
         {

@@ -1,4 +1,6 @@
-﻿namespace GCodeViewer.Library.GCodeParsing
+﻿using System;
+
+namespace GCodeViewer.Library.GCodeParsing
 {
     public struct AxisValues
     {
@@ -19,16 +21,7 @@
             return (obj is AxisValues other) && this == other;
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return this.X.GetHashCode() * 17
-                     + this.Y.GetHashCode() * 17
-                     + this.Z.GetHashCode() * 17
-                     + this.E.GetHashCode() * 17;
-            }
-        }
+        public override int GetHashCode() => HashCode.Combine(X, Y, Z, E);
 
         public static bool operator ==(AxisValues a, AxisValues b)
         {
