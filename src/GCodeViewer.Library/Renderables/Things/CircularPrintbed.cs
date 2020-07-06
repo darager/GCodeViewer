@@ -40,7 +40,7 @@ namespace GCodeViewer.Library.Renderables.Things
             {
                 float x = i * lineSpacing;
                 float y = (float)Math.Sqrt((radius * radius) - (x * x));
-                float z = 0.001f; // lines should be slightly above circle of printbed
+                float z = 0.001f; // lines have to be slightly above the printbed to be seen
 
                 // vertical Lines
                 verts.Add(new Point3D(x, y, z));
