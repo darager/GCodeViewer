@@ -34,30 +34,14 @@ namespace OpenTkTest
 
             var meshes = LoadMeshes(filePath);
 
-            // cut mesh
-            //var meshbuilder = new DMesh3Builder();
+            // cutting meshes
+            var dmesh = meshes[0];
 
-            //var triangles = new List<(int, int, int)>();
-            //for (int i = 0; i < mesh.Triangles.Count() - 3; i += 3)
-            //{
-            //    var t1 = mesh.Triangles[i];
-            //    var t2 = mesh.Triangles[i + 1];
-            //    var t3 = mesh.Triangles[i + 2];
-            //    triangles.Add((t1, t2, t3));
-            //}
-            //triangles.ForEach(t => meshbuilder.AppendTriangle(t.Item1, t.Item2, t.Item3));
-
-            //var vertices = new List<Vector3d>();
-            //for (int i = 0; i < mesh.Vertices.Count() - 3; i += 3)
-            //{
-            //    var vs = mesh.Vertices;
-            //    vertices.Add(new Vector3d(vs[i], vs[i + 1], vs[i + 2]));
-            //}
-            //vertices.ForEach(t => meshbuilder.AppendVertex(new NewVertexInfo(t)));
-            //var dmesh = meshbuilder.Meshes[0];
-
-            //var cut = new MeshPlaneCut(dmesh, new Vector3d(1, 1, 1), new Vector3d(1, 0, 0));
-            //cut.Cut();
+            var cut = new MeshPlaneCut(dmesh, new Vector3d(1, 1, 1), new Vector3d(0, 0, 1));
+            cut.Cut();
+            cut.FillHoles();
+            meshes.Remove(dmesh);
+            meshes.Add(cut.Mesh);
 
             foreach (var mesh in meshes)
                 DisplayMesh(mesh);
