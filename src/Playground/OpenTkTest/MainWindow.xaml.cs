@@ -35,18 +35,35 @@ namespace OpenTkTest
             var meshes = LoadMeshes(filePath);
 
             // cutting meshes
-            var dmesh = meshes[0];
+            var cutMeshes = CutMesh(meshes[0], new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
-            var cut = new MeshPlaneCut(dmesh, new Vector3d(1, 1, 1), new Vector3d(0, 0, 1));
-            cut.Cut();
-            cut.FillHoles();
-            meshes.Remove(dmesh);
-            meshes.Add(cut.Mesh);
+            meshes.Remove(meshes[0]);
+            meshes.Add(cutMeshes.branch);
 
             foreach (var mesh in meshes)
                 DisplayMesh(mesh);
 
             SaveMeshes(meshes, filePath);
+        }
+
+        private (DMesh3 tree, DMesh3 branch) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
+        {
+            //var copy = new DMesh3();
+            //meshToCut.CompactCopy(copy);
+
+            //var treeCut = new MeshPlaneCut(meshToCut, position, normal);
+            //treeCut.Cut();
+            //treeCut.FillHoles();
+
+            var branchCut = new MeshPlaneCut(meshToCut, position, new Vector3d(-normal.x, -normal.y, -normal.z));
+            branchCut.Cut();
+            branchCut.FillHoles();
+            //branchCut.CutLoops
+            // TODO: use cutloops to fill holes (FillHoles ignores holes and indentations on the cut surface
+            // https://github.com/gradientspace/geometry3Sharp/search?q=FillHoles&unscoped_q=FillHoles
+
+            //return (treeCut.Mesh, branchCut.Mesh);
+            return (null, branchCut.Mesh);
         }
 
         private List<DMesh3> LoadMeshes(string filePath)
