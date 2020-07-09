@@ -3,7 +3,7 @@ using System.Drawing;
 using g3;
 using GCodeViewer.WPF.Controls.PointCloud;
 
-// TODO: some lines can no be seen correctly
+// TODO: some lines can not be seen when meeting with the triangles
 namespace GCodeViewer.Library.Renderables.Things
 {
     public class Wireframe : ICompositeRenderable
@@ -17,12 +17,8 @@ namespace GCodeViewer.Library.Renderables.Things
 
             if (fillColor.HasValue)
             {
-                var color = fillColor.Value;
                 var trianglePoints = GetFacePoints(mesh);
-
-                var renderable = new Renderable(color, trianglePoints, RenderableType.Triangles);
-
-                _parts.Add(renderable);
+                _parts.Add(new Renderable(fillColor.Value, trianglePoints, RenderableType.Triangles));
             }
         }
 
