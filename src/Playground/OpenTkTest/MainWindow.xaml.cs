@@ -41,6 +41,7 @@ namespace OpenTkTest
             stlFile.SaveMeshes(new List<Mesh> { cutMeshes.BaseMesh });
         }
 
+        // TODO: move this to own Renderable class
         private void DisplayMesh(DMesh3 mesh, Color color)
         {
             var triangleIndices = mesh.TriangleIndices();
