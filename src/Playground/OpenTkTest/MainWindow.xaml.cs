@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using g3;
 using GCodeViewer.Helpers;
+using GCodeViewer.Library;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.Controls.PointCloud;
@@ -32,8 +33,9 @@ namespace OpenTkTest
             Statusbar.DataContext = new StatusBarViewModel(_textEditorVM);
 
             string filePath = @"STL-Files\xyz-calibrationCube.stl";
+            var stlFile = new STLFile(filePath);
 
-            var meshes = LoadMeshes(filePath);
+            var meshes = stlFile.LoadMeshes();
 
             // cutting meshes
             var origMesh = meshes[0];
@@ -44,7 +46,7 @@ namespace OpenTkTest
             DisplayMesh(cutMeshes.BaseMesh, Color.White);
             DisplayMesh(cutMeshes.CutOffMesh, Color.Green);
 
-            SaveMeshes(meshes, filePath);
+            stlFile.SaveMeshes(meshes);
         }
 
         private (DMesh3 BaseMesh, DMesh3 CutOffMesh) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
@@ -67,40 +69,6 @@ namespace OpenTkTest
                 var holeFill = new MinimalHoleFill(cut.Mesh, loop);
                 holeFill.Apply();
             }
-        }
-
-        private List<DMesh3> LoadMeshes(string filePath)
-        {
-            using var stream = File.OpenRead(filePath);
-            using var binaryReader = new BinaryReader(stream);
-
-            var builder = new DMesh3Builder();
-            var reader = new STLReader();
-
-            var result = reader.Read(binaryReader, ReadOptions.Defaults, builder);
-
-            binaryReader.Close();
-            stream.Close();
-
-            if (result.code != IOCode.Ok)
-                throw new Exception("Something went wrong when reading the STL file!");
-
-            return builder.Meshes;
-        }
-
-        private void SaveMeshes(List<DMesh3> meshes, string filePath)
-        {
-            using var stream = File.OpenWrite(filePath);
-            var binaryWriter = new BinaryWriter(stream);
-
-            var writeMeshes = meshes.Select(m => new WriteMesh(m))
-                                    .ToList();
-
-            var writer = new STLWriter();
-            writer.Write(binaryWriter, writeMeshes, WriteOptions.Defaults);
-
-            binaryWriter.Close();
-            stream.Close();
         }
 
         private void DisplayMesh(DMesh3 mesh, Color color)
