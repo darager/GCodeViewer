@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows;
 using g3;
-using GCodeViewer.Helpers;
 using GCodeViewer.Library;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.Controls.PointCloud;
-using gs;
 using OpenTkTest.ViewModels;
 
 namespace OpenTkTest
@@ -39,7 +34,7 @@ namespace OpenTkTest
 
             // cutting meshes
             var origMesh = meshes[0];
-            var cutMeshes = CutMesh(origMesh, new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
+            var cutMeshes = origMesh.Cut(new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
             meshes.Remove(origMesh);
 
@@ -47,28 +42,6 @@ namespace OpenTkTest
             DisplayMesh(cutMeshes.CutOffMesh, Color.Green);
 
             stlFile.SaveMeshes(meshes);
-        }
-
-        private (DMesh3 BaseMesh, DMesh3 CutOffMesh) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
-        {
-            var treeCut = new MeshPlaneCut(new DMesh3(meshToCut), position, normal);
-            treeCut.Cut();
-            CloseHoleInMesh(treeCut);
-
-            var branchCut = new MeshPlaneCut(new DMesh3(meshToCut), position, new Vector3d(-normal.x, -normal.y, -normal.z));
-            branchCut.Cut();
-            CloseHoleInMesh(branchCut);
-
-            return (treeCut.Mesh, branchCut.Mesh);
-        }
-
-        private void CloseHoleInMesh(MeshPlaneCut cut)
-        {
-            foreach (var loop in cut.CutLoops)
-            {
-                var holeFill = new MinimalHoleFill(cut.Mesh, loop);
-                holeFill.Apply();
-            }
         }
 
         private void DisplayMesh(DMesh3 mesh, Color color)

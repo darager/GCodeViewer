@@ -16,7 +16,7 @@ namespace GCodeViewer.Library
             _filePath = filePath;
         }
 
-        public List<DMesh3> LoadMeshes()
+        public List<Mesh> LoadMeshes()
         {
             using var stream = File.OpenRead(_filePath);
             using var binaryReader = new BinaryReader(stream);
@@ -32,10 +32,11 @@ namespace GCodeViewer.Library
             if (result.code != IOCode.Ok)
                 throw new Exception("Something went wrong when reading the STL file!");
 
-            return builder.Meshes;
+            return builder.Meshes.Select(m => new Mesh(m))
+                                 .ToList();
         }
 
-        public void SaveMeshes(List<DMesh3> meshes)
+        public void SaveMeshes(List<Mesh> meshes)
         {
             using var stream = File.OpenWrite(_filePath);
             var binaryWriter = new BinaryWriter(stream);
