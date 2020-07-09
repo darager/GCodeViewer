@@ -33,15 +33,12 @@ namespace OpenTkTest
             var meshes = stlFile.LoadMeshes();
 
             // cutting meshes
-            var origMesh = meshes[0];
-            var cutMeshes = origMesh.Cut(new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
-
-            meshes.Remove(origMesh);
+            var cutMeshes = meshes[0].Cut(new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
             DisplayMesh(cutMeshes.BaseMesh, Color.White);
             DisplayMesh(cutMeshes.CutOffMesh, Color.Green);
 
-            stlFile.SaveMeshes(meshes);
+            stlFile.SaveMeshes(new List<Mesh> { cutMeshes.BaseMesh });
         }
 
         private void DisplayMesh(DMesh3 mesh, Color color)

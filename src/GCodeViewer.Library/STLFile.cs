@@ -38,6 +38,9 @@ namespace GCodeViewer.Library
 
         public void SaveMeshes(List<Mesh> meshes)
         {
+            if (File.Exists(_filePath))
+                File.Delete(_filePath);
+
             using var stream = File.OpenWrite(_filePath);
             var binaryWriter = new BinaryWriter(stream);
 
