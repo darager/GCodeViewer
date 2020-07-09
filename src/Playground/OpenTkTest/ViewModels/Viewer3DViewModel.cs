@@ -25,6 +25,7 @@ namespace OpenTkTest.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PointCloudObjects"));
             }
         }
+
         private ObservableCollection<Renderable> _pointCloudObjects;
 
         private AxisValueFilter _filter = new AxisValueFilter();
@@ -41,6 +42,7 @@ namespace OpenTkTest.ViewModels
         }
 
         private Renderable _model;
+
         public async void Update3DModel(string newText)
         {
             var uiThread = Application.Current.Dispatcher;
@@ -85,15 +87,18 @@ namespace OpenTkTest.ViewModels
         {
             _pointCloudObjects.Add(renderable);
         }
+
         public void Add(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())
                 _pointCloudObjects.Add(renderable);
         }
+
         public void Remove(Renderable renderable)
         {
             _pointCloudObjects.Remove(renderable);
         }
+
         public void Remove(ICompositeRenderable compositeRenderable)
         {
             foreach (var renderable in compositeRenderable.GetParts())

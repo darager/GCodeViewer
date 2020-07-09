@@ -36,10 +36,10 @@ namespace OpenTkTest
             // cutting meshes
             var cutMeshes = meshes[0].Cut(new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
-            _viewer3DVM.Add(new Wireframe(cutMeshes.BaseMesh, Color.Yellow, Color.DarkGray));
-            _viewer3DVM.Add(new Wireframe(cutMeshes.BaseMesh, Color.GreenYellow));
+            _viewer3DVM.Add(new Wireframe(cutMeshes.BaseMesh, Color.Yellow, Color.Blue));
+            _viewer3DVM.Add(new Wireframe(cutMeshes.CutOffMesh, Color.GreenYellow));
 
-            stlFile.SaveMeshes(new List<Mesh> { cutMeshes.BaseMesh });
+            //stlFile.SaveMeshes(new List<Mesh> { cutMeshes.BaseMesh });
         }
 
         private Renderable movemodel;
