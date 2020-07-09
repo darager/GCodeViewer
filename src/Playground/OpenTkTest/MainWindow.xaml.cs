@@ -9,6 +9,7 @@ using GCodeViewer.Helpers;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.Controls.PointCloud;
+using gs;
 using OpenTkTest.ViewModels;
 
 namespace OpenTkTest
@@ -38,7 +39,7 @@ namespace OpenTkTest
             var cutMeshes = CutMesh(meshes[0], new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
             meshes.Remove(meshes[0]);
-            meshes.Add(cutMeshes.branch);
+            meshes.Add(cutMeshes.CutOfPiece);
 
             foreach (var mesh in meshes)
                 DisplayMesh(mesh);
@@ -46,7 +47,7 @@ namespace OpenTkTest
             SaveMeshes(meshes, filePath);
         }
 
-        private (DMesh3 tree, DMesh3 branch) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
+        private (DMesh3 BasePiece, DMesh3 CutOfPiece) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
         {
             //var copy = new DMesh3();
             //meshToCut.CompactCopy(copy);
@@ -57,13 +58,19 @@ namespace OpenTkTest
 
             var branchCut = new MeshPlaneCut(meshToCut, position, new Vector3d(-normal.x, -normal.y, -normal.z));
             branchCut.Cut();
-            branchCut.FillHoles();
-            //branchCut.CutLoops
-            // TODO: use cutloops to fill holes (FillHoles ignores holes and indentations on the cut surface
-            // https://github.com/gradientspace/geometry3Sharp/search?q=FillHoles&unscoped_q=FillHoles
+            CloseHoleInMesh(branchCut);
 
-            //return (treeCut.Mesh, branchCut.Mesh);
             return (null, branchCut.Mesh);
+            //return (treeCut.Mesh, branchCut.Mesh);
+        }
+
+        private void CloseHoleInMesh(MeshPlaneCut cut)
+        {
+            foreach (var loop in cut.CutLoops)
+            {
+                var holeFill = new MinimalHoleFill(cut.Mesh, loop);
+                holeFill.Apply();
+            }
         }
 
         private List<DMesh3> LoadMeshes(string filePath)
@@ -121,9 +128,9 @@ namespace OpenTkTest
                 {
                     Vector3d vert = mesh.GetVertex(vertexIndex);
 
-                    float x = (float)vert.x;
-                    float y = (float)vert.y;
-                    float z = (float)vert.z;
+                    float x = (float)vert.x / 10;
+                    float y = (float)vert.y / 10;
+                    float z = (float)vert.z / 10;
 
                     points.Add(new Point3D(x, y, z));
                 }
