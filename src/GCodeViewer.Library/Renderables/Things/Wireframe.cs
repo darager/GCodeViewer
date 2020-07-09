@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using g3;
 using GCodeViewer.WPF.Controls.PointCloud;
 
+// TODO: some lines can no be seen correctly
 namespace GCodeViewer.Library.Renderables.Things
 {
     public class Wireframe : ICompositeRenderable
@@ -18,7 +18,7 @@ namespace GCodeViewer.Library.Renderables.Things
             if (fillColor.HasValue)
             {
                 var color = fillColor.Value;
-                var trianglePoints = GetTrianglePoints(mesh);
+                var trianglePoints = GetFacePoints(mesh);
 
                 var renderable = new Renderable(color, trianglePoints, RenderableType.Triangles);
 
@@ -28,6 +28,7 @@ namespace GCodeViewer.Library.Renderables.Things
 
         private List<Point3D> GetLinePoints(Mesh mesh)
         {
+            var drawnLines = new HashSet<(int, int)>();
             var triangleIndices = mesh.TriangleIndices();
 
             var points = new List<Point3D>();
@@ -35,30 +36,34 @@ namespace GCodeViewer.Library.Renderables.Things
             {
                 var triangle = mesh.GetTriangle(idx);
 
-                // TODO: some lines are drawn twice
-                AddPoint(triangle.c);
-                AddPoint(triangle.a);
-                AddPoint(triangle.a);
-                AddPoint(triangle.b);
-                AddPoint(triangle.b);
-                AddPoint(triangle.c);
+                AddLineIfNotYetAdded(triangle.a, triangle.b);
+                AddLineIfNotYetAdded(triangle.b, triangle.c);
+                AddLineIfNotYetAdded(triangle.c, triangle.a);
 
+                void AddLineIfNotYetAdded(int point1Idx, int point2Idx)
+                {
+                    if (drawnLines.Contains((point1Idx, point2Idx)))
+                        return;
+
+                    AddPoint(point1Idx);
+                    AddPoint(point2Idx);
+
+                    drawnLines.Add((point1Idx, point2Idx));
+                }
                 void AddPoint(int vertexIndex)
                 {
-                    Vector3d vert = mesh.GetVertex(vertexIndex);
+                    Vector3d vertex = mesh.GetVertex(vertexIndex);
 
-                    float x = (float)vert.x;
-                    float y = (float)vert.y;
-                    float z = (float)vert.z;
-
-                    points.Add(new Point3D(x, y, z));
+                    points.Add(new Point3D((float)vertex.x,
+                                           (float)vertex.y,
+                                           (float)vertex.z));
                 }
             }
 
             return points;
         }
 
-        private List<Point3D> GetTrianglePoints(Mesh mesh)
+        private List<Point3D> GetFacePoints(Mesh mesh)
         {
             var triangleIndices = mesh.TriangleIndices();
 
@@ -75,11 +80,9 @@ namespace GCodeViewer.Library.Renderables.Things
                 {
                     Vector3d vert = mesh.GetVertex(vertexIndex);
 
-                    float x = (float)vert.x;
-                    float y = (float)vert.y;
-                    float z = (float)vert.z;
-
-                    points.Add(new Point3D(x, y, z));
+                    points.Add(new Point3D((float)vert.x,
+                                           (float)vert.y,
+                                           (float)vert.z));
                 }
             }
 
