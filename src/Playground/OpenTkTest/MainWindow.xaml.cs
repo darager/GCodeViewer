@@ -36,32 +36,28 @@ namespace OpenTkTest
             var meshes = LoadMeshes(filePath);
 
             // cutting meshes
-            var cutMeshes = CutMesh(meshes[0], new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
+            var origMesh = meshes[0];
+            var cutMeshes = CutMesh(origMesh, new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
-            meshes.Remove(meshes[0]);
-            meshes.Add(cutMeshes.CutOfPiece);
+            meshes.Remove(origMesh);
 
-            foreach (var mesh in meshes)
-                DisplayMesh(mesh);
+            DisplayMesh(cutMeshes.BaseMesh, Color.White);
+            DisplayMesh(cutMeshes.CutOffMesh, Color.Green);
 
             SaveMeshes(meshes, filePath);
         }
 
-        private (DMesh3 BasePiece, DMesh3 CutOfPiece) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
+        private (DMesh3 BaseMesh, DMesh3 CutOffMesh) CutMesh(DMesh3 meshToCut, Vector3d position, Vector3d normal)
         {
-            //var copy = new DMesh3();
-            //meshToCut.CompactCopy(copy);
+            var treeCut = new MeshPlaneCut(new DMesh3(meshToCut), position, normal);
+            treeCut.Cut();
+            CloseHoleInMesh(treeCut);
 
-            //var treeCut = new MeshPlaneCut(meshToCut, position, normal);
-            //treeCut.Cut();
-            //treeCut.FillHoles();
-
-            var branchCut = new MeshPlaneCut(meshToCut, position, new Vector3d(-normal.x, -normal.y, -normal.z));
+            var branchCut = new MeshPlaneCut(new DMesh3(meshToCut), position, new Vector3d(-normal.x, -normal.y, -normal.z));
             branchCut.Cut();
             CloseHoleInMesh(branchCut);
 
-            return (null, branchCut.Mesh);
-            //return (treeCut.Mesh, branchCut.Mesh);
+            return (treeCut.Mesh, branchCut.Mesh);
         }
 
         private void CloseHoleInMesh(MeshPlaneCut cut)
@@ -107,7 +103,7 @@ namespace OpenTkTest
             stream.Close();
         }
 
-        private void DisplayMesh(DMesh3 mesh)
+        private void DisplayMesh(DMesh3 mesh, Color color)
         {
             var triangleIndices = mesh.TriangleIndices();
 
@@ -136,7 +132,7 @@ namespace OpenTkTest
                 }
             }
 
-            var model = new Renderable(Color.Aqua, points, RenderableType.Lines);
+            var model = new Renderable(color, points, RenderableType.Lines);
             _viewer3DVM.Add(model);
         }
 
