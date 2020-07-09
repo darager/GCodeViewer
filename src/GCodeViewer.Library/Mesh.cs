@@ -11,18 +11,23 @@ namespace GCodeViewer.Library
 
         public (Mesh BaseMesh, Mesh CutOffMesh) Cut(Vector3d position, Vector3d normal)
         {
-            var treeCut = new MeshPlaneCut(new DMesh3(this), position, normal);
-            treeCut.Cut();
-            CloseHoleInMesh(treeCut);
+            var BaseMesh = CutAndCloseMesh(position, normal);
+            var CutOffMesh = CutAndCloseMesh(position, OppositeDirection(normal));
 
-            var branchCut = new MeshPlaneCut(new DMesh3(this), position, new Vector3d(-normal.x, -normal.y, -normal.z));
-            branchCut.Cut();
-            CloseHoleInMesh(branchCut);
-
-            return (new Mesh(treeCut.Mesh), new Mesh(branchCut.Mesh));
+            return (BaseMesh, CutOffMesh);
         }
 
-        private void CloseHoleInMesh(MeshPlaneCut cut)
+        private Mesh CutAndCloseMesh(Vector3d position, Vector3d normal)
+        {
+            // new Mesh has to be created since this method is not functional
+            var cut = new MeshPlaneCut(new DMesh3(this), position, normal);
+            cut.Cut();
+            CloseCuttingSurfaceHoles(cut);
+
+            return new Mesh(cut.Mesh);
+        }
+
+        private void CloseCuttingSurfaceHoles(MeshPlaneCut cut)
         {
             foreach (var loop in cut.CutLoops)
             {
@@ -30,5 +35,7 @@ namespace GCodeViewer.Library
                 holeFill.Apply();
             }
         }
+
+        private Vector3d OppositeDirection(Vector3d vect) => new Vector3d(-vect.x, -vect.y, -vect.z);
     }
 }
