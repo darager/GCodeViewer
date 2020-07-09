@@ -5,6 +5,7 @@ using g3;
 using GCodeViewer.Library;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Shapes;
+using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTkTest.ViewModels;
 
@@ -35,44 +36,10 @@ namespace OpenTkTest
             // cutting meshes
             var cutMeshes = meshes[0].Cut(new Vector3d(1, 1, 10), new Vector3d(0, 0, 1));
 
-            DisplayMesh(cutMeshes.BaseMesh, Color.White);
-            DisplayMesh(cutMeshes.CutOffMesh, Color.Green);
+            _viewer3DVM.Add(new Wireframe(cutMeshes.BaseMesh, Color.Yellow, Color.DarkGray));
+            _viewer3DVM.Add(new Wireframe(cutMeshes.BaseMesh, Color.GreenYellow));
 
             stlFile.SaveMeshes(new List<Mesh> { cutMeshes.BaseMesh });
-        }
-
-        // TODO: move this to own Renderable class
-        private void DisplayMesh(DMesh3 mesh, Color color)
-        {
-            var triangleIndices = mesh.TriangleIndices();
-
-            var points = new List<Point3D>();
-            foreach (int idx in triangleIndices)
-            {
-                var triangle = mesh.GetTriangle(idx);
-
-                // TODO: some lines are drawn twice
-                AddPoint(triangle.c);
-                AddPoint(triangle.a);
-                AddPoint(triangle.a);
-                AddPoint(triangle.b);
-                AddPoint(triangle.b);
-                AddPoint(triangle.c);
-
-                void AddPoint(int vertexIndex)
-                {
-                    Vector3d vert = mesh.GetVertex(vertexIndex);
-
-                    float x = (float)vert.x / 10;
-                    float y = (float)vert.y / 10;
-                    float z = (float)vert.z / 10;
-
-                    points.Add(new Point3D(x, y, z));
-                }
-            }
-
-            var model = new Renderable(color, points, RenderableType.Lines);
-            _viewer3DVM.Add(model);
         }
 
         private Renderable movemodel;
