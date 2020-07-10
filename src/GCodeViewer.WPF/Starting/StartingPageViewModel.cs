@@ -51,8 +51,21 @@ namespace GCodeViewer.WPF.Starting
 
         private void LoadSTLFile(object _)
         {
-            // TODO:
-            throw new NotImplementedException();
+            var ofd = new OpenFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                Filter = "stl files (*.stl)|*.stl",
+                FilterIndex = 2
+            };
+
+            if (ofd.ShowDialog() == true)
+            {
+                string filePath = ofd.FileName;
+
+                // TODO: display stl
+
+                _navigationService.GoTo(Navigation.Navigation.STLPositioningPage);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

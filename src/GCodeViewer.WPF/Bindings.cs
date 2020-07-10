@@ -4,6 +4,7 @@ using GCodeViewer.WPF.MainWindow;
 using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.Settings;
 using GCodeViewer.WPF.Starting;
+using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Ninject.Modules;
 
@@ -24,6 +25,10 @@ namespace GCodeViewer.WPF
             // Starting Page
             Bind<StartingPage>().ToSelf().InSingletonScope();
             Bind<StartingPageViewModel>().ToSelf().InSingletonScope();
+
+            // STL positioning Page
+            Bind<STLPositioningPage>().ToSelf().InSingletonScope();
+            Bind<STLPositioningPageViewModel>().ToSelf().InSingletonScope();
 
             // Settings
             Bind<SettingsService>().ToSelf().InSingletonScope();
