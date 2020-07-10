@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Input;
@@ -12,11 +13,60 @@ namespace GCodeViewer.WPF.StlPositioning
 {
     public class STLPositioningPageViewModel : INotifyPropertyChanged
     {
-        private IViewerScene _scene;
-        private ICompositeRenderable _model;
-        private PageNavigationService _pageNavigation;
+        public float XOffset
+        {
+            get => _xOffset;
+            set
+            {
+                if (_xOffset == value)
+                    return;
+
+                _xOffset = value;
+                OnPropertyChanged("XOffset");
+                SetModelOffset();
+            }
+        }
+
+        private float _xOffset;
+
+        public float YOffset
+        {
+            get => _yOffset;
+            set
+            {
+                if (_yOffset == value)
+                    return;
+
+                _yOffset = value;
+                OnPropertyChanged("YOffset");
+                SetModelOffset();
+            }
+        }
+
+        private float _yOffset;
+
+        public float ZOffset
+        {
+            get => _zOffset;
+            set
+            {
+                if (_zOffset == value)
+                    return;
+
+                _zOffset = value;
+                OnPropertyChanged("ZOffset");
+                SetModelOffset();
+            }
+        }
+
+        private float _zOffset;
 
         public ICommand Cancel { get; private set; }
+
+        private ICompositeRenderable _model;
+
+        private IViewerScene _scene;
+        private PageNavigationService _pageNavigation;
 
         public STLPositioningPageViewModel(IViewerScene scene, PageNavigationService navService)
         {
@@ -31,7 +81,7 @@ namespace GCodeViewer.WPF.StlPositioning
             var file = new STLFile(filePath);
             List<Mesh> meshes = file.LoadMeshes();
 
-            _model = new Wireframe(meshes[0], Color.GreenYellow, Color.DarkGreen);
+            _model = new Wireframe(meshes[0], Color.GreenYellow, Color.DarkSlateGray);
 
             _scene.Add(_model, new Point3D(0, 0, 0));
         }
@@ -41,6 +91,11 @@ namespace GCodeViewer.WPF.StlPositioning
             _scene.Remove(_model);
             _model = null;
             _pageNavigation.GoBack();
+        }
+
+        private void SetModelOffset()
+        {
+            _scene.UpdateOffset(_model, new Point3D(XOffset, YOffset, ZOffset));
         }
 
         private void OnPropertyChanged(string propertyName)
