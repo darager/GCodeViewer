@@ -25,7 +25,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
             <Label
@@ -69,16 +68,11 @@
                 MaxValue="2000"
                 MinValue="1"
                 Value="{Binding AAxisOffset}" />
-            <Label Grid.Row="2" Grid.Column="2">mm</Label>
             <Label
                 Grid.Row="2"
-                Grid.Column="3"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Bold"
-                FontSize="12"
+                Grid.Column="2"
                 Foreground="Orange">
-                *
+                mm
             </Label>
         </Grid>
 
