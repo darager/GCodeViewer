@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
+using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
+using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Microsoft.Win32;
 
@@ -17,11 +19,13 @@ namespace GCodeViewer.WPF.Starting
 
         private readonly ITextEditor _texteditor;
         private readonly PageNavigationService _navigationService;
+        private readonly STLPositioningPageViewModel _stlPositioningViewModel;
 
-        public StartingPageViewModel(PageNavigationService navigationService, ITextEditor texteditor)
+        public StartingPageViewModel(PageNavigationService navigationService, ITextEditor texteditor, STLPositioningPageViewModel stlPosVM)
         {
             _navigationService = navigationService;
             _texteditor = texteditor;
+            _stlPositioningViewModel = stlPosVM;
 
             OpenGCodeFile = new RelayCommand(LoadGcodeFile);
             StartSlicingWorkflow = new RelayCommand(LoadSTLFile);
@@ -62,8 +66,7 @@ namespace GCodeViewer.WPF.Starting
             {
                 string filePath = ofd.FileName;
 
-                // TODO: display stl
-
+                _stlPositioningViewModel.LoadSTL(filePath);
                 _navigationService.GoTo(Navigation.Navigation.STLPositioningPage);
             }
         }
