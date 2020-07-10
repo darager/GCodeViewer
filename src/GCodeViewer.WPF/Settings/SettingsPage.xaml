@@ -60,7 +60,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                Content="Height:" />
+                Content="Offset A Axis:" />
             <ctrl:NumericUpDown
                 Grid.Row="2"
                 Grid.Column="1"

@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
-using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 
