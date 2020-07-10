@@ -12,7 +12,12 @@
 
     <StackPanel>
         <DockPanel HorizontalAlignment="Stretch">
-            <Button HorizontalAlignment="Left" DockPanel.Dock="Left">go back</Button>
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding Cancel}"
+                DockPanel.Dock="Left">
+                cancel
+            </Button>
             <Button HorizontalAlignment="Right" DockPanel.Dock="Right">continue</Button>
         </DockPanel>
 
