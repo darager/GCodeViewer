@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Input;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
+using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
 
@@ -51,12 +53,12 @@ namespace GCodeViewer.WPF.Settings
         }
 
         private float _aAxisOffset;
+        private AAxisOffset _aAxisOffsetRenderable;
 
         public ICommand GoBack { get; private set; }
         public ICommand SaveAndApplySettings { get; private set; }
 
         private Library.PrinterSettings.Settings _settings;
-
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
 
@@ -74,11 +76,12 @@ namespace GCodeViewer.WPF.Settings
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
 
             LoadSettings();
+
+            _aAxisOffsetRenderable = new AAxisOffset(_settings.PrinterDimensions.AAxisOffset, Color.Orange, Color.DarkSlateGray);
         }
 
         public void ShowAAxisOffset()
         {
-            //IViewerScene.Add(
         }
 
         private void GoBackAndResetSettings(object _)

@@ -7,7 +7,7 @@ namespace GCodeViewer.Library.Renderables.Things
 {
     public class AAxisOffset : ICompositeRenderable
     {
-        private List<Renderable> _parts;
+        private List<Renderable> _parts = new List<Renderable>();
 
         public AAxisOffset(float offset, Color highlightColor, Color color)
         {
