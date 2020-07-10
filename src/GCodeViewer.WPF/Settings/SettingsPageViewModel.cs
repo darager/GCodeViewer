@@ -81,7 +81,7 @@ namespace GCodeViewer.WPF.Settings
 
         public void ShowAAxisOffset()
         {
-            _printerScene.Add(_aAxisOffsetRenderable, new Point3D(0, 0, 0));
+            _printerScene.Add(_aAxisOffsetRenderable, new Point3D(0, 0, 0), (0, 0, 0));
         }
 
         private AAxisOffset GetAAxisRenderable()

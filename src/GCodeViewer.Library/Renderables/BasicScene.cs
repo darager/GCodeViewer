@@ -17,14 +17,14 @@ namespace GCodeViewer.Library.Renderables
 
         #endregion
 
-        private Dictionary<ICompositeRenderable, (ICompositeRenderable Renderable, Point3D Offset)> _renderables;
+        private Dictionary<ICompositeRenderable, (ICompositeRenderable Renderable, Point3D Offset, (float x, float y, float z) Rotation)> _renderables;
 
         private float _scalingFactor;
 
         public BasicScene(IRenderService renderService, SettingsService settingsService)
         {
             RenderService = renderService;
-            _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D)>();
+            _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D, (float x, float y, float z) Rotation)>();
 
             RenderService.Add(_printbed);
             RenderService.Add(_coordinateSystem);
@@ -33,14 +33,15 @@ namespace GCodeViewer.Library.Renderables
             SetPrintBedDiameter(diameter);
         }
 
-        public void Add(ICompositeRenderable renderable, Point3D offset)
+        public void Add(ICompositeRenderable renderable, Point3D offset, (float x, float y, float z) rotation)
         {
             var builder = new ScaledAndOffsetRenderableBuilder(renderable);
             builder.SetScalingFactor(_scalingFactor);
             builder.SetOffset(offset);
+            builder.SetRotation(rotation);
             var offsetRenderable = builder.Build();
 
-            _renderables.Add(renderable, (offsetRenderable, offset));
+            _renderables.Add(renderable, (offsetRenderable, offset, rotation));
             RenderService.Add(offsetRenderable);
         }
 
@@ -54,10 +55,10 @@ namespace GCodeViewer.Library.Renderables
             RenderService.Remove(offsetRenderable);
         }
 
-        public void UpdateOffset(ICompositeRenderable renderable, Point3D offset)
+        public void UpdateOffsetAndRotation(ICompositeRenderable renderable, Point3D offset, (float x, float y, float z) rotation)
         {
             Remove(renderable);
-            Add(renderable, offset);
+            Add(renderable, offset, rotation);
         }
 
         public void SetPrintBedDiameter(float printBedDiameter)
@@ -77,9 +78,10 @@ namespace GCodeViewer.Library.Renderables
             foreach (var renderable in _renderables.Keys.ToList())
             {
                 var offset = _renderables[renderable].Offset;
+                var rotation = _renderables[renderable].Rotation;
 
                 Remove(renderable);
-                Add(renderable, offset);
+                Add(renderable, offset, rotation);
             }
         }
     }

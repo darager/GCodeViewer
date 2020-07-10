@@ -39,5 +39,23 @@ namespace GCodeViewer.Library.Renderables
 
             return result;
         }
+
+        public static List<Point3D> RotateXYZ(this List<Point3D> @this, float rotXdeg, float rotYdeg, float rotZdeg)
+        {
+            var result = new List<Point3D>();
+
+            foreach (var p in @this)
+            {
+                var point = new Point3D(p.X, p.Y, p.Z);
+
+                point = point.RotateX(rotXdeg);
+                point = point.RotateY(rotYdeg);
+                point = point.RotateZ(rotZdeg);
+
+                result.Add(point);
+            }
+
+            return result;
+        }
     }
 }

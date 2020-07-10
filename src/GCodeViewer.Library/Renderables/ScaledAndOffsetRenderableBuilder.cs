@@ -12,6 +12,7 @@ namespace GCodeViewer.Library.Renderables
 
         private float _scalingFactor;
         private Point3D _offset;
+        private (float X, float Y, float Z) _rotation;
 
         public ScaledAndOffsetRenderableBuilder(ICompositeRenderable renderable)
         {
@@ -28,13 +29,20 @@ namespace GCodeViewer.Library.Renderables
             _offset = offset;
         }
 
+        public void SetRotation((float rotX, float rotY, float rotZ) rotation)
+        {
+            _rotation = rotation;
+        }
+
         public ICompositeRenderable Build()
         {
             var result = new ScaledAndOffsetRenderables();
 
             foreach (Renderable renderable in _renderable.GetParts())
             {
-                var verts = GetOffsetAndScaledVertices(renderable);
+                var verts = GetOffsetAndScaledVertices(renderable)
+                           .RotateXYZ(_rotation.X, _rotation.Y, _rotation.Z);
+
                 var type = GetType(renderable.Type);
 
                 result.Add(new Renderable(renderable.Color, verts, type));

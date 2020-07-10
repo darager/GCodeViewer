@@ -83,7 +83,7 @@ namespace GCodeViewer.WPF.StlPositioning
 
             _model = new Wireframe(meshes[0], Color.GreenYellow, Color.DarkSlateGray);
 
-            _scene.Add(_model, new Point3D(0, 0, 0));
+            _scene.Add(_model, new Point3D(0, 0, 0), (0, 0, 0));
         }
 
         private void RemoveModelFromView(object _)
@@ -95,7 +95,7 @@ namespace GCodeViewer.WPF.StlPositioning
 
         private void SetModelOffset()
         {
-            _scene.UpdateOffset(_model, new Point3D(XOffset, YOffset, ZOffset));
+            _scene.UpdateOffsetAndRotation(_model, new Point3D(XOffset, YOffset, ZOffset), (0, 0, 0)); ////////////////////// HACK HACK
         }
 
         private void OnPropertyChanged(string propertyName)
