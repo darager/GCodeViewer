@@ -23,7 +23,7 @@ namespace GCodeViewer.WPF.StlPositioning
 
                 _xOffset = value;
                 OnPropertyChanged("XOffset");
-                SetModelOffset();
+                SetModelOffsetAndRotation();
             }
         }
 
@@ -39,7 +39,7 @@ namespace GCodeViewer.WPF.StlPositioning
 
                 _yOffset = value;
                 OnPropertyChanged("YOffset");
-                SetModelOffset();
+                SetModelOffsetAndRotation();
             }
         }
 
@@ -55,11 +55,59 @@ namespace GCodeViewer.WPF.StlPositioning
 
                 _zOffset = value;
                 OnPropertyChanged("ZOffset");
-                SetModelOffset();
+                SetModelOffsetAndRotation();
             }
         }
 
         private float _zOffset;
+
+        public float XRotation
+        {
+            get => _xRotation;
+            set
+            {
+                if (_xRotation == value)
+                    return;
+
+                _xRotation = value;
+                OnPropertyChanged("XRotation");
+                SetModelOffsetAndRotation();
+            }
+        }
+
+        private float _xRotation;
+
+        public float YRotation
+        {
+            get => _yRotation;
+            set
+            {
+                if (_yRotation == value)
+                    return;
+
+                _yRotation = value;
+                OnPropertyChanged("YRotation");
+                SetModelOffsetAndRotation();
+            }
+        }
+
+        private float _yRotation;
+
+        public float ZRotation
+        {
+            get => _zRotation;
+            set
+            {
+                if (_zRotation == value)
+                    return;
+
+                _zRotation = value;
+                OnPropertyChanged("ZRotation");
+                SetModelOffsetAndRotation();
+            }
+        }
+
+        private float _zRotation;
 
         public ICommand Cancel { get; private set; }
 
@@ -93,9 +141,11 @@ namespace GCodeViewer.WPF.StlPositioning
             _pageNavigation.GoBack();
         }
 
-        private void SetModelOffset()
+        private void SetModelOffsetAndRotation()
         {
-            _scene.UpdateOffsetAndRotation(_model, new Point3D(XOffset, YOffset, ZOffset), (0, 0, 0)); ////////////////////// HACK HACK
+            _scene.UpdateOffsetAndRotation(_model,
+                                           new Point3D(XOffset, YOffset, ZOffset),
+                                           (XRotation, YRotation, ZRotation));
         }
 
         private void OnPropertyChanged(string propertyName)

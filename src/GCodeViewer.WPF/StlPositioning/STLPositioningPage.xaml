@@ -96,7 +96,8 @@
                 <ctrl:NumericUpDown
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="100" />
+                    Width="100"
+                    Value="{Binding XRotation}" />
                 <Label Grid.Row="0" Grid.Column="2">deg</Label>
 
                 <Label
@@ -107,7 +108,8 @@
                 <ctrl:NumericUpDown
                     Grid.Row="1"
                     Grid.Column="1"
-                    Width="100" />
+                    Width="100"
+                    Value="{Binding YRotation}" />
                 <Label Grid.Row="1" Grid.Column="2">deg</Label>
 
                 <Label
@@ -118,7 +120,8 @@
                 <ctrl:NumericUpDown
                     Grid.Row="2"
                     Grid.Column="1"
-                    Width="100" />
+                    Width="100"
+                    Value="{Binding ZRotation}" />
                 <Label Grid.Row="2" Grid.Column="2">deg</Label>
             </Grid>
         </DockPanel>

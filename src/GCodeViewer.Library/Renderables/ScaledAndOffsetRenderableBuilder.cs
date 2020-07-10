@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
 using OpenTK.Graphics.OpenGL;
@@ -40,15 +41,48 @@ namespace GCodeViewer.Library.Renderables
 
             foreach (Renderable renderable in _renderable.GetParts())
             {
-                var verts = GetOffsetAndScaledVertices(renderable)
-                           .RotateXYZ(_rotation.X, _rotation.Y, _rotation.Z);
+                List<Point3D> points = GetVertexPoints(renderable)
+                                      .RotateXYZ(_rotation.X, _rotation.Y, _rotation.Z);
+
+                points.ForEach(p => OffsetPoint(p));
+                points.ForEach(p => ScalePoint(p));
 
                 var type = GetType(renderable.Type);
 
-                result.Add(new Renderable(renderable.Color, verts, type));
+                result.Add(new Renderable(renderable.Color, points, type));
             }
 
             return result;
+        }
+
+        private void OffsetPoint(Point3D p)
+        {
+            p.X += _offset.X;
+            p.Y += _offset.Y;
+            p.Z += _offset.Z;
+        }
+
+        private void ScalePoint(Point3D p)
+        {
+            p.X *= _scalingFactor;
+            p.Y *= _scalingFactor;
+            p.Z *= _scalingFactor;
+        }
+
+        private List<Point3D> GetVertexPoints(Renderable renderable)
+        {
+            var points = new List<Point3D>();
+
+            for (int i = 0; i < renderable.Vertices.Length; i += 3)
+            {
+                float x = renderable.Vertices[i];
+                float y = renderable.Vertices[i + 1];
+                float z = renderable.Vertices[i + 2];
+
+                points.Add(new Point3D(x, y, z));
+            }
+
+            return points;
         }
 
         private RenderableType GetType(PrimitiveType type) => type switch
@@ -58,31 +92,5 @@ namespace GCodeViewer.Library.Renderables
             PrimitiveType.Triangles => RenderableType.Triangles,
             _ => throw new Exception("This primitive Type is not supported!")
         };
-
-        private List<Point3D> GetOffsetAndScaledVertices(Renderable renderable)
-        {
-            var points = new List<Point3D>();
-
-            for (int i = 0; i < renderable.Vertices.Length; i += 3)
-            {
-                float x = OffsetAndScale(i, _offset.X);     // X
-                float y = OffsetAndScale(i + 1, _offset.Y); // Y
-                float z = OffsetAndScale(i + 2, _offset.Z); // Z
-
-                points.Add(new Point3D(x, y, z));
-
-                float OffsetAndScale(int index, float offset)
-                {
-                    float value = renderable.Vertices[index];
-
-                    value += offset;
-                    value *= _scalingFactor;
-
-                    return value;
-                }
-            }
-
-            return points;
-        }
     }
 }
