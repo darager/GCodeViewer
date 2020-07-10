@@ -79,13 +79,16 @@ namespace GCodeViewer.WPF.Settings
             _aAxisOffsetRenderable = GetAAxisRenderable();
         }
 
-        private AAxisOffset GetAAxisRenderable() => new AAxisOffset(_settings.PrinterDimensions.AAxisOffset,
-                                                                    Color.Orange,
-                                                                    Color.DarkSlateGray);
-
         public void ShowAAxisOffset()
         {
             _printerScene.Add(_aAxisOffsetRenderable, new Point3D(0, 0, 0));
+        }
+
+        private AAxisOffset GetAAxisRenderable()
+        {
+            return new AAxisOffset(_settings.PrinterDimensions.AAxisOffset,
+                                   Color.Orange,
+                                   Color.DarkSlateGray);
         }
 
         private void GoBackAndResetSettings(object _)

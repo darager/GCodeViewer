@@ -14,7 +14,7 @@
         <Button Command="{Binding GoBack}">Go back</Button>
         <Label HorizontalAlignment="Center">Settings</Label>
 
-        <Label FontWeight="Bold">Printer Dimensions:</Label>
+        <Label FontWeight="Bold">Dimensions:</Label>
         <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -31,7 +31,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                Content="Diameter:" />
+                Content="Printbed Diameter:" />
 
             <ctrl:NumericUpDown
                 Grid.Row="0"
@@ -46,7 +46,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                Content="Height:" />
+                Content="Printvolume Height:" />
             <ctrl:NumericUpDown
                 Grid.Row="1"
                 Grid.Column="1"
@@ -60,7 +60,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                Content="Offset A Axis:" />
+                Content="A-Axis offset:" />
             <ctrl:NumericUpDown
                 Grid.Row="2"
                 Grid.Column="1"
