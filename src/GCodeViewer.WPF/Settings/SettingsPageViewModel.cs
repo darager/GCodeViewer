@@ -76,17 +76,22 @@ namespace GCodeViewer.WPF.Settings
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
 
             LoadSettings();
-
-            _aAxisOffsetRenderable = new AAxisOffset(_settings.PrinterDimensions.AAxisOffset, Color.Orange, Color.DarkSlateGray);
+            _aAxisOffsetRenderable = GetAAxisRenderable();
         }
+
+        private AAxisOffset GetAAxisRenderable() => new AAxisOffset(_settings.PrinterDimensions.AAxisOffset,
+                                                                    Color.Orange,
+                                                                    Color.DarkSlateGray);
 
         public void ShowAAxisOffset()
         {
+            _printerScene.Add(_aAxisOffsetRenderable, new Point3D(0, 0, 0));
         }
 
         private void GoBackAndResetSettings(object _)
         {
             LoadSettings();
+            _printerScene.Remove(_aAxisOffsetRenderable);
             _navigationService.GoBack();
         }
 
@@ -94,7 +99,15 @@ namespace GCodeViewer.WPF.Settings
         {
             StoreSettings();
 
+            UpdateAAxisRenderable();
             _printerScene.SetPrintBedDiameter(PrintBedDiameter);
+        }
+
+        private void UpdateAAxisRenderable()
+        {
+            _printerScene.Remove(_aAxisOffsetRenderable);
+            _aAxisOffsetRenderable = GetAAxisRenderable();
+            ShowAAxisOffset();
         }
 
         private void LoadSettings()

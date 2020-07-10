@@ -12,9 +12,9 @@ namespace GCodeViewer.Library.Renderables.Things
         public AAxisOffset(float offset, Color highlightColor, Color color)
         {
             _parts.Add(Cylinder.With()
-                               .Position(new Point3D(0, 0, 0))
                                .Height(-offset)
-                               .Radius(2.5f)
+                               .RotationX(-90)
+                               .Radius(1f)
                                .Color(highlightColor)
                                .Build());
         }
