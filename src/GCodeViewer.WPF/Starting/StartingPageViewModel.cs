@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
-using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
+using GCodeViewer.WPF.Settings;
 using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Microsoft.Win32;
@@ -20,16 +20,26 @@ namespace GCodeViewer.WPF.Starting
         private readonly ITextEditor _texteditor;
         private readonly PageNavigationService _navigationService;
         private readonly STLPositioningPageViewModel _stlPositioningViewModel;
+        private readonly SettingsPageViewModel _settingsPageViewModel;
 
-        public StartingPageViewModel(PageNavigationService navigationService, ITextEditor texteditor, STLPositioningPageViewModel stlPosVM)
+        public StartingPageViewModel(PageNavigationService navigationService,
+                                     ITextEditor texteditor,
+                                     SettingsPageViewModel settingsPageVM,
+                                     STLPositioningPageViewModel stlPosVM)
         {
-            _navigationService = navigationService;
             _texteditor = texteditor;
+            _navigationService = navigationService;
             _stlPositioningViewModel = stlPosVM;
+            _settingsPageViewModel = settingsPageVM;
 
             OpenGCodeFile = new RelayCommand(LoadGcodeFile);
             StartSlicingWorkflow = new RelayCommand(LoadSTLFile);
-            GoToSettingsPage = new RelayCommand((_) => navigationService.GoTo(Navigation.Navigation.SettingsPage));
+
+            GoToSettingsPage = new RelayCommand((_) =>
+            {
+                _settingsPageViewModel.ShowAAxisOffset();
+                navigationService.GoTo(Navigation.Navigation.SettingsPage);
+            });
         }
 
         private async void LoadGcodeFile(object _)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
@@ -58,6 +59,7 @@ namespace GCodeViewer.WPF.Settings
 
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
+
         private readonly IViewerScene _printerScene;
 
         public SettingsPageViewModel(PageNavigationService navigationService,
@@ -72,6 +74,11 @@ namespace GCodeViewer.WPF.Settings
             SaveAndApplySettings = new RelayCommand(ApplySettingsAndSaveThem);
 
             LoadSettings();
+        }
+
+        public void ShowAAxisOffset()
+        {
+            //IViewerScene.Add(
         }
 
         private void GoBackAndResetSettings(object _)
