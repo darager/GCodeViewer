@@ -13,9 +13,21 @@ namespace GCodeViewer.Library
             ExecutablePath = executablePath;
         }
 
-        public async Task<string> Help()
+        public async Task<string> Help() => await RunSlicerCommand("--help");
+
+        public async Task<string> ToObj(string stlFilePath, string resultingPath)
         {
-            return await RunCommand("--help").ReadToEndAsync();
+            return await RunSlicerCommand($"--export-obj {stlFilePath} -o {resultingPath}");
+        }
+
+        public async Task Slice(string stlFilePath, string gcodeFilePath)
+        {
+            await RunSlicerCommand($"{stlFilePath} --layer-height 0.1 --output {gcodeFilePath}");
+        }
+
+        public async Task<string> RunSlicerCommand(string cmd)
+        {
+            return await RunCommand(cmd).ReadToEndAsync();
         }
 
         private StreamReader RunCommand(string cmd, bool hidden = true)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using GCodeViewer.Library;
 
 namespace Slic3rTest
@@ -9,7 +10,10 @@ namespace Slic3rTest
         {
             var slicer = new Slic3r(@"C:\Users\florager\Desktop\slic3r\Slic3r-console");
 
-            Console.WriteLine(slicer.Help());
+            string stlFilePath = "calibCube.stl";
+
+            Directory.CreateDirectory("GCODE");
+            slicer.Slice(stlFilePath, @"calibrationCube.gcode");
         }
     }
 }

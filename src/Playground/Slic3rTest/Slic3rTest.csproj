@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="xyz-calibrationCube.stl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="xyz-calibrationCube.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\GCodeViewer.Library\GCodeViewer.Library.csproj" />
   </ItemGroup>
 
