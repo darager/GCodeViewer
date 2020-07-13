@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GCodeViewer.Library
 {
@@ -14,12 +12,27 @@ namespace GCodeViewer.Library
             ExecutablePath = executablePath;
         }
 
-        public string Help()
-        {
-            string strCmdText = ExecutablePath + "--help";
-            System.Diagnostics.Process.Start("CMD.exe", "dir");
+        public async Task<string> Help() => await RunSlicerCommand("--help");
 
-            return string.Empty;
+        private async Task<string> RunSlicerCommand(string cmd, bool hidden = true)
+        {
+            return await RunCommand($"{ExecutablePath} {cmd}", hidden);
+        }
+
+        private async Task<string> RunCommand(string cmd, bool hidden = true)
+        {
+            var process = new Process();
+            var startInfo = new ProcessStartInfo();
+
+            startInfo.WindowStyle = hidden ? ProcessWindowStyle.Hidden
+                                           : ProcessWindowStyle.Normal;
+            startInfo.FileName = "CMD.exe";
+            startInfo.Arguments = $"/C {cmd}";
+            process.StartInfo = startInfo;
+
+            process.Start();
+
+            return await process.StandardOutput.ReadToEndAsync();
         }
     }
 }
