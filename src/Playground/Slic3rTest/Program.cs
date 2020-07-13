@@ -13,7 +13,7 @@ namespace Slic3rTest
             string stlFilePath = "calibCube.stl";
 
             Directory.CreateDirectory("GCODE");
-            slicer.Slice(stlFilePath, @"calibrationCube.gcode");
+            slicer.Slice(stlFilePath, @"GCODE\calibrationCube.gcode");
         }
     }
 }

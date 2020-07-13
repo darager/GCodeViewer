@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GCodeViewer.Library
+namespace GCodeViewer.Library.Slicing
 {
     public class Slic3r
     {
