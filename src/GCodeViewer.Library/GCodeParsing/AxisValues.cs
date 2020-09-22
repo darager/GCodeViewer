@@ -7,14 +7,16 @@ namespace GCodeViewer.Library.GCodeParsing
         public float X;
         public float Y;
         public float Z;
+        public float A;
+        public float C;
         public float E;
 
-        public AxisValues(float x, float y, float z, float e)
+        public AxisValues(float x, float y, float z, float e, float a = 0, float c = 0)
         {
-            (X, Y, Z, E) = (x, y, z, e);
+            (X, Y, Z, E, A, C) = (x, y, z, e, a, c);
         }
 
-        public static AxisValues NaN => new AxisValues(float.NaN, float.NaN, float.NaN, float.NaN);
+        public static AxisValues NaN => new AxisValues(float.NaN, float.NaN, float.NaN, float.NaN, float.NaN, float.NaN);
 
         public override bool Equals(object obj)
         {
@@ -28,6 +30,8 @@ namespace GCodeViewer.Library.GCodeParsing
             return a.X == b.X
                 && a.Y == b.Y
                 && a.Z == b.Z
+                && a.E == b.A
+                && a.E == b.C
                 && a.E == b.E;
         }
 

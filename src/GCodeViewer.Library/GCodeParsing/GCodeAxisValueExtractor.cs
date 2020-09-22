@@ -5,7 +5,7 @@ namespace GCodeViewer.Library.GCodeParsing
 {
     public class GCodeAxisValueExtractor
     {
-        private Dictionary<char, Regex> _expressions = new Dictionary<char, Regex>();
+        private Dictionary<string, Regex> _expressions = new Dictionary<string, Regex>();
 
         public IEnumerable<AxisValues> ExtractPrinterAxisValues(IEnumerable<string> lines)
         {
@@ -14,14 +14,20 @@ namespace GCodeViewer.Library.GCodeParsing
 
             foreach (string line in lines)
             {
-                if (ContainsValue('X', line))
-                    position.X = ExtractValue('X', line);
-                if (ContainsValue('Y', line))
-                    position.Y = ExtractValue('Y', line);
-                if (ContainsValue('Z', line))
-                    position.Z = ExtractValue('Z', line);
-                if (ContainsValue('E', line))
-                    position.E = ExtractValue('E', line);
+                if (ContainsValue("X", line))
+                    position.X = ExtractValue("X", line);
+                if (ContainsValue("Y", line))
+                    position.Y = ExtractValue("Y", line);
+                if (ContainsValue("Z", line))
+                    position.Z = ExtractValue("Z", line);
+
+                if (ContainsValue("E1", line))
+                    position.A = ExtractValue("E1", line);
+                if (ContainsValue("E2", line))
+                    position.C = ExtractValue("E2", line);
+
+                if (ContainsValue("E", line))
+                    position.E = ExtractValue("E", line);
 
                 if (prevPosition != position)
                     yield return position;
@@ -30,7 +36,7 @@ namespace GCodeViewer.Library.GCodeParsing
             }
         }
 
-        private bool ContainsValue(char c, string text)
+        private bool ContainsValue(string c, string text)
         {
             Regex regex = GetNumberRegex(c);
             bool result = regex.Match(text).Success;
@@ -38,7 +44,7 @@ namespace GCodeViewer.Library.GCodeParsing
             return result;
         }
 
-        private float ExtractValue(char c, string text)
+        private float ExtractValue(string c, string text)
         {
             Regex regex = GetNumberRegex(c);
 
@@ -51,7 +57,7 @@ namespace GCodeViewer.Library.GCodeParsing
             return float.Parse(number);
         }
 
-        private Regex GetNumberRegex(char c)
+        private Regex GetNumberRegex(string c)
         {
             if (_expressions.ContainsKey(c))
                 return _expressions[c];
