@@ -16,7 +16,7 @@ namespace GCodeViewer.WPF
                   .Show();
 
             kernel.Get<PageNavigationService>()
-                  .GoTo(Navigation.Navigation.StartingPage);
+                  .GoTo(Navigation.Navigation.GCodePreviewPage);
         }
     }
 }
