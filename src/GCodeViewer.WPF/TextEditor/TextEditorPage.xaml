@@ -15,7 +15,7 @@
             Height="25"
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Button Command="{Binding OpenOtherFile}">Open</Button>
+            <Button Command="{Binding OpenFile}">Open</Button>
             <Button Command="{Binding SaveFile}">Save</Button>
             <Button Command="{Binding SaveFileAs}">Save As</Button>
             <Button Command="{Binding CloseFile}">Close</Button>
