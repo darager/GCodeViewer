@@ -2,6 +2,6 @@
 {
     public interface ISlicingService
     {
-        public string Slice(string stlFilePath, SlicingOptions options);
+        public string Slice(string stlFilePath, string ConfigFile, SlicingOptions options);
     }
 }

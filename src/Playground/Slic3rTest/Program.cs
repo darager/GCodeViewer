@@ -1,6 +1,5 @@
-﻿using System;
-using System.IO;
-using GCodeViewer.Library;
+﻿using System.IO;
+using GCodeViewer.Library.Slicing;
 
 namespace Slic3rTest
 {
