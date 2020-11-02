@@ -19,8 +19,9 @@
             <Button Command="{Binding SaveFile}">Save</Button>
             <Button Command="{Binding SaveFileAs}">Save As</Button>
             <Button Command="{Binding CloseFile}">Close</Button>
-
             <Button Command="{Binding GoToSettingsPage}">Settings</Button>
+
+            <Button Command="{Binding PreviewPrintingPositions}">Render Positions</Button>
         </StackPanel>
 
         <editor:GCodeTextEditor

@@ -1,8 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
+using GCodeViewer.Helpers;
 using GCodeViewer.Library;
+using GCodeViewer.Library.GCodeParsing;
+using GCodeViewer.Library.Renderables;
+using GCodeViewer.Library.Renderables.Things;
+using GCodeViewer.WPF.Controls.PointCloud;
 using GCodeViewer.WPF.Controls.TextEditor;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;
@@ -20,6 +28,7 @@ namespace GCodeViewer.WPF.TextEditor
         public ICommand CloseFile { get; private set; }
         public ICommand GoToSettingsPage { get; private set; }
         public ICommand HandleTextChanged { get; private set; }
+        public ICommand PreviewPrintingPositions { get; private set; }
 
         internal GCodeTextEditor TextEditor { get; set; }
 
@@ -31,15 +40,24 @@ namespace GCodeViewer.WPF.TextEditor
 
         #endregion
 
-        private PageNavigationService _pageNavigationService;
-        private SettingsPageViewModel _settingsViewModel;
+        private readonly PageNavigationService _pageNavigationService;
+        private readonly SettingsPageViewModel _settingsViewModel;
+        private readonly IViewerScene _printerScene;
 
         private string? _filePath;
 
-        public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel)
+        private PointCloud _pointcloud;
+        private GCodeAxisValueExtractor _extractor;
+        private AxisValueFilter _filter;
+
+        public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel, IViewerScene printerScene)
         {
             _pageNavigationService = pageNavigationService;
             _settingsViewModel = settingsViewModel;
+            _printerScene = printerScene;
+
+            _extractor = new GCodeAxisValueExtractor();
+            _filter = new AxisValueFilter();
 
             InitializeCommands();
         }
@@ -108,6 +126,20 @@ namespace GCodeViewer.WPF.TextEditor
             {
                 _filePath = null;
                 SetText("");
+            });
+
+            PreviewPrintingPositions = new RelayCommand((_) =>
+            {
+                var gCodeLines = GetText().Split();
+                var allAxesPositions = _extractor.ExtractPrinterAxisValues(gCodeLines);
+                var extrudingAxesPositions = _filter.RemoveNonExtrudingValues(allAxesPositions);
+                var points = extrudingAxesPositions.Select(a => a.GetEquivalentPoint());
+
+                if (_pointcloud != null)
+                    _printerScene.Remove(_pointcloud);
+
+                _pointcloud = new PointCloud(points);
+                _printerScene.Add(_pointcloud, new Point3D(0, 0, 0), (0, 0, 0));
             });
         }
 

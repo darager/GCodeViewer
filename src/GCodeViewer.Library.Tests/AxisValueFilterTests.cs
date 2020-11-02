@@ -27,7 +27,7 @@ namespace GCodeViewer.Library.Tests
 
             var filter = new AxisValueFilter();
 
-            var actual = filter.FilterNonExtrudingValues(values);
+            var actual = filter.RemoveNonExtrudingValues(values);
 
             actual.Should().Equal(expected);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using GCodeViewer.Library.Renderables;
 
 namespace GCodeViewer.Library.GCodeParsing
 {
@@ -38,6 +39,12 @@ namespace GCodeViewer.Library.GCodeParsing
         public static bool operator !=(AxisValues a, AxisValues b)
         {
             return !(a == b);
+        }
+
+        public Point3D GetEquivalentPoint()
+        {
+            // HACK: make this work properly
+            return new Point3D(X, Y, Z);
         }
     };
 }
