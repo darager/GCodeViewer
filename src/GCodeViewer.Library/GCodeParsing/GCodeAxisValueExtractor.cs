@@ -22,10 +22,11 @@ namespace GCodeViewer.Library.GCodeParsing
                 if (ContainsValue("Z", line))
                     position.Z = ExtractValue("Z", line);
 
-                if (ContainsValue("E1", line))
-                    position.A = ExtractValue("E1", line);
-                if (ContainsValue("E2", line))
-                    position.C = ExtractValue("E2", line);
+                // HACK: can be configured in the future
+                if (ContainsValue("A", line))
+                    position.A = ExtractValue("A", line);
+                if (ContainsValue("C", line))
+                    position.C = ExtractValue("C", line);
 
                 if (ContainsValue("E", line))
                     position.E = ExtractValue("E", line);

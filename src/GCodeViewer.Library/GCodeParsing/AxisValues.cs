@@ -32,8 +32,8 @@ namespace GCodeViewer.Library.GCodeParsing
             return a.X == b.X
                 && a.Y == b.Y
                 && a.Z == b.Z
-                && a.E == b.A
-                && a.E == b.C
+                && a.A == b.A
+                && a.C == b.C
                 && a.E == b.E;
         }
 
