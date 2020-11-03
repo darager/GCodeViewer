@@ -10,6 +10,18 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <Page.InputBindings>
+        <KeyBinding
+            Key="o"
+            Command="{Binding OpenFile}"
+            Modifiers="Ctrl" />
+        <KeyBinding
+            Key="s"
+            Command="{Binding SaveFile}"
+            Modifiers="Ctrl" />
+        <KeyBinding Key="F5" Command="{Binding PreviewPrintingPositions}" />
+    </Page.InputBindings>
+
     <DockPanel>
         <StackPanel
             Height="25"
