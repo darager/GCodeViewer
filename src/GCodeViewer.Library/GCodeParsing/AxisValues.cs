@@ -17,6 +17,7 @@ namespace GCodeViewer.Library.GCodeParsing
             (X, Y, Z, E, A, C) = (x, y, z, e, a, c);
         }
 
+        public static AxisValues Zero => new AxisValues(0, 0, 0, 0, 0, 0);
         public static AxisValues NaN => new AxisValues(float.NaN, float.NaN, float.NaN, float.NaN, float.NaN, float.NaN);
 
         public override bool Equals(object obj)
@@ -41,7 +42,7 @@ namespace GCodeViewer.Library.GCodeParsing
             return !(a == b);
         }
 
-        public Point3D GetEquivalentPoint()
+        public Point3D GetEquivalentPoint(float AAxisOffset = 0)
         {
             // HACK: make this work properly
             return new Point3D(X, Y, Z);

@@ -128,9 +128,9 @@ namespace GCodeViewer.WPF.TextEditor
                 SetText("");
             });
 
-            PreviewPrintingPositions = new RelayCommand((_) =>
+            PreviewPrintingPositions = new RelayCommand(_ =>
             {
-                var gCodeLines = GetText().Split();
+                var gCodeLines = GetText().Split("\n");
                 var allAxesPositions = _extractor.ExtractPrinterAxisValues(gCodeLines);
                 var extrudingAxesPositions = _filter.RemoveNonExtrudingValues(allAxesPositions);
                 var points = extrudingAxesPositions.Select(a => a.GetEquivalentPoint());
