@@ -8,6 +8,7 @@ using System.Windows.Input;
 using GCodeViewer.Helpers;
 using GCodeViewer.Library;
 using GCodeViewer.Library.GCodeParsing;
+using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.PointCloud;
@@ -47,19 +48,19 @@ namespace GCodeViewer.WPF.TextEditor
         private string? _filePath;
 
         private PointCloud _pointcloud;
+        private SettingsService _settings;
         private GCodeAxisValueExtractor _extractor;
-        private AxisValueFilter _filter;
 
-        public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel, IViewerScene printerScene)
+        public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel, IViewerScene printerScene, SettingsService settings)
         {
             _pageNavigationService = pageNavigationService;
             _settingsViewModel = settingsViewModel;
             _printerScene = printerScene;
 
             _extractor = new GCodeAxisValueExtractor();
-            _filter = new AxisValueFilter();
 
             InitializeCommands();
+            _settings = settings;
         }
 
         private void InitializeCommands()
@@ -130,10 +131,12 @@ namespace GCodeViewer.WPF.TextEditor
 
             PreviewPrintingPositions = new RelayCommand(_ =>
             {
-                var gCodeLines = GetText().Split("\n");
-                var allAxesPositions = _extractor.ExtractPrinterAxisValues(gCodeLines);
-                var extrudingAxesPositions = _filter.RemoveNonExtrudingValues(allAxesPositions);
-                var points = extrudingAxesPositions.Select(a => a.GetEquivalentPoint());
+                var gcodeLines = GetText().Split("\n");
+                float aAxisOffset = _settings.Settings.PrinterDimensions.AAxisOffset;
+
+                var points = _extractor.ExtractAxisValues(gcodeLines)
+                                       .RemoveNonExtruding()
+                                       .Select(a => a.GetEquivalentPoint(aAxisOffset)); // this method is not implemented
 
                 if (_pointcloud != null)
                     _printerScene.Remove(_pointcloud);

@@ -32,7 +32,7 @@ namespace GCodeViewer.Library.Tests
         {
             var axisValueExtractor = new GCodeAxisValueExtractor();
 
-            var actual = axisValueExtractor.ExtractPrinterAxisValues(lines);
+            var actual = axisValueExtractor.ExtractAxisValues(lines);
 
             actual.Should().Equal(expectedValues);
         }

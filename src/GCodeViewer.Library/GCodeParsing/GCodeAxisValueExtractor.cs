@@ -8,7 +8,7 @@ namespace GCodeViewer.Library.GCodeParsing
         private Dictionary<string, Regex> _expressions = new Dictionary<string, Regex>();
 
         // TODO: make images of this class
-        public IEnumerable<AxisValues> ExtractPrinterAxisValues(IEnumerable<string> lines)
+        public IEnumerable<AxisValues> ExtractAxisValues(IEnumerable<string> lines)
         {
             var position = new AxisValues(0, 0, 0, 0);
             var prevPosition = AxisValues.NaN;

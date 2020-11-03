@@ -2,18 +2,18 @@
 
 namespace GCodeViewer.Library.GCodeParsing
 {
-    public class AxisValueFilter
+    public static class AxisValueFilter
     {
-        public IEnumerable<AxisValues> RemoveNonExtrudingValues(IEnumerable<AxisValues> values)
+        public static IEnumerable<AxisValues> RemoveNonExtruding(this IEnumerable<AxisValues> @this)
         {
-            var prev = AxisValues.NaN;
+            var prevPosition = AxisValues.Zero;
 
-            foreach (AxisValues value in values)
+            foreach (AxisValues position in @this)
             {
-                if (prev.E != value.E)
-                    yield return value;
+                if (position.E > prevPosition.E)
+                    yield return position;
 
-                prev = value;
+                prevPosition = position;
             }
         }
     }
