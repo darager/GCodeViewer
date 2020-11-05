@@ -13,8 +13,10 @@ namespace GCodeViewer.Library.GCodeParsing
             var position = new AxisValues(0, 0, 0, 0);
             var prevPosition = AxisValues.NaN;
 
-            foreach (string line in lines)
+            foreach (string gCodeLine in lines)
             {
+                string line = RemoveComment(gCodeLine);
+
                 if (ContainsValue("X", line))
                     position.X = ExtractValue("X", line);
                 if (ContainsValue("Y", line))
@@ -36,6 +38,14 @@ namespace GCodeViewer.Library.GCodeParsing
 
                 prevPosition = position;
             }
+        }
+
+        private string RemoveComment(string line)
+        {
+            if (line.Contains(";"))
+                line = line.Split(";")[0];
+
+            return line;
         }
 
         private bool ContainsValue(string c, string text)
