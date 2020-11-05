@@ -6,7 +6,7 @@ using GCodeViewer.Library.Renderables.Things;
 
 namespace GCodeViewer.Library.Renderables
 {
-    public class BasicScene : IViewerScene
+    public class PrinterScene : IViewerScene
     {
         public IRenderService RenderService { get; private set; }
 
@@ -21,7 +21,7 @@ namespace GCodeViewer.Library.Renderables
 
         private float _scalingFactor;
 
-        public BasicScene(IRenderService renderService, SettingsService settingsService)
+        public PrinterScene(IRenderService renderService, SettingsService settingsService)
         {
             RenderService = renderService;
             _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D, (float x, float y, float z) Rotation)>();
