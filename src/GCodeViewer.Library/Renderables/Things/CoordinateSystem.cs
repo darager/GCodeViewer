@@ -22,7 +22,7 @@ namespace GCodeViewer.Library.Renderables.Things
             // X-Axis
             _parts.Add(cylinder.Color(r)
                                .RotationX(0)
-                               .RotationY(90)
+                               .RotationY(-90)
                                .Build());
             // Y-Axis
             _parts.Add(cylinder.Color(g)

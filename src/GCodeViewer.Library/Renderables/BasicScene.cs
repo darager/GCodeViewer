@@ -26,8 +26,11 @@ namespace GCodeViewer.Library.Renderables
             RenderService = renderService;
             _renderables = new Dictionary<ICompositeRenderable, (ICompositeRenderable, Point3D, (float x, float y, float z) Rotation)>();
 
-            RenderService.Add(_printbed);
-            RenderService.Add(_coordinateSystem);
+            var printerBuilder = new ScaledAndOffsetRenderableBuilder(_printbed);
+            RenderService.Add(printerBuilder.Build());
+
+            var coordinateSystemBuilder = new ScaledAndOffsetRenderableBuilder(_coordinateSystem);
+            RenderService.Add(coordinateSystemBuilder.Build());
 
             float diameter = settingsService.Settings.PrinterDimensions.PrintBedDiameter;
             SetPrintBedDiameter(diameter);

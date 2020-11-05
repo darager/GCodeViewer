@@ -18,6 +18,10 @@ namespace GCodeViewer.Library.Renderables
         public ScaledAndOffsetRenderableBuilder(ICompositeRenderable renderable)
         {
             _renderable = renderable;
+
+            _offset = new Point3D(0, 0, 0);
+            _rotation = (0, 0, 0);
+            _scalingFactor = 1;
         }
 
         public void SetScalingFactor(float scalingFactor)
@@ -37,6 +41,8 @@ namespace GCodeViewer.Library.Renderables
 
         public ICompositeRenderable Build()
         {
+            _rotation.X -= 90; // transform from OpenGLSpace to PrinterSpace
+
             var result = new ScaledAndOffsetRenderables();
 
             foreach (Renderable renderable in _renderable.GetParts())

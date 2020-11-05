@@ -35,11 +35,9 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             foreach (var point in points)
             {
-                // this is done on purpose since the 3D-printer CS
-                // and the opengl CS are rotated compared to each other
                 verts.Add(point.X);
-                verts.Add(point.Z);
                 verts.Add(point.Y);
+                verts.Add(point.Z);
             }
 
             return verts.ToArray();
