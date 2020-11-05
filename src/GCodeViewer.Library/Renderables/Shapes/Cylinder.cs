@@ -14,6 +14,7 @@ namespace GCodeViewer.Library.Renderables.Shapes
         private Point3D _position;
         private float _rotationX;
         private float _rotationY;
+        private float _rotationZ;
         private int _perCircleTriangleCount = 100;
 
         private Color _color;
@@ -67,6 +68,12 @@ namespace GCodeViewer.Library.Renderables.Shapes
             return this;
         }
 
+        public Cylinder RotationZ(float rotationZ)
+        {
+            _rotationZ = rotationZ;
+            return this;
+        }
+
         public Cylinder Color(Color color)
         {
             _color = color;
@@ -76,7 +83,7 @@ namespace GCodeViewer.Library.Renderables.Shapes
         public Renderable Build()
         {
             var points = GetZylinderPoints(_radius, _perCircleTriangleCount)
-                        .RotateXYX(_rotationX, _rotationY, 0)
+                        .RotateXYZ(_rotationX, _rotationY, _rotationZ)
                         .Translate(_position);
 
             return new Renderable(_color, points, RenderableType.Triangles);

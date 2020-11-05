@@ -13,13 +13,13 @@ namespace GCodeViewer.Library.Renderables.Things
         {
             _parts.Add(Cylinder.With()
                                .Height(-offset)
-                               .RotationX(-90)
+                               .RotationX(0)
                                .Radius(1.5f)
                                .Color(highlightColor)
                                .Build());
 
             _parts.Add(Cylinder.With()
-                               .Position(new Point3D(-25, -offset, 0))
+                               .Position(new Point3D(-25, 0, -offset))
                                .Height(50)
                                .RotationY(90)
                                .Radius(1.5f)

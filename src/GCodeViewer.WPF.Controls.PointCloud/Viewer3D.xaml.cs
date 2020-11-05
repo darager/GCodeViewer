@@ -123,7 +123,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             GL.Enable(EnableCap.DepthTest);
-            GL.DepthRange(1, 0); // reverse mappings have to be used  ¯\_(ツ)_/¯
+            GL.DepthRange(0, 1);
 
             _camera.ApplyTransformation();
 
