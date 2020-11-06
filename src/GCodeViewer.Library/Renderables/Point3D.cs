@@ -56,6 +56,20 @@ namespace GCodeViewer.Library.Renderables
             return this;
         }
 
+        public Point3D RotateCA(float cDeg, float aDeg, float aAxisOffset)
+        {
+            // The Rotation along the C Axis has to be done first to
+            // ensure only asimple Rotation around the Z-Axis is required.
+
+            RotateZ(cDeg);
+
+            Z += aAxisOffset;
+            RotateX(aDeg);
+            Z -= aAxisOffset;
+
+            return this;
+        }
+
         private void Rotate(Vector3f axis, float deg)
         {
             var vec = new Vector3f(this.X, this.Y, this.Z);

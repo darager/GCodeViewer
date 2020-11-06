@@ -42,10 +42,12 @@ namespace GCodeViewer.Library.GCodeParsing
             return !(a == b);
         }
 
+        // TODO: the way the axisvalues are transformed into degrees is not bulletproof
         public Point3D GetEquivalentPoint(float AAxisOffset = 0)
         {
-            // HACK: make this work properly
-            return new Point3D(X, Y, Z);
+            var point = new Point3D(X, Y, Z);
+            point.RotateCA(C, A, AAxisOffset);
+            return point;
         }
     };
 }
