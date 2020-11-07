@@ -96,6 +96,7 @@ namespace GCodeViewer.WPF.Controls.PointCloud
 
             _shaderBuilder = new ShaderBuilder();
             _camera = new OrbitCamera(_shaderBuilder);
+            _camera.ShowHomePosition();
             _vbos = new Dictionary<Renderable, VertexBufferObject>();
 
             _control.Paint += Draw;

@@ -49,18 +49,16 @@ namespace GCodeViewer.WPF.TextEditor
 
         private PointCloud _pointcloud;
         private SettingsService _settings;
-        private GCodeAxisValueExtractor _extractor;
+        private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
 
         public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel, IViewerScene printerScene, SettingsService settings)
         {
             _pageNavigationService = pageNavigationService;
             _settingsViewModel = settingsViewModel;
             _printerScene = printerScene;
-
-            _extractor = new GCodeAxisValueExtractor();
+            _settings = settings;
 
             InitializeCommands();
-            _settings = settings;
         }
 
         private void InitializeCommands()
