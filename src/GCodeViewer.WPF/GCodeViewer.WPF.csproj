@@ -8,6 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\document-icon.png" />
+    <None Remove="Resources\settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\GCodeViewer.Helpers\GCodeViewer.Helpers.csproj" />
     <ProjectReference Include="..\GCodeViewer.Library\GCodeViewer.Library.csproj" />
     <ProjectReference Include="..\GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj" />
@@ -22,5 +26,13 @@
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="OpenTK" Version="3.2" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\settings-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 </Project>

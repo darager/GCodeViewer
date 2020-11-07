@@ -37,24 +37,47 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Grid.ColumnSpan="3">
-            <StackPanel
-                Height="25"
-                DockPanel.Dock="Top"
-                Orientation="Horizontal">
-                <Menu>
-                    <MenuItem Header="File">
+            Grid.ColumnSpan="3"
+            VerticalAlignment="Stretch">
+            <DockPanel
+                Height="30"
+                HorizontalAlignment="Stretch"
+                Background="#2D2D30"
+                DockPanel.Dock="Top">
+                <Menu
+                    Margin="5,0,0,0"
+                    Background="Transparent"
+                    DockPanel.Dock="Left">
+                    <MenuItem Margin="3" Background="Transparent">
+                        <MenuItem.Header>
+                            <Image Opacity="1.0" Source="/GCodeViewer.WPF;component/Resources/document-icon.png" />
+                        </MenuItem.Header>
                         <MenuItem Command="{Binding OpenFile}" Header="Open" />
                         <MenuItem Command="{Binding SaveFile}" Header="Save" />
                         <MenuItem Command="{Binding SaveFileAs}" Header="Save As" />
                         <MenuItem Command="{Binding CloseFile}" Header="Close" />
                     </MenuItem>
                 </Menu>
-                <Button Command="{Binding GoToSettingsPage}">Settings</Button>
-            </StackPanel>
+
+                <Menu
+                    Margin="0,0,5,0"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    DockPanel.Dock="Right">
+                    <MenuItem
+                        Margin="3"
+                        HorizontalAlignment="Center"
+                        Command="{Binding GoToSettingsPage}">
+                        <MenuItem.Header>
+                            <Image Source="/GCodeViewer.WPF;component/Resources/settings-icon.png" />
+                        </MenuItem.Header>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
 
             <editor:GCodeTextEditor
                 x:Name="textEditor"
+                VerticalAlignment="Stretch"
                 DockPanel.Dock="Bottom"
                 TextChanged="{Binding HandleTextChanged}" />
         </DockPanel>
