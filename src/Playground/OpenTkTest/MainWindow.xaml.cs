@@ -6,7 +6,7 @@ using GCodeViewer.Library;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Shapes;
 using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 using OpenTkTest.ViewModels;
 
 namespace OpenTkTest

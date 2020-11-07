@@ -6,11 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using GCodeViewer.Helpers;
-using GCodeViewer.Library;
 using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 
 namespace OpenTkTest.ViewModels
 {
@@ -28,7 +27,6 @@ namespace OpenTkTest.ViewModels
 
         private ObservableCollection<Renderable> _pointCloudObjects;
 
-        private AxisValueFilter _filter = new AxisValueFilter();
         private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
 
         public Viewer3DViewModel()
@@ -50,8 +48,8 @@ namespace OpenTkTest.ViewModels
             await Task.Factory.StartNew(() =>
             {
                 var content = newText.Split();
-                var allPoints = _extractor.ExtractPrinterAxisValues(content);
-                var filteredPoints = _filter.FilterNonExtrudingValues(allPoints);
+                var filteredPoints = _extractor.ExtractAxisValues(content)
+                                               .RemoveNonExtruding();
 
                 var verts = new List<float>();
                 foreach (var point in filteredPoints)
