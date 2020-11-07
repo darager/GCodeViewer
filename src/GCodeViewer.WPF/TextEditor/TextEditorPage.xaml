@@ -59,29 +59,16 @@
                 TextChanged="{Binding HandleTextChanged}" />
         </DockPanel>
 
-        <Border
+        <Button
             Grid.Row="1"
             Grid.Column="2"
-            Width="120"
-            Height="30"
-            Margin="0,0,20,15"
-            Padding="1"
-            Background="DarkSlateGray"
-            BorderThickness="0"
-            CornerRadius="11">
-            <Border Background="CornflowerBlue" CornerRadius="11">
-                <Button
-                    VerticalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding PreviewPrintingPositions}"
-                    FontSize="20"
-                    FontWeight="SemiBold"
-                    Foreground="#1e1e1e">
-                    PREVIEW
-                </Button>
-            </Border>
-        </Border>
+            Margin="0,0,50,45"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding PreviewPrintingPositions}"
+            FontSize="18"
+            Style="{StaticResource DarkThemeButton}">
+            PREVIEW
+        </Button>
     </Grid>
 </Page>
