@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewer3D="clr-namespace:GCodeViewer.WPF.Controls.PointCloud;assembly=GCodeViewer.WPF.Controls.PointCloud"
+    xmlns:viewer3D="clr-namespace:GCodeViewer.WPF.Controls.Viewer3D;assembly=GCodeViewer.WPF.Controls.Viewer3D"
     Title="MainWindow"
     Width="1600"
     Height="800"

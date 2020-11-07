@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
 
-namespace GCodeViewer.WPF.Controls.PointCloud
+namespace GCodeViewer.WPF.Controls.Viewer3D
 {
     public class Renderable
     {

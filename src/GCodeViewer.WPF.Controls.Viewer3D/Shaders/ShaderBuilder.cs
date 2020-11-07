@@ -4,7 +4,7 @@ using System.IO;
 using GCodeViewer.Helpers;
 using OpenTK;
 
-namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
+namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
 {
     internal class ShaderBuilder
     {

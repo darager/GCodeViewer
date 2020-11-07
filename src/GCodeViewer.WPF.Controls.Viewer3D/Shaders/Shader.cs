@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace GCodeViewer.WPF.Controls.PointCloud.Shaders
+namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
 {
     internal class Shader
     {

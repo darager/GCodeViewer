@@ -1,7 +1,7 @@
-﻿using GCodeViewer.WPF.Controls.PointCloud.Shaders;
+﻿using GCodeViewer.WPF.Controls.Viewer3D.Shaders;
 using OpenTK;
 
-namespace GCodeViewer.WPF.Controls.PointCloud.Camera
+namespace GCodeViewer.WPF.Controls.Viewer3D.Camera
 {
     internal class OrbitCamera
     {

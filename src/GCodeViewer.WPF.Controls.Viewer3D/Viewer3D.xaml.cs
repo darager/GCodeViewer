@@ -4,14 +4,14 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Forms;
 using GCodeViewer.Helpers;
-using GCodeViewer.WPF.Controls.PointCloud.Camera;
-using GCodeViewer.WPF.Controls.PointCloud.Primitives;
-using GCodeViewer.WPF.Controls.PointCloud.Shaders;
+using GCodeViewer.WPF.Controls.Viewer3D.Camera;
+using GCodeViewer.WPF.Controls.Viewer3D.Primitives;
+using GCodeViewer.WPF.Controls.Viewer3D.Shaders;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
-namespace GCodeViewer.WPF.Controls.PointCloud
+namespace GCodeViewer.WPF.Controls.Viewer3D
 {
     public partial class Viewer3D : System.Windows.Controls.UserControl
     {

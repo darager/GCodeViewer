@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 using OpenTK.Graphics.OpenGL;
 
 namespace GCodeViewer.Library.Renderables

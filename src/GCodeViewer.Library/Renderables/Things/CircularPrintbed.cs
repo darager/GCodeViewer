@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.Library.Renderables.Shapes;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 
 namespace GCodeViewer.Library.Renderables.Things
 {

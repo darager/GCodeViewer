@@ -11,7 +11,6 @@ using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
 using GCodeViewer.WPF.Controls.TextEditor;
 using GCodeViewer.WPF.MVVM.Helpers;
 using GCodeViewer.WPF.Navigation;

@@ -1,6 +1,6 @@
 ﻿using System;
 using g3;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 
 namespace GCodeViewer.Library.Renderables
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 
 namespace GCodeViewer.Library.Renderables.Things
 {

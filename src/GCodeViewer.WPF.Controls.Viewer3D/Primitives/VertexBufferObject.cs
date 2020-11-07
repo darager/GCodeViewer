@@ -1,8 +1,8 @@
 ﻿using System;
-using GCodeViewer.WPF.Controls.PointCloud.Shaders;
+using GCodeViewer.WPF.Controls.Viewer3D.Shaders;
 using OpenTK.Graphics.OpenGL;
 
-namespace GCodeViewer.WPF.Controls.PointCloud.Primitives
+namespace GCodeViewer.WPF.Controls.Viewer3D.Primitives
 {
     internal class VertexBufferObject : IDisposable
     {

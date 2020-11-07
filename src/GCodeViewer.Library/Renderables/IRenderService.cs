@@ -1,5 +1,4 @@
 ﻿using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
 
 namespace GCodeViewer.Library.Renderables
 {

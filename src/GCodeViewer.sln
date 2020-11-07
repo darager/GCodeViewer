@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTkTest", "Playground\OpenTkTest\OpenTkTest.csproj", "{79341027-20C2-4AA7-A18E-32CB0B8913D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.Controls.PointCloud", "GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.PointCloud.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCodeViewer.WPF.Controls.Viewer3D", "GCodeViewer.WPF.Controls.Viewer3D\GCodeViewer.WPF.Controls.Viewer3D.csproj", "{0B166ABC-A1F9-4160-BA5A-0A332BFD8ED0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCode-Files", "GCode-Files", "{B7143DD1-D355-494F-B081-33DD51B3542F}"
 	ProjectSection(SolutionItems) = preProject

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 using Ninject.Activation;
 
 namespace GCodeViewer.WPF.MainWindow

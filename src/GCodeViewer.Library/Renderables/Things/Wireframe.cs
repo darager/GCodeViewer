@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using g3;
-using GCodeViewer.WPF.Controls.PointCloud;
+using GCodeViewer.WPF.Controls.Viewer3D;
 
 // TODO: some lines can not be seen when meeting with the triangles
 namespace GCodeViewer.Library.Renderables.Things

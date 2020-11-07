@@ -1,4 +1,4 @@
-﻿namespace GCodeViewer.WPF.Controls.PointCloud
+﻿namespace GCodeViewer.WPF.Controls.Viewer3D
 {
     public enum RenderableType
     {
