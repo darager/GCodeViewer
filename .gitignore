@@ -5,6 +5,7 @@
 
 !dlls/
 
+.ionide/
 .vscode/
 .vs/
 vim/
