@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
-using GCodeViewer.Helpers;
-using GCodeViewer.Library;
 using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
