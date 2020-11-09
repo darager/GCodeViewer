@@ -7,6 +7,10 @@ using FindReplace;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+using System.Text.RegularExpressions;
+using System.Windows.Media;
+using Xceed.Wpf.Toolkit.Core.Converters;
+using System.Collections.Generic;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
@@ -33,6 +37,9 @@ namespace GCodeViewer.WPF.Controls.TextEditor
         private TextDocument _doc = new TextDocument();
         private FindReplaceMgr _findReplaceWindow = new FindReplaceMgr();
 
+        private IHighlightingDefinition _definitionFromFile;
+        private List<SyntaxHighlightingRule> _syntaxHighlightingRules = new List<SyntaxHighlightingRule>(); // TODO: make this bindable
+
         public GCodeTextEditor()
         {
             InitializeComponent();
@@ -55,10 +62,24 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             using var stream = File.OpenRead(path);
             using var reader = new XmlTextReader(stream);
 
-            TextEditor.SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            var definition = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+
+            _syntaxHighlightingRules.Add(new SyntaxHighlightingRule("A-?\\d+(\\.\\d+)?", Color.FromRgb(255, 0, 0))); // HACK
+
+            UpdateSyntaxHighlighting();
 
             reader.Close();
             stream.Close();
+        }
+
+        private void UpdateSyntaxHighlighting()
+        {
+            var definition = _definitionFromFile;
+
+            foreach (var rule in _syntaxHighlightingRules)
+                definition.MainRuleSet.Rules.Add(rule.GetHighlightingRule());
+
+            TextEditor.SyntaxHighlighting = definition;
         }
 
         private void SetupSearchReplace()
