@@ -1,20 +1,9 @@
-﻿using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Xml;
-using FindReplace;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Highlighting.Xshd;
-using System.Text.RegularExpressions;
-using ICSharpCode.AvalonEdit.Rendering;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Media;
-using Xceed.Wpf.Toolkit.Core.Converters;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace GCodeViewer.WPF.Controls.TextEditor
 {
-
     public class SyntaxHighlightingRule
     {
         private string _pattern;
@@ -28,14 +17,12 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         internal HighlightingRule GetHighlightingRule()
         {
-            var converter = new BrushConverter();
-
             return new HighlightingRule()
             {
                 Regex = new Regex(_pattern),
                 Color = new HighlightingColor()
                 {
-                    Foreground = new CustomHighlightingBrush((Brush)converter.ConvertFrom(_color))
+                    Foreground = new CustomHighlightingBrush(new SolidColorBrush(_color))
                 }
             };
         }

@@ -62,7 +62,7 @@ namespace GCodeViewer.WPF.Controls.TextEditor
             using var stream = File.OpenRead(path);
             using var reader = new XmlTextReader(stream);
 
-            var definition = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            _definitionFromFile = HighlightingLoader.Load(reader, HighlightingManager.Instance);
 
             _syntaxHighlightingRules.Add(new SyntaxHighlightingRule("A-?\\d+(\\.\\d+)?", Color.FromRgb(255, 0, 0))); // HACK
 
