@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,37 +41,14 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         public static readonly DependencyProperty SyntaxHighlightingRulesProperty =
             DependencyProperty.Register(
-                "SyntaxRules",
+                "SyntaxHighlightingRules",
                 typeof(ObservableCollection<SyntaxHighlightingRule>),
                 typeof(GCodeTextEditor),
                 new FrameworkPropertyMetadata(OnBackupItemsChanged));
 
-        private static void OnBackupItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var old = (ObservableCollection<SyntaxHighlightingRule>)e.OldValue;
-            if (old != null)
-            {
-                old.CollectionChanged -= UpdateSyntaxRules;
-            }
-            ((ObservableCollection<SyntaxHighlightingRule>)e.NewValue).CollectionChanged += UpdateSyntaxRules;
-        }
-
-        private static void UpdateSyntaxRules(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            var editor = sender as GCodeTextEditor;
-
-            var definition = editor.DefinitionFromFile;
-
-            foreach (var rule in editor.SyntaxHighlightingRules)
-                definition.MainRuleSet.Rules.Add(rule.GetHighlightingRule());
-
-            editor.DefinitionFromFile = definition;
-        }
-
+        internal IHighlightingDefinition DefinitionFromFile;
         private TextDocument _doc = new TextDocument();
         private FindReplaceMgr _findReplaceWindow = new FindReplaceMgr();
-
-        internal IHighlightingDefinition DefinitionFromFile;
 
         public GCodeTextEditor()
         {
@@ -85,6 +63,31 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
             // TODO: this causes performance issues
             _doc.TextChanged += (s, e) => CallTextChangedCommand();
+        }
+
+        private static void OnBackupItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var old = (ObservableCollection<SyntaxHighlightingRule>)e.OldValue;
+            if (old != null)
+            {
+                old.CollectionChanged -= UpdateSyntaxRules;
+                return;
+            }
+
+            ((ObservableCollection<SyntaxHighlightingRule>)e.NewValue).CollectionChanged += UpdateSyntaxRules;
+            UpdateSyntaxRules(d, null);
+        }
+
+        private static void UpdateSyntaxRules(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            var editor = (GCodeTextEditor)sender;
+
+            var definition = editor.DefinitionFromFile;
+
+            foreach (var rule in editor.SyntaxHighlightingRules)
+                definition.MainRuleSet.Rules.Add(rule.GetHighlightingRule());
+
+            editor.DefinitionFromFile = definition;
         }
 
         private void SetupSyntaxHighlighting()
