@@ -79,6 +79,7 @@
                 x:Name="textEditor"
                 VerticalAlignment="Stretch"
                 DockPanel.Dock="Bottom"
+                SyntaxRules="{Binding SyntaxHighlightingRules}"
                 TextChanged="{Binding HandleTextChanged}" />
         </DockPanel>
 
