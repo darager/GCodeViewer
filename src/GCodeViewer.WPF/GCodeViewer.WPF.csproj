@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\document-icon.png" />
+    <None Remove="Resources\goback-icon.png" />
     <None Remove="Resources\settings-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\document-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\goback-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\settings-icon.png">

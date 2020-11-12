@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <StackPanel VerticalAlignment="Center">
-        <Button Command="{Binding GoBack}">Go back</Button>
+        <Button Command="{Binding GoBack}" Style="{StaticResource GoBackButton}" />
         <Label HorizontalAlignment="Center">Settings</Label>
 
         <Label FontWeight="Bold">Dimensions:</Label>

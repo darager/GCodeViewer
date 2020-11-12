@@ -2,7 +2,6 @@
     x:Class="GCodeViewer.WPF.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:GCodeViewer.WPF"
     Startup="Application_Startup">
 
     <Application.Resources>
@@ -35,6 +34,15 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GoBackButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Source="/GCodeViewer.WPF;component/Resources/goback-icon.png" />
                 </Setter.Value>
             </Setter>
         </Style>
