@@ -50,7 +50,11 @@
                     DockPanel.Dock="Left">
                     <MenuItem Margin="3" Background="Transparent">
                         <MenuItem.Header>
-                            <Image Opacity="1.0" Source="/GCodeViewer.WPF;component/Resources/document-icon.png" />
+                            <Image
+                                Height="22"
+                                VerticalAlignment="Center"
+                                Opacity="1.0"
+                                Source="/GCodeViewer.WPF;component/Resources/document-icon.png" />
                         </MenuItem.Header>
                         <MenuItem Command="{Binding OpenFile}" Header="Open" />
                         <MenuItem Command="{Binding SaveFile}" Header="Save" />
@@ -69,7 +73,10 @@
                         HorizontalAlignment="Center"
                         Command="{Binding GoToSettingsPage}">
                         <MenuItem.Header>
-                            <Image Source="/GCodeViewer.WPF;component/Resources/settings-icon.png" />
+                            <Image
+                                Height="25"
+                                VerticalAlignment="Center"
+                                Source="/GCodeViewer.WPF;component/Resources/settings-icon.png" />
                         </MenuItem.Header>
                     </MenuItem>
                 </Menu>

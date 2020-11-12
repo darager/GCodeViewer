@@ -8,74 +8,111 @@
     Title="SettingsPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Background="{StaticResource BackgroundColor}"
     mc:Ignorable="d">
 
-    <StackPanel VerticalAlignment="Center">
-        <Button Command="{Binding GoBack}" Style="{StaticResource GoBackButton}" />
-        <Label HorizontalAlignment="Center">Settings</Label>
+    <DockPanel HorizontalAlignment="Stretch">
+        <DockPanel
+            Height="30"
+            HorizontalAlignment="Stretch"
+            Background="{StaticResource ToolbarBackgroundColor}"
+            DockPanel.Dock="Top">
+            <Button
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left"
+                Command="{Binding GoBack}"
+                Style="{StaticResource GoBackButton}" />
+        </DockPanel>
 
-        <Label FontWeight="Bold">Dimensions:</Label>
-        <Grid HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Center" DockPanel.Dock="bottom">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                HorizontalAlignment="Right"
-                Content="Printbed Diameter:" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Content="Printbed Diameter:"
+                    Foreground="{StaticResource FontColor}" />
 
-            <ctrl:NumericUpDown
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="100"
-                MaxValue="2000"
-                MinValue="1"
-                Value="{Binding PrintBedDiameter}" />
-            <Label Grid.Row="0" Grid.Column="2">mm</Label>
+                <ctrl:NumericUpDown
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="100"
+                    Background="{StaticResource BackgroundColor}"
+                    Foreground="{StaticResource FontColor}"
+                    MaxValue="2000"
+                    MinValue="1"
+                    Value="{Binding PrintBedDiameter}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Foreground="{StaticResource FontColor}">
+                    mm
+                </Label>
 
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                HorizontalAlignment="Right"
-                Content="Printvolume Height:" />
-            <ctrl:NumericUpDown
-                Grid.Row="1"
-                Grid.Column="1"
-                Width="100"
-                MaxValue="2000"
-                MinValue="1"
-                Value="{Binding PrintVolumeHeight}" />
-            <Label Grid.Row="1" Grid.Column="2">mm</Label>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Content="Printvolume Height:"
+                    Foreground="{StaticResource FontColor}" />
+                <ctrl:NumericUpDown
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="100"
+                    Background="{StaticResource BackgroundColor}"
+                    Foreground="{StaticResource FontColor}"
+                    MaxValue="2000"
+                    MinValue="1"
+                    Value="{Binding PrintVolumeHeight}" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Foreground="{StaticResource FontColor}">
+                    mm
+                </Label>
 
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                HorizontalAlignment="Right"
-                Content="A-Axis offset:" />
-            <ctrl:NumericUpDown
-                Grid.Row="2"
-                Grid.Column="1"
-                Width="100"
-                MaxValue="2000"
-                MinValue="1"
-                Value="{Binding AAxisOffset}" />
-            <Label
-                Grid.Row="2"
-                Grid.Column="2"
-                Foreground="Orange">
-                mm
-            </Label>
-        </Grid>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Content="A-Axis offset:"
+                    Foreground="{StaticResource SecondaryColor}" />
+                <ctrl:NumericUpDown
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="100"
+                    Background="{StaticResource BackgroundColor}"
+                    Foreground="{StaticResource FontColor}"
+                    MaxValue="2000"
+                    MinValue="1"
+                    Value="{Binding AAxisOffset}" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Foreground="{StaticResource FontColor}">
+                    mm
+                </Label>
+            </Grid>
 
-        <Button Margin="0,50,0,0" Command="{Binding SaveAndApplySettings}">Apply</Button>
-    </StackPanel>
+            <Button
+                Width="70"
+                Margin="50"
+                HorizontalAlignment="Center"
+                Command="{Binding SaveAndApplySettings}"
+                Style="{StaticResource DarkThemeButton}">
+                Apply
+            </Button>
+        </StackPanel>
+    </DockPanel>
 </Page>

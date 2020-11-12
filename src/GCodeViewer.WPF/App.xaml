@@ -5,8 +5,8 @@
     Startup="Application_Startup">
 
     <Application.Resources>
-        <SolidColorBrush x:Key="BackgroundColor" Color="#121212" />
-        <SolidColorBrush x:Key="ToolbarBackgroundColor" Color="#202020" />
+        <SolidColorBrush x:Key="BackgroundColor" Color="#1E1E1E" />
+        <SolidColorBrush x:Key="ToolbarBackgroundColor" Color="#2D2D30" />
         <SolidColorBrush x:Key="PrimaryColor" Color="#bb86fc" />
         <SolidColorBrush x:Key="SecondaryColor" Color="#03dac5" />
         <SolidColorBrush x:Key="FontColor" Color="#E1E1E1" />
@@ -40,9 +40,14 @@
 
         <Style x:Key="GoBackButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Content">
                 <Setter.Value>
-                    <Image Source="/GCodeViewer.WPF;component/Resources/goback-icon.png" />
+                    <Image
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="/GCodeViewer.WPF;component/Resources/goback-icon.png" />
                 </Setter.Value>
             </Setter>
         </Style>
