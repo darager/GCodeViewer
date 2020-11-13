@@ -107,9 +107,11 @@
 
             <Button
                 Width="70"
-                Margin="50"
+                Margin="0,80,0,0"
                 HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Command="{Binding SaveAndApplySettings}"
+                FontSize="14"
                 Style="{StaticResource DarkThemeButton}">
                 Apply
             </Button>

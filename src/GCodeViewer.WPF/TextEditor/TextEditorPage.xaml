@@ -99,7 +99,7 @@
             Command="{Binding PreviewPrintingPositions}"
             FontSize="18"
             Style="{StaticResource DarkThemeButton}">
-            PREVIEW
+            Preview
         </Button>
     </Grid>
 </Page>
