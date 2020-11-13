@@ -12,6 +12,8 @@ namespace GCodeViewer.WPF.Settings
 {
     public class SettingsPageViewModel : INotifyPropertyChanged
     {
+        #region Bindable Properties
+
         public float PrintBedDiameter
         {
             get => _printBedDiameter;
@@ -23,8 +25,6 @@ namespace GCodeViewer.WPF.Settings
                 OnPropertyChanged("PrintBedDiameter");
             }
         }
-
-        private float _printBedDiameter;
 
         public float PrintVolumeHeight
         {
@@ -38,8 +38,6 @@ namespace GCodeViewer.WPF.Settings
             }
         }
 
-        private float _printVolumeHeight;
-
         public float AAxisOffset
         {
             get => _aAxisOffset;
@@ -52,17 +50,106 @@ namespace GCodeViewer.WPF.Settings
             }
         }
 
-        private float _aAxisOffset;
-        private AAxisOffset _aAxisOffsetRenderable;
+        public string AAxisGCodePattern
+        {
+            get => _aAxisGCodePattern;
+            set
+            {
+                if (_aAxisGCodePattern == value) return;
+                _aAxisGCodePattern = value;
+                OnPropertyChanged("AAxisGCodePattern");
+            }
+        }
+
+        public float MinValueAAxis
+        {
+            get => _minValueAAxis;
+            set
+            {
+                if (_minValueAAxis == value) return;
+                _minValueAAxis = value;
+                OnPropertyChanged("MinValueAAxised");
+            }
+        }
+
+        public float MaxValueAAxis
+        {
+            get => _maxValueAAxis;
+            set
+            {
+                if (_maxValueAAxis == value) return;
+                _maxValueAAxis = value;
+                OnPropertyChanged("MaxValueAAxis");
+            }
+        }
+
+        public float MinDegreesAAxis
+        {
+            get => _minDegreesAAxis;
+            set
+            {
+                if (_minDegreesAAxis == value) return;
+                _minDegreesAAxis = value;
+                OnPropertyChanged("MinDegreesAAxis");
+            }
+        }
+
+        public float MaxDegreesAAxis
+        {
+            get => _maxDegreesAAxis;
+            set
+            {
+                if (_maxDegreesAAxis == value) return;
+                _maxDegreesAAxis = value;
+                OnPropertyChanged("MaxDegreesAAxis");
+            }
+        }
+
+        public string CAxisGCodePattern
+        {
+            get => _cAxisGCodePattern;
+            set
+            {
+                if (_cAxisGCodePattern == value) return; ;
+                _cAxisGCodePattern = value;
+                OnPropertyChanged("CAxisGCodePattern");
+            }
+        }
+
+        public float CAxisValueAt360Degrees
+        {
+            get => _cAxisValueAt360Degrees;
+            set
+            {
+                if (_cAxisValueAt360Degrees == value) return;
+                _cAxisValueAt360Degrees = value;
+                OnPropertyChanged("CAxisValueAt360Degrees");
+            }
+        }
 
         public ICommand GoBack { get; private set; }
         public ICommand SaveAndApplySettings { get; private set; }
 
-        private Library.PrinterSettings.Settings _settings;
+        private float _printBedDiameter;
+        private float _printVolumeHeight;
+        private float _aAxisOffset;
+
+        private string _aAxisGCodePattern;
+        private float _minValueAAxis;
+        private float _maxValueAAxis;
+        private float _minDegreesAAxis;
+        private float _maxDegreesAAxis;
+        private string _cAxisGCodePattern;
+        private float _cAxisValueAt360Degrees;
+
+        #endregion
+
         private readonly SettingsService _settingsService;
         private readonly PageNavigationService _navigationService;
-
         private readonly IViewerScene _printerScene;
+
+        private Library.PrinterSettings.Settings _settings;
+        private AAxisOffset _aAxisOffsetRenderable;
 
         public SettingsPageViewModel(PageNavigationService navigationService,
                                      SettingsService settingsService,

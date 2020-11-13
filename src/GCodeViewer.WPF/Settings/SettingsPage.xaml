@@ -139,7 +139,8 @@
                         <TextBox
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Text="{Binding AAxisGCodePattern}" />
                         <Label Foreground="{StaticResource FontColor}">
                             e.g. A {{value}}
                         </Label>
@@ -156,7 +157,8 @@
                         <ctrl:NumericUpDown
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Value="{Binding MinValueAAxis}" />
 
                         <Label
                             HorizontalAlignment="Center"
@@ -165,7 +167,8 @@
                         <ctrl:NumericUpDown
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Value="{Binding MaxValueAAxis}" />
                     </StackPanel>
 
                     <Label
@@ -193,7 +196,8 @@
                         <ctrl:NumericUpDown
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Value="{Binding MinDegreesAAxis}" />
 
                         <Label
                             HorizontalAlignment="Center"
@@ -202,7 +206,8 @@
                         <ctrl:NumericUpDown
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Value="{Binding MaxDegreesAAxis}" />
                     </StackPanel>
                 </Grid>
 
@@ -223,7 +228,8 @@
                         <TextBox
                             Width="100"
                             Background="{StaticResource BackgroundColor}"
-                            Foreground="{StaticResource FontColor}" />
+                            Foreground="{StaticResource FontColor}"
+                            Text="{Binding CAxisGCodePattern}" />
                         <Label Foreground="{StaticResource FontColor}">
                             e.g. C {{value}}
                         </Label>
@@ -236,7 +242,8 @@
                     <ctrl:NumericUpDown
                         Width="100"
                         Background="{StaticResource BackgroundColor}"
-                        Foreground="{StaticResource FontColor}" />
+                        Foreground="{StaticResource FontColor}"
+                        Value="{Binding CAxisValueAt360Degrees}" />
                 </StackPanel>
             </StackPanel>
 
