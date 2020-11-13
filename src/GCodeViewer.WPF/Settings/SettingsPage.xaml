@@ -138,7 +138,11 @@
                             Foreground="{StaticResource FontColor}" />
                         <TextBox
                             Width="100"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Background="{StaticResource BackgroundColor}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
                             Foreground="{StaticResource FontColor}"
                             Text="{Binding AAxisGCodePattern}" />
                         <Label Foreground="{StaticResource FontColor}">
@@ -227,7 +231,11 @@
                             Foreground="{StaticResource FontColor}" />
                         <TextBox
                             Width="100"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Background="{StaticResource BackgroundColor}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
                             Foreground="{StaticResource FontColor}"
                             Text="{Binding CAxisGCodePattern}" />
                         <Label Foreground="{StaticResource FontColor}">
