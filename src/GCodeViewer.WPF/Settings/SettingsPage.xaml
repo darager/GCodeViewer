@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="SettingsPage"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="600"
+    d:DesignWidth="450"
     Background="{StaticResource BackgroundColor}"
     mc:Ignorable="d">
 
@@ -25,7 +25,10 @@
         </DockPanel>
 
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="bottom">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid
+                Margin="25"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -41,7 +44,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     HorizontalAlignment="Right"
-                    Content="Printbed Diameter:"
+                    Content="Printbed Diameter"
                     Foreground="{StaticResource FontColor}" />
 
                 <ctrl:NumericUpDown
@@ -64,7 +67,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     HorizontalAlignment="Right"
-                    Content="Printvolume Height:"
+                    Content="Printvolume Height"
                     Foreground="{StaticResource FontColor}" />
                 <ctrl:NumericUpDown
                     Grid.Row="1"
@@ -86,7 +89,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     HorizontalAlignment="Right"
-                    Content="A-Axis offset:"
+                    Content="A-Axis offset"
                     Foreground="{StaticResource SecondaryColor}" />
                 <ctrl:NumericUpDown
                     Grid.Row="2"
@@ -105,97 +108,146 @@
                 </Label>
             </Grid>
 
-            <Grid
-                Margin="0,25,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="4"
-                    Orientation="Horizontal">
+                <Grid
+                    Margin="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Orientation="Horizontal">
+                        <Label
+                            HorizontalAlignment="Right"
+                            Content="A-Axis GCode"
+                            Foreground="{StaticResource FontColor}" />
+                        <TextBox
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+                        <Label Foreground="{StaticResource FontColor}">
+                            e.g. A {{value}}
+                        </Label>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.RowSpan="2"
+                        Grid.Column="0">
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Min Value A-Axis"
+                            Foreground="{StaticResource FontColor}" />
+                        <ctrl:NumericUpDown
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Max Value A-Axis"
+                            Foreground="{StaticResource FontColor}" />
+                        <ctrl:NumericUpDown
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+                    </StackPanel>
+
                     <Label
-                        HorizontalAlignment="Right"
-                        Content="A-Axis GCode:"
-                        Foreground="{StaticResource FontColor}" />
-                    <TextBox
-                        Width="150"
-                        Background="{StaticResource BackgroundColor}"
-                        Foreground="{StaticResource FontColor}" />
-                    <Label Foreground="{StaticResource FontColor}">
-                        e.g. A {{value}}
+                        Grid.Row="1"
+                        Grid.RowSpan="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="30"
+                        Foreground="{StaticResource FontColor}">
+                        →
                     </Label>
-                </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.RowSpan="2"
+                        Grid.Column="3">
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Min Degrees A-Axis"
+                            Foreground="{StaticResource FontColor}" />
+                        <ctrl:NumericUpDown
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Max Degrees A-Axis"
+                            Foreground="{StaticResource FontColor}" />
+                        <ctrl:NumericUpDown
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+                    </StackPanel>
+                </Grid>
 
                 <StackPanel
-                    Grid.Row="2"
-                    Grid.RowSpan="2"
-                    Grid.Column="0">
-                    <Label
-                        HorizontalAlignment="Center"
-                        Content="Min Value A-Axis"
-                        Foreground="{StaticResource FontColor}" />
-                    <ctrl:NumericUpDown
-                        Width="100"
-                        Background="{StaticResource BackgroundColor}"
-                        Foreground="{StaticResource FontColor}" />
+                    Margin="25"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Orientation="Horizontal">
+                        <Label
+                            HorizontalAlignment="Right"
+                            Content="C-Axis GCode"
+                            Foreground="{StaticResource FontColor}" />
+                        <TextBox
+                            Width="100"
+                            Background="{StaticResource BackgroundColor}"
+                            Foreground="{StaticResource FontColor}" />
+                        <Label Foreground="{StaticResource FontColor}">
+                            e.g. C {{value}}
+                        </Label>
+                    </StackPanel>
 
                     <Label
                         HorizontalAlignment="Center"
-                        Content="Max Value A-Axis"
+                        Content="C-Axis Value at 360°"
                         Foreground="{StaticResource FontColor}" />
                     <ctrl:NumericUpDown
                         Width="100"
                         Background="{StaticResource BackgroundColor}"
                         Foreground="{StaticResource FontColor}" />
                 </StackPanel>
-
-                <StackPanel
-                    Grid.Row="2"
-                    Grid.RowSpan="2"
-                    Grid.Column="3">
-                    <Label
-                        HorizontalAlignment="Center"
-                        Content="Min Degrees A-Axis"
-                        Foreground="{StaticResource FontColor}" />
-                    <ctrl:NumericUpDown
-                        Width="100"
-                        Background="{StaticResource BackgroundColor}"
-                        Foreground="{StaticResource FontColor}" />
-
-                    <Label
-                        HorizontalAlignment="Center"
-                        Content="Max Degrees A-Axis"
-                        Foreground="{StaticResource FontColor}" />
-                    <ctrl:NumericUpDown
-                        Width="100"
-                        Background="{StaticResource BackgroundColor}"
-                        Foreground="{StaticResource FontColor}" />
-                </StackPanel>
-            </Grid>
+            </StackPanel>
 
             <Button
-                Width="70"
-                Margin="0,80,0,0"
+                Margin="50"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Command="{Binding SaveAndApplySettings}"
                 FontSize="14"
                 Style="{StaticResource DarkThemeButton}">
-                Apply
+                Apply Settings
             </Button>
         </StackPanel>
     </DockPanel>
