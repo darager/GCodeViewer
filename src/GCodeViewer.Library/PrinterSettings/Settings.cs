@@ -2,13 +2,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GCodeViewer.Library.PrinterSettings
 {
     public class Settings
     {
         public PrinterDimensions PrinterDimensions { get; set; } = new PrinterDimensions();
+        public AAxisParserInfo AAxisParserInfo { get; set; } = new AAxisParserInfo();
+        public CAxisParserInfo CAxisParserInfo { get; set; } = new CAxisParserInfo();
 
         public async Task Save(FileStream stream, CancellationToken token)
         {
