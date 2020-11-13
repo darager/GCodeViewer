@@ -207,6 +207,15 @@ namespace GCodeViewer.WPF.Settings
             this.AAxisOffset = _settings.PrinterDimensions.AAxisOffset;
             this.PrintBedDiameter = _settings.PrinterDimensions.PrintBedDiameter;
             this.PrintVolumeHeight = _settings.PrinterDimensions.PrintVolumeHeight;
+
+            this.AAxisGCodePattern = _settings.AAxisParserInfo.GCodePattern;
+            this.MinValueAAxis = _settings.AAxisParserInfo.MinValueAAxis;
+            this.MaxValueAAxis = _settings.AAxisParserInfo.MaxValueAAxis;
+            this.MinDegreesAAxis = _settings.AAxisParserInfo.MinDegreesAAxis;
+            this.MaxDegreesAAxis = _settings.AAxisParserInfo.MaxDegreesAAxis;
+
+            this.CAxisGCodePattern = _settings.CAxisParserInfo.GCodePattern;
+            this.CAxisValueAt360Degrees = _settings.CAxisParserInfo.ValueAt360Degrees;
         }
 
         private void StoreSettings()
@@ -214,6 +223,15 @@ namespace GCodeViewer.WPF.Settings
             _settings.PrinterDimensions.AAxisOffset = this.AAxisOffset;
             _settings.PrinterDimensions.PrintBedDiameter = this.PrintBedDiameter;
             _settings.PrinterDimensions.PrintVolumeHeight = this.PrintVolumeHeight;
+
+            _settings.AAxisParserInfo.GCodePattern = this.AAxisGCodePattern;
+            _settings.AAxisParserInfo.MinValueAAxis = this.MinValueAAxis;
+            _settings.AAxisParserInfo.MaxValueAAxis = this.MaxValueAAxis;
+            _settings.AAxisParserInfo.MinDegreesAAxis = this.MinDegreesAAxis;
+            _settings.AAxisParserInfo.MaxDegreesAAxis = this.MaxDegreesAAxis;
+
+            _settings.CAxisParserInfo.GCodePattern = this.CAxisGCodePattern;
+            _settings.CAxisParserInfo.ValueAt360Degrees = this.CAxisValueAt360Degrees;
 
             _settingsService.StoreSettings(_settings).Wait();
         }
