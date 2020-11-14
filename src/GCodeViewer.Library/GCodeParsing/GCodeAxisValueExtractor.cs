@@ -6,6 +6,7 @@ using GCodeViewer.Library.PrinterSettings;
 
 namespace GCodeViewer.Library.GCodeParsing
 {
+    // TODO: Refactor this class
     public class GCodeAxisValueExtractor
     {
         private Dictionary<string, Regex> _expressions = new Dictionary<string, Regex>();
@@ -30,7 +31,6 @@ namespace GCodeViewer.Library.GCodeParsing
                 if (ContainsValue("Z", line))
                     position.Z = ExtractValue("Z", line);
 
-                // HACK: can be configured in the future
                 if (Contains(aAxisPattern, line))
                     position.A = ExtractAAxisDegree(aAxisPattern, line, aAxisInfo);
                 if (Contains(cAxisPattern, line))
@@ -44,43 +44,6 @@ namespace GCodeViewer.Library.GCodeParsing
 
                 prevPosition = position;
             }
-        }
-
-        private Regex GetAxisSpecificPattern(string gCodePattern)
-        {
-            string pattern = gCodePattern;
-
-            pattern = pattern.Replace(" ", "\\s*");
-            pattern = pattern.Replace("{{value}}", _floatPattern);
-
-            return new Regex(pattern);
-        }
-
-        private float ExtractAAxisDegree(Regex aAxisPattern, string text, AAxisParserInfo info)
-        {
-            Match match = aAxisPattern.Match(text);
-            string number = match.Groups[1].ToString();
-
-            if (string.IsNullOrEmpty(number))
-                return 0;
-
-            return float.Parse(number)
-                        .Scale(
-                            info.MinValueAAxis,
-                            info.MaxValueAAxis,
-                            info.MinDegreesAAxis,
-                            info.MaxDegreesAAxis);
-        }
-
-        private float ExtractCAxisDegree(Regex cAxisPattern, string text, CAxisParserInfo info)
-        {
-            Match match = cAxisPattern.Match(text);
-            string number = match.Groups[1].ToString();
-
-            if (string.IsNullOrEmpty(number))
-                return 0;
-
-            return (float)(float.Parse(number) / info.ValueAt360Degrees * 360);
         }
 
         private string RemoveComment(string line)
@@ -106,6 +69,11 @@ namespace GCodeViewer.Library.GCodeParsing
         {
             Regex regex = GetNumberRegex(c);
 
+            return ExtractFloat(text, regex);
+        }
+
+        private static float ExtractFloat(string text, Regex regex)
+        {
             Match match = regex.Match(text);
             string number = match.Groups[1].ToString();
 
@@ -124,6 +92,34 @@ namespace GCodeViewer.Library.GCodeParsing
             _expressions[c] = regex;
 
             return regex;
+        }
+
+        private Regex GetAxisSpecificPattern(string gCodePattern)
+        {
+            string pattern = gCodePattern;
+
+            pattern = pattern.Replace(" ", "\\s*");
+            pattern = pattern.Replace("{{value}}", _floatPattern);
+
+            return new Regex(pattern);
+        }
+
+        private float ExtractAAxisDegree(Regex aAxisPattern, string text, AAxisParserInfo info)
+        {
+            float number = ExtractFloat(text, aAxisPattern);
+
+            return number.Scale(
+                            info.MinValueAAxis,
+                            info.MaxValueAAxis,
+                            info.MinDegreesAAxis,
+                            info.MaxDegreesAAxis);
+        }
+
+        private float ExtractCAxisDegree(Regex cAxisPattern, string text, CAxisParserInfo info)
+        {
+            float number = ExtractFloat(text, cAxisPattern);
+
+            return number / info.ValueAt360Degrees * 360;
         }
     }
 }
