@@ -141,9 +141,11 @@ namespace GCodeViewer.WPF.TextEditor
                 var gcodeLines = GetText().Split("\n");
                 float aAxisOffset = _settings.Settings.PrinterDimensions.AAxisOffset;
 
-                var points = _extractor.ExtractAxisValues(gcodeLines)
+                var points = _extractor.ExtractAxisValues(gcodeLines,
+                                                          _settings.Settings.AAxisParserInfo,
+                                                          _settings.Settings.CAxisParserInfo)
                                        .RemoveNonExtruding()
-                                       .Select(a => a.GetEquivalentPoint(aAxisOffset)); // this method is not implemented
+                                       .Select(a => a.GetEquivalentPoint(aAxisOffset));
 
                 if (_pointcloud != null)
                     _printerScene.Remove(_pointcloud);

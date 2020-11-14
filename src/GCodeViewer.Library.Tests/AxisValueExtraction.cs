@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using GCodeViewer.Library.GCodeParsing;
+using GCodeViewer.Library.PrinterSettings;
 using NUnit.Framework;
 
 namespace GCodeViewer.Library.Tests
@@ -9,6 +10,11 @@ namespace GCodeViewer.Library.Tests
     [TestFixture]
     public class AxisValueExtraction
     {
+        // TODO: test with changed info
+        private AAxisParserInfo _aAxisInfo = new AAxisParserInfo();
+
+        private CAxisParserInfo _cAxisInfo = new CAxisParserInfo();
+
         [Test]
         public void Should_WorkForXYZE()
         {
@@ -24,7 +30,7 @@ namespace GCodeViewer.Library.Tests
             };
 
             var extractor = new GCodeAxisValueExtractor();
-            var positions = extractor.ExtractAxisValues(gcodeInput).ToList();
+            var positions = extractor.ExtractAxisValues(gcodeInput, _aAxisInfo, _cAxisInfo).ToList();
 
             positions.Should().Equal(expected);
         }
@@ -44,7 +50,7 @@ namespace GCodeViewer.Library.Tests
             };
 
             var extractor = new GCodeAxisValueExtractor();
-            var positions = extractor.ExtractAxisValues(gcodeInput).ToList();
+            var positions = extractor.ExtractAxisValues(gcodeInput, _aAxisInfo, _cAxisInfo).ToList();
 
             positions.Should().Equal(expected);
         }

@@ -42,7 +42,6 @@ namespace GCodeViewer.Library.GCodeParsing
             return !(a == b);
         }
 
-        // TODO: the way the axisvalues are transformed into degrees is not bulletproof
         public Point3D GetEquivalentPoint(float AAxisOffset = 0)
         {
             var point = new Point3D(X, Y, Z);
