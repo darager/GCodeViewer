@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using GCodeViewer.Helpers;
 using GCodeViewer.Library.PrinterSettings;
 
 namespace GCodeViewer.Library.GCodeParsing
@@ -31,9 +32,9 @@ namespace GCodeViewer.Library.GCodeParsing
 
                 // HACK: can be configured in the future
                 if (Contains(aAxisPattern, line))
-                    position.A = ExtractAAxisValue(aAxisPattern, line);
+                    position.A = ExtractAAxisDegree(aAxisPattern, line, aAxisInfo);
                 if (Contains(cAxisPattern, line))
-                    position.C = ExtractCAxisValue(cAxisPattern, line);
+                    position.C = ExtractCAxisDegree(cAxisPattern, line, cAxisInfo);
 
                 if (ContainsValue("E", line))
                     position.E = ExtractValue("E", line);
@@ -55,7 +56,7 @@ namespace GCodeViewer.Library.GCodeParsing
             return new Regex(pattern);
         }
 
-        private float ExtractAAxisValue(Regex aAxisPattern, string text)
+        private float ExtractAAxisDegree(Regex aAxisPattern, string text, AAxisParserInfo info)
         {
             Match match = aAxisPattern.Match(text);
             string number = match.Groups[1].ToString();
@@ -63,10 +64,15 @@ namespace GCodeViewer.Library.GCodeParsing
             if (string.IsNullOrEmpty(number))
                 return 0;
 
-            return float.Parse(number);
+            return float.Parse(number)
+                        .Scale(
+                            info.MinValueAAxis,
+                            info.MaxValueAAxis,
+                            info.MinDegreesAAxis,
+                            info.MaxDegreesAAxis);
         }
 
-        private float ExtractCAxisValue(Regex cAxisPattern, string text)
+        private float ExtractCAxisDegree(Regex cAxisPattern, string text, CAxisParserInfo info)
         {
             Match match = cAxisPattern.Match(text);
             string number = match.Groups[1].ToString();
@@ -74,7 +80,7 @@ namespace GCodeViewer.Library.GCodeParsing
             if (string.IsNullOrEmpty(number))
                 return 0;
 
-            return float.Parse(number);
+            return (float)(float.Parse(number) / info.ValueAt360Degrees * 360);
         }
 
         private string RemoveComment(string line)
