@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ctrl="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
+    xmlns:curdir="clr-namespace:GCodeViewer.WPF.Settings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="SettingsPage"
@@ -143,8 +144,16 @@
                             Background="{StaticResource BackgroundColor}"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1"
-                            Foreground="{StaticResource FontColor}"
-                            Text="{Binding AAxisGCodePattern}" />
+                            Foreground="{StaticResource FontColor}">
+                            <TextBox.Text>
+                                <Binding Path="AAxisGCodePattern" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <curdir:GCodePatternValidator />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <!--  Text="{Binding AAxisGCodePattern}" />  -->
                         <Label Foreground="{StaticResource FontColor}">
                             e.g. A {{value}}
                         </Label>
@@ -236,8 +245,15 @@
                             Background="{StaticResource BackgroundColor}"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1"
-                            Foreground="{StaticResource FontColor}"
-                            Text="{Binding CAxisGCodePattern}" />
+                            Foreground="{StaticResource FontColor}">
+                            <TextBox.Text>
+                                <Binding Path="CAxisGCodePattern" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <curdir:GCodePatternValidator />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label Foreground="{StaticResource FontColor}">
                             e.g. C {{value}}
                         </Label>
