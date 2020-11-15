@@ -110,6 +110,9 @@ namespace GCodeViewer.WPF.TextEditor
             {
                 _settingsViewModel.ShowAAxisOffset();
                 _pageNavigationService.GoTo(Navigation.Navigation.SettingsPage);
+
+                if (_pointcloud != null)
+                    _printerScene.Remove(_pointcloud);
             });
 
             OpenFile = new RelayCommand((_) =>
@@ -163,6 +166,9 @@ namespace GCodeViewer.WPF.TextEditor
             {
                 _filePath = null;
                 SetText("");
+
+                if (_pointcloud != null)
+                    _printerScene.Remove(_pointcloud);
             });
 
             PreviewPrintingPositions = new RelayCommand(_ =>
