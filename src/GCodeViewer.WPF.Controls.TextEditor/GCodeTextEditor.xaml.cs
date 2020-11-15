@@ -47,62 +47,54 @@ namespace GCodeViewer.WPF.Controls.TextEditor
                 typeof(GCodeTextEditor),
                 new FrameworkPropertyMetadata(OnBackupItemsChanged));
 
-        internal IHighlightingDefinition DefinitionFromFile;
         private TextDocument _doc = new TextDocument();
         private FindReplaceMgr _findReplaceWindow = new FindReplaceMgr();
 
         public GCodeTextEditor()
         {
             InitializeComponent();
-            SetupSyntaxHighlighting();
+            LoadSyntaxHighlighting(this);
 
-            // this has to be done so the parent window is not null
+            // ensure that parent window is not null
             this.Loaded += (s, e) => SetupSearchReplace();
 
             Statusbar.DataContext = new StatusBarViewModel(TextEditor);
             TextEditor.Document = _doc;
 
-            // TODO: this causes performance issues
             _doc.TextChanged += (s, e) => CallTextChangedCommand();
         }
 
         private static void OnBackupItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var editor = d as GCodeTextEditor;
+            var @this = d as GCodeTextEditor;
 
             var old = (ObservableCollection<SyntaxHighlightingRule>)e.OldValue;
             if (old != null)
             {
-                old.CollectionChanged -= (s, e) => UpdateSyntaxRules(editor);
+                old.CollectionChanged -= (s, e) => LoadSyntaxHighlighting(@this);
                 return;
             }
 
             ((ObservableCollection<SyntaxHighlightingRule>)e.NewValue)
-                                    .CollectionChanged += (s, e) => UpdateSyntaxRules(editor);
+                                    .CollectionChanged += (s, e) => LoadSyntaxHighlighting(@this);
 
-            UpdateSyntaxRules(editor);
+            LoadSyntaxHighlighting(@this);
         }
 
-        private static void UpdateSyntaxRules(GCodeTextEditor editor)
-        {
-            var definition = editor.DefinitionFromFile;
-
-            foreach (var rule in editor.SyntaxHighlightingRules)
-                definition.MainRuleSet.Rules.Add(rule.GetHighlightingRule());
-
-            editor.DefinitionFromFile = definition;
-        }
-
-        private void SetupSyntaxHighlighting()
+        private static void LoadSyntaxHighlighting(GCodeTextEditor @this)
         {
             string path = "GCodeSyntaxHighlighting.xml";
 
             using var stream = File.OpenRead(path);
             using var reader = new XmlTextReader(stream);
 
-            DefinitionFromFile = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            var highlightingDefinition = HighlightingLoader.Load(reader, HighlightingManager.Instance);
 
-            TextEditor.SyntaxHighlighting = DefinitionFromFile;
+            if (@this.SyntaxHighlightingRules != null)
+                foreach (var rule in @this.SyntaxHighlightingRules)
+                    highlightingDefinition.MainRuleSet.Rules.Add(rule.GetHighlightingRule());
+
+            @this.TextEditor.SyntaxHighlighting = highlightingDefinition;
 
             reader.Close();
             stream.Close();
