@@ -65,8 +65,7 @@ namespace GCodeViewer.WPF.TextEditor
         {
             SyntaxHighlightRules = new ObservableCollection<SyntaxHighlightingRule>();
 
-            //TODO:
-            // A-axis
+            //TODO: update the syntaxhighlighting according to the gcodepatterns in the settings
             SyntaxHighlightRules.Add(new SyntaxHighlightingRule("A-?\\d+(\\.\\d+)?", Color.FromRgb(255, 0, 0)));
         }
 

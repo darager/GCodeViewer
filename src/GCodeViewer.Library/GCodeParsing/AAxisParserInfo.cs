@@ -2,7 +2,7 @@
 {
     public class AAxisParserInfo
     {
-        public string GCodePattern { get; set; } = "A {{value}}";
+        public string GCodePattern { get; set; } = "A{{value}}";
 
         public float MinValueAAxis { get; set; } = 0;
         public float MaxValueAAxis { get; set; } = 90;

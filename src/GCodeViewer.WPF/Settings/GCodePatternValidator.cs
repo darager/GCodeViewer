@@ -1,24 +1,22 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
 namespace GCodeViewer.WPF.Settings
 {
     public class GCodePatternValidator : ValidationRule
     {
+        private string _regexPlaceholder = "{{value}}";
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            try
-            {
-                // TODO: make sure validation works correctly
-                string text = value as string;
-            }
-            catch (Exception e)
-            {
-                return new ValidationResult(false, $"Non valid GCodePattern!");
-            }
+            string pattern = (value as string)
+                                .Trim()
+                                .Replace(" ", "");
 
-            return ValidationResult.ValidResult;
+            if (pattern.Contains(_regexPlaceholder) && pattern.Length > _regexPlaceholder.Length)
+                return ValidationResult.ValidResult;
+
+            return new ValidationResult(false, $"Non valid GCodePattern!");
         }
     }
 }
