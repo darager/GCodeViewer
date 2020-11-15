@@ -17,12 +17,12 @@ namespace GCodeViewer.Library.PrinterSettings
         {
             _filePath = Path.Combine(_diretoryName, _fileName);
 
-            CreateConfigurationFileIfNoneExists().Wait();
+            CreateConfigurationFileIfNoneExists();
 
             Settings = LoadSettings();
         }
 
-        private async Task CreateConfigurationFileIfNoneExists()
+        private void CreateConfigurationFileIfNoneExists()
         {
             if (File.Exists(_filePath))
                 return;
@@ -31,7 +31,7 @@ namespace GCodeViewer.Library.PrinterSettings
                 Directory.CreateDirectory(_diretoryName);
 
             var config = new Settings();
-            await StoreSettings(config);
+            StoreSettings(config);
         }
 
         private Settings LoadSettings()
@@ -43,13 +43,17 @@ namespace GCodeViewer.Library.PrinterSettings
             return config;
         }
 
-        public async Task StoreSettings(Settings settings)
+        public void StoreSettings(Settings settings)
         {
             File.Delete(_filePath);
             using var stream = File.Open(_filePath, FileMode.OpenOrCreate);
 
-            await settings.Save(stream, CancellationToken.None);
+            settings.Save(stream, CancellationToken.None).Wait();
             stream.Close();
+
+            SettingsUpdated?.Invoke(this, null);
         }
+
+        public event FileSystemEventHandler SettingsUpdated;
     }
 }

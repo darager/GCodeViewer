@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GCodeViewer.Library.PrinterSettings;
 using GCodeViewer.Library.Renderables;
@@ -233,7 +234,7 @@ namespace GCodeViewer.WPF.Settings
             _settings.CAxisParserInfo.GCodePattern = this.CAxisGCodePattern;
             _settings.CAxisParserInfo.ValueAt360Degrees = this.CAxisValueAt360Degrees;
 
-            _settingsService.StoreSettings(_settings).Wait();
+            _settingsService.StoreSettings(_settings);
         }
 
         private void OnPropertyChanged(string propertyName)

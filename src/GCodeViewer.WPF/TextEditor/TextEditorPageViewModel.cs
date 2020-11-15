@@ -59,14 +59,44 @@ namespace GCodeViewer.WPF.TextEditor
 
             InitializeCommands();
             InitializeSyntaxHighlighting();
+
+            _settings.SettingsUpdated += (s, e) => UpdateACAxisSyntaxHighlighting();
+        }
+
+        private SyntaxHighlightingRule _aAxisHighlighting;
+        private SyntaxHighlightingRule _cAxisHighlighting;
+        private string _floatPattern = "\\d+(\\.\\d+)?";
+
+        private void UpdateACAxisSyntaxHighlighting()
+        {
+            //TODO: update the syntaxhighlighting according to the gcodepatterns in the settings
+
+            var red = Color.FromRgb(255, 0, 0);
+
+            string aAxisPattern = _settings.Settings.AAxisParserInfo.GCodePattern
+                                                        .Trim()
+                                                        .Replace("{{value}}", _floatPattern);
+            string cAxisPattern = _settings.Settings.CAxisParserInfo.GCodePattern
+                                                        .Trim()
+                                                        .Replace("{{value}}", _floatPattern);
+
+            if (SyntaxHighlightRules.Contains(_aAxisHighlighting))
+                SyntaxHighlightRules.Remove(_aAxisHighlighting);
+            if (SyntaxHighlightRules.Contains(_cAxisHighlighting))
+                SyntaxHighlightRules.Remove(_cAxisHighlighting);
+
+            _aAxisHighlighting = new SyntaxHighlightingRule(aAxisPattern, red);
+            _cAxisHighlighting = new SyntaxHighlightingRule(cAxisPattern, red);
+
+            SyntaxHighlightRules.Add(_aAxisHighlighting);
+            SyntaxHighlightRules.Add(_cAxisHighlighting);
         }
 
         private void InitializeSyntaxHighlighting()
         {
             SyntaxHighlightRules = new ObservableCollection<SyntaxHighlightingRule>();
 
-            //TODO: update the syntaxhighlighting according to the gcodepatterns in the settings
-            SyntaxHighlightRules.Add(new SyntaxHighlightingRule("A-?\\d+(\\.\\d+)?", Color.FromRgb(255, 0, 0)));
+            UpdateACAxisSyntaxHighlighting();
         }
 
         private void InitializeCommands()

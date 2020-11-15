@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
@@ -67,21 +68,23 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         private static void OnBackupItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            var editor = d as GCodeTextEditor;
+
             var old = (ObservableCollection<SyntaxHighlightingRule>)e.OldValue;
             if (old != null)
             {
-                old.CollectionChanged -= UpdateSyntaxRules;
+                old.CollectionChanged -= (s, e) => UpdateSyntaxRules(editor);
                 return;
             }
 
-            ((ObservableCollection<SyntaxHighlightingRule>)e.NewValue).CollectionChanged += UpdateSyntaxRules;
-            UpdateSyntaxRules(d, null);
+            ((ObservableCollection<SyntaxHighlightingRule>)e.NewValue)
+                                    .CollectionChanged += (s, e) => UpdateSyntaxRules(editor);
+
+            UpdateSyntaxRules(editor);
         }
 
-        private static void UpdateSyntaxRules(object sender, NotifyCollectionChangedEventArgs e)
+        private static void UpdateSyntaxRules(GCodeTextEditor editor)
         {
-            var editor = (GCodeTextEditor)sender;
-
             var definition = editor.DefinitionFromFile;
 
             foreach (var rule in editor.SyntaxHighlightingRules)
