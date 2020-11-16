@@ -19,8 +19,7 @@
             Background="{StaticResource ToolbarBackgroundColor}"
             DockPanel.Dock="Top">
             <Button
-                Height="25"
-                Margin="5,0,0,0"
+                Margin="14,2,0,2"
                 HorizontalAlignment="Left"
                 Command="{Binding GoBack}"
                 Style="{StaticResource GoBackButton}" />
