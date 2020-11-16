@@ -50,7 +50,10 @@ namespace GCodeViewer.WPF.TextEditor
         private SettingsService _settings;
         private GCodeAxisValueExtractor _extractor = new GCodeAxisValueExtractor();
 
-        public TextEditorPageViewModel(PageNavigationService pageNavigationService, SettingsPageViewModel settingsViewModel, IViewerScene printerScene, SettingsService settings)
+        public TextEditorPageViewModel(PageNavigationService pageNavigationService,
+                                       SettingsPageViewModel settingsViewModel,
+                                       IViewerScene printerScene,
+                                       SettingsService settings)
         {
             _pageNavigationService = pageNavigationService;
             _settingsViewModel = settingsViewModel;

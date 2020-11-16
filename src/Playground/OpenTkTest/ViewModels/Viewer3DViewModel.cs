@@ -10,6 +10,7 @@ using GCodeViewer.Library.GCodeParsing;
 using GCodeViewer.Library.Renderables;
 using GCodeViewer.Library.Renderables.Things;
 using GCodeViewer.WPF.Controls.Viewer3D;
+using GCodeViewer.Library.PrinterSettings;
 
 namespace OpenTkTest.ViewModels
 {
@@ -48,7 +49,7 @@ namespace OpenTkTest.ViewModels
             await Task.Factory.StartNew(() =>
             {
                 var content = newText.Split();
-                var filteredPoints = _extractor.ExtractAxisValues(content)
+                var filteredPoints = _extractor.ExtractAxisValues(content, new AAxisParserInfo(), new CAxisParserInfo())
                                                .RemoveNonExtruding();
 
                 var verts = new List<float>();
