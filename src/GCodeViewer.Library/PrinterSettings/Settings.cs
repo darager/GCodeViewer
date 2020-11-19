@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Threading;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -11,7 +11,7 @@ namespace GCodeViewer.Library.PrinterSettings
         public AAxisParserInfo AAxisParserInfo { get; set; } = new AAxisParserInfo();
         public CAxisParserInfo CAxisParserInfo { get; set; } = new CAxisParserInfo();
 
-        public async Task Save(FileStream stream, CancellationToken token)
+        public async Task Save(FileStream stream)
         {
             var writer = new StreamWriter(stream);
 

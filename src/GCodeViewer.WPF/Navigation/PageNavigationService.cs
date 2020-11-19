@@ -7,6 +7,10 @@ using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Ninject;
 
+// TODO: improve this method
+//       return the page according to the viewmodel given
+//       get page by name of viewmodel
+
 namespace GCodeViewer.WPF.Navigation
 {
     public class PageNavigationService
