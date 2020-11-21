@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GCodeViewer.WPF.Controls.PointCloud\GCodeViewer.WPF.Controls.Viewer3D.csproj" />
     <ProjectReference Include="..\GCodeViewer.WPF.Controls.Viewer3D\GCodeViewer.WPF.Controls.Viewer3D.csproj" />
   </ItemGroup>
 
@@ -19,5 +18,4 @@
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\WindowsBase.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

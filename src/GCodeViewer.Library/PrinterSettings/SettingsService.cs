@@ -48,7 +48,7 @@ namespace GCodeViewer.Library.PrinterSettings
             File.Delete(_filePath);
             using var stream = File.Open(_filePath, FileMode.OpenOrCreate);
 
-            settings.Save(stream, CancellationToken.None).Wait();
+            settings.Save(stream).Wait();
             stream.Close();
 
             SettingsUpdated?.Invoke(this, null);

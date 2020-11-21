@@ -16,24 +16,32 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
 
         public Shader(string vertexShaderSource, string fragmentShaderSource)
         {
-            _vertexShader = GL.CreateShader(ShaderType.VertexShader);
-            _fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
+            _vertexShader = CompileShader(ShaderType.VertexShader, vertexShaderSource);
+            _fragmentShader = CompileShader(ShaderType.FragmentShader, fragmentShaderSource);
 
-            GL.ShaderSource(_vertexShader, vertexShaderSource);
-            GL.ShaderSource(_fragmentShader, fragmentShaderSource);
-
-            GL.CompileShader(_vertexShader);
-            GL.CompileShader(_fragmentShader);
-
-            // link shaders together into a program for later usage
-            _handle = GL.CreateProgram();
-            GL.AttachShader(_handle, _vertexShader);
-            GL.AttachShader(_handle, _fragmentShader);
-            GL.LinkProgram(_handle);
-
+            _handle = LinkShaders(_vertexShader, _fragmentShader);
             CleanUpShaders();
 
             AddUniforms();
+        }
+
+        private int CompileShader(ShaderType type, string shaderSource)
+        {
+            int shaderHandle = GL.CreateShader(type);
+            GL.ShaderSource(shaderHandle, shaderSource);
+            GL.CompileShader(shaderHandle);
+
+            return shaderHandle;
+        }
+
+        private int LinkShaders(int vertexShader, int fragmentShader)
+        {
+            int handle = GL.CreateProgram();
+            GL.AttachShader(handle, vertexShader);
+            GL.AttachShader(handle, fragmentShader);
+            GL.LinkProgram(handle);
+
+            return handle;
         }
 
         private void CleanUpShaders()
