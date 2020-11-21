@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
@@ -158,8 +159,8 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            float dx = (float)(e.X - _previousMousePosition.X);
-            float dy = (float)(e.Y - _previousMousePosition.Y);
+            float dx = -(float)(e.X - _previousMousePosition.X);
+            float dy = -(float)(e.Y - _previousMousePosition.Y);
 
             // this fixes the camera jumping after a slider or something has been adjusted
             if (dx > 60 || dy > 60)
@@ -169,13 +170,21 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
             }
 
             bool leftMouseButtonPressed = (Control.MouseButtons & MouseButtons.Left) != 0;
+            bool rightMouseButtonPressed = (Control.MouseButtons & MouseButtons.Right) != 0;
 
             if (leftMouseButtonPressed)
             {
-                float newRotationX = (-dy * _mouseSensitivity) + _camera.RotationX;
+                float newRotationX = (dy * _mouseSensitivity) + _camera.RotationX;
                 _camera.RotationX = newRotationX.Constrain(-90, 90);
 
-                _camera.RotationY += (-dx * _mouseSensitivity);
+                _camera.RotationY += (dx * _mouseSensitivity);
+            }
+            else if (rightMouseButtonPressed)
+            {
+                float sensitivity = _mouseSensitivity / 50;
+
+                _camera.OffsetX += (dx * sensitivity);
+                _camera.OffsetZ += (dy * sensitivity);
             }
 
             _previousMousePosition = new Point(e.X, e.Y);
