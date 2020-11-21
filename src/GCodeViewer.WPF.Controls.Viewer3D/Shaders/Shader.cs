@@ -77,6 +77,12 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
             GL.UniformMatrix4(_uniformLocations[name], true, ref data);
         }
 
+        public void SetVector3(string name, Vector3 data)
+        {
+            GL.UseProgram(_handle);
+            GL.Uniform3(_uniformLocations[name], ref data);
+        }
+
         public void Dispose()
         {
             GL.DeleteProgram(_handle);

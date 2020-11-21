@@ -27,10 +27,13 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
             return shader;
         }
 
-        public void SetProjectionMatrix(Matrix4 matrix)
+        public void SetProjectionAndTranslation(Matrix4 projection, Vector3 translation)
         {
             foreach (Shader shader in _shaders.Values)
-                shader.SetMatrix4(_projectionMatrixName, matrix);
+            {
+                shader.SetMatrix4(_projectionMatrixName, projection);
+                shader.SetVector3("translation", translation);
+            }
         }
 
         public void DisposeAll()
