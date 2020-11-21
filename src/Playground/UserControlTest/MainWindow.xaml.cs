@@ -36,7 +36,7 @@ namespace UserControlTest
                 using var stream = File.Create(filePath);
 
                 var config = new Settings();
-                await config.Save(stream, CancellationToken.None);
+                await config.Save(stream);
                 stream.Close();
             }
             else

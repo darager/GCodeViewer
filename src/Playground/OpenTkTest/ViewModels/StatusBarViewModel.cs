@@ -21,7 +21,7 @@ namespace OpenTkTest.ViewModels
 
         private async void StartOpenFileDialogue()
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             ofd.Filter = "gcode files (*.gcode)|*.gcode";
             ofd.FilterIndex = 2;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
@@ -28,55 +27,6 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
                 typeof(ObservableCollection<Renderable>),
                 typeof(Viewer3D),
                 new FrameworkPropertyMetadata(UpdateRenderables));
-
-        private static void UpdateRenderables(DependencyObject source, DependencyPropertyChangedEventArgs args)
-        {
-            var pclViewer = (Viewer3D)source;
-
-            if (args.OldValue != null)
-            {
-                var oldRenderables = (ObservableCollection<Renderable>)args.OldValue;
-                foreach (Renderable renderable in oldRenderables)
-                    pclViewer._vbos.Remove(renderable);
-            }
-
-            if (args.NewValue != null)
-            {
-                pclViewer.Renderables = (ObservableCollection<Renderable>)args.NewValue;
-                foreach (var renderable in pclViewer.Renderables)
-                    AddRenderable(pclViewer, renderable);
-                pclViewer.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, pclViewer);
-            }
-        }
-
-        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
-        {
-            if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Renderable renderable in args.OldItems)
-                    pclViewer._vbos.Remove(renderable);
-            }
-
-            if (args.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Renderable renderable in args.NewItems)
-                    AddRenderable(pclViewer, renderable);
-            }
-
-            if (args.Action == NotifyCollectionChangedAction.Reset)
-            {
-                foreach (Renderable renderable in args.OldItems)
-                    pclViewer._vbos.Remove(renderable);
-            }
-        }
-
-        private static void AddRenderable(Viewer3D pclViewer, Renderable renderable)
-        {
-            var shader = pclViewer._shaderBuilder.FromColor(renderable.Color);
-            var vbo = new VertexBufferObject(renderable.Vertices, renderable.Type, shader);
-
-            pclViewer._vbos.Add(renderable, vbo);
-        }
 
         private readonly GLControl _control;
         private readonly OrbitCamera _camera;
@@ -136,6 +86,54 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
             _control.Invalidate();
         }
 
+        private static void UpdateRenderables(DependencyObject source, DependencyPropertyChangedEventArgs args)
+        {
+            var @this = (Viewer3D)source;
+
+            if (args.OldValue != null)
+            {
+                foreach (var renderable in (args.OldValue as ObservableCollection<Renderable>))
+                    @this._vbos.Remove(renderable);
+            }
+
+            if (args.NewValue != null)
+            {
+                @this.Renderables = (ObservableCollection<Renderable>)args.NewValue;
+                foreach (var renderable in @this.Renderables)
+                    AddRenderable(@this, renderable);
+                @this.Renderables.CollectionChanged += (_, e) => Renderables_CollectionChanged(e, @this);
+            }
+        }
+
+        private static void Renderables_CollectionChanged(NotifyCollectionChangedEventArgs args, Viewer3D pclViewer)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Renderable renderable in args.NewItems)
+                    AddRenderable(pclViewer, renderable);
+            }
+
+            if (args.Action == NotifyCollectionChangedAction.Reset)
+            {
+                foreach (Renderable renderable in args.OldItems)
+                    pclViewer._vbos.Remove(renderable);
+            }
+        }
+
+        private static void AddRenderable(Viewer3D @this, Renderable renderable)
+        {
+            var shader = @this._shaderBuilder.FromColor(renderable.Color);
+            var vbo = new VertexBufferObject(renderable, shader);
+
+            @this._vbos.Add(renderable, vbo);
+        }
+
         private void ResizeWindow(object sender, SizeChangedEventArgs e)
         {
             GL.Viewport(0, 0, (int)this.ActualWidth, (int)this.ActualHeight);
@@ -162,8 +160,8 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
             float dx = -(float)(e.X - _previousMousePosition.X);
             float dy = -(float)(e.Y - _previousMousePosition.Y);
 
-            // this fixes the camera jumping after a slider or something has been adjusted
-            if (dx > 60 || dy > 60)
+            bool isIntentionalMovement = (dx < 60 || dy < 60);
+            if (!isIntentionalMovement)
             {
                 _previousMousePosition = new Point(e.X, e.Y);
                 return;
@@ -175,8 +173,8 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
             if (leftMouseButtonPressed)
             {
                 float newRotationX = (dy * _mouseSensitivity) + _camera.RotationX;
-                _camera.RotationX = newRotationX.Constrain(-90, 90);
 
+                _camera.RotationX = newRotationX.Constrain(-90, 90);
                 _camera.RotationY += (dx * _mouseSensitivity);
             }
             else if (rightMouseButtonPressed)
@@ -193,7 +191,6 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
         private void OnMouseWheel(object sender, MouseEventArgs e)
         {
             int direction = e.Delta / 120;
-
             float newScale = _camera.Scale + (direction * _mouseWheelSensitivity);
 
             _camera.Scale = newScale.Constrain(0.05f, 2.0f);

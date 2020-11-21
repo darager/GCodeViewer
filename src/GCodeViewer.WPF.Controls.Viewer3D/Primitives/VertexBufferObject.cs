@@ -13,13 +13,12 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Primitives
         private PrimitiveType _type;
         private BufferUsageHint _usageHint;
 
-        public VertexBufferObject(float[] vertices,
-                                  PrimitiveType type,
+        public VertexBufferObject(Renderable renderable,
                                   Shader shader,
                                   BufferUsageHint usageHint = BufferUsageHint.StaticDraw)
         {
-            _vertices = vertices;
-            _type = type;
+            _vertices = renderable.Vertices;
+            _type = renderable.Type;
             _shader = shader;
             _usageHint = usageHint;
 
