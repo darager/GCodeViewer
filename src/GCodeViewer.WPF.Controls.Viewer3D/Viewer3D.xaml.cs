@@ -182,7 +182,9 @@ namespace GCodeViewer.WPF.Controls.Viewer3D
                 float sensitivity = _mouseSensitivity / 50;
 
                 _camera.OffsetX += (dx * sensitivity);
-                _camera.OffsetZ += (dy * sensitivity);
+
+                float changeY = (_camera.RotationX < 0) ? dy : -dy;
+                _camera.OffsetZ += (changeY * sensitivity);
             }
 
             _previousMousePosition = new Point(e.X, e.Y);

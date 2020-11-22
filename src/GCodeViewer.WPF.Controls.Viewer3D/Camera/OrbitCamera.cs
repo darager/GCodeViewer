@@ -33,16 +33,17 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Camera
               * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-RotationX))
               * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(RotationY));
 
-            var transform =
+            var projection =
                 Matrix4.Identity
               * Matrix4.LookAt(new Vector3(0, 0, -10), Vector3.Zero, Vector3.UnitY)
               * Matrix4.CreatePerspectiveFieldOfView(0.5f, 1, 1.0f, 100.0f)
               * rotation
               * Matrix4.CreateScale(Scale);
 
-            var translation = new Vector4(new Vector3(OffsetX, 0, OffsetZ), 1) * rotation;
+            rotation.Transpose();
+            var translation = rotation * new Vector4(new Vector3(OffsetX, 0, OffsetZ), 1);
 
-            _shaderFactory.SetProjectionAndTranslation(transform, new Vector3(translation.X, 0, translation.Z));
+            _shaderFactory.SetProjectionAndTranslation(projection, new Vector3(translation.X, 0, translation.Z));
         }
     }
 }
