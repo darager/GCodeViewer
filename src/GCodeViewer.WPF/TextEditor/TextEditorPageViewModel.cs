@@ -72,8 +72,6 @@ namespace GCodeViewer.WPF.TextEditor
 
         private void UpdateACAxisSyntaxHighlighting()
         {
-            //TODO: update the syntaxhighlighting according to the gcodepatterns in the settings
-
             var red = Color.FromRgb(255, 0, 0);
 
             string aAxisPattern = _settings.Settings.AAxisParserInfo.GCodePattern

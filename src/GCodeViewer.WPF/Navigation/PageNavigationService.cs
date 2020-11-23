@@ -15,8 +15,6 @@ namespace GCodeViewer.WPF.Navigation
 {
     public class PageNavigationService
     {
-        private Stack<Navigation> _visitedPages = new Stack<Navigation>();
-
         [Inject]
         public StartingPage StartingPage { get; set; }
 
@@ -28,6 +26,8 @@ namespace GCodeViewer.WPF.Navigation
 
         [Inject]
         public STLPositioningPage STLPositioningPage { get; set; }
+
+        private Stack<Navigation> _visitedPages = new Stack<Navigation>();
 
         private Page GetPage(Navigation page) => page switch
         {

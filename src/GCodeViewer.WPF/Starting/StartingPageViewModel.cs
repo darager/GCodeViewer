@@ -44,12 +44,7 @@ namespace GCodeViewer.WPF.Starting
 
         private async void LoadGcodeFile(object _)
         {
-            var ofd = new OpenFileDialog
-            {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                Filter = "gcode files (*.gcode)|*.gcode",
-                FilterIndex = 2
-            };
+            var ofd = NewOpenFileDialog("gcode files (*.gcode)|*.gcode");
 
             if (ofd.ShowDialog() == true)
             {
@@ -65,12 +60,7 @@ namespace GCodeViewer.WPF.Starting
 
         private void LoadSTLFile(object _)
         {
-            var ofd = new OpenFileDialog
-            {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                Filter = "stl files (*.stl)|*.stl",
-                FilterIndex = 2
-            };
+            var ofd = NewOpenFileDialog("stl files (*.stl)|*.stl");
 
             if (ofd.ShowDialog() == true)
             {
@@ -79,6 +69,16 @@ namespace GCodeViewer.WPF.Starting
                 _stlPositioningViewModel.LoadSTL(filePath);
                 _navigationService.GoTo(Navigation.Navigation.STLPositioningPage);
             }
+        }
+
+        private OpenFileDialog NewOpenFileDialog(string filter)
+        {
+            return new OpenFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                Filter = filter,
+                FilterIndex = 2
+            };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
