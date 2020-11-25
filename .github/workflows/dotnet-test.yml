@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v2
@@ -13,9 +13,7 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies of Library
-      run: dotnet restore ./src/GCodeViewer.Library/GCodeViewer.Library.csproj
-    - name: Install dependencies of Testing Project
-      run: dotnet restore ./src/GCodeViewer.Library.Tests/GCodeViewer.Library.Tests.csproj
+      run: dotnet restore ./src
     - name: Build Library
       run: dotnet build --configuration Release --no-restore ./src/GCodeViewer.Library/GCodeViewer.Library.csproj
     - name: Build Test Project
