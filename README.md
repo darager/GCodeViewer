@@ -1,5 +1,7 @@
 # 5D-Slicer
 
+![.NET Core](https://github.com/darager/GCodeViewer/workflows/.NET%20Core/badge.svg)
+
 This tool enables the creation of .gcode files for a custom built 5D-Printer.
 
 **Workflow to create a gcode file for the 5D-printer:**
