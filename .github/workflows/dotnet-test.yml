@@ -3,7 +3,7 @@ name: .NET Core
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,8 +12,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore ./src
+    - name: Install dependencies of Library
+      run: dotnet restore ./src/GCodeViewer.Library/GCodeViewer.Library.csproj
+    - name: Install dependencies of Testing Project
+      run: dotnet restore ./src/GCodeViewer.Library.Tests/GCodeViewer.Library.Tests.csproj
     - name: Build Library
       run: dotnet build --configuration Release --no-restore ./src/GCodeViewer.Library/GCodeViewer.Library.csproj
     - name: Build Test Project
