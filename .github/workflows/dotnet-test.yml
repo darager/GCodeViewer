@@ -1,0 +1,22 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore ./src
+    - name: Build Library
+      run: dotnet build --configuration Release --no-restore ./src/GCodeViewer.Library/GCodeViewer.Library.csproj
+    - name: Build Test Project
+      run: dotnet build --configuration Release --no-restore ./src/GCodeViewer.Library.Tests/GCodeViewer.Library.Tests.csproj
+    - name: Run Tests
+      run: dotnet test --no-restore --verbosity normal ./src
