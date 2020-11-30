@@ -8,8 +8,6 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
 {
     internal class ShaderBuilder
     {
-        private const string _projectionMatrixName = "transform";
-
         private Dictionary<Color, Shader> _shaders = new Dictionary<Color, Shader>();
 
         public Shader FromColor(Color color)
@@ -27,23 +25,6 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
             return shader;
         }
 
-        public void SetProjectionAndTranslation(Matrix4 projection, Vector3 translation)
-        {
-            foreach (Shader shader in _shaders.Values)
-            {
-                shader.SetMatrix4(_projectionMatrixName, projection);
-                shader.SetVector3("translation", translation);
-            }
-        }
-
-        public void DisposeAll()
-        {
-            foreach (Shader shader in _shaders.Values)
-                shader.Dispose();
-
-            _shaders.Clear();
-        }
-
         private string GetFragmentShaderSource(Color color)
         {
             return File.ReadAllText(@"Shaders\shader.frag")
@@ -55,10 +36,26 @@ namespace GCodeViewer.WPF.Controls.Viewer3D.Shaders
 
         private string GetVertexShaderSource()
         {
-            return File.ReadAllText(@"Shaders\shader.vert")
-                       .Replace("%UNIFORMNAME%", _projectionMatrixName);
+            return File.ReadAllText(@"Shaders\shader.vert");
+        }
+
+        public void SetProjectionAndTranslation(Matrix4 projection, Vector3 translation)
+        {
+            foreach (Shader shader in _shaders.Values)
+            {
+                shader.SetMatrix4("transform", projection);
+                shader.SetVector3("translation", translation);
+            }
         }
 
         private string ScaleToFloat(int value) => ((float)value).Scale(0, 255, 0, 1).ToString();
+
+        public void DisposeAll()
+        {
+            foreach (Shader shader in _shaders.Values)
+                shader.Dispose();
+
+            _shaders.Clear();
+        }
     }
 }
