@@ -155,7 +155,7 @@
                         </TextBox>
                         <!--  Text="{Binding AAxisGCodePattern}" />  -->
                         <Label Foreground="{StaticResource FontColor}">
-                            e.g. A {{value}}
+                            e.g. T2 E{{value}} T0
                         </Label>
                     </StackPanel>
 
@@ -255,7 +255,7 @@
                             </TextBox.Text>
                         </TextBox>
                         <Label Foreground="{StaticResource FontColor}">
-                            e.g. C {{value}}
+                            e.g. T3 E{{value}} T0
                         </Label>
                     </StackPanel>
 
