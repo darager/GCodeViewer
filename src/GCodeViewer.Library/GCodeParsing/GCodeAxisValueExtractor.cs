@@ -38,19 +38,29 @@ namespace GCodeViewer.Library.GCodeParsing
                     position.Y = line.ExtractValue(_yPattern);
                 if (line.Contains(_zPattern))
                     position.Z = line.ExtractValue(_zPattern);
-                if (line.Contains(_ePattern))
-                    position.E = line.ExtractValue(_ePattern);
 
                 if (line.Contains(aAxisPattern))
+                {
                     position.A = line.ExtractValue(aAxisPattern)
                                        .Scale(aAxisInfo.MinValueAAxis,
                                               aAxisInfo.MaxValueAAxis,
                                               aAxisInfo.MinDegreesAAxis,
                                               aAxisInfo.MaxDegreesAAxis);
 
+                    line = aAxisPattern.Replace(line, "");
+                }
+
                 if (line.Contains(cAxisPattern))
+                {
                     position.C = line.ExtractValue(cAxisPattern)
                                         / cAxisInfo.ValueAt360Degrees * 360;
+                    line = cAxisPattern.Replace(line, "");
+                }
+
+                // Extracting the Extruder value has to happen after the A/C-Axis
+                // Otherwise the value of the A or C-Axis could be seen as the value of the Extruder
+                if (line.Contains(_ePattern))
+                    position.E = line.ExtractValue(_ePattern);
 
                 if (prevPosition != position)
                     yield return position;
