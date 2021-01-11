@@ -11,9 +11,15 @@ namespace GCodeViewer.Library.Tests
     public class AxisValueExtraction
     {
         // TODO: test with changed info
-        private AAxisParserInfo _aAxisInfo = new AAxisParserInfo();
+        private AAxisParserInfo _aAxisInfo = new AAxisParserInfo()
+        {
+            GCodePattern = "A{{value}}"
+        };
 
-        private CAxisParserInfo _cAxisInfo = new CAxisParserInfo();
+        private CAxisParserInfo _cAxisInfo = new CAxisParserInfo()
+        {
+            GCodePattern = "C{{value}}"
+        };
 
         [Test]
         public void Should_WorkForXYZE()
