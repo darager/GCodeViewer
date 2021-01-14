@@ -12,14 +12,11 @@ namespace GCodeViewer.WPF
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            kernel.Get<MainWindow.MainWindow>()
-                  .Show();
+            var mainWindow = kernel.Get<MainWindow.MainWindow>();
+            mainWindow.Show();
 
             kernel.Get<PageNavigationService>()
                   .GoTo(Navigation.Navigation.GCodePreviewPage);
-
-            var offsetpage = new AddOffset.AddOffsetWindow();
-            offsetpage.Show();
         }
     }
 }

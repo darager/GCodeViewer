@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GCodeViewer.Library.GCodeParsing;
@@ -27,7 +28,7 @@ namespace GCodeViewer.WPF.TextEditor
         public ICommand GoToSettingsPage { get; private set; }
         public ICommand HandleTextChanged { get; private set; }
         public ICommand PreviewPrintingPositions { get; private set; }
-
+        public ICommand ShowAddOffsetPage { get; private set; }
         public ObservableCollection<SyntaxHighlightingRule> SyntaxHighlightRules { get; set; }
 
         internal GCodeTextEditor TextEditor { get; set; }
@@ -192,6 +193,24 @@ namespace GCodeViewer.WPF.TextEditor
                 var rotation = (0, 0, 0);
                 _printerScene.Add(_pointcloud, offset, rotation);
             });
+
+            ShowAddOffsetPage = new RelayCommand(ShowOffsetPage);
+        }
+
+        private Window _addOffsetWindow;
+
+        private void ShowOffsetPage(object obj)
+        {
+            if (_addOffsetWindow is null)
+            {
+                _addOffsetWindow = new AddOffset.AddOffsetWindow(this);
+                _addOffsetWindow.Show();
+                _addOffsetWindow.Closed += (s, e) => _addOffsetWindow = null;
+            }
+            else
+            {
+                _addOffsetWindow.Activate();
+            }
         }
 
         public void SetText(string text)

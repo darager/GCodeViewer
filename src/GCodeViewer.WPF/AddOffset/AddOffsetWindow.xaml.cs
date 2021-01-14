@@ -1,25 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using GCodeViewer.Library.GCodeParsing;
 
 namespace GCodeViewer.WPF.AddOffset
 {
-    /// <summary>
-    /// Interaction logic for AddOffsetWindow.xaml
-    /// </summary>
     public partial class AddOffsetWindow : Window
     {
-        public AddOffsetWindow()
+        private TextEditor.TextEditorPageViewModel _textEditorPageViewModel { get; }
+
+        public AddOffsetWindow(TextEditor.TextEditorPageViewModel textEditorPageViewModel)
         {
             InitializeComponent();
+            _textEditorPageViewModel = textEditorPageViewModel;
+        }
+
+        private void AddOffset(object sender, RoutedEventArgs e)
+        {
+            if (_textEditorPageViewModel.TextEditor is null)
+                return;
+
+            var newLineBreak = '\n';
+            string[] lines = _textEditorPageViewModel.GetText().Split(newLineBreak);
+
+            uint from = (uint)fromLine.Value;
+            uint to = (uint)toLine.Value;
+
+            var extractor = new GCodeAxisValueExtractor();
+            var newlines = extractor.AddOffset(lines, from, to, xOffset.Value, yOffset.Value, zOffset.Value);
+
+            _textEditorPageViewModel.SetText(string.Join(newLineBreak, newlines));
         }
     }
 }

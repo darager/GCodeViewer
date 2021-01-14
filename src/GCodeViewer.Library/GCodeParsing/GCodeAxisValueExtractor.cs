@@ -69,6 +69,42 @@ namespace GCodeViewer.Library.GCodeParsing
             }
         }
 
+        public string[] AddOffset(string[] lines, uint from, uint to, float xOffset, float yOffset, float zOffset)
+        {
+            if (to > lines.Length)
+                to = (uint)lines.Length;
+
+            for (int i = 1; i <= lines.Length; i++)
+            {
+                if (i < from || i > to)
+                    continue;
+
+                int idx = i - 1;
+                string line = lines[idx];
+
+                if (line.Contains(_xPattern))
+                {
+                    float offset = line.ExtractValue(_xPattern) + xOffset;
+                    line = _xPattern.Replace(line, $"X{offset.ToString()}");
+                }
+
+                if (line.Contains(_yPattern))
+                {
+                    float offset = line.ExtractValue(_yPattern) + yOffset;
+                    line = _yPattern.Replace(line, $"Y{offset.ToString()}");
+                }
+
+                if (line.Contains(_zPattern))
+                {
+                    float offset = line.ExtractValue(_zPattern) + zOffset;
+                    line = _zPattern.Replace(line, $"Z{offset.ToString()}");
+                }
+
+                lines[idx] = line;
+            }
+            return lines;
+        }
+
         private string RemoveComment(string line)
         {
             if (line.Contains(";"))
@@ -96,9 +132,14 @@ namespace GCodeViewer.Library.GCodeParsing
             return float.Parse(number);
         }
 
+        public static string Replace(this string @this, Regex pattern, string newValue)
+        {
+            return pattern.Replace(@this, newValue);
+        }
+
         public static Regex ConstructPattern(this string @this)
         {
-            string floatPattern = "(\\d+\\.\\d+|\\d+)";
+            string floatPattern = "(-?\\d+\\.\\d+|-?\\d+)";
 
             string pattern = @this.Trim()
                                   .Replace("{{value}}", floatPattern);

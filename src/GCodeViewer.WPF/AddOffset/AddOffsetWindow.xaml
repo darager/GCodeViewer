@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:GCodeViewer.WPF.AddOffset"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Add Offset"
-    Width="200"
+    Width="400"
     Height="300"
     Background="{StaticResource BackgroundColor}"
     mc:Ignorable="d">
@@ -31,10 +31,10 @@
                 From Line
             </Label>
             <ctrl:NumericUpDown
+                x:Name="fromLine"
                 Grid.Row="0"
                 Grid.Column="1"
                 Width="100"
-                MaxValue="{Binding LineCount}"
                 MinValue="0" />
 
             <Label
@@ -45,10 +45,10 @@
                 to line
             </Label>
             <ctrl:NumericUpDown
+                x:Name="toLine"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="100"
-                MaxValue="{Binding LineCount}"
                 MinValue="0" />
         </Grid>
 
@@ -78,6 +78,7 @@
                 X:
             </Label>
             <ctrl:NumericUpDown
+                x:Name="xOffset"
                 Grid.Row="0"
                 Grid.Column="1"
                 Width="100" />
@@ -97,6 +98,7 @@
                 Y:
             </Label>
             <ctrl:NumericUpDown
+                x:Name="yOffset"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="100" />
@@ -116,6 +118,7 @@
                 Z:
             </Label>
             <ctrl:NumericUpDown
+                x:Name="zOffset"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="100" />
@@ -131,9 +134,10 @@
         <Button
             Width="110"
             Margin="0,40,0,0"
+            Click="AddOffset"
             FontSize="14"
             Style="{StaticResource DarkThemeButton}">
-            apply Offset
+            Apply Offset
         </Button>
     </StackPanel>
 </Window>

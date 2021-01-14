@@ -25,7 +25,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -86,16 +86,28 @@
                 TextChanged="{Binding HandleTextChanged}" />
         </DockPanel>
 
-        <Button
+        <StackPanel
             Grid.Row="1"
             Grid.Column="2"
             Margin="0,0,50,45"
             HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Command="{Binding PreviewPrintingPositions}"
-            FontSize="18"
-            Style="{StaticResource DarkThemeButton}">
-            Preview
-        </Button>
+            VerticalAlignment="Bottom">
+            <Button
+                Width="100"
+                Command="{Binding PreviewPrintingPositions}"
+                FontSize="20"
+                Style="{StaticResource DarkThemeButton}">
+                Preview
+            </Button>
+
+            <Button
+                Width="83"
+                Margin="0,3,0,0"
+                Command="{Binding ShowAddOffsetPage}"
+                FontSize="13"
+                Style="{StaticResource RoundButton}">
+                Add Offset
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
