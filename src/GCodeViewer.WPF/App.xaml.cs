@@ -17,6 +17,9 @@ namespace GCodeViewer.WPF
 
             kernel.Get<PageNavigationService>()
                   .GoTo(Navigation.Navigation.GCodePreviewPage);
+
+            var offsetpage = new AddOffset.AddOffsetWindow();
+            offsetpage.Show();
         }
     }
 }

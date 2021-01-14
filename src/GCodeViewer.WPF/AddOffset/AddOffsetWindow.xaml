@@ -1,0 +1,139 @@
+﻿<Window
+    x:Class="GCodeViewer.WPF.AddOffset.AddOffsetWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:GCodeViewer.WPF.Controls;assembly=GCodeViewer.WPF.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GCodeViewer.WPF.AddOffset"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Add Offset"
+    Width="200"
+    Height="300"
+    Background="{StaticResource BackgroundColor}"
+    mc:Ignorable="d">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource FontColor}">
+                From Line
+            </Label>
+            <ctrl:NumericUpDown
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="100"
+                MaxValue="{Binding LineCount}"
+                MinValue="0" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource FontColor}">
+                to line
+            </Label>
+            <ctrl:NumericUpDown
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="100"
+                MaxValue="{Binding LineCount}"
+                MinValue="0" />
+        </Grid>
+
+        <Label
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            Foreground="{StaticResource FontColor}">
+            Add the following Offset:
+        </Label>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource FontColor}">
+                X:
+            </Label>
+            <ctrl:NumericUpDown
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="100" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                HorizontalAlignment="Left"
+                Foreground="{StaticResource FontColor}">
+                mm
+            </Label>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource FontColor}">
+                Y:
+            </Label>
+            <ctrl:NumericUpDown
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="100" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                HorizontalAlignment="Left"
+                Foreground="{StaticResource FontColor}">
+                mm
+            </Label>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource FontColor}">
+                Z:
+            </Label>
+            <ctrl:NumericUpDown
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="100" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
+                HorizontalAlignment="Left"
+                Foreground="{StaticResource FontColor}">
+                mm
+            </Label>
+        </Grid>
+
+        <Button
+            Width="110"
+            Margin="0,40,0,0"
+            FontSize="14"
+            Style="{StaticResource DarkThemeButton}">
+            apply Offset
+        </Button>
+    </StackPanel>
+</Window>

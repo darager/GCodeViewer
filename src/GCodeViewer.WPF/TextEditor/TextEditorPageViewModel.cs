@@ -186,9 +186,11 @@ namespace GCodeViewer.WPF.TextEditor
                 if (_pointcloud != null)
                     _printerScene.Remove(_pointcloud);
 
-                var listpoints = points.ToList();
-                _pointcloud = new PointCloud(points);
-                _printerScene.Add(_pointcloud, new Point3D(0, 0, 0), (0, 0, 0));
+                _pointcloud = new PointCloud(points.ToList());
+
+                var offset = new Point3D(0, 0, 0);
+                var rotation = (0, 0, 0);
+                _printerScene.Add(_pointcloud, offset, rotation);
             });
         }
 
