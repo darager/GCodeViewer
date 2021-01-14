@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using GCodeViewer.WPF.Controls.Viewer3D;
 
-// TODO: positioning does not work when the cylinder is rotated (?)
 namespace GCodeViewer.Library.Renderables.Shapes
 {
     public class Cylinder

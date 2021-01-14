@@ -102,7 +102,6 @@ namespace GCodeViewer.WPF.Controls.TextEditor
 
         private void SetupSearchReplace()
         {
-            // TODO: after the search/replace functionality is used the texteditor takes a performance hit
             _findReplaceWindow.CurrentEditor = new TextEditorAdapter(TextEditor);
             _findReplaceWindow.ShowSearchIn = false;
             _findReplaceWindow.ShowReplaceAllConfirmationPrompt = false;

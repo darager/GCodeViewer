@@ -10,7 +10,6 @@ namespace GCodeViewer.Library.Tests
     [TestFixture]
     public class AxisValueExtraction
     {
-        // TODO: test with changed info
         private AAxisParserInfo _aAxisInfo = new AAxisParserInfo()
         {
             GCodePattern = "A{{value}}"
