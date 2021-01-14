@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using GCodeViewer.WPF.Settings;
-using GCodeViewer.WPF.Starting;
-using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Ninject;
 
@@ -16,25 +14,17 @@ namespace GCodeViewer.WPF.Navigation
     public class PageNavigationService
     {
         [Inject]
-        public StartingPage StartingPage { get; set; }
-
-        [Inject]
         public SettingsPage SettingsPage { get; set; }
 
         [Inject]
         public TextEditorPage TextEditorPage { get; set; }
 
-        [Inject]
-        public STLPositioningPage STLPositioningPage { get; set; }
-
         private Stack<Navigation> _visitedPages = new Stack<Navigation>();
 
         private Page GetPage(Navigation page) => page switch
         {
-            Navigation.StartingPage => StartingPage,
             Navigation.SettingsPage => SettingsPage,
             Navigation.GCodePreviewPage => TextEditorPage,
-            Navigation.STLPositioningPage => STLPositioningPage,
             _ => throw new Exception("This page is not added in the NavigatorService!")
         };
 

@@ -3,8 +3,6 @@ using GCodeViewer.Library.Renderables;
 using GCodeViewer.WPF.MainWindow;
 using GCodeViewer.WPF.Navigation;
 using GCodeViewer.WPF.Settings;
-using GCodeViewer.WPF.Starting;
-using GCodeViewer.WPF.StlPositioning;
 using GCodeViewer.WPF.TextEditor;
 using Ninject.Modules;
 
@@ -22,14 +20,6 @@ namespace GCodeViewer.WPF
             Bind<IRenderService>().ToProvider<Viewer3DViewModel>();
             Bind<Viewer3DViewModel>().ToSelf().InSingletonScope();
             Bind<IViewerScene>().To<PrinterScene>().InSingletonScope();
-
-            // Starting Page
-            Bind<StartingPage>().ToSelf().InSingletonScope();
-            Bind<StartingPageViewModel>().ToSelf().InSingletonScope();
-
-            // STL positioning Page
-            Bind<STLPositioningPage>().ToSelf().InSingletonScope();
-            Bind<STLPositioningPageViewModel>().ToSelf().InSingletonScope();
 
             // Settings
             Bind<SettingsService>().ToSelf().InSingletonScope();
